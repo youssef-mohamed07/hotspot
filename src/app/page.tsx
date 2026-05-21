@@ -106,16 +106,20 @@ const testimonials = [
   { quote: "Crowds gathered before the truck even parked. The visual presence is on another level.", author: "Khalid Mansour", role: "Head of Production" },
 ];
 
-// Cities with approximate normalized positions on a stylized KSA map (% from top-left)
+// Real KSA borders + city positions derived from GeoJSON via scripts/extract-ksa.mjs
+// Web Mercator projection inside a 100×75 viewBox.
+const KSA_PATH =
+  "M 74.91 36.42 L 77.09 37.03 L 77.44 37.05 L 77.68 37.23 L 77.05 38.07 L 77.48 38.22 L 79.27 40.33 L 82.46 43.98 L 90.65 45.03 L 96 47.97 L 94.07 53.58 L 87.98 57.88 L 77.23 60.71 L 67.57 61.93 L 60.77 66.72 L 57.01 67.35 L 47.9 66.74 L 45.43 67.06 L 44.68 67.03 L 42.51 66.39 L 41.47 67.79 L 41.49 69.17 L 41.59 69.82 L 40.38 70.62 L 39.6 70.21 L 39.21 69.21 L 38.51 68.31 L 38.07 68.29 L 37.67 66.61 L 36.72 65.83 L 35.51 65.09 L 34.91 64.26 L 34.37 63.59 L 34.13 63.28 L 33.88 62.42 L 33.42 62.08 L 33.15 61.04 L 32.74 60.36 L 32.28 59.45 L 31.84 58.77 L 31.35 58.11 L 30.51 57.19 L 29.65 56.21 L 28.56 55.44 L 27.56 55.12 L 26.74 54.84 L 25.81 53.78 L 25.34 53.18 L 25.3 52.84 L 24.92 52.52 L 24.45 51.99 L 24.05 51.27 L 23.82 49.94 L 23.74 49.06 L 23.47 48.8 L 23.39 47.75 L 23.66 46.84 L 23.75 46.43 L 23.39 44.77 L 22.69 44.09 L 22.92 44.05 L 22.46 43.22 L 21.85 42.23 L 21.57 41.57 L 20.67 40.33 L 19.83 39.72 L 18.69 39 L 18.63 38.83 L 17.55 38.35 L 16.43 37.89 L 15.5 36.23 L 15.7 35.12 L 15.06 33.97 L 14.49 32.93 L 13.73 32.19 L 13.13 31.68 L 12.2 30 L 9.85 26.75 L 8.31 24.77 L 7.4 23.26 L 6.74 22.27 L 6.47 22.05 L 5.76 21.94 L 5.16 22.05 L 5.14 21.96 L 5.01 21.9 L 4.78 21.92 L 4.46 21.82 L 4.3 22.16 L 4 21.9 L 4.29 21.63 L 4.4 21.41 L 4.82 20.48 L 5.14 18.68 L 5.47 17.07 L 5.63 16.51 L 11.98 16.06 L 16.75 13.51 L 18.67 11.11 L 14.59 6.82 L 23.85 4.08 L 27.83 4.58 L 34.08 7.31 L 39.36 10.72 L 44.19 14.24 L 48.31 17.15 L 54.01 17.6 L 59.05 17.89 L 60.88 19.72 L 64.86 20.43 L 64.9 20.84 L 65.56 22.23 L 65.9 22.47 L 66.47 23.37 L 66.16 23.46 L 66.19 23.71 L 66.46 23.88 L 66.58 24 L 67.09 24.2 L 67.84 24.33 L 68.29 24.78 L 67.75 24.92 L 68.13 25.01 L 68.34 25.33 L 68.76 25.85 L 68.86 26.11 L 69.27 25.93 L 69.94 26.79 L 71.61 27.8 L 71.3 28.12 L 72.32 29.67 L 71.91 30.8 L 71.58 30.23 L 71.33 30.8 L 71.66 31 L 72.09 31.99 L 72.03 32.35 L 73.08 33.25 L 73.67 34.15 Z";
+
 const cities = [
-  { name: "Riyadh",  region: "Central",   x: 56, y: 50, hub: true },
-  { name: "Jeddah",  region: "Western",   x: 26, y: 58, hub: true },
-  { name: "Mecca",   region: "Western",   x: 28, y: 62 },
-  { name: "Medina",  region: "Western",   x: 30, y: 45 },
-  { name: "AlUla",   region: "Western",   x: 32, y: 35 },
-  { name: "NEOM",    region: "North-West", x: 18, y: 22 },
-  { name: "Dammam",  region: "Eastern",   x: 78, y: 38, hub: true },
-  { name: "Khobar",  region: "Eastern",   x: 80, y: 42 },
+  { name: "Riyadh", region: "Central",    x: 56.86, y: 36.56, hub: true },
+  { name: "Jeddah", region: "Western",    x: 24.18, y: 50.11, hub: true },
+  { name: "Mecca",  region: "Western",    x: 27.08, y: 50.51 },
+  { name: "Medina", region: "Western",    x: 25.97, y: 37.66 },
+  { name: "AlUla",  region: "Western",    x: 18.63, y: 28.44 },
+  { name: "NEOM",   region: "North-West", x: 8.05,  y: 22.83 },
+  { name: "Dammam", region: "Eastern",    x: 71.77, y: 29.25, hub: true },
+  { name: "Khobar", region: "Eastern",    x: 72.29, y: 29.86 },
 ];
 
 const faqs = [
@@ -420,7 +424,6 @@ function TransitionStatsSection() {
 
 /* ─── 6. Visualization Car — 3D Model Section ─── */
 function VisualizationSection() {
-  const [autoRotate, setAutoRotate] = useState(true);
   return (
     <section id="visualization" className="relative overflow-hidden py-32">
       <div className="mx-auto max-w-7xl px-6">
@@ -438,21 +441,13 @@ function VisualizationSection() {
             <div className="absolute inset-12 rounded-full bg-accent-gradient opacity-25 blur-3xl" aria-hidden />
             <div className="grid-floor pointer-events-none absolute inset-0 opacity-40" aria-hidden />
             <div className="relative h-full w-full">
-              <CybertruckScene autoRotate={autoRotate} onAutoRotateChange={setAutoRotate} />
+              <CybertruckScene initialView="explore" />
             </div>
-            {/* Bottom controls */}
-            <div className="pointer-events-none absolute inset-x-0 bottom-0 flex justify-between p-6">
-              <div className="glass pointer-events-auto inline-flex items-center gap-2 rounded-full px-4 py-2 text-[10px] uppercase tracking-[0.25em] text-zinc-300">
+            <div className="pointer-events-none absolute left-6 top-6">
+              <div className="glass inline-flex items-center gap-2 rounded-full px-4 py-2 text-[10px] uppercase tracking-[0.25em] text-zinc-300">
                 <span className="pulse-dot" />
                 Drag · Zoom · Explore
               </div>
-              <button
-                onClick={() => setAutoRotate((v) => !v)}
-                className="glass pointer-events-auto inline-flex items-center gap-2 rounded-full px-4 py-2 text-[10px] uppercase tracking-[0.25em] text-zinc-200 transition hover:bg-white/10"
-              >
-                <span className={`h-1.5 w-1.5 rounded-full ${autoRotate ? "bg-accent-soft animate-pulse" : "bg-zinc-500"}`} />
-                {autoRotate ? "Rotating" : "Paused"}
-              </button>
             </div>
           </div>
         </Reveal>
@@ -607,12 +602,11 @@ function KingdomMap() {
       {/* Subtle grid overlay */}
       <div className="grid-floor pointer-events-none absolute inset-0 opacity-50" aria-hidden />
 
-      {/* Country silhouette */}
+      {/* Real KSA borders + city hotspots in shared SVG coord space */}
       <svg
         viewBox="0 0 100 75"
         className="absolute inset-0 h-full w-full"
         preserveAspectRatio="xMidYMid meet"
-        aria-hidden
       >
         <defs>
           <linearGradient id="ksa-fill" x1="0" x2="1" y1="0" y2="1">
@@ -620,50 +614,30 @@ function KingdomMap() {
             <stop offset="100%" stopColor="#04285f" stopOpacity="0.08" />
           </linearGradient>
           <linearGradient id="ksa-stroke" x1="0" x2="1" y1="0" y2="1">
-            <stop offset="0%" stopColor="#5ba3d4" stopOpacity="0.6" />
-            <stop offset="100%" stopColor="#2a76a6" stopOpacity="0.3" />
+            <stop offset="0%" stopColor="#5ba3d4" stopOpacity="0.7" />
+            <stop offset="100%" stopColor="#2a76a6" stopOpacity="0.35" />
           </linearGradient>
+          <radialGradient id="pin-glow" cx="50%" cy="50%" r="50%">
+            <stop offset="0%" stopColor="#5ba3d4" stopOpacity="0.6" />
+            <stop offset="100%" stopColor="#5ba3d4" stopOpacity="0" />
+          </radialGradient>
         </defs>
-        {/* Stylized KSA outline (approximate silhouette) */}
+
+        {/* Country outline */}
         <path
-          d="M 18 18
-             L 24 14
-             L 30 12
-             L 38 14
-             L 44 18
-             L 50 16
-             L 60 18
-             L 70 22
-             L 78 26
-             L 84 32
-             L 86 40
-             L 84 46
-             L 80 50
-             L 76 50
-             L 72 56
-             L 68 60
-             L 60 64
-             L 50 66
-             L 38 66
-             L 30 62
-             L 24 56
-             L 22 50
-             L 24 44
-             L 22 38
-             L 18 32
-             L 16 26
-             Z"
+          d={KSA_PATH}
           fill="url(#ksa-fill)"
           stroke="url(#ksa-stroke)"
-          strokeWidth={0.4}
+          strokeWidth={0.35}
           strokeLinejoin="round"
+          aria-hidden
         />
-      </svg>
 
-      {/* City pins */}
-      {cities.map((city) => (
-        <CityPin key={city.name} city={city} />
-      ))}
+        {/* City pins as SVG groups (perfect alignment) */}
+        {cities.map((city) => (
+          <CityPinSvg key={city.name} city={city} />
+        ))}
+      </svg>
 
       {/* Footer caption */}
       <div className="pointer-events-none absolute bottom-5 left-5 right-5 flex items-center justify-between text-[10px] uppercase tracking-[0.25em] text-zinc-500">
@@ -677,31 +651,64 @@ function KingdomMap() {
   );
 }
 
-function CityPin({ city }: { city: { name: string; x: number; y: number; hub?: boolean } }) {
-  const size = city.hub ? "h-3 w-3" : "h-2 w-2";
-  const ringSize = city.hub ? "h-8 w-8" : "h-6 w-6";
+function CityPinSvg({
+  city,
+}: {
+  city: { name: string; x: number; y: number; hub?: boolean };
+}) {
+  const r = city.hub ? 0.9 : 0.6;
+  const ringR = city.hub ? 2.2 : 1.6;
+  const dur = city.hub ? "2.4s" : "3.2s";
   return (
-    <div
-      className="group absolute -translate-x-1/2 -translate-y-1/2"
-      style={{ left: `${city.x}%`, top: `${city.y}%` }}
-    >
-      {/* Pulse ring */}
-      <span
-        className={`absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 ${ringSize} rounded-full border border-accent/50`}
-        style={{ animation: city.hub ? "city-pulse 2.4s ease-out infinite" : "city-pulse 3.2s ease-out infinite" }}
-        aria-hidden
+    <g className="group" style={{ cursor: "pointer" }}>
+      {/* Outer halo (static glow) */}
+      <circle cx={city.x} cy={city.y} r={ringR * 1.6} fill="url(#pin-glow)" />
+      {/* Animated pulse ring */}
+      <circle
+        cx={city.x}
+        cy={city.y}
+        r={r}
+        fill="none"
+        stroke="#2a76a6"
+        strokeWidth={0.18}
+        opacity={0.7}
+      >
+        <animate attributeName="r" from={r} to={ringR} dur={dur} repeatCount="indefinite" />
+        <animate attributeName="opacity" from="0.7" to="0" dur={dur} repeatCount="indefinite" />
+      </circle>
+      {/* Solid dot */}
+      <circle
+        cx={city.x}
+        cy={city.y}
+        r={r}
+        fill="#5ba3d4"
+        className="transition-all duration-200 group-hover:opacity-100"
+        style={{ filter: "drop-shadow(0 0 1.5px rgba(91,163,212,0.9))" }}
       />
-      {/* Dot */}
-      <span
-        className={`relative block ${size} rounded-full bg-accent shadow-[0_0_12px_rgba(42,118,166,0.9)] transition group-hover:scale-150`}
-      />
-      {/* Tooltip */}
-      <div className="pointer-events-none absolute left-1/2 top-full mt-3 -translate-x-1/2 whitespace-nowrap opacity-0 transition group-hover:opacity-100">
-        <div className="glass-strong rounded-full px-3 py-1 text-[10px] uppercase tracking-[0.2em] text-white">
-          {city.name}
-        </div>
-      </div>
-    </div>
+      {/* Hover-only label */}
+      <g className="opacity-0 transition-opacity duration-200 group-hover:opacity-100">
+        <rect
+          x={city.x - city.name.length * 0.7}
+          y={city.y + 1.5}
+          width={city.name.length * 1.4}
+          height={2.5}
+          rx={1.25}
+          fill="rgba(10, 12, 18, 0.9)"
+          stroke="rgba(255,255,255,0.12)"
+          strokeWidth={0.1}
+        />
+        <text
+          x={city.x}
+          y={city.y + 3.3}
+          textAnchor="middle"
+          fontSize={1.5}
+          fill="#fff"
+          style={{ fontFamily: "var(--font-geist-sans, sans-serif)", letterSpacing: "0.05em" }}
+        >
+          {city.name.toUpperCase()}
+        </text>
+      </g>
+    </g>
   );
 }
 
@@ -939,17 +946,15 @@ function ChoiceCard({
       type="button"
       onClick={onClick}
       aria-pressed={active}
-      className={`${cardBase} ${active ? cardSelected : cardIdle} text-left`}
+      className={`${cardBase} ${active ? cardSelected : cardIdle} text-left ${kbd ? "pb-7" : ""}`}
     >
-      <div className="flex items-start justify-between gap-3">
-        <div className="flex-1">
-          <p className="text-sm font-semibold text-white">{label}</p>
-          {description && <p className="mt-1 text-xs leading-relaxed text-zinc-500">{description}</p>}
-        </div>
-        {kbd && (
-          <span className="font-mono text-[10px] text-zinc-600">{kbd}</span>
-        )}
+      {/* Reserve right padding so the check badge never overlaps the title */}
+      <div className="pr-8">
+        <p className="text-sm font-semibold text-white">{label}</p>
+        {description && <p className="mt-1 text-xs leading-relaxed text-zinc-500">{description}</p>}
       </div>
+
+      {/* Check badge — top-right corner only */}
       <span
         className={`absolute right-3 top-3 grid h-5 w-5 place-items-center rounded-full transition ${
           active ? "bg-accent text-white" : "border border-white/15 text-transparent"
@@ -959,6 +964,13 @@ function ChoiceCard({
           <path d="M2.5 6.5l2.5 2.5L9.5 4" strokeLinecap="round" strokeLinejoin="round" />
         </svg>
       </span>
+
+      {/* Index pill — bottom-right corner, far from the check badge */}
+      {kbd && (
+        <span className="absolute bottom-3 right-3 font-mono text-[10px] tracking-widest text-zinc-600">
+          {kbd}
+        </span>
+      )}
     </button>
   );
 }

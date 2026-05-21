@@ -1,80 +1,99 @@
 "use client";
 
-import { Suspense } from "react";
-import { Canvas } from "@react-three/fiber";
-import { OrbitControls, Environment, ContactShadows } from "@react-three/drei";
-import { CybertruckModel } from "./cybertruck-model";
+import { useState } from "react";
 
 interface CybertruckSceneProps {
-  autoRotate?: boolean;
-  onAutoRotateChange?: (value: boolean) => void;
+  /** "hero" hides UI overlays and uses an autostart shot; "explore" enables full controls */
+  initialView?: "hero" | "explore";
 }
 
-export function CybertruckScene({
-  autoRotate = true,
-  onAutoRotateChange,
-}: CybertruckSceneProps) {
+/**
+ * Sketchfab embed for the "Cyberpunk car" by 4d_Bob.
+ * https://sketchfab.com/3d-models/cyberpunk-car-b4301ff99d214d16a7a43708a5866bf0
+ *
+ * Embed parameters reference: https://sketchfab.com/developers/viewer/initialization
+ */
+const MODEL_ID = "b4301ff99d214d16a7a43708a5866bf0";
+
+const heroParams = new URLSearchParams({
+  autostart: "1",
+  ui_infos: "0",
+  ui_controls: "0",
+  ui_stop: "0",
+  ui_watermark: "0",
+  ui_watermark_link: "0",
+  ui_help: "0",
+  ui_settings: "0",
+  ui_inspector: "0",
+  ui_annotations: "0",
+  ui_fullscreen: "0",
+  ui_vr: "0",
+  ui_ar: "0",
+  ui_ar_qrcode: "0",
+  ui_animations: "0",
+  ui_loading: "0",
+  ui_color: "2a76a6",
+  transparent: "1",
+  preload: "1",
+  dnt: "1",
+}).toString();
+
+const exploreParams = new URLSearchParams({
+  autostart: "1",
+  ui_infos: "0",
+  ui_watermark_link: "0",
+  ui_watermark: "0",
+  ui_color: "2a76a6",
+  transparent: "1",
+  preload: "1",
+  dnt: "1",
+}).toString();
+
+export function CybertruckScene({ initialView = "explore" }: CybertruckSceneProps) {
+  const [loaded, setLoaded] = useState(false);
+  const params = initialView === "hero" ? heroParams : exploreParams;
+  const src = `https://sketchfab.com/models/${MODEL_ID}/embed?${params}`;
+
   return (
-    <div className="relative h-full w-full">
-      <Canvas
-        shadows
-        dpr={[1, 2]}
-        camera={{ position: [4.5, 2.2, 5.5], fov: 35 }}
-        gl={{ antialias: true, alpha: true }}
+    <div className="relative h-full w-full overflow-hidden rounded-[36px]">
+      {/* Loading state */}
+      {!loaded && (
+        <div className="absolute inset-0 z-10 grid place-items-center bg-[#05060a]/30">
+          <div className="flex flex-col items-center gap-3 text-zinc-400">
+            <div className="h-10 w-10 animate-spin rounded-full border-2 border-white/10 border-t-accent" />
+            <p className="text-[10px] uppercase tracking-[0.3em]">Loading 3D model</p>
+          </div>
+        </div>
+      )}
+
+      <iframe
+        title="Cyberpunk Cybertruck"
+        src={src}
+        onLoad={() => setLoaded(true)}
+        allow="autoplay; fullscreen; xr-spatial-tracking"
+        allowFullScreen
+        {...({
+          mozallowfullscreen: "true",
+          webkitallowfullscreen: "true",
+          "execution-while-out-of-viewport": "true",
+          "execution-while-not-rendered": "true",
+          "web-share": "true",
+        } as Record<string, string>)}
+        className="h-full w-full border-0"
         style={{ background: "transparent" }}
-      >
-        {/* Lighting rig */}
-        <ambientLight intensity={0.35} />
-        <directionalLight
-          position={[5, 8, 5]}
-          intensity={1.2}
-          castShadow
-          shadow-mapSize-width={1024}
-          shadow-mapSize-height={1024}
-        />
-        <spotLight
-          position={[-4, 6, -2]}
-          angle={0.4}
-          penumbra={1}
-          intensity={1.5}
-          color="#2a76a6"
-        />
-        <spotLight
-          position={[4, 4, 2]}
-          angle={0.5}
-          penumbra={1}
-          intensity={0.8}
-          color="#5ba3d4"
-        />
+      />
 
-        <Suspense fallback={null}>
-          <Environment preset="city" background={false} />
-        </Suspense>
-
-        <Suspense fallback={null}>
-          <CybertruckModel autoRotate={autoRotate} />
-        </Suspense>
-
-        <ContactShadows
-          position={[0, -0.42, 0]}
-          opacity={0.55}
-          scale={10}
-          blur={2.4}
-          far={4}
-          color="#000000"
-        />
-
-        <OrbitControls
-          enablePan={false}
-          enableZoom
-          minDistance={4}
-          maxDistance={10}
-          minPolarAngle={Math.PI / 6}
-          maxPolarAngle={Math.PI / 2.05}
-          autoRotate={false}
-          onStart={() => onAutoRotateChange?.(false)}
-        />
-      </Canvas>
+      {/* Attribution (required by Sketchfab CC license) */}
+      <div className="pointer-events-none absolute bottom-3 right-3 text-[9px] text-zinc-600">
+        <a
+          href={`https://sketchfab.com/3d-models/cyberpunk-car-${MODEL_ID}`}
+          target="_blank"
+          rel="nofollow noopener noreferrer"
+          className="pointer-events-auto rounded-full bg-black/40 px-2 py-1 text-zinc-500 backdrop-blur transition hover:text-zinc-300"
+        >
+          Model by 4d_Bob · Sketchfab
+        </a>
+      </div>
     </div>
   );
 }
