@@ -3,22 +3,20 @@
 import dynamic from "next/dynamic";
 import Link from "next/link";
 import Image from "next/image";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Hero } from "@/components/hero";
-import { Marquee } from "@/components/marquee";
 import { Reveal } from "@/components/reveal";
 import { Counter } from "@/components/counter";
+import { KSA_REGIONS, KSA_VIEWBOX } from "@/lib/ksa-map";
 import {
   IconArrowRight,
   IconBolt,
   IconBuilding,
-  IconChevronDown,
   IconCube,
   IconGlobe,
   IconMail,
   IconMapPin,
   IconPhone,
-  IconQuote,
   IconScreen,
   IconShield,
   IconSpotlight,
@@ -46,8 +44,16 @@ function SceneLoader() {
 
 /* ─── Data ─── */
 const trustedClients = [
-  "Mobily", "STC", "NEOM", "Aramco", "SABIC", "Riyadh Season",
-  "MDL Beast", "Hikma", "Red Sea Film", "Ministry of Culture",
+  { name: "Mobily",              sector: "Telecom",        since: "2022", logo: "/logos/mobily.svg" },
+  { name: "STC",                 sector: "Telecom",        since: "2023", logo: "/logos/stc.svg" },
+  { name: "NEOM",                sector: "Real Estate",    since: "2023", logo: "/logos/neom.svg" },
+  { name: "Aramco",              sector: "Energy",         since: "2024", logo: "/logos/aramco.svg" },
+  { name: "SABIC",               sector: "Industrial",     since: "2024", logo: "/logos/sabic.svg" },
+  { name: "Riyadh Season",       sector: "Entertainment",  since: "2023", logo: "/logos/riyadh-season.svg" },
+  { name: "MDL Beast",           sector: "Music & Events", since: "2023" },
+  { name: "Hikma",               sector: "Healthcare",     since: "2024", logo: "/logos/hikma.svg" },
+  { name: "Red Sea Film",        sector: "Culture",        since: "2024" },
+  { name: "Ministry of Culture", sector: "Government",     since: "2024" },
 ];
 
 const conceptPillars = [
@@ -101,33 +107,94 @@ const otherServices = [
 ];
 
 const testimonials = [
-  { quote: "The Cybertruck activation generated more social impressions in one weekend than our entire Q3 digital campaign.", author: "Sara Al-Dosari", role: "Marketing Director" },
-  { quote: "From brief to delivery, HotSpot ran the entire production. Zero coordination headaches on our side.", author: "Mohammed Al-Rashid", role: "VP Events" },
-  { quote: "Crowds gathered before the truck even parked. The visual presence is on another level.", author: "Khalid Mansour", role: "Head of Production" },
+  {
+    quote: "The Cybertruck activation generated more social impressions in one weekend than our entire Q3 digital campaign.",
+    author: "Sara Al-Dosari",
+    role: "Marketing Director",
+    company: "IA Group",
+    initials: "SA",
+    rating: 5,
+    metric: { value: "3.2M", label: "Social impressions" },
+    accent: "from-[#2a76a6] to-[#04285f]",
+  },
+  {
+    quote: "From brief to delivery, HotSpot ran the entire production. Zero coordination headaches on our side.",
+    author: "Mohammed Al-Rashid",
+    role: "VP Events",
+    company: "Hikma Group",
+    initials: "MA",
+    rating: 5,
+    metric: { value: "0", label: "Vendor escalations" },
+    accent: "from-[#5ba3d4] to-[#2a76a6]",
+  },
+  {
+    quote: "Crowds gathered before the truck even parked. The visual presence is on another level.",
+    author: "Khalid Mansour",
+    role: "Head of Production",
+    company: "Mobily",
+    initials: "KM",
+    rating: 5,
+    metric: { value: "12K", label: "Visitors / day" },
+    accent: "from-[#1d5a82] to-[#04285f]",
+  },
 ];
 
-// Real KSA borders + city positions derived from GeoJSON via scripts/extract-ksa.mjs
-// Web Mercator projection inside a 100×75 viewBox.
-const KSA_PATH =
-  "M 74.91 36.42 L 77.09 37.03 L 77.44 37.05 L 77.68 37.23 L 77.05 38.07 L 77.48 38.22 L 79.27 40.33 L 82.46 43.98 L 90.65 45.03 L 96 47.97 L 94.07 53.58 L 87.98 57.88 L 77.23 60.71 L 67.57 61.93 L 60.77 66.72 L 57.01 67.35 L 47.9 66.74 L 45.43 67.06 L 44.68 67.03 L 42.51 66.39 L 41.47 67.79 L 41.49 69.17 L 41.59 69.82 L 40.38 70.62 L 39.6 70.21 L 39.21 69.21 L 38.51 68.31 L 38.07 68.29 L 37.67 66.61 L 36.72 65.83 L 35.51 65.09 L 34.91 64.26 L 34.37 63.59 L 34.13 63.28 L 33.88 62.42 L 33.42 62.08 L 33.15 61.04 L 32.74 60.36 L 32.28 59.45 L 31.84 58.77 L 31.35 58.11 L 30.51 57.19 L 29.65 56.21 L 28.56 55.44 L 27.56 55.12 L 26.74 54.84 L 25.81 53.78 L 25.34 53.18 L 25.3 52.84 L 24.92 52.52 L 24.45 51.99 L 24.05 51.27 L 23.82 49.94 L 23.74 49.06 L 23.47 48.8 L 23.39 47.75 L 23.66 46.84 L 23.75 46.43 L 23.39 44.77 L 22.69 44.09 L 22.92 44.05 L 22.46 43.22 L 21.85 42.23 L 21.57 41.57 L 20.67 40.33 L 19.83 39.72 L 18.69 39 L 18.63 38.83 L 17.55 38.35 L 16.43 37.89 L 15.5 36.23 L 15.7 35.12 L 15.06 33.97 L 14.49 32.93 L 13.73 32.19 L 13.13 31.68 L 12.2 30 L 9.85 26.75 L 8.31 24.77 L 7.4 23.26 L 6.74 22.27 L 6.47 22.05 L 5.76 21.94 L 5.16 22.05 L 5.14 21.96 L 5.01 21.9 L 4.78 21.92 L 4.46 21.82 L 4.3 22.16 L 4 21.9 L 4.29 21.63 L 4.4 21.41 L 4.82 20.48 L 5.14 18.68 L 5.47 17.07 L 5.63 16.51 L 11.98 16.06 L 16.75 13.51 L 18.67 11.11 L 14.59 6.82 L 23.85 4.08 L 27.83 4.58 L 34.08 7.31 L 39.36 10.72 L 44.19 14.24 L 48.31 17.15 L 54.01 17.6 L 59.05 17.89 L 60.88 19.72 L 64.86 20.43 L 64.9 20.84 L 65.56 22.23 L 65.9 22.47 L 66.47 23.37 L 66.16 23.46 L 66.19 23.71 L 66.46 23.88 L 66.58 24 L 67.09 24.2 L 67.84 24.33 L 68.29 24.78 L 67.75 24.92 L 68.13 25.01 L 68.34 25.33 L 68.76 25.85 L 68.86 26.11 L 69.27 25.93 L 69.94 26.79 L 71.61 27.8 L 71.3 28.12 L 72.32 29.67 L 71.91 30.8 L 71.58 30.23 L 71.33 30.8 L 71.66 31 L 72.09 31.99 L 72.03 32.35 L 73.08 33.25 L 73.67 34.15 Z";
-
+// City positions on the 1000×824 viewBox of the real Simplemaps KSA SVG (src/sa.svg → src/lib/ksa-map.ts)
 const cities = [
-  { name: "Riyadh", region: "Central",    x: 56.86, y: 36.56, hub: true },
-  { name: "Jeddah", region: "Western",    x: 24.18, y: 50.11, hub: true },
-  { name: "Mecca",  region: "Western",    x: 27.08, y: 50.51 },
-  { name: "Medina", region: "Western",    x: 25.97, y: 37.66 },
-  { name: "AlUla",  region: "Western",    x: 18.63, y: 28.44 },
-  { name: "NEOM",   region: "North-West", x: 8.05,  y: 22.83 },
-  { name: "Dammam", region: "Eastern",    x: 71.77, y: 29.25, hub: true },
-  { name: "Khobar", region: "Eastern",    x: 72.29, y: 29.86 },
+  { name: "Riyadh", region: "Central",    x: 530, y: 476, hub: true },
+  { name: "Jeddah", region: "Western",    x: 310, y: 540, hub: true },
+  { name: "Mecca",  region: "Western",    x: 351, y: 555 },
+  { name: "Medina", region: "Western",    x: 245, y: 405 },
+  { name: "AlUla",  region: "Western",    x: 215, y: 320 },
+  { name: "NEOM",   region: "North-West", x: 130, y: 180 },
+  { name: "Dammam", region: "Eastern",    x: 735, y: 425, hub: true },
+  { name: "Khobar", region: "Eastern",    x: 750, y: 440 },
 ];
 
-const faqs = [
-  { q: "Can the Cybertruck be customized?", a: "Yes — full vehicle wraps, rooftop decorations, LED cube screens, flowers, balloons, and modular setups. Every activation is designed around your brand." },
-  { q: "Is it suitable for indoor events?", a: "Absolutely. The Cybertruck fits through standard loading docks and is engineered for both indoor malls and outdoor festivals." },
-  { q: "Do you provide operators & setup?", a: "Every activation includes a full technical crew — from delivery and setup to live operation and strike." },
-  { q: "Can we integrate our campaign digitally?", a: "Yes. We support live social media feeds, custom apps, QR activations, AI photo booths, and real-time audience engagement tools." },
-  { q: "Is it available across Saudi Arabia?", a: "We operate nationwide — Riyadh, Jeddah, Dammam, and everywhere in between. Contact us for availability." },
+const faqCategories = ["All", "Customization", "Operations", "Technology", "Logistics"] as const;
+type FaqCategory = typeof faqCategories[number];
+
+const faqs: { q: string; a: string; category: FaqCategory }[] = [
+  {
+    q: "Can the Cybertruck be customized?",
+    a: "Yes — full vehicle wraps, rooftop decorations, LED cube screens, flowers, balloons, and modular setups. Every activation is designed around your brand identity, with creative direction signed off before production.",
+    category: "Customization",
+  },
+  {
+    q: "Is it suitable for indoor events?",
+    a: "Absolutely. The Cybertruck fits through standard loading docks (height 1.91m, width 2.20m) and is engineered for both indoor malls and outdoor festivals. We coordinate venue clearances ahead of time.",
+    category: "Logistics",
+  },
+  {
+    q: "Do you provide operators & setup?",
+    a: "Every activation includes a full technical crew — from delivery, setup, and rehearsal through live operation and strike. You don't need to coordinate with multiple vendors.",
+    category: "Operations",
+  },
+  {
+    q: "Can we integrate our campaign digitally?",
+    a: "Yes. We support live social media feeds, custom mobile apps, QR activations, AI photo booths, real-time audience engagement tools, and CRM integrations for lead capture.",
+    category: "Technology",
+  },
+  {
+    q: "Is it available across Saudi Arabia?",
+    a: "We operate nationwide — Riyadh, Jeddah, Dammam, AlUla, NEOM, and everywhere in between. Multi-city tours are common; we route the truck and crew between activations.",
+    category: "Logistics",
+  },
+  {
+    q: "How far in advance should we book?",
+    a: "For full-scale activations: 3–4 weeks ideal, 1 week minimum. We've delivered emergency campaigns in 72 hours when timelines allowed. The earlier we get involved, the more we can design for your brand.",
+    category: "Operations",
+  },
+  {
+    q: "What's included in the activation cost?",
+    a: "Vehicle rental, custom branding production, on-board hardware, full technical crew, content production, and a wrap report with footage and KPIs. Permits and venue fees are quoted separately based on the location.",
+    category: "Operations",
+  },
+  {
+    q: "Can the LED screens display live content?",
+    a: "Yes. Our screens accept live HDMI/SDI feeds, CMS-controlled playlists, social media walls, and remote live updates. Content can be swapped on-the-fly during the activation.",
+    category: "Technology",
+  },
 ];
 
 /* ─── Page ─── */
@@ -143,6 +210,7 @@ export default function Home() {
         <TransitionStatsSection />
         <VisualizationSection />
         <CaseStudiesSection />
+        <ProcessSection />
         <OtherServicesSection />
         <TestimonialsSection />
         <ServingCitiesSection />
@@ -160,6 +228,7 @@ function Header() {
     { href: "#concept", label: "Concept" },
     { href: "#visualization", label: "The Truck" },
     { href: "#cases", label: "Case Studies" },
+    { href: "#process", label: "Process" },
     { href: "#services", label: "Services" },
     { href: "#contact", label: "Contact" },
   ];
@@ -189,62 +258,467 @@ function Header() {
 function StrongestToolSection() {
   return (
     <section className="relative overflow-hidden py-32">
-      <div className="mx-auto max-w-7xl px-6">
-        <div className="grid gap-16 lg:grid-cols-[1.1fr_1fr] lg:items-center">
-          <Reveal>
+      {/* Cinematic crowd backdrop */}
+      <div
+        className="absolute inset-0 opacity-[0.18]"
+        style={{
+          backgroundImage:
+            "url(https://images.unsplash.com/photo-1492684223066-81342ee5ff30?w=1920&q=80)",
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+        }}
+        aria-hidden
+      />
+      <div className="absolute inset-0 bg-gradient-to-b from-[#05060a] via-[#05060a]/85 to-[#05060a]" aria-hidden />
+      <div
+        className="absolute inset-0 opacity-50"
+        style={{
+          background:
+            "radial-gradient(50% 50% at 50% 100%, rgba(42,118,166,0.22), transparent 70%)",
+        }}
+        aria-hidden
+      />
+      <div className="grid-floor pointer-events-none absolute inset-0 opacity-25" aria-hidden />
+
+      <div className="relative mx-auto max-w-7xl px-6">
+        {/* Header */}
+        <Reveal className="mb-16 max-w-4xl">
+          <div className="flex items-center gap-3">
+            <span className="h-px w-12 bg-accent" />
             <p className="text-xs uppercase tracking-[0.3em] text-accent">The strongest marketing tool</p>
-            <h2 className="display-headline mt-4 text-4xl text-white sm:text-5xl md:text-6xl lg:text-7xl">
-              The most powerful<br />
-              marketing tool in the<br />
-              <span className="text-gradient-accent">Saudi market.</span>
-            </h2>
-            <p className="mt-8 max-w-lg text-lg text-zinc-400">
-              Traditional advertising gets ignored. The HotSpot Cybertruck moves through your audience&apos;s daily life — at malls, events, business districts and national campaigns — generating attention, engagement and viral content that paid media simply can&apos;t buy.
-            </p>
-            <div className="mt-8 flex flex-wrap gap-3">
-              {["Mobile Reach", "Crowd Magnet", "Viral by Design", "Premium Presence"].map((tag) => (
-                <span key={tag} className="glass-light rounded-full px-4 py-2 text-xs text-zinc-300">{tag}</span>
-              ))}
+          </div>
+          <h2 className="display-headline mt-6 text-4xl text-white sm:text-5xl md:text-6xl lg:text-7xl">
+            The most powerful<br />
+            marketing tool in the<br />
+            <span className="text-gradient-accent">Saudi market.</span>
+          </h2>
+        </Reveal>
+
+        {/* Headline comparison strip */}
+        <Reveal delay={0.1}>
+          <div className="mb-12 grid gap-px overflow-hidden rounded-3xl border border-white/10 bg-white/[0.03] sm:grid-cols-2">
+            <div className="relative p-8 md:p-10">
+              <div className="absolute inset-0 bg-zinc-900/40" aria-hidden />
+              <div className="relative">
+                <p className="text-[10px] uppercase tracking-[0.3em] text-zinc-500">Traditional ads</p>
+                <p className="mt-4 display-headline text-5xl text-zinc-700 line-through decoration-zinc-700/60 sm:text-6xl">
+                  IGNORED
+                </p>
+                <p className="mt-4 text-sm text-zinc-500">
+                  Average banner CTR: <span className="text-zinc-300">0.05%</span>
+                </p>
+                <ul className="mt-4 space-y-1.5 text-xs text-zinc-600">
+                  <li className="flex items-center gap-2"><span className="text-red-500/80">✕</span> Ad-blocked, scrolled past</li>
+                  <li className="flex items-center gap-2"><span className="text-red-500/80">✕</span> Saturated, forgettable</li>
+                  <li className="flex items-center gap-2"><span className="text-red-500/80">✕</span> Static and time-bound</li>
+                </ul>
+              </div>
+            </div>
+            <div className="relative p-8 md:p-10">
+              <div
+                className="absolute inset-0 opacity-80"
+                style={{
+                  background:
+                    "radial-gradient(70% 80% at 80% 30%, rgba(42,118,166,0.18), transparent 70%), linear-gradient(135deg, rgba(42,118,166,0.08), rgba(4,40,95,0.04))",
+                }}
+                aria-hidden
+              />
+              <div className="relative">
+                <p className="text-[10px] uppercase tracking-[0.3em] text-accent">HotSpot Cybertruck</p>
+                <p className="mt-4 display-headline text-5xl text-gradient-accent sm:text-6xl">
+                  REMEMBERED
+                </p>
+                <p className="mt-4 text-sm text-zinc-300">
+                  Average dwell time per activation: <span className="font-semibold text-white">4–9 min</span>
+                </p>
+                <ul className="mt-4 space-y-1.5 text-xs text-zinc-300">
+                  <li className="flex items-center gap-2"><span className="text-accent">✓</span> Crowds gather, film, and share</li>
+                  <li className="flex items-center gap-2"><span className="text-accent">✓</span> Scarcity-driven attention</li>
+                  <li className="flex items-center gap-2"><span className="text-accent">✓</span> Mobile, location-aware, programmable</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </Reveal>
+
+        {/* Big visual grid: gauge + ticker + outcomes */}
+        <div className="grid gap-4 lg:grid-cols-3">
+          {/* Engagement gauge */}
+          <Reveal delay={0.2}>
+            <div className="spotlight-card glass-card relative h-full overflow-hidden rounded-3xl p-8">
+              <p className="font-mono text-[10px] uppercase tracking-widest text-zinc-500">/Gauge · 01</p>
+              <p className="mt-2 text-sm text-zinc-300">Engagement vs. traditional</p>
+              <EngagementGauge value={94} />
+              <div className="mt-2 flex items-center justify-between text-[10px] uppercase tracking-widest text-zinc-500">
+                <span>Banner ad</span>
+                <span>HotSpot truck</span>
+              </div>
             </div>
           </Reveal>
-          <Reveal delay={0.15}>
-            <div className="grid grid-cols-2 gap-3">
-              {[
-                { num: "01", label: "Attention", desc: "People stop and look" },
-                { num: "02", label: "Engagement", desc: "They walk over and interact" },
-                { num: "03", label: "Virality", desc: "They film it and share it" },
-                { num: "04", label: "Recall", desc: "They remember your brand" },
-              ].map((item) => (
-                <div key={item.num} className="spotlight-card glass-card rounded-2xl p-6 hover:border-white/20">
-                  <p className="font-mono text-[10px] uppercase tracking-widest text-zinc-600">/{item.num}</p>
-                  <p className="mt-3 text-lg font-semibold text-white">{item.label}</p>
-                  <p className="mt-1 text-xs text-zinc-500">{item.desc}</p>
+
+          {/* Live impressions ticker */}
+          <Reveal delay={0.28}>
+            <div className="spotlight-card glass-card relative h-full overflow-hidden rounded-3xl p-8">
+              <div
+                className="absolute inset-0 opacity-30"
+                style={{
+                  background:
+                    "radial-gradient(70% 70% at 50% 100%, rgba(42,118,166,0.4), transparent 70%)",
+                }}
+                aria-hidden
+              />
+              <div className="relative">
+                <p className="font-mono text-[10px] uppercase tracking-widest text-zinc-500">/Live · 02</p>
+                <p className="mt-2 text-sm text-zinc-300">Avg. impressions per activation day</p>
+                <ImpressionsTicker />
+                <div className="mt-2 inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.04] px-3 py-1 text-[10px] uppercase tracking-widest text-zinc-300">
+                  <span className="h-1.5 w-1.5 rounded-full bg-accent shadow-[0_0_6px_rgba(42,118,166,0.9)]" />
+                  Verified field data
                 </div>
-              ))}
+              </div>
+            </div>
+          </Reveal>
+
+          {/* Outcomes ladder */}
+          <Reveal delay={0.36}>
+            <div className="spotlight-card glass-card relative h-full overflow-hidden rounded-3xl p-8">
+              <p className="font-mono text-[10px] uppercase tracking-widest text-zinc-500">/Funnel · 03</p>
+              <p className="mt-2 text-sm text-zinc-300">From glance to brand recall</p>
+              <OutcomeLadder />
             </div>
           </Reveal>
         </div>
+
+        {/* Tag strip */}
+        <Reveal delay={0.45}>
+          <div className="mt-10 flex flex-wrap items-center justify-center gap-2">
+            {["Mobile reach", "Crowd magnet", "Viral by design", "Premium presence", "Location-aware", "Always shareable"].map((tag) => (
+              <span
+                key={tag}
+                className="rounded-full border border-white/10 bg-white/[0.03] px-4 py-2 text-xs text-zinc-400"
+              >
+                {tag}
+              </span>
+            ))}
+          </div>
+        </Reveal>
       </div>
     </section>
   );
 }
 
-/* ─── 3. Proof of Concept — Logo Slider ─── */
+/* Animated half-gauge — fills from 0 to {value}% on viewport entry */
+function EngagementGauge({ value }: { value: number }) {
+  const [progress, setProgress] = useState(0);
+  const ref = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    const obs = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          // Animate from 0 to value
+          let raf: number;
+          const start = performance.now();
+          const duration = 1800;
+          const tick = (now: number) => {
+            const t = Math.min((now - start) / duration, 1);
+            const eased = 1 - Math.pow(1 - t, 3);
+            setProgress(eased * value);
+            if (t < 1) raf = requestAnimationFrame(tick);
+          };
+          raf = requestAnimationFrame(tick);
+          obs.disconnect();
+          return () => cancelAnimationFrame(raf);
+        }
+      },
+      { threshold: 0.4 }
+    );
+    obs.observe(el);
+    return () => obs.disconnect();
+  }, [value]);
+
+  // Half-circle: 180° sweep. SVG path for the arc background and progress.
+  const radius = 70;
+  const circumference = Math.PI * radius;
+  const dashOffset = circumference * (1 - progress / 100);
+
+  return (
+    <div ref={ref} className="relative mt-6 flex flex-col items-center">
+      <svg viewBox="0 0 180 100" className="w-full max-w-[260px]">
+        <defs>
+          <linearGradient id="gauge-grad" x1="0" x2="1" y1="0" y2="0">
+            <stop offset="0%" stopColor="#2a76a6" />
+            <stop offset="100%" stopColor="#5ba3d4" />
+          </linearGradient>
+        </defs>
+        {/* Track */}
+        <path
+          d="M 20 90 A 70 70 0 0 1 160 90"
+          fill="none"
+          stroke="rgba(255,255,255,0.08)"
+          strokeWidth={10}
+          strokeLinecap="round"
+        />
+        {/* Progress */}
+        <path
+          d="M 20 90 A 70 70 0 0 1 160 90"
+          fill="none"
+          stroke="url(#gauge-grad)"
+          strokeWidth={10}
+          strokeLinecap="round"
+          strokeDasharray={circumference}
+          strokeDashoffset={dashOffset}
+          style={{ filter: "drop-shadow(0 0 6px rgba(91,163,212,0.5))" }}
+        />
+      </svg>
+      <div className="-mt-8 flex flex-col items-center">
+        <p className="display-headline text-5xl text-white sm:text-6xl">
+          {Math.round(progress)}<span className="text-gradient-accent">×</span>
+        </p>
+        <p className="mt-1 text-[10px] uppercase tracking-[0.3em] text-zinc-500">More attention</p>
+      </div>
+    </div>
+  );
+}
+
+/* Live-feel impressions counter that ticks up continuously */
+function ImpressionsTicker() {
+  const [count, setCount] = useState(0);
+  const ref = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    const obs = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          // Ramp up to 47000, then keep ticking by small random increments
+          let raf: number;
+          const start = performance.now();
+          const duration = 2200;
+          const target = 47000;
+          const tick = (now: number) => {
+            const t = (now - start) / duration;
+            if (t < 1) {
+              const eased = 1 - Math.pow(1 - t, 3);
+              setCount(Math.round(eased * target));
+              raf = requestAnimationFrame(tick);
+            } else {
+              setCount(target);
+              // Slow live ticker
+              const id = setInterval(() => {
+                setCount((c) => c + Math.floor(Math.random() * 7) + 2);
+              }, 1400);
+              obs.disconnect();
+              return () => {
+                clearInterval(id);
+                cancelAnimationFrame(raf);
+              };
+            }
+          };
+          raf = requestAnimationFrame(tick);
+        }
+      },
+      { threshold: 0.4 }
+    );
+    obs.observe(el);
+    return () => obs.disconnect();
+  }, []);
+
+  const formatted = count.toLocaleString("en-US");
+  return (
+    <div ref={ref} className="mt-6">
+      <p className="display-headline text-5xl text-white sm:text-6xl">
+        {formatted}
+        <span className="text-gradient-accent">+</span>
+      </p>
+      <p className="mt-2 text-xs text-zinc-500">eyes per truck per day</p>
+    </div>
+  );
+}
+
+/* Outcome ladder — animated bars showing the funnel from glance to recall */
+function OutcomeLadder() {
+  const stages = [
+    { label: "Glance", value: 100, desc: "First eye contact" },
+    { label: "Stop", value: 78, desc: "Pause to look" },
+    { label: "Engage", value: 54, desc: "Walk over, interact" },
+    { label: "Share", value: 31, desc: "Film, post, tag" },
+    { label: "Recall", value: 88, desc: "Remember 7 days later" },
+  ];
+  const [visible, setVisible] = useState(false);
+  const ref = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    const obs = new IntersectionObserver(
+      ([e]) => {
+        if (e.isIntersecting) {
+          setVisible(true);
+          obs.disconnect();
+        }
+      },
+      { threshold: 0.3 }
+    );
+    obs.observe(el);
+    return () => obs.disconnect();
+  }, []);
+
+  return (
+    <div ref={ref} className="mt-6 space-y-2.5">
+      {stages.map((s, i) => (
+        <div key={s.label} className="space-y-1">
+          <div className="flex items-center justify-between text-[11px]">
+            <span className="font-medium text-white">{s.label}</span>
+            <span className="font-mono text-zinc-500">{s.value}%</span>
+          </div>
+          <div className="h-1.5 overflow-hidden rounded-full bg-white/[0.06]">
+            <div
+              className="h-full rounded-full bg-accent-gradient transition-[width] duration-1000 ease-out"
+              style={{
+                width: visible ? `${s.value}%` : "0%",
+                transitionDelay: `${i * 110}ms`,
+                boxShadow: "0 0 8px rgba(42,118,166,0.5)",
+              }}
+            />
+          </div>
+          <p className="text-[10px] text-zinc-600">{s.desc}</p>
+        </div>
+      ))}
+    </div>
+  );
+}
+
+/* ─── 3. Proof of Concept — Logo Wall ─── */
 function ProofOfConceptSection() {
   return (
-    <section className="relative border-y border-white/5 bg-black/40 py-20">
-      <div className="mx-auto max-w-7xl px-6">
-        <Reveal className="mb-10 text-center">
-          <p className="text-xs uppercase tracking-[0.3em] text-accent">Proof of concept</p>
-          <h2 className="display-headline mt-3 text-2xl text-white sm:text-3xl md:text-4xl">
-            Our solutions trusted by
-          </h2>
+    <section className="relative overflow-hidden py-24">
+      {/* Top + bottom hairlines */}
+      <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-accent-soft/40 to-transparent" aria-hidden />
+      <div className="absolute inset-x-0 bottom-0 h-px bg-gradient-to-r from-transparent via-accent-soft/40 to-transparent" aria-hidden />
+      {/* Atmospheric glow */}
+      <div
+        className="absolute inset-0 opacity-40"
+        style={{
+          background:
+            "radial-gradient(40% 60% at 50% 50%, rgba(42,118,166,0.18), transparent 70%)",
+        }}
+        aria-hidden
+      />
+      {/* Big background watermark "TRUSTED" */}
+      <div
+        aria-hidden
+        className="display-headline pointer-events-none absolute inset-x-0 top-1/2 -translate-y-1/2 select-none whitespace-nowrap text-center text-[20rem] leading-none text-white/[0.02] sm:text-[28rem]"
+      >
+        TRUSTED
+      </div>
+
+      <div className="relative mx-auto max-w-7xl px-6">
+        {/* Header */}
+        <div className="mb-12 grid items-end gap-6 md:grid-cols-[1.4fr_1fr]">
+          <Reveal>
+            <div className="flex items-center gap-3">
+              <span className="h-px w-12 bg-accent" />
+              <p className="text-xs uppercase tracking-[0.3em] text-accent">Proof of concept</p>
+            </div>
+            <h2 className="display-headline mt-5 text-3xl text-white sm:text-4xl md:text-5xl">
+              Our solutions <span className="text-gradient-accent">trusted by</span>
+            </h2>
+          </Reveal>
+          <Reveal delay={0.1}>
+            <div className="flex flex-wrap items-center justify-end gap-3 text-sm text-zinc-400">
+              <span className="flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.03] px-4 py-1.5">
+                <span className="h-1.5 w-1.5 rounded-full bg-accent shadow-[0_0_6px_rgba(42,118,166,0.9)]" />
+                <span className="text-zinc-200">{trustedClients.length}+</span>
+                <span className="text-[10px] uppercase tracking-widest text-zinc-500">brands</span>
+              </span>
+              <span className="flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.03] px-4 py-1.5">
+                <span className="text-zinc-200">10</span>
+                <span className="text-[10px] uppercase tracking-widest text-zinc-500">sectors</span>
+              </span>
+            </div>
+          </Reveal>
+        </div>
+
+        {/* Logo grid */}
+        <Reveal delay={0.15}>
+          <div className="grid grid-cols-2 gap-px overflow-hidden rounded-3xl border border-white/10 bg-white/[0.04] sm:grid-cols-3 lg:grid-cols-5">
+            {trustedClients.map((client, i) => (
+              <ClientTile key={client.name} client={client} index={i} />
+            ))}
+          </div>
         </Reveal>
-        <Reveal delay={0.1}>
-          <Marquee items={trustedClients} />
+
+        {/* Footer caption */}
+        <Reveal delay={0.25}>
+          <p className="mt-8 text-center text-xs text-zinc-500">
+            And more across telecom, government, real estate, and entertainment.
+          </p>
         </Reveal>
       </div>
     </section>
+  );
+}
+
+/** Render a real logo image when available; fallback to a styled wordmark. */
+function ClientTile({
+  client, index,
+}: {
+  client: { name: string; sector: string; since: string; logo?: string };
+  index: number;
+}) {
+  return (
+    <div
+      className="group relative flex h-32 items-center justify-center bg-[#08090f] transition-colors duration-300 hover:bg-white/[0.02] sm:h-36"
+    >
+      {/* Subtle accent corner glow on hover */}
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-300 group-hover:opacity-100"
+        style={{
+          background:
+            "radial-gradient(80% 80% at 50% 50%, rgba(42,118,166,0.18), transparent 70%)",
+        }}
+      />
+
+      {/* Logo or wordmark */}
+      <div className="relative flex h-full w-full items-center justify-center px-6 transition-all duration-300 group-hover:-translate-y-1">
+        {client.logo ? (
+          <Image
+            src={client.logo}
+            alt={`${client.name} logo`}
+            width={140}
+            height={48}
+            className="h-9 w-auto max-w-[70%] object-contain opacity-60 grayscale transition duration-300 group-hover:opacity-100 group-hover:grayscale-0 sm:h-10"
+            unoptimized={client.logo.endsWith(".svg")}
+            style={{ filter: "brightness(0) invert(0.78)" }}
+          />
+        ) : (
+          <span
+            className="display-headline text-2xl tracking-tight text-zinc-500 transition-colors duration-300 group-hover:text-white sm:text-3xl"
+            style={{ letterSpacing: "0.04em" }}
+          >
+            {client.name.split(" ")[0]}
+            {client.name.split(" ").length > 1 && (
+              <span className="text-accent">·</span>
+            )}
+          </span>
+        )}
+      </div>
+
+      {/* Hover-only sector + since pill */}
+      <div className="pointer-events-none absolute bottom-3 left-1/2 -translate-x-1/2 translate-y-2 rounded-full border border-white/10 bg-black/70 px-2.5 py-0.5 text-[9px] uppercase tracking-widest text-zinc-400 opacity-0 backdrop-blur transition-all duration-300 group-hover:translate-y-0 group-hover:opacity-100">
+        {client.sector} · since {client.since}
+      </div>
+
+      {/* Index marker */}
+      <span className="pointer-events-none absolute left-3 top-3 font-mono text-[9px] tracking-widest text-zinc-700">
+        /{String(index + 1).padStart(2, "0")}
+      </span>
+    </div>
   );
 }
 
@@ -502,7 +976,268 @@ function CaseStudiesSection() {
   );
 }
 
-/* ─── 8. Other Services Linked With Our Cybertruck ─── */
+/* ─── Process — Scroll-driven step rail ─── */
+const processSteps = [
+  {
+    n: "01",
+    title: "Brief & Discovery",
+    blurb: "We listen to your goals, audience and dates. Output: a sharp creative direction and a watertight technical scope.",
+    bullets: ["Goals & KPIs alignment", "Audience & venue mapping", "Constraints & permits"],
+    duration: "Day 1–3",
+  },
+  {
+    n: "02",
+    title: "Design & Concept",
+    blurb: "Vehicle wraps, LED content, lighting plots and on-truck experiences — designed around your brand.",
+    bullets: ["Wrap & rooftop concepts", "Custom LED content", "Interactive moments"],
+    duration: "Week 1",
+  },
+  {
+    n: "03",
+    title: "Production & Build",
+    blurb: "Wrap install, content production, hardware prep, rehearsal. Every cue is dry-run before we ship.",
+    bullets: ["Vehicle wrap install", "Content & motion graphics", "Studio rehearsal"],
+    duration: "Week 1–2",
+  },
+  {
+    n: "04",
+    title: "Deployment",
+    blurb: "Logistics, permits, on-site setup, crew briefings. We arrive, plug in, and we're live.",
+    bullets: ["Routing & permits", "On-site setup", "Crew briefings"],
+    duration: "Activation day",
+  },
+  {
+    n: "05",
+    title: "Live Operation",
+    blurb: "Full technical crew running the activation — content, lighting, social capture, audience engagement.",
+    bullets: ["Live operators on board", "Real-time content", "Social capture team"],
+    duration: "Activation window",
+  },
+  {
+    n: "06",
+    title: "Wrap Report",
+    blurb: "Footage, KPIs, social listening and recommendations — delivered within 5 business days.",
+    bullets: ["Hero film + raw footage", "Engagement & reach data", "Next-campaign roadmap"],
+    duration: "+5 days",
+  },
+];
+
+function ProcessSection() {
+  const containerRef = useRef<HTMLDivElement>(null);
+  const [scrollProgress, setScrollProgress] = useState(0);
+
+  useEffect(() => {
+    const el = containerRef.current;
+    if (!el) return;
+    const handler = () => {
+      const rect = el.getBoundingClientRect();
+      const vh = window.innerHeight;
+      // Progress: 0 when section top hits viewport bottom; 1 when section bottom hits viewport top
+      const total = rect.height + vh;
+      const passed = vh - rect.top;
+      const p = Math.max(0, Math.min(1, passed / total));
+      setScrollProgress(p);
+    };
+    handler();
+    window.addEventListener("scroll", handler, { passive: true });
+    window.addEventListener("resize", handler);
+    return () => {
+      window.removeEventListener("scroll", handler);
+      window.removeEventListener("resize", handler);
+    };
+  }, []);
+
+  return (
+    <section id="process" className="relative overflow-hidden py-32">
+      {/* Backdrop */}
+      <div
+        className="absolute inset-0 opacity-40"
+        style={{
+          background:
+            "radial-gradient(40% 60% at 50% 30%, rgba(42,118,166,0.18), transparent 70%)",
+        }}
+        aria-hidden
+      />
+      <div className="grid-floor pointer-events-none absolute inset-0 opacity-25" aria-hidden />
+
+      <div className="relative mx-auto max-w-6xl px-6">
+        {/* Header */}
+        <Reveal className="mb-20 max-w-3xl">
+          <div className="flex items-center gap-3">
+            <span className="h-px w-12 bg-accent" />
+            <p className="text-xs uppercase tracking-[0.3em] text-accent">Our process</p>
+          </div>
+          <h2 className="display-headline mt-6 text-4xl text-white sm:text-5xl md:text-6xl lg:text-7xl">
+            From brief to<br />
+            <span className="text-gradient-accent">activation day.</span>
+          </h2>
+          <p className="mt-6 text-lg text-zinc-400">
+            Six stages, one team, no hand-offs. Every step is signed off before the next begins.
+          </p>
+        </Reveal>
+
+        {/* Timeline rail */}
+        <div ref={containerRef} className="relative">
+          {/* Center vertical track (mobile: left-aligned, desktop: centered) */}
+          <div
+            className="absolute bottom-0 left-6 top-0 w-px bg-white/[0.06] md:left-1/2 md:-translate-x-1/2"
+            aria-hidden
+          />
+          {/* Animated progress fill */}
+          <div
+            className="absolute left-6 top-0 w-px bg-gradient-to-b from-accent via-accent-soft to-accent-deep md:left-1/2 md:-translate-x-1/2"
+            style={{
+              height: `${scrollProgress * 100}%`,
+              boxShadow: "0 0 12px rgba(42,118,166,0.6)",
+              transition: "height 80ms linear",
+            }}
+            aria-hidden
+          />
+
+          {/* Steps */}
+          <ol className="space-y-16 md:space-y-24">
+            {processSteps.map((step, i) => (
+              <ProcessStep key={step.n} step={step} index={i} />
+            ))}
+          </ol>
+        </div>
+
+        {/* Footer CTA */}
+        <Reveal delay={0.1}>
+          <div className="mt-24 flex flex-col items-center gap-4 text-center">
+            <p className="text-sm text-zinc-400">Ready to start your timeline?</p>
+            <a
+              href="#contact"
+              className="inline-flex items-center gap-2 rounded-full bg-accent-gradient px-7 py-3.5 text-sm font-semibold text-white transition hover:opacity-90 hover:shadow-lg hover:shadow-accent/20"
+            >
+              Build my brief
+              <IconArrowRight className="h-4 w-4" />
+            </a>
+          </div>
+        </Reveal>
+      </div>
+    </section>
+  );
+}
+
+function ProcessStep({
+  step, index,
+}: {
+  step: typeof processSteps[number];
+  index: number;
+}) {
+  const ref = useRef<HTMLLIElement>(null);
+  const [visible, setVisible] = useState(false);
+  const fromLeft = index % 2 === 0;
+
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    const obs = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setVisible(true);
+          obs.disconnect();
+        }
+      },
+      { threshold: 0.3, rootMargin: "0px 0px -10% 0px" }
+    );
+    obs.observe(el);
+    return () => obs.disconnect();
+  }, []);
+
+  return (
+    <li ref={ref} className="relative">
+      {/* Mobile dot (left rail) */}
+      <span
+        className={`absolute left-6 top-6 -translate-x-1/2 md:hidden ${
+          visible ? "scale-100 opacity-100" : "scale-50 opacity-0"
+        } transition-all duration-500`}
+        aria-hidden
+      >
+        <span className="block h-3 w-3 rounded-full bg-accent shadow-[0_0_12px_rgba(42,118,166,0.9)]" />
+        <span className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 h-6 w-6 rounded-full border border-accent/50 animate-ping" />
+      </span>
+
+      {/* Desktop dot (center rail) */}
+      <span
+        className={`absolute left-1/2 top-6 hidden -translate-x-1/2 md:block ${
+          visible ? "scale-100 opacity-100" : "scale-50 opacity-0"
+        } transition-all duration-500`}
+        style={{ transitionDelay: "120ms" }}
+        aria-hidden
+      >
+        <span className="relative block h-4 w-4 rounded-full bg-accent shadow-[0_0_14px_rgba(42,118,166,0.9)]">
+          <span className="absolute inset-0 rounded-full bg-white/30" />
+        </span>
+        <span className="absolute left-1/2 top-1/2 h-8 w-8 -translate-x-1/2 -translate-y-1/2 rounded-full border border-accent/40 animate-ping" />
+      </span>
+
+      <div
+        className={`grid items-start gap-6 md:grid-cols-2 ${
+          fromLeft ? "" : "md:[&>div:first-child]:order-2"
+        }`}
+      >
+        {/* Card side */}
+        <div
+          className={`pl-16 md:pl-0 ${fromLeft ? "md:pr-12" : "md:pl-12"}`}
+          style={{
+            transition: "all 800ms cubic-bezier(0.22, 1, 0.36, 1)",
+            transitionDelay: "100ms",
+            transform: visible
+              ? "translateX(0) translateY(0)"
+              : `translateX(${fromLeft ? "-40px" : "40px"}) translateY(20px)`,
+            opacity: visible ? 1 : 0,
+          }}
+        >
+          <div className="spotlight-card glass-card group rounded-3xl p-7 hover:border-white/20 md:p-8">
+            <div className="flex items-center justify-between">
+              <span className="font-mono text-[10px] uppercase tracking-[0.3em] text-zinc-500">
+                /Step {step.n}
+              </span>
+              <span className="rounded-full border border-accent/30 bg-accent/10 px-3 py-0.5 text-[10px] uppercase tracking-widest text-accent">
+                {step.duration}
+              </span>
+            </div>
+            <h3 className="mt-4 text-2xl font-semibold tracking-tight text-white md:text-3xl">
+              {step.title}
+            </h3>
+            <p className="mt-3 text-sm leading-relaxed text-zinc-400 md:text-base">
+              {step.blurb}
+            </p>
+            <ul className="mt-5 space-y-2">
+              {step.bullets.map((b) => (
+                <li key={b} className="flex items-start gap-2 text-xs text-zinc-300 md:text-sm">
+                  <span className="mt-1.5 grid h-3 w-3 shrink-0 place-items-center rounded-full border border-accent/40 bg-accent/10">
+                    <span className="h-1 w-1 rounded-full bg-accent" />
+                  </span>
+                  {b}
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+
+        {/* Numeral side — huge index for visual rhythm */}
+        <div
+          className={`hidden md:flex md:items-start ${fromLeft ? "md:justify-start md:pl-12" : "md:justify-end md:pr-12"}`}
+          style={{
+            transition: "all 900ms cubic-bezier(0.22, 1, 0.36, 1)",
+            transitionDelay: "200ms",
+            transform: visible
+              ? "translateX(0)"
+              : `translateX(${fromLeft ? "30px" : "-30px"})`,
+            opacity: visible ? 1 : 0,
+          }}
+        >
+          <span className="display-headline select-none text-[8rem] leading-none text-white/[0.06] lg:text-[11rem]">
+            {step.n}
+          </span>
+        </div>
+      </div>
+    </li>
+  );
+}
 function OtherServicesSection() {
   return (
     <section id="services" className="relative py-32">
@@ -537,32 +1272,217 @@ function OtherServicesSection() {
 
 /* ─── 9. Testimonials ─── */
 function TestimonialsSection() {
+  const [active, setActive] = useState(0);
+  const main = testimonials[active];
+
   return (
-    <section className="relative py-32">
-      <div className="mx-auto max-w-7xl px-6">
-        <Reveal className="mb-16 text-center">
-          <p className="text-xs uppercase tracking-[0.3em] text-accent">Client voices</p>
-          <h2 className="display-headline mt-4 text-4xl text-white sm:text-5xl md:text-6xl">
-            What our<br />
-            <span className="text-gradient-accent">partners say.</span>
-          </h2>
+    <section className="relative overflow-hidden py-32">
+      {/* Atmospheric backdrop */}
+      <div
+        className="absolute inset-0 opacity-50"
+        style={{
+          background:
+            "radial-gradient(45% 55% at 25% 30%, rgba(42,118,166,0.18), transparent 70%), radial-gradient(35% 45% at 80% 70%, rgba(4,40,95,0.18), transparent 70%)",
+        }}
+        aria-hidden
+      />
+      <div className="grid-floor pointer-events-none absolute inset-0 opacity-25" aria-hidden />
+
+      {/* Massive quote glyph backdrop */}
+      <div
+        aria-hidden
+        className="display-headline pointer-events-none absolute -left-8 top-20 select-none text-[28rem] leading-none text-white/[0.02] sm:-left-16 sm:text-[40rem]"
+      >
+        “
+      </div>
+
+      <div className="relative mx-auto max-w-7xl px-6">
+        {/* Header + aggregate rating */}
+        <Reveal className="mb-16 flex flex-col items-start gap-8 md:flex-row md:items-end md:justify-between">
+          <div>
+            <div className="flex items-center gap-3">
+              <span className="h-px w-12 bg-accent" />
+              <p className="text-xs uppercase tracking-[0.3em] text-accent">Client voices</p>
+            </div>
+            <h2 className="display-headline mt-6 text-4xl text-white sm:text-5xl md:text-6xl lg:text-7xl">
+              Trusted by the<br />
+              <span className="text-gradient-accent">biggest stages.</span>
+            </h2>
+          </div>
+          <AggregateRating />
         </Reveal>
-        <div className="grid gap-4 md:grid-cols-3">
-          {testimonials.map((t, i) => (
-            <Reveal key={t.author} delay={i * 0.08}>
-              <div className="spotlight-card glass-card flex h-full flex-col rounded-3xl p-8 hover:border-white/20">
-                <IconQuote className="h-8 w-8 text-accent/30" />
-                <p className="mt-6 flex-1 text-base leading-relaxed text-zinc-300">&ldquo;{t.quote}&rdquo;</p>
-                <div className="mt-8 border-t border-white/5 pt-6">
-                  <p className="text-sm font-semibold text-white">{t.author}</p>
-                  <p className="mt-1 text-xs text-zinc-500">{t.role}</p>
+
+        {/* Featured testimonial */}
+        <Reveal delay={0.15}>
+          <div className="relative overflow-hidden rounded-[36px] glass-strong">
+            {/* Accent gradient wash */}
+            <div
+              className={`absolute inset-0 opacity-50 bg-gradient-to-br ${main.accent}`}
+              style={{ mixBlendMode: "soft-light" }}
+              aria-hidden
+            />
+            <div
+              className="absolute inset-0 opacity-60"
+              style={{
+                background:
+                  "radial-gradient(60% 80% at 80% 20%, rgba(42,118,166,0.22), transparent 65%)",
+              }}
+              aria-hidden
+            />
+            <div className="grid-floor pointer-events-none absolute inset-0 opacity-30" aria-hidden />
+
+            <div className="relative grid gap-10 p-8 sm:p-12 md:p-16 lg:grid-cols-[1.5fr_1fr] lg:items-center">
+              {/* Quote side */}
+              <div className="flex flex-col">
+                {/* Rating */}
+                <div className="mb-6 flex items-center gap-1.5">
+                  {Array.from({ length: 5 }).map((_, i) => (
+                    <StarIcon key={i} filled={i < main.rating} className="h-4 w-4" />
+                  ))}
+                  <span className="ml-3 text-[10px] uppercase tracking-[0.3em] text-zinc-400">
+                    Verified partner
+                  </span>
+                </div>
+
+                {/* The quote */}
+                <p className="text-pretty text-2xl font-medium leading-tight text-white sm:text-3xl md:text-4xl lg:leading-[1.15]">
+                  <span className="text-accent">&ldquo;</span>
+                  {main.quote}
+                  <span className="text-accent">&rdquo;</span>
+                </p>
+
+                {/* Author block */}
+                <div className="mt-10 flex items-center gap-4">
+                  <div
+                    className={`grid h-14 w-14 shrink-0 place-items-center rounded-2xl bg-gradient-to-br ${main.accent} text-base font-semibold text-white shadow-lg shadow-accent/20`}
+                  >
+                    {main.initials}
+                  </div>
+                  <div>
+                    <p className="text-base font-semibold text-white">{main.author}</p>
+                    <p className="text-sm text-zinc-400">
+                      {main.role} · <span className="text-zinc-300">{main.company}</span>
+                    </p>
+                  </div>
                 </div>
               </div>
+
+              {/* Metric pull-out */}
+              <div className="flex flex-col gap-3 lg:items-end lg:text-right">
+                <p className="text-[10px] uppercase tracking-[0.3em] text-accent">Outcome</p>
+                <p className="display-headline text-7xl text-white sm:text-8xl">
+                  {main.metric.value}
+                </p>
+                <p className="max-w-[12rem] text-sm text-zinc-300 lg:ml-auto">
+                  {main.metric.label}
+                </p>
+                {/* Bottom progress dots / nav */}
+                <div className="mt-6 flex items-center gap-2 lg:justify-end">
+                  {testimonials.map((_, i) => (
+                    <button
+                      key={i}
+                      onClick={() => setActive(i)}
+                      aria-label={`Show testimonial ${i + 1}`}
+                      className={`h-1.5 rounded-full transition-all ${
+                        i === active
+                          ? "w-8 bg-accent shadow-[0_0_8px_rgba(42,118,166,0.7)]"
+                          : "w-3 bg-white/20 hover:bg-white/40"
+                      }`}
+                    />
+                  ))}
+                </div>
+              </div>
+            </div>
+          </div>
+        </Reveal>
+
+        {/* Side rail with the other two */}
+        <div className="mt-6 grid gap-4 md:grid-cols-3">
+          {testimonials.map((t, i) => (
+            <Reveal key={t.author} delay={0.05 * i}>
+              <button
+                onClick={() => setActive(i)}
+                className={`spotlight-card glass-card group h-full w-full rounded-3xl p-6 text-left transition hover:-translate-y-0.5 ${
+                  i === active
+                    ? "border-accent/40 bg-accent/[0.04]"
+                    : "hover:border-white/20"
+                }`}
+              >
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center gap-3">
+                    <div
+                      className={`grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-gradient-to-br ${t.accent} text-xs font-semibold text-white`}
+                    >
+                      {t.initials}
+                    </div>
+                    <div>
+                      <p className="text-sm font-semibold text-white">{t.author}</p>
+                      <p className="text-[11px] text-zinc-500">{t.company}</p>
+                    </div>
+                  </div>
+                  <div className="flex items-center gap-0.5">
+                    {Array.from({ length: t.rating }).map((_, j) => (
+                      <StarIcon key={j} filled className="h-2.5 w-2.5" />
+                    ))}
+                  </div>
+                </div>
+                <p className="mt-5 line-clamp-3 text-xs leading-relaxed text-zinc-400 transition group-hover:text-zinc-300">
+                  &ldquo;{t.quote}&rdquo;
+                </p>
+                <div className="mt-5 flex items-center justify-between border-t border-white/5 pt-4">
+                  <span className="text-[10px] uppercase tracking-widest text-zinc-500">{t.metric.label}</span>
+                  <span className="text-sm font-semibold text-accent">{t.metric.value}</span>
+                </div>
+              </button>
             </Reveal>
           ))}
         </div>
       </div>
     </section>
+  );
+}
+
+function AggregateRating() {
+  return (
+    <div className="glass-light flex items-center gap-5 rounded-2xl px-6 py-4">
+      <div className="text-right">
+        <div className="flex items-center gap-1">
+          {Array.from({ length: 5 }).map((_, i) => (
+            <StarIcon key={i} filled className="h-4 w-4" />
+          ))}
+        </div>
+        <p className="mt-1.5 text-[10px] uppercase tracking-[0.25em] text-zinc-400">
+          4.9 / 5 · 80+ partners
+        </p>
+      </div>
+      <div className="h-10 w-px bg-white/10" />
+      <div>
+        <p className="text-2xl font-semibold tracking-tight text-white">98%</p>
+        <p className="text-[10px] uppercase tracking-widest text-zinc-500">
+          Repeat clients
+        </p>
+      </div>
+    </div>
+  );
+}
+
+function StarIcon({ filled = false, className = "" }: { filled?: boolean; className?: string }) {
+  return (
+    <svg
+      viewBox="0 0 20 20"
+      className={className}
+      fill={filled ? "url(#star-grad)" : "none"}
+      stroke={filled ? "none" : "rgba(255,255,255,0.2)"}
+      strokeWidth={1.5}
+    >
+      <defs>
+        <linearGradient id="star-grad" x1="0" x2="1" y1="0" y2="1">
+          <stop offset="0%" stopColor="#5ba3d4" />
+          <stop offset="100%" stopColor="#2a76a6" />
+        </linearGradient>
+      </defs>
+      <path d="M10 1.5l2.6 5.3 5.9.85-4.25 4.15 1 5.85L10 14.9l-5.25 2.75 1-5.85L1.5 7.65l5.9-.85L10 1.5z" />
+    </svg>
   );
 }
 
@@ -602,38 +1522,45 @@ function KingdomMap() {
       {/* Subtle grid overlay */}
       <div className="grid-floor pointer-events-none absolute inset-0 opacity-50" aria-hidden />
 
-      {/* Real KSA borders + city hotspots in shared SVG coord space */}
+      {/* Real KSA regions + city hotspots in shared SVG coord space */}
       <svg
-        viewBox="0 0 100 75"
-        className="absolute inset-0 h-full w-full"
+        viewBox={KSA_VIEWBOX}
+        className="absolute inset-0 h-full w-full p-6"
         preserveAspectRatio="xMidYMid meet"
       >
         <defs>
           <linearGradient id="ksa-fill" x1="0" x2="1" y1="0" y2="1">
-            <stop offset="0%" stopColor="#2a76a6" stopOpacity="0.18" />
-            <stop offset="100%" stopColor="#04285f" stopOpacity="0.08" />
+            <stop offset="0%" stopColor="#2a76a6" stopOpacity="0.16" />
+            <stop offset="100%" stopColor="#04285f" stopOpacity="0.06" />
           </linearGradient>
           <linearGradient id="ksa-stroke" x1="0" x2="1" y1="0" y2="1">
             <stop offset="0%" stopColor="#5ba3d4" stopOpacity="0.7" />
             <stop offset="100%" stopColor="#2a76a6" stopOpacity="0.35" />
           </linearGradient>
           <radialGradient id="pin-glow" cx="50%" cy="50%" r="50%">
-            <stop offset="0%" stopColor="#5ba3d4" stopOpacity="0.6" />
+            <stop offset="0%" stopColor="#5ba3d4" stopOpacity="0.7" />
             <stop offset="100%" stopColor="#5ba3d4" stopOpacity="0" />
           </radialGradient>
         </defs>
 
-        {/* Country outline */}
-        <path
-          d={KSA_PATH}
-          fill="url(#ksa-fill)"
-          stroke="url(#ksa-stroke)"
-          strokeWidth={0.35}
-          strokeLinejoin="round"
-          aria-hidden
-        />
+        {/* All 13 administrative regions */}
+        <g aria-hidden>
+          {KSA_REGIONS.map((region) => (
+            <path
+              key={region.id}
+              d={region.d}
+              fill="url(#ksa-fill)"
+              stroke="url(#ksa-stroke)"
+              strokeWidth={1.2}
+              strokeLinejoin="round"
+              className="transition-colors duration-300 hover:fill-[rgba(42,118,166,0.28)]"
+            >
+              <title>{region.name}</title>
+            </path>
+          ))}
+        </g>
 
-        {/* City pins as SVG groups (perfect alignment) */}
+        {/* City pins on top */}
         {cities.map((city) => (
           <CityPinSvg key={city.name} city={city} />
         ))}
@@ -656,13 +1583,15 @@ function CityPinSvg({
 }: {
   city: { name: string; x: number; y: number; hub?: boolean };
 }) {
-  const r = city.hub ? 0.9 : 0.6;
-  const ringR = city.hub ? 2.2 : 1.6;
+  // viewBox is 1000×824, so pin sizes are tuned to that scale
+  const r = city.hub ? 9 : 6;
+  const ringR = city.hub ? 22 : 16;
   const dur = city.hub ? "2.4s" : "3.2s";
+  const padX = city.name.length * 7;
   return (
     <g className="group" style={{ cursor: "pointer" }}>
       {/* Outer halo (static glow) */}
-      <circle cx={city.x} cy={city.y} r={ringR * 1.6} fill="url(#pin-glow)" />
+      <circle cx={city.x} cy={city.y} r={ringR * 1.7} fill="url(#pin-glow)" />
       {/* Animated pulse ring */}
       <circle
         cx={city.x}
@@ -670,7 +1599,7 @@ function CityPinSvg({
         r={r}
         fill="none"
         stroke="#2a76a6"
-        strokeWidth={0.18}
+        strokeWidth={1.8}
         opacity={0.7}
       >
         <animate attributeName="r" from={r} to={ringR} dur={dur} repeatCount="indefinite" />
@@ -683,27 +1612,28 @@ function CityPinSvg({
         r={r}
         fill="#5ba3d4"
         className="transition-all duration-200 group-hover:opacity-100"
-        style={{ filter: "drop-shadow(0 0 1.5px rgba(91,163,212,0.9))" }}
+        style={{ filter: "drop-shadow(0 0 14px rgba(91,163,212,0.9))" }}
       />
-      {/* Hover-only label */}
+      {/* Hover label */}
       <g className="opacity-0 transition-opacity duration-200 group-hover:opacity-100">
         <rect
-          x={city.x - city.name.length * 0.7}
-          y={city.y + 1.5}
-          width={city.name.length * 1.4}
-          height={2.5}
-          rx={1.25}
-          fill="rgba(10, 12, 18, 0.9)"
-          stroke="rgba(255,255,255,0.12)"
-          strokeWidth={0.1}
+          x={city.x - padX}
+          y={city.y + 14}
+          width={padX * 2}
+          height={26}
+          rx={13}
+          fill="rgba(10, 12, 18, 0.95)"
+          stroke="rgba(255,255,255,0.15)"
+          strokeWidth={1}
         />
         <text
           x={city.x}
-          y={city.y + 3.3}
+          y={city.y + 31}
           textAnchor="middle"
-          fontSize={1.5}
+          fontSize={14}
           fill="#fff"
-          style={{ fontFamily: "var(--font-geist-sans, sans-serif)", letterSpacing: "0.05em" }}
+          fontWeight={600}
+          style={{ letterSpacing: "0.1em" }}
         >
           {city.name.toUpperCase()}
         </text>
@@ -1323,33 +2253,261 @@ function BriefSuccess({ data }: { data: BriefData }) {
 }
 
 function FAQSection() {
+  const [activeCategory, setActiveCategory] = useState<FaqCategory>("All");
+  const [openIndex, setOpenIndex] = useState<number | null>(0);
+
+  const filtered = faqs.filter(
+    (f) => activeCategory === "All" || f.category === activeCategory
+  );
+
   return (
-    <section className="relative py-32">
-      <div className="mx-auto max-w-3xl px-6">
-        <Reveal className="mb-16 text-center">
-          <p className="text-xs uppercase tracking-[0.3em] text-accent">FAQ</p>
-          <h2 className="display-headline mt-4 text-4xl text-white sm:text-5xl">
-            Common<br />
-            <span className="text-gradient-accent">questions.</span>
+    <section className="relative overflow-hidden py-32">
+      {/* Atmospheric backdrop */}
+      <div
+        className="absolute inset-0 opacity-40"
+        style={{
+          background:
+            "radial-gradient(40% 50% at 80% 20%, rgba(42,118,166,0.18), transparent 70%), radial-gradient(35% 45% at 10% 80%, rgba(4,40,95,0.18), transparent 70%)",
+        }}
+        aria-hidden
+      />
+      <div className="grid-floor pointer-events-none absolute inset-0 opacity-25" aria-hidden />
+
+      {/* Massive transparent ? glyph */}
+      <div
+        aria-hidden
+        className="display-headline pointer-events-none absolute right-[-8rem] top-1/2 -translate-y-1/2 select-none text-[40rem] leading-none text-white/[0.025] sm:right-[-4rem]"
+      >
+        ?
+      </div>
+
+      <div className="relative mx-auto max-w-7xl px-6">
+        {/* Header */}
+        <Reveal className="mb-16 max-w-3xl">
+          <div className="flex items-center gap-3">
+            <span className="h-px w-12 bg-accent" />
+            <p className="text-xs uppercase tracking-[0.3em] text-accent">FAQ</p>
+          </div>
+          <h2 className="display-headline mt-6 text-4xl text-white sm:text-5xl md:text-6xl lg:text-7xl">
+            Everything you<br />
+            need to <span className="text-gradient-accent">know.</span>
           </h2>
+          <p className="mt-6 text-lg text-zinc-400">
+            Quick answers about customization, logistics, and how the activation actually runs.
+          </p>
         </Reveal>
-        <div className="space-y-3">
-          {faqs.map((faq, i) => (
-            <Reveal key={faq.q} delay={i * 0.05}>
-              <details className="group glass-card rounded-2xl">
-                <summary className="flex cursor-pointer items-center justify-between gap-4 p-6 text-base font-semibold text-white [&::-webkit-details-marker]:hidden">
-                  {faq.q}
-                  <IconChevronDown className="h-5 w-5 shrink-0 text-zinc-500 transition group-open:rotate-180" />
-                </summary>
-                <div className="px-6 pb-6 text-sm leading-relaxed text-zinc-400">
-                  {faq.a}
+
+        <div className="grid gap-10 lg:grid-cols-[260px_1fr] lg:gap-14">
+          {/* Category rail */}
+          <Reveal delay={0.05}>
+            <div className="lg:sticky lg:top-28">
+              <p className="mb-4 text-[10px] uppercase tracking-[0.3em] text-zinc-500">Filter by</p>
+              <div className="flex flex-wrap gap-2 lg:flex-col">
+                {faqCategories.map((cat) => {
+                  const count =
+                    cat === "All" ? faqs.length : faqs.filter((f) => f.category === cat).length;
+                  const active = cat === activeCategory;
+                  return (
+                    <button
+                      key={cat}
+                      onClick={() => {
+                        setActiveCategory(cat);
+                        setOpenIndex(0);
+                      }}
+                      className={`group/btn flex items-center justify-between gap-3 rounded-2xl border px-4 py-2.5 text-left text-sm transition-all ${
+                        active
+                          ? "border-accent/40 bg-accent/[0.08] text-white"
+                          : "border-white/10 bg-white/[0.02] text-zinc-400 hover:border-white/20 hover:bg-white/[0.04] hover:text-zinc-200"
+                      }`}
+                    >
+                      <span className="flex items-center gap-2">
+                        {active && (
+                          <span className="h-1.5 w-1.5 rounded-full bg-accent shadow-[0_0_6px_rgba(42,118,166,0.9)]" />
+                        )}
+                        <span className={active ? "font-semibold" : ""}>{cat}</span>
+                      </span>
+                      <span
+                        className={`font-mono text-[10px] transition ${
+                          active ? "text-accent" : "text-zinc-600 group-hover/btn:text-zinc-400"
+                        }`}
+                      >
+                        {String(count).padStart(2, "0")}
+                      </span>
+                    </button>
+                  );
+                })}
+              </div>
+
+              {/* Helpful contact card */}
+              <div className="mt-8 hidden rounded-2xl border border-dashed border-white/10 bg-white/[0.02] p-5 lg:block">
+                <p className="text-sm font-semibold text-white">Still curious?</p>
+                <p className="mt-2 text-xs leading-relaxed text-zinc-400">
+                  Skip the forms. Reach our team directly.
+                </p>
+                <div className="mt-4 flex flex-col gap-2">
+                  <a
+                    href="https://wa.me/966543938548"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 rounded-full bg-accent-gradient px-4 py-2 text-[10px] font-semibold uppercase tracking-[0.2em] text-white transition hover:opacity-90"
+                  >
+                    <IconWhatsApp className="h-3.5 w-3.5" />
+                    WhatsApp
+                  </a>
+                  <a
+                    href="mailto:inquiry@hotsspots.com"
+                    className="inline-flex items-center gap-2 rounded-full border border-white/10 px-4 py-2 text-[10px] font-medium uppercase tracking-[0.2em] text-zinc-300 transition hover:bg-white/[0.04] hover:text-white"
+                  >
+                    <IconMail className="h-3.5 w-3.5" />
+                    Email
+                  </a>
                 </div>
-              </details>
-            </Reveal>
-          ))}
+              </div>
+            </div>
+          </Reveal>
+
+          {/* Question list */}
+          <div className="space-y-3">
+            {filtered.map((faq, i) => (
+              <Reveal key={`${activeCategory}-${faq.q}`} delay={i * 0.04}>
+                <FAQItem
+                  faq={faq}
+                  index={i}
+                  isOpen={openIndex === i}
+                  onToggle={() => setOpenIndex(openIndex === i ? null : i)}
+                />
+              </Reveal>
+            ))}
+
+            {filtered.length === 0 && (
+              <div className="rounded-2xl border border-dashed border-white/10 bg-white/[0.02] p-8 text-center text-sm text-zinc-500">
+                No questions in this category yet.
+              </div>
+            )}
+          </div>
         </div>
+
+        {/* Bottom CTA */}
+        <Reveal delay={0.15}>
+          <div className="mt-20 flex flex-col items-center gap-4 rounded-3xl border border-white/10 bg-white/[0.03] p-10 text-center md:flex-row md:justify-between md:text-left">
+            <div>
+              <p className="text-lg font-semibold text-white">Didn&apos;t find what you needed?</p>
+              <p className="mt-1 text-sm text-zinc-400">
+                Our team responds within 24 hours with a tailored answer.
+              </p>
+            </div>
+            <a
+              href="#contact"
+              className="inline-flex items-center gap-2 rounded-full bg-accent-gradient px-6 py-3 text-sm font-semibold text-white transition hover:opacity-90 hover:shadow-lg hover:shadow-accent/20"
+            >
+              Ask us anything
+              <IconArrowRight className="h-4 w-4" />
+            </a>
+          </div>
+        </Reveal>
       </div>
     </section>
+  );
+}
+
+function FAQItem({
+  faq, index, isOpen, onToggle,
+}: {
+  faq: { q: string; a: string; category: FaqCategory };
+  index: number;
+  isOpen: boolean;
+  onToggle: () => void;
+}) {
+  const contentRef = useRef<HTMLDivElement>(null);
+  const [height, setHeight] = useState(0);
+
+  useEffect(() => {
+    const el = contentRef.current;
+    if (!el) return;
+    setHeight(isOpen ? el.scrollHeight : 0);
+  }, [isOpen, faq.a]);
+
+  return (
+    <div
+      className={`spotlight-card glass-card group rounded-3xl transition-all duration-300 ${
+        isOpen
+          ? "border-accent/30 bg-white/[0.04]"
+          : "hover:border-white/20"
+      }`}
+    >
+      <button
+        type="button"
+        onClick={onToggle}
+        aria-expanded={isOpen}
+        className="flex w-full items-start justify-between gap-4 p-6 text-left md:p-7"
+      >
+        {/* Number + content */}
+        <div className="flex items-start gap-5">
+          <span
+            className={`shrink-0 font-mono text-[11px] uppercase tracking-[0.2em] transition-colors ${
+              isOpen ? "text-accent" : "text-zinc-600"
+            }`}
+          >
+            /{String(index + 1).padStart(2, "0")}
+          </span>
+          <div className="flex-1">
+            <h3
+              className={`text-base font-semibold leading-snug transition-colors md:text-lg ${
+                isOpen ? "text-white" : "text-zinc-200 group-hover:text-white"
+              }`}
+            >
+              {faq.q}
+            </h3>
+            <p
+              className={`mt-1 inline-flex items-center gap-1.5 text-[10px] uppercase tracking-widest text-zinc-500 transition-opacity ${
+                isOpen ? "opacity-0 md:opacity-100" : "opacity-70"
+              }`}
+            >
+              <span className="h-1 w-1 rounded-full bg-zinc-600" />
+              {faq.category}
+            </p>
+          </div>
+        </div>
+
+        {/* Chevron / plus icon */}
+        <span
+          className={`grid h-9 w-9 shrink-0 place-items-center rounded-full border transition-all ${
+            isOpen
+              ? "rotate-45 border-accent/40 bg-accent/15 text-accent"
+              : "border-white/10 bg-white/[0.03] text-zinc-400 group-hover:border-white/30 group-hover:text-white"
+          }`}
+        >
+          <svg viewBox="0 0 16 16" className="h-3.5 w-3.5" fill="none" stroke="currentColor" strokeWidth={2.2}>
+            <path d="M8 2v12M2 8h12" strokeLinecap="round" />
+          </svg>
+        </span>
+      </button>
+
+      {/* Animated answer */}
+      <div
+        style={{
+          height: `${height}px`,
+          transition: "height 380ms cubic-bezier(0.22, 1, 0.36, 1)",
+        }}
+        className="overflow-hidden"
+      >
+        <div ref={contentRef}>
+          <div className="border-t border-white/5 px-6 pb-6 pt-4 md:px-7">
+            <p
+              className="ml-9 max-w-3xl text-sm leading-relaxed text-zinc-400 md:text-base"
+              style={{
+                transform: isOpen ? "translateY(0)" : "translateY(-8px)",
+                opacity: isOpen ? 1 : 0,
+                transition: "transform 400ms ease-out, opacity 400ms ease-out",
+                transitionDelay: isOpen ? "120ms" : "0ms",
+              }}
+            >
+              {faq.a}
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
   );
 }
 
