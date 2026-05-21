@@ -1,14 +1,20 @@
+"use client";
+
+import { useId } from "react";
+
 export function StarIcon({ filled = false, className = "" }: { filled?: boolean; className?: string }) {
+  const gradientId = useId();
+
   return (
     <svg
       viewBox="0 0 20 20"
       className={className}
-      fill={filled ? "url(#star-grad)" : "none"}
+      fill={filled ? `url(#${gradientId})` : "none"}
       stroke={filled ? "none" : "rgba(255,255,255,0.2)"}
       strokeWidth={1.5}
     >
       <defs>
-        <linearGradient id="star-grad" x1="0" x2="1" y1="0" y2="1">
+        <linearGradient id={gradientId} x1="0" x2="1" y1="0" y2="1">
           <stop offset="0%" stopColor="#5ba3d4" />
           <stop offset="100%" stopColor="#2a76a6" />
         </linearGradient>
