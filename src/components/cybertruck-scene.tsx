@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { SceneLoader } from "@/components/scene/scene-loader";
 
 interface CybertruckSceneProps {
   /** "hero" hides UI overlays and uses an autostart shot; "explore" enables full controls */
@@ -59,10 +60,7 @@ export function CybertruckScene({ initialView = "explore" }: CybertruckSceneProp
       {/* Loading state */}
       {!loaded && (
         <div className="absolute inset-0 z-10 grid place-items-center bg-[#05060a]/30">
-          <div className="flex flex-col items-center gap-3 text-zinc-400">
-            <div className="h-10 w-10 animate-spin rounded-full border-2 border-white/10 border-t-accent" />
-            <p className="text-[10px] uppercase tracking-[0.3em]">Loading 3D model</p>
-          </div>
+          <SceneLoader />
         </div>
       )}
 

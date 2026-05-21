@@ -1,25 +1,8 @@
 "use client";
 
-import dynamic from "next/dynamic";
 import { useEffect, useState } from "react";
+import { CybertruckSceneDynamic } from "@/components/scene/cybertruck-scene-dynamic";
 import { IconArrowRight } from "./icons";
-
-// 3D scene — browser only, lazy
-const CybertruckScene = dynamic(
-  () => import("./cybertruck-scene").then((m) => m.CybertruckScene),
-  { ssr: false, loading: () => <SceneFallback /> }
-);
-
-function SceneFallback() {
-  return (
-    <div className="grid h-full w-full place-items-center">
-      <div className="flex flex-col items-center gap-3 text-zinc-500">
-        <div className="h-10 w-10 animate-spin rounded-full border-2 border-white/10 border-t-accent" />
-        <p className="text-[10px] uppercase tracking-[0.3em]">Loading 3D model</p>
-      </div>
-    </div>
-  );
-}
 
 export function Hero() {
   const [mounted, setMounted] = useState(false);
@@ -74,7 +57,7 @@ export function Hero() {
           <div className="absolute inset-x-10 bottom-0 h-1/3 rounded-[100%] bg-accent-gradient opacity-30 blur-3xl" aria-hidden />
           {/* Side rim glow */}
           <div className="pointer-events-none absolute -inset-4 rounded-[40px] bg-[radial-gradient(70%_60%_at_50%_60%,rgba(42,118,166,0.2),transparent_70%)]" aria-hidden />
-          <CybertruckScene initialView="hero" />
+          <CybertruckSceneDynamic initialView="hero" />
         </div>
 
         {/* CTAs */}
