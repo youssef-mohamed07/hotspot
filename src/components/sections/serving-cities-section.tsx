@@ -17,7 +17,7 @@ export function ServingCitiesSection() {
             <span className="text-gradient-accent">the Kingdom.</span>
           </h2>
           <p className="mt-6 text-lg text-zinc-600">
-            From Riyadh to NEOM, we move the truck wherever your audience lives. Eight active hubs and counting.
+            Riyadh, Jeddah, Khobar, Mecca, and Medina — five active hubs across the Kingdom.
           </p>
         </Reveal>
         <Reveal delay={0.1}>

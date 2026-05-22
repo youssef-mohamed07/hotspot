@@ -6,19 +6,7 @@ import { IconArrowRight } from "@/components/icons";
 import { StepHeader } from "@/components/brief-wizard/step-header";
 import { WizardNav } from "@/components/brief-wizard/wizard-nav";
 import { WizardProgress } from "@/components/brief-wizard/wizard-progress";
-
-type ContactFormData = {
-  name: string;
-  company: string;
-  email: string;
-  whatsapp: string;
-  industry: string;
-  campaignType: string;
-  targetCities: string;
-  campaignDate: string;
-  budget: string;
-  notes: string;
-};
+import type { ContactFormData } from "@/lib/contact-form";
 
 const initialForm: ContactFormData = {
   name: "",
@@ -63,6 +51,8 @@ function Field({
 
 export function FormSection() {
   const [submitted, setSubmitted] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState<string | null>(null);
   const [step, setStep] = useState(0);
   const [data, setData] = useState<ContactFormData>(initialForm);
 
@@ -79,7 +69,26 @@ export function FormSection() {
     true,
   ][step];
 
-  const handleSubmit = () => setSubmitted(true);
+  const handleSubmit = async () => {
+    setSubmitError(null);
+    setIsSubmitting(true);
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data),
+      });
+      const body = (await res.json().catch(() => ({}))) as { error?: string };
+      if (!res.ok) {
+        throw new Error(body.error ?? "Something went wrong. Please try again.");
+      }
+      setSubmitted(true);
+    } catch (err) {
+      setSubmitError(err instanceof Error ? err.message : "Something went wrong. Please try again.");
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
 
   return (
     <section
@@ -298,10 +307,17 @@ export function FormSection() {
                   )}
                 </div>
 
+                {submitError && (
+                  <p className="rounded-xl border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700">
+                    {submitError}
+                  </p>
+                )}
+
                 <WizardNav
                   step={step}
                   totalSteps={TOTAL_STEPS}
                   canAdvance={canAdvance}
+                  isSubmitting={isSubmitting}
                   onPrev={() => setStep((s) => Math.max(0, s - 1))}
                   onNext={() => setStep((s) => Math.min(TOTAL_STEPS - 1, s + 1))}
                   onSubmit={handleSubmit}

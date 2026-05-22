@@ -30,6 +30,8 @@ export function Header() {
             alt="HotSpot"
             width={120}
             height={36}
+            priority
+            fetchPriority="high"
             className="h-7 w-auto md:h-8"
           />
         </Link>

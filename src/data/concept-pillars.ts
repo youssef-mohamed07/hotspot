@@ -8,7 +8,7 @@ export const conceptPillars: ConceptPillarData[] = [
     description:
       "We position the Cybertruck where your audience already lives — malls, events, neighborhoods, business districts. The location is part of the message.",
     Icon: IconMapPin,
-    image: "https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=1200&q=80",
+    image: "",
     bullets: [
       "Foot-traffic mapping in advance",
       "Permits, parking & power handled",
@@ -22,7 +22,7 @@ export const conceptPillars: ConceptPillarData[] = [
     description:
       "Full vehicle wraps, custom LED content, interactive overlays, and modular accessories. The truck becomes a 100% extension of your brand identity.",
     Icon: IconCube,
-    image: "https://images.unsplash.com/photo-1605559424843-9e4c228bf1c2?w=1200&q=80",
+    image: "",
     bullets: [
       "Full-body custom vehicle wrap",
       "Branded LED content & motion graphics",

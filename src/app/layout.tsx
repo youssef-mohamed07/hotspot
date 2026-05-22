@@ -1,5 +1,8 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono, Bebas_Neue, Cairo } from "next/font/google";
+import { JsonLd } from "@/components/seo/json-ld";
+import { WhatsAppFloat } from "@/components/layout/whatsapp-float";
+import { homePageJsonLd, rootMetadata } from "@/lib/seo";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -23,19 +26,12 @@ const cairo = Cairo({
   subsets: ["arabic"],
 });
 
-export const metadata: Metadata = {
-  title: "HotSpot — Event Technology Solutions",
-  description:
-    "Integrated LED screens, lighting, sound systems, and live event production across Saudi Arabia. Where technology becomes experience.",
-  metadataBase: new URL("https://hotsspots.com"),
-  openGraph: {
-    title: "HotSpot — Event Technology Solutions",
-    description:
-      "Integrated AV, LED screens, lighting and sound systems for every type of event.",
-    url: "https://hotsspots.com",
-    siteName: "HotSpot",
-    type: "website",
-  },
+export const metadata: Metadata = rootMetadata;
+
+export const viewport: Viewport = {
+  themeColor: "#2a76a6",
+  width: "device-width",
+  initialScale: 1,
 };
 
 export default function RootLayout({
@@ -46,10 +42,13 @@ export default function RootLayout({
   return (
     <html
       lang="en"
+      dir="ltr"
       className={`${geistSans.variable} ${geistMono.variable} ${bebasNeue.variable} ${cairo.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col bg-[#08090c] text-zinc-100">
+        <JsonLd data={homePageJsonLd()} />
         {children}
+        <WhatsAppFloat />
       </body>
     </html>
   );

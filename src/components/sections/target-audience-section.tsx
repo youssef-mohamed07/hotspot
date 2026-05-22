@@ -4,65 +4,7 @@ import { useRef, useState } from "react";
 import { motion, useScroll, useMotionValueEvent } from "framer-motion";
 import { SectionHeader } from "@/components/section-header";
 import { AudienceCard } from "@/components/target-audience/audience-card";
-import {
-  IconSparkle,
-  IconCamera,
-  IconVenue,
-  IconWave,
-} from "@/components/icons";
-
-const audienceList = [
-  {
-    title: "Launching a New Product",
-    description: (
-      <>
-        Make an{" "}
-        <span className="rounded-md bg-accent/10 px-1.5 py-0.5 font-semibold text-accent-deep">
-          unforgettable statement
-        </span>{" "}
-        that drives immediate awareness and curiosity from the first second.
-      </>
-    ),
-    icon: IconSparkle,
-  },
-  {
-    title: "Opening a New Location",
-    description: (
-      <>
-        <span className="rounded-md bg-accent/10 px-1.5 py-0.5 font-semibold text-accent-deep">
-          Dominate the local physical area
-        </span>{" "}
-        and drive foot traffic directly to your front doors.
-      </>
-    ),
-    icon: IconVenue,
-  },
-  {
-    title: "Seeking Viral Engagement",
-    description: (
-      <>
-        People don&apos;t take pictures of normal billboards. They{" "}
-        <span className="rounded-md bg-accent/10 px-1.5 py-0.5 font-semibold text-accent-deep">
-          film this and share it natively
-        </span>
-        .
-      </>
-    ),
-    icon: IconCamera,
-  },
-  {
-    title: "Dominating Major Events",
-    description: (
-      <>
-        <span className="rounded-md bg-accent/10 px-1.5 py-0.5 font-semibold text-accent-deep">
-          Stand out effortlessly
-        </span>{" "}
-        outside conferences, concerts, and massive festivals across the country.
-      </>
-    ),
-    icon: IconWave,
-  },
-];
+import { audienceList } from "@/data/target-audience";
 
 export function TargetAudienceSection() {
   const sectionRef = useRef<HTMLDivElement>(null);
@@ -108,7 +50,7 @@ export function TargetAudienceSection() {
               <div className="mt-10 hidden gap-2 md:flex">
                 {audienceList.map((item, i) => (
                   <button
-                    key={item.title}
+                    key={item.id}
                     type="button"
                     onClick={() => setActiveIndex(i)}
                     className={`rounded-full px-3 py-1.5 text-[10px] font-bold uppercase tracking-[0.2em] transition ${
@@ -130,12 +72,12 @@ export function TargetAudienceSection() {
                 className="absolute inset-x-0 top-0 hidden h-[400%] w-full flex-col md:flex"
               >
                 {audienceList.map((item, i) => (
-                  <div key={item.title} className="flex h-1/4 w-full items-center p-2">
+                  <div key={item.id} className="flex h-1/4 w-full items-center p-2">
                     <AudienceCard
                       index={i}
                       total={audienceList.length}
-                      title={item.title}
-                      description={item.description}
+                      lead={item.lead}
+                      payoff={item.payoff}
                       icon={item.icon}
                       active={i === activeIndex}
                     />
@@ -146,11 +88,11 @@ export function TargetAudienceSection() {
               <div className="flex flex-col gap-5 md:hidden">
                 {audienceList.map((item, i) => (
                   <AudienceCard
-                    key={item.title}
+                    key={item.id}
                     index={i}
                     total={audienceList.length}
-                    title={item.title}
-                    description={item.description}
+                    lead={item.lead}
+                    payoff={item.payoff}
                     icon={item.icon}
                     active={i === activeIndex}
                   />

@@ -1,6 +1,6 @@
 "use client";
 
-import Image from "next/image";
+import { ImagePlaceholder } from "@/components/ui/image-placeholder";
 import { Reveal } from "@/components/reveal";
 import { SectionHeader } from "@/components/section-header";
 import { IconIntegration, IconVenue, IconSparkle } from "@/components/icons";
@@ -73,22 +73,14 @@ export function ExperientialMarketingSection() {
 
           {/* Right Column Visual */}
           <Reveal delay={0.3} className="relative hidden lg:block h-full min-h-[600px]">
-            <div className="absolute inset-0 rounded-[48px] overflow-hidden border border-zinc-200/50 bg-zinc-100 shadow-[0_32px_80px_rgba(0,0,0,0.08)]">
-               <Image 
-                 src="https://placehold.co/800x1000/f4f4f5/71717a?text=800x1000+Cinematic+Activation+Visual"
-                 alt="Premium Activation"
-                 fill
-                 className="object-cover"
-                 unoptimized
-               />
-               
-               {/* Decorative cinematic lighting overlays to maintain premium feel */}
-               <div className="absolute inset-0 bg-linear-to-tr from-accent/5 via-transparent to-transparent" />
-               <div className="absolute inset-0 shadow-[inset_0_0_100px_rgba(0,0,0,0.02)]" />
-               
-               {/* Soft floating dots */}
-               <div className="absolute top-12 left-12 h-2.5 w-2.5 rounded-full bg-accent/40 animate-pulse" />
-               <div className="absolute bottom-12 right-12 h-3.5 w-3.5 rounded-full bg-accent/30 animate-bounce" style={{ animationDuration: '4s' }} />
+            <div className="absolute inset-0 overflow-hidden rounded-[48px] border border-zinc-200/50 shadow-[0_32px_80px_rgba(0,0,0,0.08)]">
+              <ImagePlaceholder
+                fill
+                width={800}
+                height={1000}
+                label="Cinematic Activation Visual"
+                className="rounded-[48px]"
+              />
             </div>
           </Reveal>
         </div>

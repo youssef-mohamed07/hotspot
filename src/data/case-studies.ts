@@ -32,7 +32,7 @@ export const caseStudies: CaseStudy[] = [
         description: "The activation marketed itself",
       },
     ],
-    image: "https://images.unsplash.com/photo-1522778119026-d647f9f68212?w=1200&q=80",
+    image: "",
   },
   {
     title: "Tawineya",
@@ -54,6 +54,6 @@ export const caseStudies: CaseStudy[] = [
         description: "Crowd was hyped before stepping inside",
       },
     ],
-    image: "https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=1200&q=80",
+    image: "",
   },
 ];

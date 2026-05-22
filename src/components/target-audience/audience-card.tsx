@@ -1,20 +1,20 @@
 "use client";
 
 import { motion } from "framer-motion";
-import type { ComponentType, SVGProps, ReactNode } from "react";
+import type { ComponentType, SVGProps } from "react";
 
 export function AudienceCard({
   index,
   total,
-  title,
-  description,
+  lead,
+  payoff,
   icon: Icon,
   active,
 }: {
   index: number;
   total: number;
-  title: string;
-  description: ReactNode;
+  lead: string;
+  payoff: string;
   icon: ComponentType<SVGProps<SVGSVGElement>>;
   active: boolean;
 }) {
@@ -64,22 +64,24 @@ export function AudienceCard({
         </span>
       </div>
 
-      <div className="relative mt-8">
-        <motion.h3
+      <div className="relative mt-8 space-y-4">
+        <motion.p
           animate={{ x: active ? 0 : -8 }}
           transition={{ type: "spring", stiffness: 300, damping: 26, delay: 0.05 }}
-          className={`text-xl font-bold tracking-tight transition-colors sm:text-2xl ${
-            active ? "text-zinc-900" : "text-zinc-500"
+          className={`text-lg leading-snug transition-colors sm:text-xl ${
+            active ? "text-zinc-600" : "text-zinc-400"
           }`}
         >
-          {title}
-        </motion.h3>
+          {lead}
+        </motion.p>
         <motion.p
           animate={{ x: active ? 0 : -8 }}
           transition={{ type: "spring", stiffness: 300, damping: 26, delay: 0.1 }}
-          className="mt-3 text-base leading-relaxed text-zinc-600 sm:text-lg"
+          className={`text-xl font-bold leading-snug tracking-tight sm:text-2xl ${
+            active ? "text-zinc-900" : "text-zinc-500"
+          }`}
         >
-          {description}
+          {payoff}
         </motion.p>
       </div>
 

@@ -1,7 +1,7 @@
 "use client";
 
-import Image from "next/image";
 import { Reveal } from "@/components/reveal";
+import { ImagePlaceholder } from "@/components/ui/image-placeholder";
 import type { ConceptPillarData } from "@/types/concept-pillar";
 
 export function ConceptPillar({
@@ -17,34 +17,24 @@ export function ConceptPillar({
         {/* Visual side */}
         <div className="relative">
           <div className="relative aspect-[4/5] w-full overflow-hidden rounded-[36px]">
-            <Image
-              src={pillar.image}
-              alt={pillar.title}
+            <ImagePlaceholder
               fill
-              className="object-cover transition duration-700 hover:scale-105"
-              sizes="(max-width: 1024px) 100vw, 50vw"
+              width={800}
+              height={1000}
+              label={`${pillar.title} Visual`}
+              className="rounded-[36px]"
             />
-            {/* Cinematic overlays */}
-            <div className="absolute inset-0 bg-gradient-to-t from-[#05060a] via-[#05060a]/30 to-transparent" />
-            <div
-              className="absolute inset-0 mix-blend-overlay"
-              style={{
-                background:
-                  "radial-gradient(60% 60% at 30% 30%, rgba(42,118,166,0.4), transparent 70%)",
-              }}
-            />
-            <div className="absolute inset-0 ring-1 ring-inset ring-white/10" />
 
             {/* Floating index badge */}
-            <div className="glass-strong absolute left-6 top-6 inline-flex items-center gap-2 rounded-full px-3 py-1.5 text-[10px] uppercase tracking-[0.25em] text-zinc-200">
+            <div className="absolute left-6 top-6 inline-flex items-center gap-2 rounded-full border border-zinc-200/90 bg-white/95 px-3 py-1.5 text-[10px] uppercase tracking-[0.25em] text-zinc-600 shadow-sm backdrop-blur-sm">
               <span className="pulse-dot" />
               Pillar /{String(index + 1).padStart(2, "0")}
             </div>
 
             {/* Floating metric pill */}
-            <div className="glass-strong absolute bottom-6 right-6 rounded-2xl px-5 py-3">
-              <p className="text-2xl font-semibold tracking-tight text-white">{pillar.metric.value}</p>
-              <p className="text-[10px] uppercase tracking-widest text-zinc-400">{pillar.metric.label}</p>
+            <div className="absolute bottom-6 right-6 rounded-2xl border border-zinc-200/90 bg-white/95 px-5 py-3 shadow-sm backdrop-blur-sm">
+              <p className="text-2xl font-semibold tracking-tight text-zinc-900">{pillar.metric.value}</p>
+              <p className="text-[10px] uppercase tracking-widest text-zinc-500">{pillar.metric.label}</p>
             </div>
           </div>
 
