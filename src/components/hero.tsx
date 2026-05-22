@@ -1,7 +1,7 @@
 "use client";
 
+import Image from "next/image";
 import { useEffect, useState } from "react";
-import { CybertruckSceneDynamic } from "@/components/scene/cybertruck-scene-dynamic";
 import { IconArrowRight } from "./icons";
 
 export function Hero() {
@@ -12,80 +12,139 @@ export function Hero() {
   }, []);
 
   return (
-    <section className="relative flex min-h-[100dvh] flex-col items-center justify-center overflow-hidden px-4 pt-24 pb-12 sm:px-6">
-      {/* Background image */}
-      <div
-        className="absolute inset-0"
-        style={{
-          backgroundImage:
-            "url(https://images.unsplash.com/photo-1492684223066-81342ee5ff30?w=1920&q=80)",
-          backgroundSize: "cover",
-          backgroundPosition: "center",
-        }}
-      />
-      <div className="absolute inset-0 bg-gradient-to-b from-[#05060a]/70 via-[#05060a]/85 to-[#05060a]" aria-hidden />
+    <section className="dark-hero-bg relative flex w-full flex-col items-center overflow-hidden px-4 pb-24 pt-28 sm:px-6 sm:pb-28 md:h-dvh md:min-h-dvh md:pb-0 md:pt-24 lg:pt-28">
+      {/* Layered cinematic backdrop */}
       <div className="aurora" aria-hidden />
-      <div className="grid-floor pointer-events-none absolute inset-0" aria-hidden />
+      <div className="cinematic-guides" aria-hidden />
+
+      {/* Vertical edge vignettes for depth (subtle on mobile, stronger on desktop) */}
+      <div
+        className="pointer-events-none absolute inset-y-0 left-0 w-[10%] bg-linear-to-r from-black/40 to-transparent md:w-[18%] md:from-black/60"
+        aria-hidden
+      />
+      <div
+        className="pointer-events-none absolute inset-y-0 right-0 w-[10%] bg-linear-to-l from-black/40 to-transparent md:w-[18%] md:from-black/60"
+        aria-hidden
+      />
 
       {/* Stage container */}
       <div
-        className={`relative z-10 mx-auto flex w-full max-w-7xl flex-col items-center text-center transition-all duration-1000 ease-out ${
-          mounted ? "translate-y-0 opacity-100" : "translate-y-12 opacity-0"
+        className={`relative z-10 mx-auto flex w-full max-w-7xl flex-col items-center text-center transition-all duration-1200 ease-out ${
+          mounted ? "translate-y-0 opacity-100" : "translate-y-8 opacity-0"
         }`}
       >
-        {/* Top label */}
-        <div className="glass mb-6 inline-flex items-center gap-2 rounded-full px-4 py-1.5 text-[10px] uppercase tracking-[0.3em] text-zinc-300 sm:text-xs">
-          <span className="pulse-dot" />
-          Cybertruck • LED Walls • Stage Production
+        {/* Top label - Ranking Typography */}
+        <div className="mb-4 flex items-center justify-center gap-3 sm:mb-6">
+          {/* Ranking Badge */}
+          <div className="flex items-center gap-1.5 pt-0.5">
+            <svg
+              className="h-3.5 w-3.5 text-accent drop-shadow-[0_0_5px_rgba(80,160,230,0.8)]"
+              viewBox="0 0 24 24"
+              fill="currentColor"
+            >
+              <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z" />
+            </svg>
+            <span className="text-[12px] font-black italic tracking-wider text-white drop-shadow-[0_0_10px_rgba(255,255,255,0.8)] sm:text-[14px]">
+              #1
+            </span>
+          </div>
+          <div className="h-3.5 w-[1px] bg-white/30" />
+          <span className="text-[9px] font-bold uppercase tracking-[0.35em] text-zinc-300 sm:text-[11px]">
+            For the first time in Saudi Arabia
+          </span>
         </div>
 
-        {/* Headline */}
-        <h1 className="display-headline text-4xl text-white sm:text-5xl md:text-6xl lg:text-7xl xl:text-[6.5rem]">
-          Beyond Traditional
+        {/* Headline — balanced two lines */}
+        <h1 className="display-headline text-[2.5rem] leading-[0.92] tracking-[-0.01em] text-white sm:text-5xl sm:leading-[0.9] md:text-6xl lg:text-[5.5rem] xl:text-[6.25rem]">
+          Cybertruck Is Now
           <br />
-          <span className="text-gradient-accent">Advertising</span>
+          <span className="text-gradient-accent text-glow-accent">
+            Your Ad.
+          </span>
         </h1>
 
-        <p className="mt-6 max-w-2xl text-base text-zinc-300 md:text-lg">
-          Transform your brand into a moving experience people stop, film, and
-          share. Powered by motion, LED, and interactive activations.
+        {/* Subtitle — structured into two substantial lines */}
+        <p className="mt-4 max-w-xl text-[14px] leading-[1.6] text-zinc-300/90 sm:mt-5 sm:text-base md:text-[17px] md:leading-[1.6]">
+          Command attention with the most futuristic mobile billboard on the
+          road.
+          <br className="hidden sm:block" />
+          Be the first brand in your sector to truly own the street.
         </p>
 
-        {/* 3D stage — sits BELOW the headline like the reference */}
-        <div className="relative mt-10 aspect-[16/9] w-full max-w-5xl sm:aspect-[16/8]">
-          {/* Ground glow */}
-          <div className="absolute inset-x-10 bottom-0 h-1/3 rounded-[100%] bg-accent-gradient opacity-30 blur-3xl" aria-hidden />
-          {/* Side rim glow */}
-          <div className="pointer-events-none absolute -inset-4 rounded-[40px] bg-[radial-gradient(70%_60%_at_50%_60%,rgba(42,118,166,0.2),transparent_70%)]" aria-hidden />
-          <CybertruckSceneDynamic initialView="hero" />
-        </div>
-
         {/* CTAs */}
-        <div className="-mt-2 flex flex-wrap items-center justify-center gap-3 sm:gap-4">
+        <div className="relative z-20 mt-5 flex flex-wrap items-center justify-center gap-2.5 sm:mt-6 sm:gap-3 md:mt-7">
           <a
             href="#contact"
-            className="inline-flex items-center gap-2 rounded-full bg-accent-gradient px-7 py-3.5 text-sm font-semibold text-white transition hover:opacity-90 hover:shadow-lg hover:shadow-accent/20"
+            className="group relative inline-flex items-center gap-2 overflow-hidden rounded-full bg-accent-gradient px-5 py-2.5 text-[13px] font-semibold tracking-wide text-white shadow-[0_0_50px_-12px_rgba(80,160,230,0.85)] ring-1 ring-white/10 transition-all duration-300 hover:shadow-[0_0_60px_-8px_rgba(80,160,230,1)] hover:ring-white/20 sm:px-6 sm:py-3 sm:text-sm"
           >
-            Book Your Experience
-            <IconArrowRight className="h-4 w-4" />
-          </a>
-          <a
-            href="#concept"
-            className="glass inline-flex items-center gap-2 rounded-full px-7 py-3.5 text-sm font-medium text-white transition hover:bg-white/10"
-          >
-            See the Concept
-            <IconArrowRight className="h-4 w-4" />
+            {/* shine sweep */}
+            <span
+              aria-hidden
+              className="pointer-events-none absolute inset-0 -translate-x-full bg-linear-to-r from-transparent via-white/25 to-transparent transition-transform duration-700 group-hover:translate-x-full"
+            />
+            <span className="relative">Book Your Experience</span>
+            <IconArrowRight className="relative h-3.5 w-3.5 transition-transform duration-300 group-hover:translate-x-0.5 sm:h-4 sm:w-4" />
           </a>
         </div>
       </div>
 
-      {/* Scroll indicator */}
-      <div className="absolute bottom-6 left-1/2 -translate-x-1/2">
-        <div className="flex flex-col items-center gap-2 text-zinc-500">
-          <span className="text-[10px] uppercase tracking-[0.3em]">Scroll</span>
-          <div className="h-8 w-px bg-gradient-to-b from-zinc-500 to-transparent" />
+      {/* Stage: spotlight + vehicle + floor reflection */}
+      <div className="relative z-0 mt-8 flex w-full max-w-2xl items-end justify-center pb-2 sm:mt-10 sm:max-w-3xl sm:pb-4 md:mt-10 md:max-w-5xl md:flex-1 md:pb-6">
+        {/* Soft radial spotlight behind vehicle */}
+        <div className="hero-spotlight" aria-hidden />
+
+        {/* Vehicle group — slight right bias for composition balance */}
+        <div
+          className={`relative z-10 flex w-full translate-x-[2%] items-end justify-center transition-all duration-1400 ease-out ${
+            mounted ? "translate-y-0 opacity-100" : "translate-y-6 opacity-0"
+          }`}
+        >
+          {/* Ambient edge highlight wrapping the vehicle silhouette */}
+          <div className="relative">
+            <div className="vehicle-edge-glow" aria-hidden />
+
+            <Image
+              src="/hero/car-hero.png"
+              alt="Activation Truck"
+              width={1400}
+              height={700}
+              className="relative z-10 w-[92%] max-w-130 object-contain drop-shadow-[0_30px_40px_rgba(0,0,0,0.55)] sm:w-auto sm:max-h-[38vh] sm:max-w-none md:max-h-[36vh] lg:max-h-[38vh] xl:max-h-[40vh]"
+              priority
+            />
+
+            {/* Floor reflection of the vehicle */}
+            <Image
+              src="/hero/car-hero.png"
+              alt=""
+              aria-hidden
+              width={1400}
+              height={700}
+              className="vehicle-reflection pointer-events-none absolute left-0 right-0 top-[calc(100%-12px)] z-5 mx-auto w-[92%] max-w-130 object-contain sm:w-auto sm:max-h-[38vh] sm:max-w-none md:max-h-[36vh] lg:max-h-[38vh] xl:max-h-[40vh]"
+            />
+
+            {/* Cinematic ground shadow under the vehicle — layered for depth */}
+            <div
+              className="pointer-events-none absolute left-1/2 top-[calc(100%-22px)] h-16 w-[110%] -translate-x-1/2 rounded-[50%] bg-black/55 blur-3xl"
+              aria-hidden
+            />
+            <div
+              className="pointer-events-none absolute left-1/2 top-[calc(100%-14px)] h-10 w-[90%] -translate-x-1/2 rounded-[50%] bg-black/75 blur-2xl"
+              aria-hidden
+            />
+            <div
+              className="pointer-events-none absolute left-1/2 top-[calc(100%-6px)] h-5 w-[65%] -translate-x-1/2 rounded-[50%] bg-black/90 blur-lg"
+              aria-hidden
+            />
+            <div
+              className="pointer-events-none absolute left-1/2 top-[calc(100%-2px)] h-2 w-[45%] -translate-x-1/2 rounded-[50%] bg-black blur-sm"
+              aria-hidden
+            />
+          </div>
         </div>
       </div>
+
+      {/* Cinematic studio fog fade at the bottom (preserved) */}
+      <div className="hero-bottom-transition z-20" aria-hidden />
     </section>
   );
 }

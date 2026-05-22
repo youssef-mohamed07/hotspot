@@ -7,7 +7,7 @@ import { ServiceAddonCard } from "@/components/other-services/service-addon-card
 
 export function OtherServicesSection() {
   return (
-    <section id="services" className="relative overflow-hidden py-32">
+    <section id="services" className="relative flex min-h-[100dvh] flex-col items-center justify-center overflow-hidden py-24">
       <div
         className="absolute inset-0 opacity-40"
         style={{

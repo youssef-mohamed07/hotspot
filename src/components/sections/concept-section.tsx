@@ -6,7 +6,7 @@ import { ConceptPillar } from "@/components/concept/concept-pillar";
 
 export function ConceptSection() {
   return (
-    <section id="concept" className="relative overflow-hidden py-32">
+    <section id="concept" className="relative flex min-h-[100dvh] flex-col items-center justify-center overflow-hidden py-24">
       {/* Ambient backdrop */}
       <div
         className="absolute inset-0 opacity-40"

@@ -1,8 +1,12 @@
 @import "tailwindcss";
 
 @theme inline {
-  --color-background: #05060a;
-  --color-foreground: #f4f4f5;
+  --color-background: #faf8f5;
+  --color-foreground: #09090b;
+  --color-zinc-300: #71717a;
+  --color-zinc-400: #52525b;
+  --color-zinc-500: #3f3f46;
+  --color-zinc-600: #27272a;
   --color-accent: #2a76a6;
   --color-accent-soft: #1d5a82;
   --color-accent-deep: #04285f;
@@ -16,7 +20,135 @@ body {
   background: var(--color-background);
   color: var(--color-foreground);
   font-family: var(--font-sans), Arial, Helvetica, sans-serif;
-  overflow-x: hidden;
+  overflow-x: clip;
+}
+
+.dark-hero-bg {
+  /* Deep navy-to-black cinematic gradient */
+  background: radial-gradient(
+    120% 80% at 50% 0%,
+    #0a1530 0%,
+    #050913 45%,
+    #02040a 100%
+  );
+  color: #f4f4f5;
+  border-bottom: 2px solid #faf8f5; /* covers any subpixel dark seams */
+}
+
+/* Cinematic horizontal guide lines for subtle depth */
+.cinematic-guides {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-image: linear-gradient(
+    to bottom,
+    rgba(120, 170, 220, 0.06) 1px,
+    transparent 1px
+  );
+  background-size: 100% 140px;
+  mask-image: radial-gradient(
+    ellipse 70% 60% at 50% 55%,
+    #000 30%,
+    transparent 85%
+  );
+  -webkit-mask-image: radial-gradient(
+    ellipse 70% 60% at 50% 55%,
+    #000 30%,
+    transparent 85%
+  );
+  opacity: 0.55;
+}
+
+/* Soft electric-blue text glow (for "Advertising") */
+.text-glow-accent {
+  text-shadow:
+    0 0 24px rgba(80, 160, 230, 0.35),
+    0 0 60px rgba(42, 118, 166, 0.25);
+}
+
+/* Cinematic radial spotlight behind vehicle */
+.hero-spotlight {
+  position: absolute;
+  left: 50%;
+  bottom: 18%;
+  transform: translateX(-50%);
+  width: 90%;
+  max-width: 1200px;
+  height: 55%;
+  pointer-events: none;
+  background:
+    radial-gradient(
+      50% 60% at 50% 60%,
+      rgba(60, 140, 210, 0.28),
+      transparent 70%
+    ),
+    radial-gradient(
+      80% 50% at 50% 80%,
+      rgba(20, 60, 120, 0.35),
+      transparent 75%
+    );
+  filter: blur(20px);
+}
+
+/* Premium glass-pill (slightly upgraded glass) */
+.glass-pill {
+  background: rgba(255, 255, 255, 0.04);
+  backdrop-filter: blur(20px) saturate(1.4);
+  -webkit-backdrop-filter: blur(20px) saturate(1.4);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow:
+    0 0 0 1px rgba(80, 160, 230, 0.04) inset,
+    0 8px 30px -10px rgba(20, 70, 130, 0.4),
+    0 0 40px -20px rgba(80, 160, 230, 0.5);
+}
+
+/* Vehicle floor reflection */
+.vehicle-reflection {
+  transform: scaleY(-1);
+  opacity: 0.22;
+  mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 1) 0%, transparent 75%);
+  -webkit-mask-image: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 1) 0%,
+    transparent 75%
+  );
+  filter: blur(2px);
+}
+
+/* Vehicle ambient edge highlight (very subtle) */
+.vehicle-edge-glow {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: radial-gradient(
+    60% 50% at 50% 50%,
+    rgba(80, 160, 230, 0.18),
+    transparent 70%
+  );
+  mix-blend-mode: screen;
+  filter: blur(30px);
+}
+
+.hero-bottom-transition {
+  position: absolute;
+  /* Extending height and pulling down bottom by 2px fixes cross-browser subpixel rendering */
+  bottom: -2px;
+  left: 0;
+  right: 0;
+  height: 242px; /* reduced from 422px to reveal more of the car */
+  background: linear-gradient(
+    to bottom,
+    rgba(250, 248, 245, 0) 0%,
+    rgba(250, 248, 245, 0) 15%,
+    /* starts completely transparent at the top */ rgba(250, 248, 245, 0.04) 35%,
+    rgba(250, 248, 245, 0.12) 55%,
+    rgba(250, 248, 245, 0.28) 70%,
+    rgba(250, 248, 245, 0.55) 85%,
+    rgba(250, 248, 245, 0.85) 95%,
+    #faf8f5 99%,
+    #faf8f5 100%
+  );
+  pointer-events: none;
 }
 
 html {
@@ -56,33 +188,19 @@ section[id] {
 
 /* ---------- Glassmorphism ---------- */
 .glass {
-  background: rgba(10, 12, 18, 0.6);
+  background: rgba(0, 0, 0, 0.05);
   backdrop-filter: blur(16px) saturate(1.4);
   -webkit-backdrop-filter: blur(16px) saturate(1.4);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-}
-
-.glass-strong {
-  background: rgba(10, 12, 18, 0.75);
-  backdrop-filter: blur(24px) saturate(1.6);
-  -webkit-backdrop-filter: blur(24px) saturate(1.6);
-  border: 1px solid rgba(255, 255, 255, 0.12);
-}
-
-.glass-light {
-  background: rgba(255, 255, 255, 0.04);
-  backdrop-filter: blur(12px) saturate(1.2);
-  -webkit-backdrop-filter: blur(12px) saturate(1.2);
-  border: 1px solid rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(0, 0, 0, 0.08);
 }
 
 .glass-card {
-  background: rgba(8, 9, 15, 0.5);
+  background: rgba(255, 255, 255, 0.5);
   backdrop-filter: blur(20px) saturate(1.5);
   -webkit-backdrop-filter: blur(20px) saturate(1.5);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(0, 0, 0, 0.08);
   box-shadow:
-    0 8px 32px rgba(0, 0, 0, 0.4),
+    0 8px 32px rgba(0, 0, 0, 0.05),
     inset 0 1px 0 rgba(255, 255, 255, 0.05);
 }
 
@@ -93,19 +211,34 @@ section[id] {
   pointer-events: none;
   overflow: hidden;
   background:
-    radial-gradient(40% 35% at 20% 30%, rgba(42, 118, 166, 0.35), transparent 65%),
-    radial-gradient(35% 30% at 80% 25%, rgba(4, 40, 95, 0.3), transparent 65%),
-    radial-gradient(45% 40% at 60% 80%, rgba(29, 90, 130, 0.4), transparent 65%);
+    radial-gradient(
+      38% 32% at 18% 22%,
+      rgba(60, 140, 210, 0.18),
+      transparent 70%
+    ),
+    radial-gradient(
+      32% 28% at 82% 18%,
+      rgba(20, 70, 140, 0.16),
+      transparent 70%
+    ),
+    radial-gradient(
+      55% 45% at 50% 95%,
+      rgba(42, 118, 166, 0.22),
+      transparent 75%
+    ),
+    linear-gradient(180deg, rgba(8, 20, 45, 0.4) 0%, transparent 40%);
 }
 
 /* ---------- Static grid floor ---------- */
 .grid-floor {
   background-image:
-    linear-gradient(to right, rgba(42, 118, 166, 0.08) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(42, 118, 166, 0.08) 1px, transparent 1px);
+    linear-gradient(to right, rgba(0, 0, 0, 0.05) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(0, 0, 0, 0.05) 1px, transparent 1px);
   background-size: 64px 64px;
   mask-image: radial-gradient(ellipse at center, #000 30%, transparent 75%);
 }
+
+/* ...rest of styles kept but adapted slightly... */
 
 /* ---------- Marquee ---------- */
 .marquee {
@@ -135,8 +268,11 @@ section[id] {
 /* ---------- LED panel ---------- */
 .led-panel {
   position: relative;
-  background-image:
-    radial-gradient(circle, rgba(42, 118, 166, 0.55) 1.2px, transparent 1.6px);
+  background-image: radial-gradient(
+    circle,
+    rgba(42, 118, 166, 0.55) 1.2px,
+    transparent 1.6px
+  );
   background-size: 14px 14px;
   background-position: 0 0;
 }
@@ -145,14 +281,18 @@ section[id] {
   content: "";
   position: absolute;
   inset: 0;
-  background:
-    radial-gradient(60% 60% at 50% 50%, rgba(42, 118, 166, 0.35), transparent 70%);
+  background: radial-gradient(
+    60% 60% at 50% 50%,
+    rgba(42, 118, 166, 0.35),
+    transparent 70%
+  );
   animation: led-breathe 3.6s ease-in-out infinite;
   pointer-events: none;
 }
 
 @keyframes led-breathe {
-  0%, 100% {
+  0%,
+  100% {
     opacity: 0.55;
   }
   50% {
@@ -165,7 +305,9 @@ section[id] {
   position: relative;
   isolation: isolate;
   overflow: hidden;
-  transition: border-color 250ms ease, transform 250ms ease;
+  transition:
+    border-color 250ms ease,
+    transform 250ms ease;
 }
 
 .spotlight-card::before {

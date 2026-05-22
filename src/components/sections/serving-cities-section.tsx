@@ -6,7 +6,7 @@ import { CitiesPanel } from "@/components/cities/cities-panel";
 
 export function ServingCitiesSection() {
   return (
-    <section className="relative overflow-hidden py-32">
+    <section className="relative flex min-h-[100dvh] flex-col items-center justify-center overflow-hidden py-24">
       <div className="absolute inset-0 opacity-30" style={{ background: "radial-gradient(50% 50% at 50% 50%, rgba(42,118,166,0.2), transparent 70%)" }} aria-hidden />
       <div className="grid-floor pointer-events-none absolute inset-0 opacity-30" aria-hidden />
       <div className="relative mx-auto max-w-7xl px-6">

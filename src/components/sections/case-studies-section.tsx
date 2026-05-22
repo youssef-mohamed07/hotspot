@@ -7,7 +7,7 @@ import { caseStudies } from "@/data/case-studies";
 
 export function CaseStudiesSection() {
   return (
-    <section id="cases" className="relative py-32">
+    <section id="cases" className="relative flex min-h-[100dvh] flex-col items-center justify-center py-24">
       <div className="mx-auto max-w-7xl px-6">
         <Reveal className="mb-16">
           <p className="text-xs uppercase tracking-[0.3em] text-accent">Case studies</p>

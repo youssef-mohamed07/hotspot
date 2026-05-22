@@ -1,0 +1,98 @@
+"use client";
+
+import Image from "next/image";
+import { Reveal } from "@/components/reveal";
+import { SectionHeader } from "@/components/section-header";
+import { IconIntegration, IconVenue, IconSparkle } from "@/components/icons";
+
+export function ExperientialMarketingSection() {
+  const cards = [
+    {
+      title: "Brand Integration",
+      description: "Align every activation with your visual identity and campaign goals.",
+      icon: IconIntegration,
+    },
+    {
+      title: "Event Activation",
+      description: "Designed for launches, exhibitions, and premium public experiences.",
+      icon: IconVenue,
+    },
+    {
+      title: "Audience Attention",
+      description: "Create strong visual presence that naturally attracts engagement.",
+      icon: IconSparkle,
+    },
+  ];
+
+  return (
+    <section className="relative flex min-h-[100dvh] flex-col items-center justify-center overflow-hidden py-24 bg-background">
+      {/* Background cinematic lighting */}
+      <div 
+        className="absolute inset-0 opacity-40"
+        style={{
+          background: "radial-gradient(circle at 70% 30%, rgba(42,118,166,0.12), transparent 50%), radial-gradient(circle at 90% 80%, rgba(4,40,95,0.08), transparent 50%)"
+        }}
+        aria-hidden
+      />
+      <div className="grid-floor pointer-events-none absolute inset-0 opacity-15" aria-hidden />
+
+      <div className="relative mx-auto max-w-7xl px-6 w-full">
+        <div className="grid lg:grid-cols-2 gap-16 lg:gap-24 items-center">
+          {/* Left Column Content */}
+          <div>
+            <SectionHeader
+              variant="normal"
+              title="EXPERIENTIAL MARKETING"
+              theme="light"
+              headline={<>Turn Attention<br />Into <span className="text-gradient-accent">Presence</span></>}
+              subtitle="Create unforgettable brand experiences through premium public activations designed to attract attention, generate buzz, and elevate visibility."
+            />
+
+            {/* Feature Cards */}
+            <div className="grid gap-5 mt-12 sm:grid-cols-1 max-w-xl">
+              {cards.map((card, i) => {
+                const Icon = card.icon;
+                return (
+                  <Reveal key={card.title} delay={0.1 + i * 0.08}>
+                    <div className="group relative flex items-start gap-5 rounded-[24px] border border-zinc-200/60 bg-white p-6 shadow-[0_8px_30px_rgba(0,0,0,0.04)] transition-all hover:border-accent/20 hover:shadow-[0_20px_40px_rgba(0,0,0,0.06)]">
+                      <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-zinc-50 border border-zinc-100 text-accent transition-colors group-hover:bg-accent group-hover:text-white group-hover:border-accent">
+                        <Icon className="h-6 w-6" />
+                      </div>
+                      <div>
+                        <h3 className="text-lg font-bold text-zinc-900">{card.title}</h3>
+                        <p className="mt-1.5 text-sm text-zinc-500 leading-relaxed">
+                          {card.description}
+                        </p>
+                      </div>
+                    </div>
+                  </Reveal>
+                );
+              })}
+            </div>
+          </div>
+
+          {/* Right Column Visual */}
+          <Reveal delay={0.3} className="relative hidden lg:block h-full min-h-[600px]">
+            <div className="absolute inset-0 rounded-[48px] overflow-hidden border border-zinc-200/50 bg-zinc-100 shadow-[0_32px_80px_rgba(0,0,0,0.08)]">
+               <Image 
+                 src="https://placehold.co/800x1000/f4f4f5/71717a?text=800x1000+Cinematic+Activation+Visual"
+                 alt="Premium Activation"
+                 fill
+                 className="object-cover"
+                 unoptimized
+               />
+               
+               {/* Decorative cinematic lighting overlays to maintain premium feel */}
+               <div className="absolute inset-0 bg-linear-to-tr from-accent/5 via-transparent to-transparent" />
+               <div className="absolute inset-0 shadow-[inset_0_0_100px_rgba(0,0,0,0.02)]" />
+               
+               {/* Soft floating dots */}
+               <div className="absolute top-12 left-12 h-2.5 w-2.5 rounded-full bg-accent/40 animate-pulse" />
+               <div className="absolute bottom-12 right-12 h-3.5 w-3.5 rounded-full bg-accent/30 animate-bounce" style={{ animationDuration: '4s' }} />
+            </div>
+          </Reveal>
+        </div>
+      </div>
+    </section>
+  );
+}

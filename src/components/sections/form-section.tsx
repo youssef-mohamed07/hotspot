@@ -7,7 +7,7 @@ import { BriefWizard } from "@/components/brief-wizard/brief-wizard";
 export function FormSection() {
   const [submitted, setSubmitted] = useState(false);
   return (
-    <section id="contact" className="relative overflow-hidden py-32">
+    <section id="contact" className="relative flex min-h-[100dvh] flex-col items-center justify-center overflow-hidden py-24">
       <div className="mx-auto max-w-6xl px-6">
         <Reveal className="mb-12 text-center">
           <p className="text-xs uppercase tracking-[0.3em] text-accent">Build your brief</p>

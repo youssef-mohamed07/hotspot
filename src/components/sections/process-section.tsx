@@ -32,7 +32,7 @@ export function ProcessSection() {
   }, []);
 
   return (
-    <section id="process" className="relative overflow-hidden py-32">
+    <section id="process" className="relative flex min-h-[100dvh] flex-col items-center justify-center overflow-hidden py-24">
       {/* Backdrop */}
       <div
         className="absolute inset-0 opacity-40"

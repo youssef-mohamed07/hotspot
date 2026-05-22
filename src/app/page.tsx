@@ -1,6 +1,8 @@
 import { Hero } from "@/components/hero";
 import { Header } from "@/components/layout/header";
 import { Footer } from "@/components/layout/footer";
+import { ClientsMarqueeSection } from "@/components/sections/clients-marquee-section";
+import { TargetAudienceSection } from "@/components/sections/target-audience-section";
 import { CaseStudiesSection } from "@/components/sections/case-studies-section";
 import { ConceptSection } from "@/components/sections/concept-section";
 import { FAQSection } from "@/components/sections/faq-section";
@@ -13,6 +15,7 @@ import { StrongestToolSection } from "@/components/sections/strongest-tool-secti
 import { TestimonialsSection } from "@/components/sections/testimonials-section";
 import { TransitionStatsSection } from "@/components/sections/transition-stats-section";
 import { VisualizationSection } from "@/components/sections/visualization-section";
+import { ExperientialMarketingSection } from "@/components/sections/experiential-marketing-section";
 
 export default function Home() {
   return (
@@ -20,13 +23,18 @@ export default function Home() {
       <Header />
       <main className="flex-1">
         <Hero />
-        <StrongestToolSection />
+        <ClientsMarqueeSection />
+        <TargetAudienceSection />
+        <ExperientialMarketingSection />
+        <TransitionStatsSection />
+        <ProcessSection />
+        {/* ALL DONE TO HERERERERERE 👆👆👆👆 */}
+
+        {/* <StrongestToolSection /> */}
         <ProofOfConceptSection />
         <ConceptSection />
-        <TransitionStatsSection />
         <VisualizationSection />
         <CaseStudiesSection />
-        <ProcessSection />
         <OtherServicesSection />
         <TestimonialsSection />
         <ServingCitiesSection />

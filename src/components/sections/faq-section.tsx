@@ -16,7 +16,7 @@ export function FAQSection() {
   );
 
   return (
-    <section className="relative overflow-hidden py-32">
+    <section className="relative flex min-h-[100dvh] flex-col items-center justify-center overflow-hidden py-24">
       {/* Atmospheric backdrop */}
       <div
         className="absolute inset-0 opacity-40"
