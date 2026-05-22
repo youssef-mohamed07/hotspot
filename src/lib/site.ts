@@ -21,7 +21,7 @@ export const siteConfig = {
   },
 } as const;
 
-export function getWhatsAppUrl(message = siteConfig.whatsappMessage) {
+export function getWhatsAppUrl(message: string = siteConfig.whatsappMessage) {
   const phone = siteConfig.phone.replace(/\D/g, "");
   return `https://wa.me/${phone}?text=${encodeURIComponent(message)}`;
 }

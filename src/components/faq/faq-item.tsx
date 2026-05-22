@@ -1,6 +1,7 @@
 "use client";
 
 import type { FaqItem } from "@/types/faq";
+import { useDictionary } from "@/i18n/locale-provider";
 import { useEffect, useRef, useState } from "react";
 export function FAQItem({
   faq, index, isOpen, onToggle,
@@ -10,6 +11,7 @@ export function FAQItem({
   isOpen: boolean;
   onToggle: () => void;
 }) {
+  const dict = useDictionary();
   const contentRef = useRef<HTMLDivElement>(null);
   const [height, setHeight] = useState(0);
 
@@ -31,7 +33,7 @@ export function FAQItem({
         type="button"
         onClick={onToggle}
         aria-expanded={isOpen}
-        className="flex w-full items-start justify-between gap-4 p-6 text-left md:p-7"
+        className="flex w-full items-start justify-between gap-4 p-6 text-start md:p-7"
       >
         {/* Number + content */}
         <div className="flex items-start gap-5">
@@ -56,7 +58,7 @@ export function FAQItem({
               }`}
             >
               <span className="h-1 w-1 rounded-full bg-zinc-600" />
-              {faq.category}
+              {dict.faq.categories[faq.category]}
             </p>
           </div>
         </div>
@@ -86,7 +88,7 @@ export function FAQItem({
         <div ref={contentRef}>
           <div className="border-t border-white/5 px-6 pb-6 pt-4 md:px-7">
             <p
-              className="ml-9 max-w-3xl text-sm leading-relaxed text-zinc-600 md:text-base"
+              className="ms-9 max-w-3xl text-sm leading-relaxed text-zinc-600 md:text-base"
               style={{
                 transform: isOpen ? "translateY(0)" : "translateY(-8px)",
                 opacity: isOpen ? 1 : 0,

@@ -2,9 +2,12 @@
 
 import Image from "next/image";
 import { useEffect, useState } from "react";
-import { IconArrowRight } from "./icons";
+import { DirectionalArrow } from "@/components/icons/directional-arrow";
+import { useDictionary, useLocale } from "@/i18n/locale-provider";
 
 export function Hero() {
+  const dict = useDictionary();
+  const locale = useLocale();
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
@@ -13,11 +16,9 @@ export function Hero() {
 
   return (
     <section className="dark-hero-bg relative flex w-full flex-col items-center overflow-hidden px-4 pb-24 pt-28 sm:px-6 sm:pb-28 md:h-dvh md:min-h-dvh md:pb-0 md:pt-24 lg:pt-28">
-      {/* Layered cinematic backdrop */}
       <div className="aurora" aria-hidden />
       <div className="cinematic-guides" aria-hidden />
 
-      {/* Vertical edge vignettes for depth (subtle on mobile, stronger on desktop) */}
       <div
         className="pointer-events-none absolute inset-y-0 left-0 w-[10%] bg-linear-to-r from-black/40 to-transparent md:w-[18%] md:from-black/60"
         aria-hidden
@@ -27,15 +28,13 @@ export function Hero() {
         aria-hidden
       />
 
-      {/* Stage container */}
       <div
-        className={`relative z-10 mx-auto flex w-full max-w-7xl flex-col items-center text-center transition-all duration-1200 ease-out ${
+        dir="ltr"
+        className={`locale-shell-ltr relative z-10 mx-auto flex w-full max-w-7xl flex-col items-center text-center transition-all duration-1200 ease-out ${
           mounted ? "translate-y-0 opacity-100" : "translate-y-8 opacity-0"
         }`}
       >
-        {/* Top label - Ranking Typography */}
         <div className="mb-4 flex items-center justify-center gap-3 sm:mb-6">
-          {/* Ranking Badge */}
           <div className="flex items-center gap-1.5 pt-0.5">
             <svg
               className="h-3.5 w-3.5 text-accent drop-shadow-[0_0_5px_rgba(80,160,230,0.8)]"
@@ -45,105 +44,99 @@ export function Hero() {
               <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z" />
             </svg>
             <span className="text-[12px] font-black italic tracking-wider text-white drop-shadow-[0_0_10px_rgba(255,255,255,0.8)] sm:text-[14px]">
-              #1
+              {dict.hero.badgeRank}
             </span>
           </div>
-          <div className="h-3.5 w-[1px] bg-white/30" />
+          <div className="h-3.5 w-px bg-white/30" />
           <span className="text-[9px] font-bold uppercase tracking-[0.35em] text-zinc-300 sm:text-[11px]">
-            For the first time in Saudi Arabia
+            {dict.hero.badgeLabel}
           </span>
         </div>
 
-        {/* Headline — balanced two lines */}
-        <h1 className="display-headline text-[2.5rem] leading-[0.92] tracking-[-0.01em] text-white sm:text-5xl sm:leading-[0.9] md:text-6xl lg:text-[5.5rem] xl:text-[6.25rem]">
-          Cybertruck Is Now
+        <h1
+          dir={locale === "ar" ? "rtl" : "ltr"}
+          className="display-headline text-[2.5rem] leading-[0.92] tracking-[-0.01em] text-white sm:text-5xl sm:leading-[0.9] md:text-6xl lg:text-[5.5rem] xl:text-[6.25rem]"
+        >
+          {dict.hero.titleLine1}
           <br />
-          <span className="text-gradient-accent text-glow-accent">
-            Your Ad.
+          <span className="hero-accent-gradient">
+            <span className="text-gradient-accent">{dict.hero.titleLine2}</span>
           </span>
         </h1>
 
-        {/* Subtitle — structured into two substantial lines */}
-        <p className="mt-4 max-w-xl text-[14px] leading-[1.6] text-zinc-300/90 sm:mt-5 sm:text-base md:text-[17px] md:leading-[1.6]">
-          Command attention with the most futuristic mobile billboard on the
-          road.
+        <p
+          dir={locale === "ar" ? "rtl" : "ltr"}
+          className="mt-4 max-w-xl text-[14px] leading-[1.6] text-zinc-300/90 sm:mt-5 sm:text-base md:text-[17px] md:leading-[1.6]"
+        >
+          {dict.hero.subtitle1}
           <br className="hidden sm:block" />
-          Be the first brand in your sector to truly own the street.
+          {dict.hero.subtitle2}
         </p>
 
-        {/* CTAs */}
         <div className="relative z-20 mt-5 flex flex-wrap items-center justify-center gap-2.5 sm:mt-6 sm:gap-3 md:mt-7">
           <a
             href="#contact"
             className="group relative inline-flex items-center gap-2 overflow-hidden rounded-full bg-accent-gradient px-5 py-2.5 text-[13px] font-semibold tracking-wide text-white shadow-[0_0_50px_-12px_rgba(80,160,230,0.85)] ring-1 ring-white/10 transition-all duration-300 hover:shadow-[0_0_60px_-8px_rgba(80,160,230,1)] hover:ring-white/20 sm:px-6 sm:py-3 sm:text-sm"
           >
-            {/* shine sweep */}
             <span
               aria-hidden
               className="pointer-events-none absolute inset-0 -translate-x-full bg-linear-to-r from-transparent via-white/25 to-transparent transition-transform duration-700 group-hover:translate-x-full"
             />
-            <span className="relative">Book Your Experience</span>
-            <IconArrowRight className="relative h-3.5 w-3.5 transition-transform duration-300 group-hover:translate-x-0.5 sm:h-4 sm:w-4" />
+            <span className="relative">{dict.hero.cta}</span>
+            <DirectionalArrow className="relative h-3.5 w-3.5 transition-transform duration-300 group-hover:translate-x-0.5 sm:h-4 sm:w-4" />
           </a>
         </div>
       </div>
 
-      {/* Stage: spotlight + vehicle + floor reflection */}
       <div className="relative z-0 mt-8 flex w-full max-w-2xl items-end justify-center pb-2 sm:mt-10 sm:max-w-3xl sm:pb-4 md:mt-10 md:max-w-5xl md:flex-1 md:pb-6">
-        {/* Soft radial spotlight behind vehicle */}
         <div className="hero-spotlight" aria-hidden />
 
-        {/* Vehicle group — slight right bias for composition balance */}
         <div
           className={`relative z-10 flex w-full translate-x-[2%] items-end justify-center transition-all duration-1400 ease-out ${
             mounted ? "translate-y-0 opacity-100" : "translate-y-6 opacity-0"
           }`}
         >
-          {/* Ambient edge highlight wrapping the vehicle silhouette */}
           <div className="relative">
             <div className="vehicle-edge-glow" aria-hidden />
 
             <Image
               src="/hero/car-hero.png"
-              alt="Activation Truck"
+              alt={dict.hero.imageAlt}
               width={1400}
               height={700}
               className="relative z-10 w-[92%] max-w-130 object-contain drop-shadow-[0_30px_40px_rgba(0,0,0,0.55)] sm:w-auto sm:max-h-[38vh] sm:max-w-none md:max-h-[36vh] lg:max-h-[38vh] xl:max-h-[40vh]"
               priority
             />
 
-            {/* Floor reflection of the vehicle */}
             <Image
               src="/hero/car-hero.png"
               alt=""
               aria-hidden
               width={1400}
               height={700}
-              className="vehicle-reflection pointer-events-none absolute left-0 right-0 top-[calc(100%-12px)] z-5 mx-auto w-[92%] max-w-130 object-contain sm:w-auto sm:max-h-[38vh] sm:max-w-none md:max-h-[36vh] lg:max-h-[38vh] xl:max-h-[40vh]"
+              className="vehicle-reflection pointer-events-none absolute start-0 end-0 top-[calc(100%-12px)] z-5 mx-auto w-[92%] max-w-130 object-contain sm:w-auto sm:max-h-[38vh] sm:max-w-none md:max-h-[36vh] lg:max-h-[38vh] xl:max-h-[40vh]"
             />
 
-            {/* Cinematic ground shadow under the vehicle — layered for depth */}
             <div
-              className="pointer-events-none absolute left-1/2 top-[calc(100%-22px)] h-16 w-[110%] -translate-x-1/2 rounded-[50%] bg-black/55 blur-3xl"
+              className="pointer-events-none absolute start-1/2 top-[calc(100%-22px)] h-16 w-[110%] -translate-x-1/2 rounded-[50%] bg-black/55 blur-3xl"
               aria-hidden
             />
             <div
-              className="pointer-events-none absolute left-1/2 top-[calc(100%-14px)] h-10 w-[90%] -translate-x-1/2 rounded-[50%] bg-black/75 blur-2xl"
+              className="pointer-events-none absolute start-1/2 top-[calc(100%-14px)] h-10 w-[90%] -translate-x-1/2 rounded-[50%] bg-black/75 blur-2xl"
               aria-hidden
             />
             <div
-              className="pointer-events-none absolute left-1/2 top-[calc(100%-6px)] h-5 w-[65%] -translate-x-1/2 rounded-[50%] bg-black/90 blur-lg"
+              className="pointer-events-none absolute start-1/2 top-[calc(100%-6px)] h-5 w-[65%] -translate-x-1/2 rounded-[50%] bg-black/90 blur-lg"
               aria-hidden
             />
             <div
-              className="pointer-events-none absolute left-1/2 top-[calc(100%-2px)] h-2 w-[45%] -translate-x-1/2 rounded-[50%] bg-black blur-sm"
+              className="pointer-events-none absolute start-1/2 top-[calc(100%-2px)] h-2 w-[45%] -translate-x-1/2 rounded-[50%] bg-black blur-sm"
               aria-hidden
             />
           </div>
         </div>
       </div>
 
-      {/* Cinematic studio fog fade at the bottom (preserved) */}
       <div className="hero-bottom-transition z-20" aria-hidden />
     </section>
   );

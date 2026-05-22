@@ -3,11 +3,13 @@
 import Image from "next/image";
 import { trustedClients } from "@/data/trusted-clients";
 import { SectionHeader } from "@/components/section-header";
+import { useDictionary } from "@/i18n/locale-provider";
 
 // We only want clients that have a logo defined
 const clientsWithLogos = trustedClients.filter((client) => client.logo);
 
 export function ClientsMarqueeSection() {
+  const dict = useDictionary();
   // Duplicate for seamless infinite scroll
   const doubledLogos = [
     ...clientsWithLogos,
@@ -22,7 +24,7 @@ export function ClientsMarqueeSection() {
 
       <SectionHeader
         variant="transition"
-        title="Trusted by the most ambitious brands in the Kingdom"
+        title={dict.marquee.title}
         theme="light"
       />
 

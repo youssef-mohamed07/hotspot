@@ -2,11 +2,12 @@
 
 import { useState } from "react";
 import { Reveal } from "@/components/reveal";
-import { IconArrowRight } from "@/components/icons";
+import { DirectionalArrow } from "@/components/icons/directional-arrow";
 import { StepHeader } from "@/components/brief-wizard/step-header";
 import { WizardNav } from "@/components/brief-wizard/wizard-nav";
 import { WizardProgress } from "@/components/brief-wizard/wizard-progress";
 import type { ContactFormData } from "@/lib/contact-form";
+import { useDictionary } from "@/i18n/locale-provider";
 
 const initialForm: ContactFormData = {
   name: "",
@@ -20,9 +21,6 @@ const initialForm: ContactFormData = {
   budget: "",
   notes: "",
 };
-
-const STEP_LABELS = ["Contact", "Brand", "Campaign", "Details"];
-const TOTAL_STEPS = STEP_LABELS.length;
 
 const inputCls =
   "w-full rounded-xl border border-zinc-200 bg-zinc-50 px-4 py-3 text-sm text-zinc-900 outline-none transition focus:border-accent focus:bg-white focus:ring-1 focus:ring-accent";
@@ -50,6 +48,10 @@ function Field({
 }
 
 export function FormSection() {
+  const dict = useDictionary();
+  const c = dict.contact;
+  const TOTAL_STEPS = c.steps.length;
+
   const [submitted, setSubmitted] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitError, setSubmitError] = useState<string | null>(null);
@@ -80,42 +82,41 @@ export function FormSection() {
       });
       const body = (await res.json().catch(() => ({}))) as { error?: string };
       if (!res.ok) {
-        throw new Error(body.error ?? "Something went wrong. Please try again.");
+        throw new Error(body.error ?? c.error);
       }
       setSubmitted(true);
     } catch (err) {
-      setSubmitError(err instanceof Error ? err.message : "Something went wrong. Please try again.");
+      setSubmitError(err instanceof Error ? err.message : c.error);
     } finally {
       setIsSubmitting(false);
     }
   };
+
+  const successBody = c.successBody.replace(
+    "{name}",
+    data.name ? `، ${data.name.split(" ")[0]}` : ""
+  );
 
   return (
     <section
       id="contact"
       className="relative flex min-h-[100dvh] flex-col items-center justify-center overflow-hidden bg-[#fafafa] py-24 md:py-32"
     >
-      <div
-        className="grid-floor pointer-events-none absolute inset-0 opacity-40 mix-blend-multiply"
-        aria-hidden
-      />
+      <div className="grid-floor pointer-events-none absolute inset-0 opacity-40 mix-blend-multiply" aria-hidden />
 
       <div className="relative z-10 mx-auto w-full max-w-4xl px-6">
         <Reveal className="mb-16 flex flex-col items-center text-center">
           <div className="flex items-center justify-center gap-3">
             <span className="h-px w-12 bg-accent" />
-            <p className="text-xs font-bold uppercase tracking-[0.3em] text-accent">Contact Us</p>
+            <p className="text-xs font-bold uppercase tracking-[0.3em] text-accent">{c.eyebrow}</p>
             <span className="h-px w-12 bg-accent" />
           </div>
           <h2 className="display-headline mt-6 text-4xl text-zinc-900 sm:text-5xl md:text-6xl">
-            Start your
+            {c.headline1}
             <br />
-            <span className="text-accent">activation.</span>
+            <span className="text-accent">{c.headlineAccent}</span>
           </h2>
-          <p className="mt-6 max-w-xl text-lg text-zinc-600">
-            Tell us about your campaign. We come back within 24 hours with scope, timeline and a
-            tailored proposal.
-          </p>
+          <p className="mt-6 max-w-xl text-lg text-zinc-600">{c.subtitle}</p>
         </Reveal>
 
         <Reveal delay={0.1}>
@@ -123,27 +124,21 @@ export function FormSection() {
             {submitted ? (
               <div className="flex flex-col items-center py-20 text-center">
                 <div className="mb-6 flex h-20 w-20 items-center justify-center rounded-full bg-accent/10 text-accent">
-                  <IconArrowRight className="h-10 w-10 rotate-90" />
+                  <DirectionalArrow className="h-10 w-10 rotate-90" />
                 </div>
-                <h3 className="text-3xl font-bold text-zinc-900">Brief Received!</h3>
-                <p className="mt-4 text-zinc-600">
-                  Thanks{data.name ? `, ${data.name.split(" ")[0]}` : ""}. We&apos;re reviewing your
-                  specs and will be in touch within 24 hours.
-                </p>
+                <h3 className="text-3xl font-bold text-zinc-900">{c.successTitle}</h3>
+                <p className="mt-4 text-zinc-600">{successBody}</p>
               </div>
             ) : (
               <div className="grid gap-8">
-                <WizardProgress current={step} total={TOTAL_STEPS} labels={STEP_LABELS} />
+                <WizardProgress current={step} total={TOTAL_STEPS} labels={c.steps} />
 
                 <div className="min-h-[280px]">
                   {step === 0 && (
                     <div>
-                      <StepHeader
-                        title="Let's connect."
-                        hint="Tell us who you are and how to reach you."
-                      />
+                      <StepHeader title={c.step0.title} hint={c.step0.hint} />
                       <div className="grid gap-6 md:grid-cols-2">
-                        <Field label="Full Name *">
+                        <Field label={c.step0.name}>
                           <input
                             required
                             type="text"
@@ -152,7 +147,7 @@ export function FormSection() {
                             className={inputCls}
                           />
                         </Field>
-                        <Field label="Brand / Company *">
+                        <Field label={c.step0.company}>
                           <input
                             required
                             type="text"
@@ -161,7 +156,7 @@ export function FormSection() {
                             className={inputCls}
                           />
                         </Field>
-                        <Field label="Email *">
+                        <Field label={c.step0.email}>
                           <input
                             required
                             type="email"
@@ -170,7 +165,7 @@ export function FormSection() {
                             className={inputCls}
                           />
                         </Field>
-                        <Field label="WhatsApp Number *">
+                        <Field label={c.step0.whatsapp}>
                           <input
                             required
                             type="tel"
@@ -185,28 +180,20 @@ export function FormSection() {
 
                   {step === 1 && (
                     <div>
-                      <StepHeader
-                        title="About your brand."
-                        hint="Help us understand your industry and category."
-                      />
-                      <Field label="Your Industry / Category *" hint="Select your industry">
+                      <StepHeader title={c.step1.title} hint={c.step1.hint} />
+                      <Field label={c.step1.industry} hint={c.step1.industryHint}>
                         <select
                           required
                           value={data.industry}
                           onChange={(e) => update("industry", e.target.value)}
                           className={inputCls}
                         >
-                          <option value="">Choose...</option>
-                          <option>FMCG / Consumer Goods</option>
-                          <option>Retail / Fashion</option>
-                          <option>F&B / Food & Beverage</option>
-                          <option>Tech / Fintech / App</option>
-                          <option>Real Estate / Hospitality</option>
-                          <option>Automotive</option>
-                          <option>Government / Public Sector</option>
-                          <option>Healthcare / Pharma</option>
-                          <option>Entertainment / Events</option>
-                          <option>Other</option>
+                          <option value="">{c.step1.choose}</option>
+                          {c.step1.industries.map((opt) => (
+                            <option key={opt} value={opt}>
+                              {opt}
+                            </option>
+                          ))}
                         </select>
                       </Field>
                     </div>
@@ -214,74 +201,59 @@ export function FormSection() {
 
                   {step === 2 && (
                     <div>
-                      <StepHeader
-                        title="The campaign."
-                        hint="What you're activating and where."
-                      />
+                      <StepHeader title={c.step2.title} hint={c.step2.hint} />
                       <div className="grid gap-6 md:grid-cols-2">
-                        <Field
-                          label="Campaign Type *"
-                          hint="What are you activating?"
-                          className="md:col-span-2"
-                        >
+                        <Field label={c.step2.type} hint={c.step2.typeHint} className="md:col-span-2">
                           <select
                             required
                             value={data.campaignType}
                             onChange={(e) => update("campaignType", e.target.value)}
                             className={inputCls}
                           >
-                            <option value="">Choose...</option>
-                            <option>Product Launch</option>
-                            <option>Brand Awareness Campaign</option>
-                            <option>Seasonal / Promotional Campaign</option>
-                            <option>Event Activation</option>
-                            <option>Influencer / Content Moment</option>
-                            <option>B2B / Corporate Activation</option>
-                            <option>I&apos;m not sure yet — advise me</option>
+                            <option value="">{c.step1.choose}</option>
+                            {c.step2.campaignTypes.map((opt) => (
+                              <option key={opt} value={opt}>
+                                {opt}
+                              </option>
+                            ))}
                           </select>
                         </Field>
-                        <Field
-                          label="Target Cities *"
-                          hint="Where do you need to be?"
-                          className="md:col-span-2"
-                        >
+                        <Field label={c.step2.cities} hint={c.step2.citiesHint} className="md:col-span-2">
                           <select
                             required
                             value={data.targetCities}
                             onChange={(e) => update("targetCities", e.target.value)}
                             className={inputCls}
                           >
-                            <option value="">Choose...</option>
-                            <option>Riyadh only</option>
-                            <option>Jeddah only</option>
-                            <option>Khobar / Eastern Province only</option>
-                            <option>Multiple KSA cities</option>
-                            <option>KSA + Dubai</option>
-                            <option>KSA + Cairo</option>
-                            <option>Full multi-market — let&apos;s discuss</option>
+                            <option value="">{c.step1.choose}</option>
+                            {c.step2.cityOptions.map((opt) => (
+                              <option key={opt} value={opt}>
+                                {opt}
+                              </option>
+                            ))}
                           </select>
                         </Field>
-                        <Field label="Estimated Campaign Date">
+                        <Field label={c.step2.date}>
                           <input
                             type="text"
-                            placeholder="e.g. Next month, Q3, etc."
+                            placeholder={c.step2.datePlaceholder}
                             value={data.campaignDate}
                             onChange={(e) => update("campaignDate", e.target.value)}
                             className={inputCls}
                           />
                         </Field>
-                        <Field label="Approximate Budget Range">
+                        <Field label={c.step2.budget}>
                           <select
                             value={data.budget}
                             onChange={(e) => update("budget", e.target.value)}
                             className={inputCls}
                           >
-                            <option value="">Choose...</option>
-                            <option>Under SAR 50,000</option>
-                            <option>SAR 50,000 – 150,000</option>
-                            <option>SAR 150,000 – 500,000</option>
-                            <option>SAR 500,000+</option>
-                            <option>Let&apos;s discuss</option>
+                            <option value="">{c.step1.choose}</option>
+                            {c.step2.budgetOptions.map((opt) => (
+                              <option key={opt} value={opt}>
+                                {opt}
+                              </option>
+                            ))}
                           </select>
                         </Field>
                       </div>
@@ -290,16 +262,13 @@ export function FormSection() {
 
                   {step === 3 && (
                     <div>
-                      <StepHeader
-                        title="Anything else?"
-                        hint="Share extra details, links, or requirements before you send."
-                      />
-                      <Field label="Tell Us About Your Campaign">
+                      <StepHeader title={c.step3.title} hint={c.step3.hint} />
+                      <Field label={c.step3.notes}>
                         <textarea
                           rows={5}
                           value={data.notes}
                           onChange={(e) => update("notes", e.target.value)}
-                          placeholder="Any extra details, links, or requirements..."
+                          placeholder={c.step3.notesPlaceholder}
                           className={inputCls}
                         />
                       </Field>
@@ -321,7 +290,7 @@ export function FormSection() {
                   onPrev={() => setStep((s) => Math.max(0, s - 1))}
                   onNext={() => setStep((s) => Math.min(TOTAL_STEPS - 1, s + 1))}
                   onSubmit={handleSubmit}
-                  submitLabel="Send My Brief — Let's Deploy"
+                  submitLabel={c.submit}
                 />
               </div>
             )}

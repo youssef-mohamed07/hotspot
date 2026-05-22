@@ -2,21 +2,29 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { IconArrowRight } from "@/components/icons";
+import { DirectionalArrow } from "@/components/icons/directional-arrow";
+import { LanguageSwitcher } from "@/components/layout/language-switcher";
+import { useAudience, useDictionary, useLocale } from "@/i18n/locale-provider";
+import { localizedPath } from "@/i18n/config";
 
 export function Header() {
+  const dict = useDictionary();
+  const locale = useLocale();
+  const audience = useAudience();
+  const home = localizedPath(locale, audience);
+
   const links = [
-    { href: "#concept", label: "Concept" },
-    { href: "#visualization", label: "The Truck" },
-    { href: "#cases", label: "Case Studies" },
-    { href: "#process", label: "Process" },
-    { href: "#services", label: "Services" },
-    { href: "#contact", label: "Contact" },
+    { href: "#concept", label: dict.nav.concept },
+    { href: "#visualization", label: dict.nav.truck },
+    { href: "#cases", label: dict.nav.cases },
+    { href: "#process", label: dict.nav.process },
+    { href: "#services", label: dict.nav.services },
+    { href: "#contact", label: dict.nav.contact },
   ];
+
   return (
     <header className="fixed inset-x-0 top-6 z-50 px-4 md:px-8">
-      <div
-        className="mx-auto flex max-w-5xl items-center justify-between rounded-full border border-white/15 px-4 py-2.5 shadow-[0_8px_32px_rgba(0,0,0,0.25),0_0_40px_-20px_rgba(80,160,230,0.4)] ring-1 ring-black/5 transition-all"
+      <div className="mx-auto flex max-w-5xl items-center justify-between gap-2 rounded-full border border-white/15 px-4 py-2.5 shadow-[0_8px_32px_rgba(0,0,0,0.25),0_0_40px_-20px_rgba(80,160,230,0.4)] ring-1 ring-black/5 transition-all"
         style={{
           background:
             "linear-gradient(135deg, rgba(12, 16, 28, 0.78) 0%, rgba(8, 12, 22, 0.7) 100%)",
@@ -24,7 +32,7 @@ export function Header() {
           WebkitBackdropFilter: "blur(24px) saturate(1.8)",
         }}
       >
-        <Link href="/" className="flex items-center gap-2 pl-2">
+        <Link href={home} className="flex shrink-0 items-center gap-2 ps-2">
           <Image
             src="/logo.png"
             alt="HotSpot"
@@ -46,13 +54,16 @@ export function Header() {
             </a>
           ))}
         </nav>
-        <a
-          href="#contact"
-          className="inline-flex items-center gap-1.5 rounded-full bg-accent-gradient px-5 py-2.5 text-xs font-semibold text-white shadow-lg shadow-accent/20 ring-1 ring-white/10 transition hover:opacity-90"
-        >
-          Book Experience
-          <IconArrowRight className="h-3.5 w-3.5" />
-        </a>
+        <div className="flex items-center gap-2">
+          <LanguageSwitcher />
+          <a
+            href="#contact"
+            className="inline-flex items-center gap-1.5 rounded-full bg-accent-gradient px-5 py-2.5 text-xs font-semibold text-white shadow-lg shadow-accent/20 ring-1 ring-white/10 transition hover:opacity-90"
+          >
+            {dict.nav.cta}
+            <DirectionalArrow className="h-3.5 w-3.5" />
+          </a>
+        </div>
       </div>
     </header>
   );

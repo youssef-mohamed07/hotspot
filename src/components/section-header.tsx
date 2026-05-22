@@ -18,7 +18,7 @@ export interface SectionHeaderProps {
   // Used only by "normal" variant
   headline?: ReactNode;
   subtitle?: ReactNode;
-  align?: "left" | "center";
+  align?: "start" | "center";
   theme?: "light" | "dark"; // "dark" = dark background (white text), "light" = light background (dark text)
 }
 
@@ -27,7 +27,7 @@ export function SectionHeader({
   title,
   headline,
   subtitle,
-  align = "left",
+  align = "start",
   theme = "dark",
 }: SectionHeaderProps) {
   // -------------------------
@@ -86,7 +86,7 @@ export function SectionHeader({
 
   return (
     <Reveal
-      className={`mb-16 max-w-4xl ${isCenter ? "mx-auto text-center" : ""}`}
+      className={`mb-16 max-w-4xl text-start ${isCenter ? "mx-auto text-center" : ""}`}
     >
       <div
         className={`flex items-center gap-3 ${isCenter ? "justify-center" : ""}`}

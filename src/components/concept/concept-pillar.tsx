@@ -2,19 +2,28 @@
 
 import { Reveal } from "@/components/reveal";
 import { ImagePlaceholder } from "@/components/ui/image-placeholder";
+import { useIsRtl } from "@/i18n/locale-provider";
 import type { ConceptPillarData } from "@/types/concept-pillar";
 
 export function ConceptPillar({
-  pillar, index, flipped,
-}: { pillar: ConceptPillarData; index: number; flipped: boolean }) {
+  pillar,
+  index,
+  flipped,
+}: {
+  pillar: ConceptPillarData;
+  index: number;
+  flipped: boolean;
+}) {
+  const isRtl = useIsRtl();
+  const swapColumns = isRtl ? !flipped : flipped;
+
   return (
     <Reveal delay={index * 0.1}>
       <div
-        className={`grid items-center gap-10 lg:gap-16 lg:grid-cols-2 ${
-          flipped ? "lg:[&>div:first-child]:order-2" : ""
+        className={`grid items-center gap-10 text-start lg:grid-cols-2 lg:gap-16 ${
+          swapColumns ? "lg:[&>div:first-child]:order-2" : ""
         }`}
       >
-        {/* Visual side */}
         <div className="relative">
           <div className="relative aspect-[4/5] w-full overflow-hidden rounded-[36px]">
             <ImagePlaceholder
@@ -25,33 +34,32 @@ export function ConceptPillar({
               className="rounded-[36px]"
             />
 
-            {/* Floating index badge */}
-            <div className="absolute left-6 top-6 inline-flex items-center gap-2 rounded-full border border-zinc-200/90 bg-white/95 px-3 py-1.5 text-[10px] uppercase tracking-[0.25em] text-zinc-600 shadow-sm backdrop-blur-sm">
+            <div className="absolute start-6 top-6 inline-flex items-center gap-2 rounded-full border border-zinc-200/90 bg-white/95 px-3 py-1.5 text-[10px] uppercase tracking-[0.25em] text-zinc-600 shadow-sm backdrop-blur-sm">
               <span className="pulse-dot" />
               Pillar /{String(index + 1).padStart(2, "0")}
             </div>
 
-            {/* Floating metric pill */}
-            <div className="absolute bottom-6 right-6 rounded-2xl border border-zinc-200/90 bg-white/95 px-5 py-3 shadow-sm backdrop-blur-sm">
-              <p className="text-2xl font-semibold tracking-tight text-zinc-900">{pillar.metric.value}</p>
-              <p className="text-[10px] uppercase tracking-widest text-zinc-500">{pillar.metric.label}</p>
+            <div className="absolute bottom-6 end-6 rounded-2xl border border-zinc-200/90 bg-white/95 px-5 py-3 shadow-sm backdrop-blur-sm">
+              <p className="text-2xl font-semibold tracking-tight text-zinc-900">
+                {pillar.metric.value}
+              </p>
+              <p className="text-[10px] uppercase tracking-widest text-zinc-500">
+                {pillar.metric.label}
+              </p>
             </div>
           </div>
 
-          {/* Decorative offset frame */}
           <div
-            className={`pointer-events-none absolute inset-0 hidden -translate-x-3 translate-y-3 rounded-[36px] border border-accent/20 lg:block ${
-              flipped ? "-translate-x-[-12px]" : ""
+            className={`pointer-events-none absolute inset-0 hidden translate-y-3 rounded-[36px] border border-accent/20 lg:block ${
+              swapColumns ? "translate-x-3" : "-translate-x-3"
             }`}
             aria-hidden
           />
         </div>
 
-        {/* Copy side */}
         <div className="relative">
-          {/* Huge background numeral */}
           <span
-            className="display-headline pointer-events-none absolute -left-2 -top-10 select-none text-[10rem] leading-none text-zinc-900/[0.04] sm:text-[14rem]"
+            className="display-headline pointer-events-none absolute -start-2 -top-10 select-none text-[10rem] leading-none text-zinc-900/[0.04] sm:text-[14rem]"
             aria-hidden
           >
             {String(index + 1).padStart(2, "0")}
@@ -73,7 +81,6 @@ export function ConceptPillar({
               {pillar.description}
             </p>
 
-            {/* Bullets */}
             <ul className="mt-8 space-y-3">
               {pillar.bullets.map((b) => (
                 <li key={b} className="flex items-start gap-3 text-sm text-zinc-600">

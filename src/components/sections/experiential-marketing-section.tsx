@@ -4,33 +4,24 @@ import { ImagePlaceholder } from "@/components/ui/image-placeholder";
 import { Reveal } from "@/components/reveal";
 import { SectionHeader } from "@/components/section-header";
 import { IconIntegration, IconVenue, IconSparkle } from "@/components/icons";
+import { useDictionary } from "@/i18n/locale-provider";
+
+const cardIcons = [IconIntegration, IconVenue, IconSparkle];
 
 export function ExperientialMarketingSection() {
-  const cards = [
-    {
-      title: "Brand Integration",
-      description: "Align every activation with your visual identity and campaign goals.",
-      icon: IconIntegration,
-    },
-    {
-      title: "Event Activation",
-      description: "Designed for launches, exhibitions, and premium public experiences.",
-      icon: IconVenue,
-    },
-    {
-      title: "Audience Attention",
-      description: "Create strong visual presence that naturally attracts engagement.",
-      icon: IconSparkle,
-    },
-  ];
+  const dict = useDictionary();
+  const cards = dict.experiential.cards.map((card, i) => ({
+    ...card,
+    icon: cardIcons[i] ?? IconSparkle,
+  }));
 
   return (
     <section className="relative flex min-h-[100dvh] flex-col items-center justify-center overflow-hidden py-24 bg-background">
-      {/* Background cinematic lighting */}
-      <div 
+      <div
         className="absolute inset-0 opacity-40"
         style={{
-          background: "radial-gradient(circle at 70% 30%, rgba(42,118,166,0.12), transparent 50%), radial-gradient(circle at 90% 80%, rgba(4,40,95,0.08), transparent 50%)"
+          background:
+            "radial-gradient(circle at 70% 30%, rgba(42,118,166,0.12), transparent 50%), radial-gradient(circle at 90% 80%, rgba(4,40,95,0.08), transparent 50%)",
         }}
         aria-hidden
       />
@@ -38,17 +29,22 @@ export function ExperientialMarketingSection() {
 
       <div className="relative mx-auto max-w-7xl px-6 w-full">
         <div className="grid lg:grid-cols-2 gap-16 lg:gap-24 items-center">
-          {/* Left Column Content */}
           <div>
             <SectionHeader
               variant="normal"
-              title="EXPERIENTIAL MARKETING"
+              title={dict.experiential.title}
               theme="light"
-              headline={<>Turn Attention<br />Into <span className="text-gradient-accent">Presence</span></>}
-              subtitle="Create unforgettable brand experiences through premium public activations designed to attract attention, generate buzz, and elevate visibility."
+              headline={
+                <>
+                  {dict.experiential.headline1}
+                  <br />
+                  {dict.experiential.headline2}{" "}
+                  <span className="text-gradient-accent">{dict.experiential.headlineAccent}</span>
+                </>
+              }
+              subtitle={dict.experiential.subtitle}
             />
 
-            {/* Feature Cards */}
             <div className="grid gap-5 mt-12 sm:grid-cols-1 max-w-xl">
               {cards.map((card, i) => {
                 const Icon = card.icon;
@@ -71,7 +67,6 @@ export function ExperientialMarketingSection() {
             </div>
           </div>
 
-          {/* Right Column Visual */}
           <Reveal delay={0.3} className="relative hidden lg:block h-full min-h-[600px]">
             <div className="absolute inset-0 overflow-hidden rounded-[48px] border border-zinc-200/50 shadow-[0_32px_80px_rgba(0,0,0,0.08)]">
               <ImagePlaceholder

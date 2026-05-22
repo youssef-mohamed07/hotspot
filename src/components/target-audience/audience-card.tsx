@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import type { ComponentType, SVGProps } from "react";
+import { useIsRtl } from "@/i18n/locale-provider";
 
 export function AudienceCard({
   index,
@@ -18,6 +19,9 @@ export function AudienceCard({
   icon: ComponentType<SVGProps<SVGSVGElement>>;
   active: boolean;
 }) {
+  const isRtl = useIsRtl();
+  const slideX = isRtl ? 8 : -8;
+
   return (
     <motion.div
       animate={{
@@ -26,7 +30,7 @@ export function AudienceCard({
         y: active ? 0 : 16,
       }}
       transition={{ type: "spring", stiffness: 320, damping: 28 }}
-      className={`relative flex h-full w-full flex-col justify-between overflow-hidden rounded-3xl border p-7 transition-colors duration-300 sm:p-9 ${
+      className={`relative flex h-full w-full flex-col justify-between overflow-hidden rounded-3xl border p-7 text-start transition-colors duration-300 sm:p-9 ${
         active
           ? "border-accent/25 bg-white shadow-2xl shadow-accent/[0.08] ring-1 ring-accent/15"
           : "border-zinc-200/70 bg-white/80 shadow-sm"
@@ -66,7 +70,7 @@ export function AudienceCard({
 
       <div className="relative mt-8 space-y-4">
         <motion.p
-          animate={{ x: active ? 0 : -8 }}
+          animate={{ x: active ? 0 : slideX }}
           transition={{ type: "spring", stiffness: 300, damping: 26, delay: 0.05 }}
           className={`text-lg leading-snug transition-colors sm:text-xl ${
             active ? "text-zinc-600" : "text-zinc-400"
@@ -75,7 +79,7 @@ export function AudienceCard({
           {lead}
         </motion.p>
         <motion.p
-          animate={{ x: active ? 0 : -8 }}
+          animate={{ x: active ? 0 : slideX }}
           transition={{ type: "spring", stiffness: 300, damping: 26, delay: 0.1 }}
           className={`text-xl font-bold leading-snug tracking-tight sm:text-2xl ${
             active ? "text-zinc-900" : "text-zinc-500"

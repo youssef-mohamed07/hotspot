@@ -1,5 +1,9 @@
 import type { Metadata } from "next";
-import { faqs } from "@/data/faq";
+import type { Audience } from "@/i18n/audience";
+import { defaultAudience } from "@/i18n/audience";
+import { getDictionary } from "@/i18n/get-dictionary";
+import type { Locale } from "@/i18n/config";
+import { localizedPath } from "@/i18n/config";
 import { seoKeywords } from "@/data/seo-keywords";
 import { siteConfig } from "@/lib/site";
 
@@ -20,15 +24,21 @@ export function buildMetadata({
   title = defaultTitle,
   description = defaultDescription,
   path = "/",
+  locale = "en" as Locale,
+  audience = defaultAudience,
   noIndex = false,
 }: {
   title?: string;
   description?: string;
   path?: string;
+  locale?: Locale;
+  audience?: Audience;
   noIndex?: boolean;
 } = {}): Metadata {
   const canonical = getSiteUrl(path);
   const ogImage = getSiteUrl("/hero/car-hero.png");
+  const ogLocale = locale === "ar" ? "ar_SA" : "en_SA";
+  const alternateLocale = locale === "ar" ? "en_SA" : "ar_SA";
 
   return {
     metadataBase: new URL(siteConfig.url),
@@ -50,6 +60,11 @@ export function buildMetadata({
     },
     alternates: {
       canonical,
+      languages: {
+        en: getSiteUrl(localizedPath("en", audience)),
+        ar: getSiteUrl(localizedPath("ar", audience)),
+        "x-default": getSiteUrl(localizedPath("en", audience)),
+      },
     },
     robots: noIndex
       ? { index: false, follow: false }
@@ -66,7 +81,8 @@ export function buildMetadata({
         },
     openGraph: {
       type: "website",
-      locale: siteConfig.locale,
+      locale: ogLocale,
+      alternateLocale: [alternateLocale],
       url: canonical,
       siteName: siteConfig.name,
       title,
@@ -117,14 +133,15 @@ export function organizationJsonLd() {
   };
 }
 
-export function webSiteJsonLd() {
+export function webSiteJsonLd(locale: Locale = "en", audience: Audience = defaultAudience) {
+  const dict = getDictionary(locale, audience);
   return {
     "@context": "https://schema.org",
     "@type": "WebSite",
     name: siteConfig.name,
-    url: siteConfig.url,
-    description: defaultDescription,
-    inLanguage: "en",
+    url: getSiteUrl(localizedPath(locale, audience)),
+    description: dict.meta.description,
+    inLanguage: locale === "ar" ? "ar" : "en",
     publisher: {
       "@type": "Organization",
       name: siteConfig.name,
@@ -180,7 +197,8 @@ export function serviceJsonLd() {
   };
 }
 
-export function faqPageJsonLd() {
+export function faqPageJsonLd(locale: Locale = "en", audience: Audience = defaultAudience) {
+  const faqs = getDictionary(locale, audience).faq.items;
   return {
     "@context": "https://schema.org",
     "@type": "FAQPage",
@@ -195,6 +213,12 @@ export function faqPageJsonLd() {
   };
 }
 
-export function homePageJsonLd() {
-  return [organizationJsonLd(), webSiteJsonLd(), localBusinessJsonLd(), serviceJsonLd(), faqPageJsonLd()];
+export function homePageJsonLd(locale: Locale = "en", audience: Audience = defaultAudience) {
+  return [
+    organizationJsonLd(),
+    webSiteJsonLd(locale, audience),
+    localBusinessJsonLd(),
+    serviceJsonLd(),
+    faqPageJsonLd(locale, audience),
+  ];
 }

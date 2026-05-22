@@ -4,9 +4,23 @@ import { useRef, useState } from "react";
 import { motion, useScroll, useMotionValueEvent } from "framer-motion";
 import { SectionHeader } from "@/components/section-header";
 import { AudienceCard } from "@/components/target-audience/audience-card";
-import { audienceList } from "@/data/target-audience";
+import { IconSparkle, IconVenue, IconCamera, IconWave } from "@/components/icons";
+import { useDictionary } from "@/i18n/locale-provider";
+
+const audienceIcons = {
+  launch: IconSparkle,
+  event: IconVenue,
+  buzz: IconCamera,
+  street: IconWave,
+} as const;
 
 export function TargetAudienceSection() {
+  const dict = useDictionary();
+  const audienceList = dict.targetAudience.items.map((item) => ({
+    ...item,
+    icon: audienceIcons[item.id as keyof typeof audienceIcons],
+  }));
+
   const sectionRef = useRef<HTMLDivElement>(null);
   const [activeIndex, setActiveIndex] = useState(0);
 
@@ -34,17 +48,17 @@ export function TargetAudienceSection() {
             <div>
               <SectionHeader
                 variant="normal"
-                title="Is this for you?"
+                title={dict.targetAudience.title}
                 theme="light"
                 headline={
                   <>
-                    This Cybertruck is
+                    {dict.targetAudience.headline1}
                     <br />
-                    made for you{" "}
-                    <span className="text-accent italic">if...</span>
+                    {dict.targetAudience.headline2}{" "}
+                    <span className="text-accent italic">{dict.targetAudience.headlineAccent}</span>
                   </>
                 }
-                subtitle="It's not just a digital billboard. It's a statement piece designed strictly for brands that refuse to blend in."
+                subtitle={dict.targetAudience.subtitle}
               />
 
               <div className="mt-10 hidden gap-2 md:flex">

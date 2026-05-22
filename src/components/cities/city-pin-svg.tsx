@@ -1,17 +1,19 @@
 "use client";
 
 import type { City } from "@/types/city";
+import { useIsRtl } from "@/i18n/locale-provider";
 
 export function CityPinSvg({
   city,
 }: {
   city: City;
 }) {
-  // viewBox is 1000×824, so pin sizes are tuned to that scale
+  const isRtl = useIsRtl();
   const r = city.hub ? 9 : 6;
   const ringR = city.hub ? 22 : 16;
   const dur = city.hub ? "2.4s" : "3.2s";
-  const padX = city.name.length * 7;
+  const padX = Math.max(40, city.name.length * (isRtl ? 9 : 7));
+  const label = isRtl ? city.name : city.name.toUpperCase();
   return (
     <g className="group" style={{ cursor: "pointer" }}>
       {/* Outer halo (static glow) */}
@@ -54,12 +56,13 @@ export function CityPinSvg({
           x={city.x}
           y={city.y + 31}
           textAnchor="middle"
-          fontSize={14}
+          fontSize={isRtl ? 13 : 14}
           fill="#fff"
           fontWeight={600}
-          style={{ letterSpacing: "0.1em" }}
+          direction={isRtl ? "rtl" : "ltr"}
+          style={{ letterSpacing: isRtl ? "0" : "0.1em" }}
         >
-          {city.name.toUpperCase()}
+          {label}
         </text>
       </g>
     </g>

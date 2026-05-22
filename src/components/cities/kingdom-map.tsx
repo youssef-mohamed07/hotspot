@@ -1,18 +1,20 @@
 "use client";
 
 import { KSA_REGIONS, KSA_VIEWBOX } from "@/lib/ksa-map";
-import { cities } from "@/data/cities";
+import { useDictionary } from "@/i18n/locale-provider";
+import { getLocalizedCities } from "@/lib/cities-i18n";
 import { CityPinSvg } from "./city-pin-svg";
 
 export function KingdomMap() {
+  const dict = useDictionary();
+  const cities = getLocalizedCities(dict);
+  const c = dict.cities;
+
   return (
     <div className="relative aspect-[4/3] w-full overflow-hidden rounded-[36px] glass-strong">
-      {/* Ambient glow */}
       <div className="absolute inset-12 rounded-full bg-accent-gradient opacity-15 blur-3xl" aria-hidden />
-      {/* Subtle grid overlay */}
       <div className="grid-floor pointer-events-none absolute inset-0 opacity-50" aria-hidden />
 
-      {/* Real KSA regions + city hotspots in shared SVG coord space */}
       <svg
         viewBox={KSA_VIEWBOX}
         className="absolute inset-0 h-full w-full p-6"
@@ -33,7 +35,6 @@ export function KingdomMap() {
           </radialGradient>
         </defs>
 
-        {/* All 13 administrative regions */}
         <g aria-hidden>
           {KSA_REGIONS.map((region) => (
             <path
@@ -50,19 +51,17 @@ export function KingdomMap() {
           ))}
         </g>
 
-        {/* City pins on top */}
         {cities.map((city) => (
           <CityPinSvg key={city.name} city={city} />
         ))}
       </svg>
 
-      {/* Footer caption */}
-      <div className="pointer-events-none absolute bottom-5 left-5 right-5 flex items-center justify-between text-[10px] uppercase tracking-[0.25em] text-zinc-500">
+      <div className="pointer-events-none absolute bottom-5 start-5 end-5 flex items-center justify-between gap-4 text-[10px] uppercase tracking-[0.25em] text-zinc-500">
         <span className="flex items-center gap-2">
           <span className="h-1.5 w-1.5 rounded-full bg-accent shadow-[0_0_8px_rgba(42,118,166,0.9)]" />
-          Active hub
+          {c.mapActiveHub}
         </span>
-        <span>Saudi Arabia · KSA</span>
+        <span>{c.mapCountry}</span>
       </div>
     </div>
   );

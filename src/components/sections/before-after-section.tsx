@@ -2,12 +2,14 @@
 
 import { Reveal } from "@/components/reveal";
 import { BeforeAfterSlider } from "@/components/before-after/before-after-slider";
+import { useDictionary } from "@/i18n/locale-provider";
 
-/** Replace with transparent PNGs (45° Cybertruck, same angle) when available */
 const BEFORE_IMAGE = "/hero/car-hero.png";
 const AFTER_IMAGE = "/hero/car-hero.png";
 
 export function BeforeAfterSection() {
+  const dict = useDictionary();
+
   return (
     <section
       id="before-after"
@@ -19,15 +21,16 @@ export function BeforeAfterSection() {
         <Reveal className="mb-12 text-center">
           <div className="mb-6 flex items-center justify-center gap-3">
             <span className="h-px w-12 bg-accent" />
-            <p className="text-xs font-bold uppercase tracking-[0.3em] text-accent">Transformation</p>
+            <p className="text-xs font-bold uppercase tracking-[0.3em] text-accent">
+              {dict.beforeAfter.eyebrow}
+            </p>
             <span className="h-px w-12 bg-accent" />
           </div>
           <h2 className="display-headline text-4xl text-zinc-900 sm:text-5xl md:text-6xl">
-            Before vs after
+            {dict.beforeAfter.title}
           </h2>
           <p className="mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-zinc-600">
-            See the exact transformation — from stock Cybertruck to your brand moving through Saudi
-            streets.
+            {dict.beforeAfter.subtitle}
           </p>
         </Reveal>
 
@@ -35,12 +38,10 @@ export function BeforeAfterSection() {
           <BeforeAfterSlider
             beforeSrc={BEFORE_IMAGE}
             afterSrc={AFTER_IMAGE}
-            beforeAlt="Stock Cybertruck before branding"
-            afterAlt="Cybertruck after full brand wrap"
+            beforeAlt={dict.beforeAfter.beforeAlt}
+            afterAlt={dict.beforeAfter.afterAlt}
           />
-          <p className="mt-6 text-center text-xs text-zinc-500">
-            Drag the handle to compare · Same angle · Transparent assets with shadow
-          </p>
+          <p className="mt-6 text-center text-xs text-zinc-500">{dict.beforeAfter.hint}</p>
         </Reveal>
       </div>
     </section>

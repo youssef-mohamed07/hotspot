@@ -2,11 +2,12 @@
 
 import { useEffect, useRef, useState } from "react";
 import { Reveal } from "@/components/reveal";
-import { IconArrowRight } from "@/components/icons";
-import { processSteps } from "@/data/process-steps";
+import { DirectionalArrow } from "@/components/icons/directional-arrow";
 import { ProcessStep } from "@/components/sections/process-step";
+import { useDictionary } from "@/i18n/locale-provider";
 
 export function ProcessSection() {
+  const dict = useDictionary();
   const containerRef = useRef<HTMLDivElement>(null);
   const [scrollProgress, setScrollProgress] = useState(0);
 
@@ -16,7 +17,6 @@ export function ProcessSection() {
     const handler = () => {
       const rect = el.getBoundingClientRect();
       const vh = window.innerHeight;
-      // Progress: 0 when section top hits viewport bottom; 1 when section bottom hits viewport top
       const total = rect.height + vh;
       const passed = vh - rect.top;
       const p = Math.max(0, Math.min(1, passed / total));
@@ -32,8 +32,10 @@ export function ProcessSection() {
   }, []);
 
   return (
-    <section id="process" className="relative flex min-h-[100dvh] flex-col items-center justify-center overflow-hidden py-24">
-      {/* Backdrop */}
+    <section
+      id="process"
+      className="relative flex min-h-[100dvh] flex-col items-center justify-center overflow-hidden py-24"
+    >
       <div
         className="absolute inset-0 opacity-40"
         style={{
@@ -45,57 +47,50 @@ export function ProcessSection() {
       <div className="grid-floor pointer-events-none absolute inset-0 opacity-25" aria-hidden />
 
       <div className="relative mx-auto max-w-6xl px-6">
-        {/* Header */}
-        <Reveal className="mb-20 max-w-3xl">
+        <Reveal className="mb-20 max-w-3xl text-start">
           <div className="flex items-center gap-3">
             <span className="h-px w-12 bg-accent" />
-            <p className="text-xs uppercase tracking-[0.3em] text-accent">Our process</p>
+            <p className="text-xs uppercase tracking-[0.3em] text-accent">{dict.process.eyebrow}</p>
           </div>
           <h2 className="display-headline mt-6 text-4xl text-zinc-900 sm:text-5xl md:text-6xl lg:text-7xl">
-            From brief to<br />
-            <span className="text-gradient-accent">activation day.</span>
+            {dict.process.headline1}
+            <br />
+            <span className="text-gradient-accent">{dict.process.headlineAccent}</span>
           </h2>
-          <p className="mt-6 text-lg text-zinc-600">
-            Five stages, one team, no hand-offs. Every step is signed off before the next begins.
-          </p>
+          <p className="mt-6 text-lg text-zinc-600">{dict.process.subtitle}</p>
         </Reveal>
 
-        {/* Timeline rail */}
         <div ref={containerRef} className="relative">
-          {/* Center vertical track (mobile: left-aligned, desktop: centered) */}
           <div
-            className="absolute bottom-0 left-6 top-0 w-px bg-white/[0.06] md:left-1/2 md:-translate-x-1/2"
+            className="absolute bottom-0 start-1/2 top-0 w-px -translate-x-1/2 bg-white/[0.06]"
             aria-hidden
           />
-          {/* Animated progress fill */}
           <div
-            className="absolute left-6 top-0 w-px bg-gradient-to-b from-accent via-accent-soft to-accent-deep md:left-1/2 md:-translate-x-1/2"
+            className="absolute start-1/2 top-0 w-px origin-top -translate-x-1/2 bg-gradient-to-b from-accent via-accent-soft to-accent-deep"
             style={{
               height: `${scrollProgress * 100}%`,
               boxShadow: "0 0 12px rgba(42,118,166,0.6)",
-              transition: "height 80ms linear",
+              transition: "height 120ms ease-out",
             }}
             aria-hidden
           />
 
-          {/* Steps */}
           <ol className="space-y-16 md:space-y-24">
-            {processSteps.map((step, i) => (
+            {dict.process.steps.map((step, i) => (
               <ProcessStep key={step.n} step={step} index={i} />
             ))}
           </ol>
         </div>
 
-        {/* Footer CTA */}
         <Reveal delay={0.1}>
           <div className="mt-24 flex flex-col items-center gap-4 text-center">
-            <p className="text-sm text-zinc-600">Ready to start your timeline?</p>
+            <p className="text-sm text-zinc-600">{dict.process.ctaPrompt}</p>
             <a
               href="#contact"
               className="inline-flex items-center gap-2 rounded-full bg-accent-gradient px-7 py-3.5 text-sm font-semibold text-white transition hover:opacity-90 hover:shadow-lg hover:shadow-accent/20"
             >
-              Build my brief
-              <IconArrowRight className="h-4 w-4" />
+              {dict.process.cta}
+              <DirectionalArrow className="h-4 w-4" />
             </a>
           </div>
         </Reveal>

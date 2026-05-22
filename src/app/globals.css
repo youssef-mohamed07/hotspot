@@ -24,6 +24,58 @@ body {
   overflow-x: clip;
 }
 
+html.lang-ar body {
+  font-family: var(--font-arabic), var(--font-sans), Arial, Helvetica, sans-serif;
+}
+
+/* Marketing chrome (hero/header) stays LTR layout — matches English composition */
+.locale-shell-ltr {
+  direction: ltr;
+}
+
+html[dir="rtl"] .rtl-flip {
+  transform: scaleX(-1);
+}
+
+/* ---------- RTL layout & typography ---------- */
+html[dir="rtl"] {
+  direction: rtl;
+}
+
+html[dir="rtl"] main {
+  text-align: start;
+}
+
+html[dir="rtl"] .display-headline,
+html[dir="rtl"] h1,
+html[dir="rtl"] h2,
+html[dir="rtl"] h3,
+html[dir="rtl"] h4,
+html[dir="rtl"] p,
+html[dir="rtl"] li {
+  text-align: inherit;
+}
+
+html[dir="rtl"] .marquee {
+  animation-name: marquee-rtl;
+}
+
+@keyframes marquee-rtl {
+  to {
+    transform: translateX(50%);
+  }
+}
+
+html[dir="rtl"] .marquee-mask {
+  mask-image: linear-gradient(
+    to left,
+    transparent,
+    #000 10%,
+    #000 90%,
+    transparent
+  );
+}
+
 .dark-hero-bg {
   /* Deep navy-to-black cinematic gradient */
   background: radial-gradient(
@@ -60,11 +112,23 @@ body {
   opacity: 0.55;
 }
 
-/* Soft electric-blue text glow (for "Advertising") */
+/* Glow for solid-color text only — never combine with .text-gradient-accent (breaks clip in WebKit) */
 .text-glow-accent {
   text-shadow:
     0 0 24px rgba(80, 160, 230, 0.35),
     0 0 60px rgba(42, 118, 166, 0.25);
+}
+
+/* Hero accent line: glow via filter on wrapper, gradient on inner span */
+.hero-accent-gradient {
+  display: inline-block;
+  filter: drop-shadow(0 0 24px rgba(80, 160, 230, 0.35))
+    drop-shadow(0 0 60px rgba(42, 118, 166, 0.25));
+}
+
+html.lang-ar .hero-accent-gradient {
+  filter: drop-shadow(0 0 18px rgba(80, 160, 230, 0.22))
+    drop-shadow(0 0 42px rgba(42, 118, 166, 0.14));
 }
 
 /* Cinematic radial spotlight behind vehicle */
@@ -174,8 +238,8 @@ section[id] {
   text-transform: uppercase;
 }
 
-:lang(ar) .display-headline,
-[dir="rtl"] .display-headline {
+html.lang-ar .display-headline {
+  font-family: var(--font-arabic), var(--font-display), sans-serif;
   text-transform: none;
   letter-spacing: 0;
   line-height: 1.1;
@@ -186,11 +250,17 @@ section[id] {
   background: linear-gradient(135deg, #2a76a6 0%, #1d5a82 45%, #04285f 100%);
 }
 
-/* Static gradient text */
+html.lang-ar .bg-accent-gradient {
+  background: linear-gradient(135deg, #2a76a6 0%, #1d5a82 45%, #04285f 100%);
+}
+
+/* Static gradient text — fixed angle so AR/EN match (not mirrored by dir) */
 .text-gradient-accent {
-  background: linear-gradient(135deg, #2a76a6 0%, #5ba3d4 50%, #2a76a6 100%);
+  display: inline;
+  background-image: linear-gradient(135deg, #2a76a6 0%, #5ba3d4 50%, #2a76a6 100%);
   background-clip: text;
   -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
   color: transparent;
 }
 
