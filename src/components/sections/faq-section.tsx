@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { TrackedCta } from "@/components/marketing/tracked-cta";
 import { Reveal } from "@/components/reveal";
 import { DirectionalArrow } from "@/components/icons/directional-arrow";
 import { IconMail, IconWhatsApp } from "@/components/icons";
@@ -146,13 +147,14 @@ export function FAQSection() {
               <p className="text-lg font-semibold text-zinc-900">{dict.faq.bottomTitle}</p>
               <p className="mt-1 text-sm text-zinc-600">{dict.faq.bottomBody}</p>
             </div>
-            <a
+            <TrackedCta
               href="#contact"
+              ctaLocation="faq"
               className="inline-flex items-center gap-2 rounded-full bg-accent-gradient px-6 py-3 text-sm font-semibold text-white transition hover:opacity-90 hover:shadow-lg hover:shadow-accent/20"
             >
               {dict.faq.bottomCta}
               <DirectionalArrow className="h-4 w-4" />
-            </a>
+            </TrackedCta>
           </div>
         </Reveal>
       </div>

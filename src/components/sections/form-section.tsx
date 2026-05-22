@@ -8,6 +8,7 @@ import { WizardNav } from "@/components/brief-wizard/wizard-nav";
 import { WizardProgress } from "@/components/brief-wizard/wizard-progress";
 import type { ContactFormData } from "@/lib/contact-form";
 import { useDictionary } from "@/i18n/locale-provider";
+import { attributionPayload, trackFormStart, trackLead } from "@/lib/marketing/track";
 
 const initialForm: ContactFormData = {
   name: "",
@@ -75,15 +76,24 @@ export function FormSection() {
     setSubmitError(null);
     setIsSubmitting(true);
     try {
+      const payload: ContactFormData = {
+        ...data,
+        attribution: attributionPayload(),
+      };
       const res = await fetch("/api/contact", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(data),
+        body: JSON.stringify(payload),
       });
       const body = (await res.json().catch(() => ({}))) as { error?: string };
       if (!res.ok) {
         throw new Error(body.error ?? c.error);
       }
+      trackLead({
+        campaign_type: data.campaignType,
+        industry: data.industry,
+        budget: data.budget || undefined,
+      });
       setSubmitted(true);
     } catch (err) {
       setSubmitError(err instanceof Error ? err.message : c.error);
@@ -288,7 +298,10 @@ export function FormSection() {
                   canAdvance={canAdvance}
                   isSubmitting={isSubmitting}
                   onPrev={() => setStep((s) => Math.max(0, s - 1))}
-                  onNext={() => setStep((s) => Math.min(TOTAL_STEPS - 1, s + 1))}
+                  onNext={() => {
+                    if (step === 0) trackFormStart();
+                    setStep((s) => Math.min(TOTAL_STEPS - 1, s + 1));
+                  }}
                   onSubmit={handleSubmit}
                   submitLabel={c.submit}
                 />

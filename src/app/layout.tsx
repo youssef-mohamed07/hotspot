@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { headers } from "next/headers";
 import { Geist, Geist_Mono, Bebas_Neue, Cairo } from "next/font/google";
+import { MarketingScripts } from "@/components/marketing/marketing-scripts";
 import { JsonLd } from "@/components/seo/json-ld";
 import { homePageJsonLd, rootMetadata } from "@/lib/seo";
 import { defaultAudience, isAudience, type Audience } from "@/i18n/audience";
@@ -52,6 +53,7 @@ export default async function RootLayout({
   return (
     <html lang={locale} dir={dir} className={fontClass}>
       <body className="min-h-full flex flex-col bg-[#08090c] text-zinc-100">
+        <MarketingScripts />
         <JsonLd data={homePageJsonLd(locale, audience)} />
         {children}
       </body>

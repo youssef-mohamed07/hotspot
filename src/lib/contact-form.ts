@@ -1,3 +1,5 @@
+import type { AttributionData } from "@/lib/marketing/attribution";
+
 export type ContactFormData = {
   name: string;
   company: string;
@@ -9,6 +11,7 @@ export type ContactFormData = {
   campaignDate: string;
   budget: string;
   notes: string;
+  attribution?: AttributionData;
 };
 
 export function parseContactForm(body: unknown): ContactFormData | null {
@@ -17,6 +20,11 @@ export function parseContactForm(body: unknown): ContactFormData | null {
   const raw = body as Record<string, unknown>;
   const str = (key: keyof ContactFormData) =>
     typeof raw[key] === "string" ? (raw[key] as string).trim() : "";
+
+  const attribution =
+    raw.attribution && typeof raw.attribution === "object"
+      ? (raw.attribution as AttributionData)
+      : undefined;
 
   const data: ContactFormData = {
     name: str("name"),
@@ -29,6 +37,7 @@ export function parseContactForm(body: unknown): ContactFormData | null {
     campaignDate: str("campaignDate"),
     budget: str("budget"),
     notes: str("notes"),
+    attribution,
   };
 
   if (
@@ -67,7 +76,36 @@ export function buildContactEmailHtml(data: ContactFormData) {
         ${row("Budget", data.budget)}
         ${row("Notes", data.notes.replace(/\n/g, "<br>"))}
       </table>
+      ${attributionBlockHtml(data.attribution)}
     </div>
+  `;
+}
+
+function attributionBlockHtml(attribution?: AttributionData) {
+  if (!attribution) return "";
+  const rows = [
+    ["utm_source", attribution.utm_source],
+    ["utm_medium", attribution.utm_medium],
+    ["utm_campaign", attribution.utm_campaign],
+    ["utm_content", attribution.utm_content],
+    ["utm_term", attribution.utm_term],
+    ["fbclid", attribution.fbclid],
+    ["landing_page", attribution.landing_page],
+    ["referrer", attribution.referrer],
+  ].filter(([, v]) => v);
+
+  if (rows.length === 0) return "";
+
+  const inner = rows
+    .map(
+      ([label, value]) =>
+        `<tr><td style="padding:6px 12px;font-weight:600;color:#52525b">${label}</td><td style="padding:6px 12px;color:#18181b">${escapeHtml(value!)}</td></tr>`,
+    )
+    .join("");
+
+  return `
+    <h3 style="color:#18181b;margin:24px 0 12px;font-size:14px">Campaign attribution</h3>
+    <table style="width:100%;border-collapse:collapse;background:#f4f4f5;border-radius:12px">${inner}</table>
   `;
 }
 
@@ -85,7 +123,16 @@ export function buildContactEmailText(data: ContactFormData) {
     ["Notes", data.notes],
   ].filter(([, v]) => v);
 
-  return `New activation brief\n\n${lines.map(([k, v]) => `${k}: ${v}`).join("\n")}`;
+  let text = `New activation brief\n\n${lines.map(([k, v]) => `${k}: ${v}`).join("\n")}`;
+
+  if (data.attribution) {
+    const attrLines = Object.entries(data.attribution).filter(([, v]) => v);
+    if (attrLines.length > 0) {
+      text += `\n\n--- Campaign attribution ---\n${attrLines.map(([k, v]) => `${k}: ${v}`).join("\n")}`;
+    }
+  }
+
+  return text;
 }
 
 function escapeHtml(value: string) {

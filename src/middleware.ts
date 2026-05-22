@@ -24,6 +24,7 @@ export function middleware(request: NextRequest) {
   if (pathname === "/") {
     const url = request.nextUrl.clone();
     url.pathname = `/${defaultLocale}/${defaultAudience}`;
+    // Keep utm_* / gclid / fbclid on paid landing redirects
     return NextResponse.redirect(url);
   }
 
@@ -43,6 +44,7 @@ export function middleware(request: NextRequest) {
         ? pathname.replace(`/${locale}/${maybeAudience}`, "")
         : pathname.replace(`/${locale}`, "");
     url.pathname = `/${locale}/${defaultAudience}${rest === "/" ? "" : rest}`;
+    // searchParams (UTM, click IDs) preserved via clone()
     const response = NextResponse.redirect(url);
     response.headers.set("x-locale", locale);
     response.headers.set("x-audience", defaultAudience);

@@ -95,9 +95,11 @@ Keywords: keep shared technical terms (Cyber Stage, Cybertruck); B2B adds *brand
 
 **Campaign URLs (examples)**
 
-- LinkedIn / B2B deck → `hotsspots.com/en/b2b`
-- Instagram / consumer reel → `hotsspots.com/ar/b2c`
+- LinkedIn / B2B deck → `hotsspots.com/en/b2b?utm_source=linkedin&utm_medium=paid&utm_campaign=b2b`
+- Instagram / consumer reel → `hotsspots.com/ar/b2c?utm_source=instagram&utm_medium=paid&utm_campaign=b2c`
 - Never link both on the same landing footer.
+
+**Meta Pixel & UTM:** see [MARKETING_TRACKING.md](./MARKETING_TRACKING.md).
 
 ## Adding a new section
 

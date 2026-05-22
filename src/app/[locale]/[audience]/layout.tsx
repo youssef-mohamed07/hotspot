@@ -1,4 +1,6 @@
 import { notFound } from "next/navigation";
+import { AttributionCapture } from "@/components/marketing/attribution-capture";
+import { MarketingProvider } from "@/components/marketing/marketing-provider";
 import { SplashScreen } from "@/components/layout/splash-screen";
 import { WhatsAppFloat } from "@/components/layout/whatsapp-float";
 import { HtmlDirSync } from "@/components/i18n/html-dir-sync";
@@ -33,12 +35,15 @@ export default async function AudienceLayout({
 
   return (
     <LocaleProvider locale={locale} audience={audience} dict={dict}>
-      <HtmlDirSync locale={locale} />
-      <SplashScreen />
-      <div dir={dir} lang={locale} className="flex min-h-full flex-1 flex-col text-start">
-        {children}
-        <WhatsAppFloat />
-      </div>
+      <MarketingProvider>
+        <AttributionCapture />
+        <HtmlDirSync locale={locale} />
+        <SplashScreen />
+        <div dir={dir} lang={locale} className="flex min-h-full flex-1 flex-col text-start">
+          {children}
+          <WhatsAppFloat />
+        </div>
+      </MarketingProvider>
     </LocaleProvider>
   );
 }

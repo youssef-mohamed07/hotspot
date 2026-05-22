@@ -4,6 +4,7 @@ import type { CSSProperties } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { DirectionalArrow } from "@/components/icons/directional-arrow";
+import { TrackedCta } from "@/components/marketing/tracked-cta";
 import { LanguageSwitcher } from "@/components/layout/language-switcher";
 import { useAudience, useDictionary, useLocale } from "@/i18n/locale-provider";
 import { localizedPath } from "@/i18n/config";
@@ -60,13 +61,14 @@ export function Header() {
         </nav>
         <div className="flex items-center gap-2">
           <LanguageSwitcher />
-          <a
+          <TrackedCta
             href="#contact"
+            ctaLocation="header"
             className="inline-flex items-center gap-1.5 rounded-full bg-accent-gradient px-5 py-2.5 text-xs font-semibold text-white shadow-lg shadow-accent/20 ring-1 ring-white/10 transition hover:opacity-90"
           >
             {dict.nav.cta}
             <DirectionalArrow className="h-3.5 w-3.5" />
-          </a>
+          </TrackedCta>
         </div>
       </div>
     </header>
