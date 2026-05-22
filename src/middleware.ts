@@ -22,9 +22,10 @@ export function middleware(request: NextRequest) {
   const maybeAudience = segments[1];
 
   if (pathname === "/") {
+    const acceptLang = request.headers.get("accept-language") || "";
+    const preferredLocale = acceptLang.startsWith("ar") ? "ar" : defaultLocale;
     const url = request.nextUrl.clone();
-    url.pathname = `/${defaultLocale}/${defaultAudience}`;
-    // Keep utm_* / gclid / fbclid on paid landing redirects
+    url.pathname = `/${preferredLocale}`;
     return NextResponse.redirect(url);
   }
 
@@ -35,6 +36,11 @@ export function middleware(request: NextRequest) {
   const requestHeaders = new Headers(request.headers);
   requestHeaders.set("x-locale", locale);
   requestHeaders.set("x-audience", audience);
+
+  // Allow exactly /[locale] to pass through to the audience selector
+  if (isLocale(maybeLocale ?? "") && segments.length === 1) {
+    return NextResponse.next({ request: { headers: requestHeaders } });
+  }
 
   if (!isLocale(maybeLocale ?? "") || !hasAudience) {
     const url = request.nextUrl.clone();

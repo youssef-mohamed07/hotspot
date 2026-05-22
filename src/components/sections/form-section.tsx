@@ -1,6 +1,7 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import { Reveal } from "@/components/reveal";
 import { DirectionalArrow } from "@/components/icons/directional-arrow";
 import { StepHeader } from "@/components/brief-wizard/step-header";
@@ -44,6 +45,97 @@ function Field({
       <label className={labelCls}>{label}</label>
       {hint && <span className={hintCls}>{hint}</span>}
       {children}
+    </div>
+  );
+}
+
+function CustomSelect({
+  value,
+  onChange,
+  options,
+  placeholder,
+}: {
+  value: string;
+  onChange: (val: string) => void;
+  options: string[];
+  placeholder: string;
+}) {
+  const [isOpen, setIsOpen] = useState(false);
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    function handleClickOutside(event: MouseEvent) {
+      if (containerRef.current && !containerRef.current.contains(event.target as Node)) {
+        setIsOpen(false);
+      }
+    }
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
+
+  return (
+    <div className="relative w-full" ref={containerRef}>
+      <button
+        type="button"
+        onClick={() => setIsOpen((prev) => !prev)}
+        className={`flex w-full items-center justify-between rounded-xl border px-4 py-3 text-sm outline-none transition-all ${
+          isOpen
+            ? "border-accent bg-white ring-1 ring-accent"
+            : "border-zinc-200 bg-zinc-50 hover:bg-zinc-100/80"
+        } ${value ? "text-zinc-900" : "text-zinc-500"}`}
+      >
+        <span className="truncate">{value || placeholder}</span>
+        <svg
+          className={`h-4 w-4 shrink-0 text-zinc-400 transition-transform duration-200 ${
+            isOpen ? "rotate-180" : ""
+          }`}
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+        >
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+        </svg>
+      </button>
+
+      <AnimatePresence>
+        {isOpen && (
+          <motion.div
+            initial={{ opacity: 0, y: -10, scale: 0.98 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            exit={{ opacity: 0, y: -10, scale: 0.98 }}
+            transition={{ duration: 0.15, ease: "easeOut" }}
+            className="absolute left-0 right-0 z-50 mt-2 max-h-60 overflow-y-auto rounded-xl border border-zinc-200 bg-white py-1 shadow-[0_10px_40px_-10px_rgba(0,0,0,0.1)] outline-none"
+          >
+            {options.map((opt) => (
+              <button
+                key={opt}
+                type="button"
+                onClick={() => {
+                  onChange(opt);
+                  setIsOpen(false);
+                }}
+                className={`flex w-full items-center px-4 py-3 text-start text-sm transition-colors ${
+                  value === opt
+                    ? "bg-accent/5 font-semibold text-accent"
+                    : "text-zinc-700 hover:bg-zinc-50 hover:text-zinc-900"
+                }`}
+              >
+                {opt}
+                {value === opt && (
+                  <svg
+                    className="ml-auto h-4 w-4 text-accent"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                  </svg>
+                )}
+              </button>
+            ))}
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 }
@@ -130,7 +222,7 @@ export function FormSection() {
         </Reveal>
 
         <Reveal delay={0.1}>
-          <div className="overflow-hidden rounded-[2rem] bg-white p-8 shadow-xl shadow-accent/5 ring-1 ring-accent/10 md:p-12">
+          <div className="relative rounded-[2rem] bg-white p-8 shadow-xl shadow-accent/5 ring-1 ring-accent/10 md:p-12">
             {submitted ? (
               <div className="flex flex-col items-center py-20 text-center">
                 <div className="mb-6 flex h-20 w-20 items-center justify-center rounded-full bg-accent/10 text-accent">
@@ -192,19 +284,12 @@ export function FormSection() {
                     <div>
                       <StepHeader title={c.step1.title} hint={c.step1.hint} />
                       <Field label={c.step1.industry} hint={c.step1.industryHint}>
-                        <select
-                          required
+                        <CustomSelect
                           value={data.industry}
-                          onChange={(e) => update("industry", e.target.value)}
-                          className={inputCls}
-                        >
-                          <option value="">{c.step1.choose}</option>
-                          {c.step1.industries.map((opt) => (
-                            <option key={opt} value={opt}>
-                              {opt}
-                            </option>
-                          ))}
-                        </select>
+                          onChange={(val) => update("industry", val)}
+                          options={c.step1.industries}
+                          placeholder={c.step1.choose}
+                        />
                       </Field>
                     </div>
                   )}
@@ -214,34 +299,20 @@ export function FormSection() {
                       <StepHeader title={c.step2.title} hint={c.step2.hint} />
                       <div className="grid gap-6 md:grid-cols-2">
                         <Field label={c.step2.type} hint={c.step2.typeHint} className="md:col-span-2">
-                          <select
-                            required
+                          <CustomSelect
                             value={data.campaignType}
-                            onChange={(e) => update("campaignType", e.target.value)}
-                            className={inputCls}
-                          >
-                            <option value="">{c.step1.choose}</option>
-                            {c.step2.campaignTypes.map((opt) => (
-                              <option key={opt} value={opt}>
-                                {opt}
-                              </option>
-                            ))}
-                          </select>
+                            onChange={(val) => update("campaignType", val)}
+                            options={c.step2.campaignTypes}
+                            placeholder={c.step1.choose}
+                          />
                         </Field>
                         <Field label={c.step2.cities} hint={c.step2.citiesHint} className="md:col-span-2">
-                          <select
-                            required
+                          <CustomSelect
                             value={data.targetCities}
-                            onChange={(e) => update("targetCities", e.target.value)}
-                            className={inputCls}
-                          >
-                            <option value="">{c.step1.choose}</option>
-                            {c.step2.cityOptions.map((opt) => (
-                              <option key={opt} value={opt}>
-                                {opt}
-                              </option>
-                            ))}
-                          </select>
+                            onChange={(val) => update("targetCities", val)}
+                            options={c.step2.cityOptions}
+                            placeholder={c.step1.choose}
+                          />
                         </Field>
                         <Field label={c.step2.date}>
                           <input
@@ -253,18 +324,12 @@ export function FormSection() {
                           />
                         </Field>
                         <Field label={c.step2.budget}>
-                          <select
+                          <CustomSelect
                             value={data.budget}
-                            onChange={(e) => update("budget", e.target.value)}
-                            className={inputCls}
-                          >
-                            <option value="">{c.step1.choose}</option>
-                            {c.step2.budgetOptions.map((opt) => (
-                              <option key={opt} value={opt}>
-                                {opt}
-                              </option>
-                            ))}
-                          </select>
+                            onChange={(val) => update("budget", val)}
+                            options={c.step2.budgetOptions}
+                            placeholder={c.step1.choose}
+                          />
                         </Field>
                       </div>
                     </div>

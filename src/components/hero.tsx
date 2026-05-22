@@ -110,6 +110,7 @@ export function Hero() {
               width={1400}
               height={700}
               className="relative z-10 w-[92%] max-w-130 object-contain drop-shadow-[0_30px_40px_rgba(0,0,0,0.55)] sm:w-auto sm:max-h-[38vh] sm:max-w-none md:max-h-[36vh] lg:max-h-[38vh] xl:max-h-[40vh]"
+              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 75vw, 1400px"
               priority
             />
 
@@ -120,6 +121,7 @@ export function Hero() {
               width={1400}
               height={700}
               className="vehicle-reflection pointer-events-none absolute start-0 end-0 top-[calc(100%-12px)] z-5 mx-auto w-[92%] max-w-130 object-contain sm:w-auto sm:max-h-[38vh] sm:max-w-none md:max-h-[36vh] lg:max-h-[38vh] xl:max-h-[40vh]"
+              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 75vw, 1400px"
             />
 
             <div

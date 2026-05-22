@@ -69,10 +69,7 @@ export function CybertruckScene({ initialView = "explore" }: CybertruckSceneProp
         src={src}
         onLoad={() => setLoaded(true)}
         allow="autoplay; fullscreen; xr-spatial-tracking"
-        allowFullScreen
         {...({
-          mozallowfullscreen: "true",
-          webkitallowfullscreen: "true",
           "execution-while-out-of-viewport": "true",
           "execution-while-not-rendered": "true",
           "web-share": "true",

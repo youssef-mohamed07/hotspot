@@ -45,7 +45,8 @@ export function Header() {
             height={36}
             priority
             fetchPriority="high"
-            className="h-7 w-auto md:h-8"
+            className="h-7 md:h-8"
+            style={{ width: "auto" }}
           />
         </Link>
         <nav className="hidden items-center gap-1 md:flex">
