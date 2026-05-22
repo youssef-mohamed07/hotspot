@@ -35,7 +35,7 @@ export function ProcessSection() {
   return (
     <section
       id="process"
-      className="relative flex min-h-[100dvh] flex-col items-center justify-center overflow-hidden py-24"
+      className="relative flex min-h-[100dvh] scroll-mt-28 flex-col items-center justify-center overflow-hidden py-24 pt-32 md:scroll-mt-24 md:pt-24"
     >
       <div
         className="absolute inset-0 opacity-40"
@@ -61,13 +61,14 @@ export function ProcessSection() {
           <p className="mt-6 text-lg text-zinc-600">{dict.process.subtitle}</p>
         </Reveal>
 
-        <div ref={containerRef} className="relative">
+        <div ref={containerRef} className="relative md:px-0">
+          {/* Mobile: timeline on inline-start; desktop: centered between columns */}
           <div
-            className="absolute bottom-0 start-1/2 top-0 w-px -translate-x-1/2 bg-white/[0.06]"
+            className="absolute bottom-0 start-[1.125rem] top-0 w-px bg-zinc-200/80 md:start-1/2 md:-translate-x-1/2 md:bg-white/[0.06]"
             aria-hidden
           />
           <div
-            className="absolute start-1/2 top-0 w-px origin-top -translate-x-1/2 bg-gradient-to-b from-accent via-accent-soft to-accent-deep"
+            className="absolute start-[1.125rem] top-0 w-px origin-top bg-gradient-to-b from-accent via-accent-soft to-accent-deep md:start-1/2 md:-translate-x-1/2"
             style={{
               height: `${scrollProgress * 100}%`,
               boxShadow: "0 0 12px rgba(42,118,166,0.6)",

@@ -54,9 +54,9 @@ export function ProcessStep({
   const numeralEnterX = isEven ? (isRtl ? -36 : 36) : isRtl ? 36 : -36;
 
   return (
-    <li ref={ref} className="relative">
+    <li ref={ref} className="relative min-h-[5rem] md:min-h-0">
       <span
-        className={`absolute start-1/2 top-6 -translate-x-1/2 ${
+        className={`absolute start-[1.125rem] top-8 z-10 -translate-x-1/2 md:start-1/2 md:top-6 ${
           visible ? "scale-100 opacity-100" : "scale-50 opacity-0"
         } transition-all duration-500`}
         aria-hidden
@@ -67,7 +67,7 @@ export function ProcessStep({
 
       <div className="grid items-start gap-6 md:grid-cols-2">
         <div
-          className={`pt-1 ${cardCol} ${cardPad} px-2 sm:px-4 md:px-0`}
+          className={`pt-1 ps-10 sm:ps-12 md:ps-0 ${cardCol} ${cardPad} pe-2 sm:pe-4 md:px-0`}
           style={{
             transition: "all 800ms cubic-bezier(0.22, 1, 0.36, 1)",
             transitionDelay: "100ms",
