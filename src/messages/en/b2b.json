@@ -6,6 +6,9 @@
   "site": {
     "whatsappMessage": "Hi HotSpot! I'd like to learn more about Cyber Stage and book an activation."
   },
+  "splash": {
+    "tagline": "Own the street. Own the moment."
+  },
   "nav": {
     "concept": "Concept",
     "truck": "The Truck",

@@ -1,5 +1,6 @@
 "use client";
 
+import type { CSSProperties } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { DirectionalArrow } from "@/components/icons/directional-arrow";
@@ -23,7 +24,10 @@ export function Header() {
   ];
 
   return (
-    <header className="fixed inset-x-0 top-6 z-50 px-4 md:px-8">
+    <header
+      className="enter-item enter-item-from-top fixed inset-x-0 top-6 z-50 px-4 md:px-8"
+      style={{ "--enter-delay": "0.1s" } as CSSProperties}
+    >
       <div className="mx-auto flex max-w-5xl items-center justify-between gap-2 rounded-full border border-white/15 px-4 py-2.5 shadow-[0_8px_32px_rgba(0,0,0,0.25),0_0_40px_-20px_rgba(80,160,230,0.4)] ring-1 ring-black/5 transition-all"
         style={{
           background:

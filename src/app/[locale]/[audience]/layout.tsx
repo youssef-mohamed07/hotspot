@@ -1,4 +1,5 @@
 import { notFound } from "next/navigation";
+import { SplashScreen } from "@/components/layout/splash-screen";
 import { WhatsAppFloat } from "@/components/layout/whatsapp-float";
 import { HtmlDirSync } from "@/components/i18n/html-dir-sync";
 import { isAudience, type Audience } from "@/i18n/audience";
@@ -33,6 +34,7 @@ export default async function AudienceLayout({
   return (
     <LocaleProvider locale={locale} audience={audience} dict={dict}>
       <HtmlDirSync locale={locale} />
+      <SplashScreen />
       <div dir={dir} lang={locale} className="flex min-h-full flex-1 flex-col text-start">
         {children}
         <WhatsAppFloat />

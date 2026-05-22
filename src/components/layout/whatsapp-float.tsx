@@ -1,5 +1,6 @@
 "use client";
 
+import type { CSSProperties } from "react";
 import { IconWhatsApp } from "@/components/icons";
 import { useDictionary } from "@/i18n/locale-provider";
 import { getWhatsAppUrl } from "@/lib/site";
@@ -8,7 +9,10 @@ export function WhatsAppFloat() {
   const dict = useDictionary();
 
   return (
-    <div className="fixed bottom-6 right-6 z-[60]">
+    <div
+      className="enter-item fixed bottom-6 right-6 z-[60]"
+      style={{ "--enter-delay": "0.68s" } as CSSProperties}
+    >
       <a
         href={getWhatsAppUrl(dict.site.whatsappMessage)}
         target="_blank"

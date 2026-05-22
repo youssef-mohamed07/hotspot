@@ -466,6 +466,225 @@ html.lang-ar .bg-accent-gradient {
   }
 }
 
+/* ---------- Landing page entrance (CSS-only, GPU: opacity + transform) ---------- */
+@keyframes page-enter-rise {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 22px, 0);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes page-enter-drop {
+  from {
+    opacity: 0;
+    transform: translate3d(0, -20px, 0);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes page-enter-vehicle {
+  from {
+    opacity: 0;
+    transform: translate3d(2%, 36px, 0) scale(0.94);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(2%, 0, 0) scale(1);
+  }
+}
+
+@keyframes splash-logo-in {
+  from {
+    opacity: 0;
+    transform: scale(0.88) translate3d(0, 12px, 0);
+    filter: blur(6px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translate3d(0, 0, 0);
+    filter: blur(0);
+  }
+}
+
+@keyframes splash-glow-pulse {
+  0%,
+  100% {
+    opacity: 0.55;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.9;
+    transform: scale(1.08);
+  }
+}
+
+@keyframes splash-tagline-in {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 10px, 0);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes splash-screen-exit {
+  from {
+    opacity: 1;
+    transform: scale(1);
+  }
+  to {
+    opacity: 0;
+    transform: scale(1.04);
+    visibility: hidden;
+  }
+}
+
+@keyframes aurora-enter {
+  from {
+    opacity: 0;
+    transform: scale(1.04);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* ---------- Branded splash (logo) ---------- */
+html[data-splash="active"] {
+  overflow: hidden;
+}
+
+.splash-screen {
+  position: fixed;
+  inset: 0;
+  z-index: 300;
+  display: grid;
+  place-items: center;
+  background: #08090c;
+  overflow: hidden;
+}
+
+.splash-screen__glow {
+  position: absolute;
+  left: 50%;
+  top: 46%;
+  width: min(70vw, 420px);
+  height: min(70vw, 420px);
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  background: radial-gradient(
+    circle,
+    rgba(42, 118, 166, 0.45) 0%,
+    rgba(42, 118, 166, 0.12) 42%,
+    transparent 70%
+  );
+  animation: splash-glow-pulse 2.2s ease-in-out infinite;
+  pointer-events: none;
+}
+
+.splash-screen__brand {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.25rem;
+  padding: 1.5rem;
+  text-align: center;
+}
+
+.splash-screen__logo {
+  width: auto;
+  height: 3.25rem;
+  object-fit: contain;
+  animation: splash-logo-in 0.75s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  filter: drop-shadow(0 0 28px rgba(80, 160, 230, 0.45));
+}
+
+.splash-screen__tagline {
+  max-width: 18rem;
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  line-height: 1.65;
+  color: rgba(200, 220, 240, 0.88);
+  animation: splash-tagline-in 0.7s cubic-bezier(0.22, 1, 0.36, 1) 0.28s both;
+}
+
+html.lang-ar .splash-screen__tagline {
+  max-width: 20rem;
+  font-size: 1rem;
+  font-weight: 500;
+  letter-spacing: 0;
+  text-transform: none;
+  line-height: 1.55;
+  color: rgba(220, 232, 245, 0.9);
+}
+
+.splash-screen--exit {
+  animation: splash-screen-exit 0.65s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+  pointer-events: none;
+}
+
+.splash-screen--exit .splash-screen__brand {
+  opacity: 0;
+  transform: scale(1.04);
+  transition:
+    opacity 0.4s ease,
+    transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* Page content waits for splash, then staggers in */
+html:not([data-splash="done"]) .enter-item {
+  opacity: 0;
+  animation: none;
+}
+
+html[data-splash="done"] .enter-item {
+  opacity: 0;
+  animation: page-enter-rise 0.62s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  animation-delay: var(--enter-delay, 0s);
+}
+
+html[data-splash="done"] .enter-item-from-top {
+  animation-name: page-enter-drop;
+}
+
+html[data-splash="done"] .enter-item-vehicle {
+  animation-name: page-enter-vehicle;
+  animation-duration: 0.82s;
+}
+
+html:not([data-splash="done"]) .dark-hero-bg .aurora {
+  opacity: 0;
+}
+
+html[data-splash="done"] .dark-hero-bg .aurora {
+  animation: aurora-enter 1s cubic-bezier(0.22, 1, 0.36, 1) 0.04s both;
+}
+
+/* Scroll reveals reuse the same motion curve */
+.reveal-scroll {
+  opacity: 0;
+  transform: translate3d(0, 24px, 0);
+}
+
+.reveal-scroll.is-inview {
+  animation: page-enter-rise 0.62s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  animation-delay: var(--reveal-delay, 0s);
+}
+
 /* ---------- Reduce motion ---------- */
 @media (prefers-reduced-motion: reduce) {
   .marquee,
@@ -476,5 +695,25 @@ html.lang-ar .bg-accent-gradient {
 
   [style*="city-pulse"] {
     animation: none !important;
+  }
+
+  .splash-screen {
+    display: none !important;
+  }
+
+  html[data-splash="active"] {
+    overflow: auto;
+  }
+
+  .enter-item,
+  .reveal-scroll {
+    opacity: 1 !important;
+    transform: none !important;
+    animation: none !important;
+  }
+
+  .dark-hero-bg .aurora {
+    animation: none !important;
+    opacity: 1 !important;
   }
 }

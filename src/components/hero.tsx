@@ -1,18 +1,16 @@
 "use client";
 
 import Image from "next/image";
-import { useEffect, useState } from "react";
+import type { CSSProperties } from "react";
 import { DirectionalArrow } from "@/components/icons/directional-arrow";
 import { useDictionary, useLocale } from "@/i18n/locale-provider";
+
+const d = (seconds: number): CSSProperties =>
+  ({ "--enter-delay": `${seconds}s` }) as CSSProperties;
 
 export function Hero() {
   const dict = useDictionary();
   const locale = useLocale();
-  const [mounted, setMounted] = useState(false);
-
-  useEffect(() => {
-    setMounted(true);
-  }, []);
 
   return (
     <section className="dark-hero-bg relative flex w-full flex-col items-center overflow-hidden px-4 pb-24 pt-28 sm:px-6 sm:pb-28 md:h-dvh md:min-h-dvh md:pb-0 md:pt-24 lg:pt-28">
@@ -30,11 +28,12 @@ export function Hero() {
 
       <div
         dir="ltr"
-        className={`locale-shell-ltr relative z-10 mx-auto flex w-full max-w-7xl flex-col items-center text-center transition-all duration-1200 ease-out ${
-          mounted ? "translate-y-0 opacity-100" : "translate-y-8 opacity-0"
-        }`}
+        className="locale-shell-ltr relative z-10 mx-auto flex w-full max-w-7xl flex-col items-center text-center"
       >
-        <div className="mb-4 flex items-center justify-center gap-3 sm:mb-6">
+        <div
+          className="enter-item mb-4 flex items-center justify-center gap-3 sm:mb-6"
+          style={d(0.14)}
+        >
           <div className="flex items-center gap-1.5 pt-0.5">
             <svg
               className="h-3.5 w-3.5 text-accent drop-shadow-[0_0_5px_rgba(80,160,230,0.8)]"
@@ -57,23 +56,28 @@ export function Hero() {
           dir={locale === "ar" ? "rtl" : "ltr"}
           className="display-headline text-[2.5rem] leading-[0.92] tracking-[-0.01em] text-white sm:text-5xl sm:leading-[0.9] md:text-6xl lg:text-[5.5rem] xl:text-[6.25rem]"
         >
-          {dict.hero.titleLine1}
-          <br />
-          <span className="hero-accent-gradient">
+          <span className="enter-item block" style={d(0.22)}>
+            {dict.hero.titleLine1}
+          </span>
+          <span className="enter-item hero-accent-gradient mt-0 block" style={d(0.3)}>
             <span className="text-gradient-accent">{dict.hero.titleLine2}</span>
           </span>
         </h1>
 
         <p
           dir={locale === "ar" ? "rtl" : "ltr"}
-          className="mt-4 max-w-xl text-[14px] leading-[1.6] text-zinc-300/90 sm:mt-5 sm:text-base md:text-[17px] md:leading-[1.6]"
+          className="enter-item mt-4 max-w-xl text-[14px] leading-[1.6] text-zinc-300/90 sm:mt-5 sm:text-base md:text-[17px] md:leading-[1.6]"
+          style={d(0.38)}
         >
           {dict.hero.subtitle1}
           <br className="hidden sm:block" />
           {dict.hero.subtitle2}
         </p>
 
-        <div className="relative z-20 mt-5 flex flex-wrap items-center justify-center gap-2.5 sm:mt-6 sm:gap-3 md:mt-7">
+        <div
+          className="enter-item relative z-20 mt-5 flex flex-wrap items-center justify-center gap-2.5 sm:mt-6 sm:gap-3 md:mt-7"
+          style={d(0.46)}
+        >
           <a
             href="#contact"
             className="group relative inline-flex items-center gap-2 overflow-hidden rounded-full bg-accent-gradient px-5 py-2.5 text-[13px] font-semibold tracking-wide text-white shadow-[0_0_50px_-12px_rgba(80,160,230,0.85)] ring-1 ring-white/10 transition-all duration-300 hover:shadow-[0_0_60px_-8px_rgba(80,160,230,1)] hover:ring-white/20 sm:px-6 sm:py-3 sm:text-sm"
@@ -92,9 +96,8 @@ export function Hero() {
         <div className="hero-spotlight" aria-hidden />
 
         <div
-          className={`relative z-10 flex w-full translate-x-[2%] items-end justify-center transition-all duration-1400 ease-out ${
-            mounted ? "translate-y-0 opacity-100" : "translate-y-6 opacity-0"
-          }`}
+          className="enter-item enter-item-vehicle relative z-10 flex w-full items-end justify-center"
+          style={d(0.54)}
         >
           <div className="relative">
             <div className="vehicle-edge-glow" aria-hidden />
