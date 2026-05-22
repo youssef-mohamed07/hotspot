@@ -16,7 +16,7 @@ export function FAQSection() {
   );
 
   return (
-    <section className="relative flex min-h-[100dvh] flex-col items-center justify-center overflow-hidden py-24">
+    <section className="relative flex min-h-[100dvh] flex-col items-center justify-center overflow-hidden bg-[#fafafa] py-24">
       {/* Atmospheric backdrop */}
       <div
         className="absolute inset-0 opacity-40"
@@ -71,8 +71,8 @@ export function FAQSection() {
                       }}
                       className={`group/btn flex items-center justify-between gap-3 rounded-2xl border px-4 py-2.5 text-left text-sm transition-all ${
                         active
-                          ? "border-accent/40 bg-accent/[0.08] text-white"
-                          : "border-white/10 bg-white/[0.02] text-zinc-400 hover:border-white/20 hover:bg-white/[0.04] hover:text-zinc-200"
+                          ? "border-accent/30 bg-accent/[0.08] font-semibold text-accent-deep"
+                          : "border-zinc-200 bg-white text-zinc-600 hover:border-zinc-300 hover:text-zinc-900"
                       }`}
                     >
                       <span className="flex items-center gap-2">
@@ -94,7 +94,7 @@ export function FAQSection() {
               </div>
 
               {/* Helpful contact card */}
-              <div className="mt-8 hidden rounded-2xl border border-dashed border-white/10 bg-white/[0.02] p-5 lg:block">
+              <div className="mt-8 hidden rounded-2xl border border-dashed border-zinc-200 bg-white p-5 shadow-sm lg:block">
                 <p className="text-sm font-semibold text-zinc-900">Still curious?</p>
                 <p className="mt-2 text-xs leading-relaxed text-zinc-600">
                   Skip the forms. Reach our team directly.

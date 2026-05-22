@@ -9,7 +9,6 @@ import { FAQSection } from "@/components/sections/faq-section";
 import { FormSection } from "@/components/sections/form-section";
 import { OtherServicesSection } from "@/components/sections/other-services-section";
 import { ProcessSection } from "@/components/sections/process-section";
-import { ProofOfConceptSection } from "@/components/sections/proof-of-concept-section";
 import { ServingCitiesSection } from "@/components/sections/serving-cities-section";
 import { StrongestToolSection } from "@/components/sections/strongest-tool-section";
 import { TestimonialsSection } from "@/components/sections/testimonials-section";
@@ -31,7 +30,6 @@ export default function Home() {
         {/* ALL DONE TO HERERERERERE 👆👆👆👆 */}
 
         {/* <StrongestToolSection /> */}
-        <ProofOfConceptSection />
         <ConceptSection />
         <VisualizationSection />
         <CaseStudiesSection />

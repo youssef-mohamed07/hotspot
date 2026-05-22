@@ -3,14 +3,25 @@
 import { IconArrowRight } from "@/components/icons";
 
 export function WizardNav({
-  step, totalSteps, canAdvance, onPrev, onNext, onSubmit,
+  step,
+  totalSteps,
+  canAdvance,
+  onPrev,
+  onNext,
+  onSubmit,
+  submitLabel = "Submit Brief",
 }: {
-  step: number; totalSteps: number; canAdvance: boolean;
-  onPrev: () => void; onNext: () => void; onSubmit: () => void;
+  step: number;
+  totalSteps: number;
+  canAdvance: boolean;
+  onPrev: () => void;
+  onNext: () => void;
+  onSubmit: () => void;
+  submitLabel?: string;
 }) {
   const isLast = step === totalSteps - 1;
   return (
-    <div className="flex items-center justify-between gap-4 border-t border-white/5 pt-6">
+    <div className="flex items-center justify-between gap-4 border-t border-zinc-100 pt-6">
       <button
         type="button"
         onClick={onPrev}
@@ -25,7 +36,7 @@ export function WizardNav({
         disabled={!canAdvance}
         className="inline-flex items-center gap-2 rounded-full bg-accent-gradient px-7 py-3 text-xs font-semibold uppercase tracking-[0.2em] text-white transition hover:opacity-90 hover:shadow-lg hover:shadow-accent/20 disabled:cursor-not-allowed disabled:opacity-30 disabled:hover:shadow-none"
       >
-        {isLast ? "Submit Brief" : "Continue"}
+        {isLast ? submitLabel : "Continue"}
         <IconArrowRight className="h-3.5 w-3.5" />
       </button>
     </div>

@@ -1,30 +1,59 @@
-export const caseStudies = [
+export type CaseStudyHighlight = {
+  title: string;
+  description: string;
+};
+
+export type CaseStudy = {
+  title: string;
+  category: string;
+  location: string;
+  intro: string;
+  highlights: CaseStudyHighlight[];
+  image: string;
+};
+
+export const caseStudies: CaseStudy[] = [
   {
-    title: "Mobily Ramadan Campaign",
-    category: "National Telecom",
-    year: "2024",
-    impressions: "2.4M",
-    image: "https://images.unsplash.com/photo-1492684223066-81342ee5ff30?w=800&q=80",
+    title: "Kora Break",
+    category: "Sports Media",
+    location: "Riyadh",
+    intro: "Sports media brand. Riyadh. The truck was the entrance.",
+    highlights: [
+      {
+        title: "Instant Crowd",
+        description: "Lines formed before doors opened",
+      },
+      {
+        title: "Organic Content",
+        description: "Guests filmed it before the event started",
+      },
+      {
+        title: "Zero Paid Reach",
+        description: "The activation marketed itself",
+      },
+    ],
+    image: "https://images.unsplash.com/photo-1522778119026-d647f9f68212?w=1200&q=80",
   },
   {
-    title: "Riyadh Season Mall Tour",
-    category: "Entertainment",
-    year: "2024",
-    impressions: "1.8M",
-    image: "https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=800&q=80",
+    title: "Tawineya",
+    category: "Community Brand",
+    location: "Saudi Arabia",
+    intro:
+      "Saudi community brand. The venue didn't need decoration — it needed a statement.",
+    highlights: [
+      {
+        title: "Venue Takeover",
+        description: "Entrance became the first brand moment",
+      },
+      {
+        title: "Built-In Photo Moment",
+        description: "Every guest left with a picture next to the truck",
+      },
+      {
+        title: "Set The Energy",
+        description: "Crowd was hyped before stepping inside",
+      },
+    ],
+    image: "https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=1200&q=80",
   },
-  {
-    title: "NEOM Brand Activation",
-    category: "Real Estate",
-    year: "2023",
-    impressions: "3.1M",
-    image: "https://images.unsplash.com/photo-1505373877841-8d25f7d46678?w=800&q=80",
-  },
-  {
-    title: "Hikma VIP Launch",
-    category: "Luxury",
-    year: "2024",
-    impressions: "950K",
-    image: "https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=800&q=80",
-  },
-] as const;
+];

@@ -6,7 +6,7 @@ export function FeaturedCybertruckCard() {
   return (
     <a
       href="#visualization"
-      className="group relative mb-4 block overflow-hidden rounded-[36px] border border-white/10"
+      className="group relative block overflow-hidden rounded-[2rem] border border-accent-deep/20 shadow-2xl shadow-accent-deep/15 ring-1 ring-white/10 transition duration-300 hover:shadow-accent-deep/25"
     >
       <div
         className="absolute inset-0 bg-gradient-to-br from-[#04285f] via-[#0a3d6b] to-[#1d5a82]"
