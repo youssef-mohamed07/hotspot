@@ -15,7 +15,10 @@ export function BeforeAfterSection() {
       id="before-after"
       className="relative overflow-hidden bg-[#fafafa] py-24 md:py-32"
     >
-      <div className="grid-floor pointer-events-none absolute inset-0 opacity-25 mix-blend-multiply" aria-hidden />
+      <div
+        className="grid-floor pointer-events-none absolute inset-0 opacity-25 mix-blend-multiply"
+        aria-hidden
+      />
 
       <div className="relative mx-auto max-w-5xl px-6">
         <Reveal className="mb-12 text-center">
@@ -41,7 +44,9 @@ export function BeforeAfterSection() {
             beforeAlt={dict.beforeAfter.beforeAlt}
             afterAlt={dict.beforeAfter.afterAlt}
           />
-          <p className="mt-6 text-center text-xs text-zinc-500">{dict.beforeAfter.hint}</p>
+          <p className="mt-6 text-center text-xs text-zinc-500">
+            {dict.beforeAfter.hint}
+          </p>
         </Reveal>
       </div>
     </section>

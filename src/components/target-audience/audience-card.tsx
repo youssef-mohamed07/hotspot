@@ -30,7 +30,7 @@ export function AudienceCard({
         y: active ? 0 : 16,
       }}
       transition={{ type: "spring", stiffness: 320, damping: 28 }}
-      className={`relative flex h-full w-full flex-col justify-between overflow-hidden rounded-3xl border p-7 text-start transition-colors duration-300 sm:p-9 ${
+      className={`relative flex  w-full flex-col justify-start overflow-hidden rounded-3xl border p-7 text-start transition-colors duration-300 sm:p-9 ${
         active
           ? "border-accent/25 bg-white shadow-2xl shadow-accent/[0.08] ring-1 ring-accent/15"
           : "border-zinc-200/70 bg-white/80 shadow-sm"
@@ -64,14 +64,22 @@ export function AudienceCard({
 
         <span className="font-mono text-[10px] tracking-widest text-zinc-400">
           {String(index + 1).padStart(2, "0")}
-          <span className="text-zinc-300"> / {String(total).padStart(2, "0")}</span>
+          <span className="text-zinc-300">
+            {" "}
+            / {String(total).padStart(2, "0")}
+          </span>
         </span>
       </div>
 
-      <div className="relative mt-8 space-y-4">
+      <div className="relative mt-4 space-y-2 sm:mt-5 sm:space-y-3">
         <motion.p
           animate={{ x: active ? 0 : slideX }}
-          transition={{ type: "spring", stiffness: 300, damping: 26, delay: 0.05 }}
+          transition={{
+            type: "spring",
+            stiffness: 300,
+            damping: 26,
+            delay: 0.05,
+          }}
           className={`text-lg leading-snug transition-colors sm:text-xl ${
             active ? "text-zinc-600" : "text-zinc-400"
           }`}
@@ -80,28 +88,18 @@ export function AudienceCard({
         </motion.p>
         <motion.p
           animate={{ x: active ? 0 : slideX }}
-          transition={{ type: "spring", stiffness: 300, damping: 26, delay: 0.1 }}
+          transition={{
+            type: "spring",
+            stiffness: 300,
+            damping: 26,
+            delay: 0.1,
+          }}
           className={`text-xl font-bold leading-snug tracking-tight sm:text-2xl ${
             active ? "text-zinc-900" : "text-zinc-500"
           }`}
         >
           {payoff}
         </motion.p>
-      </div>
-
-      <div className="relative mt-8 flex items-center gap-2">
-        {Array.from({ length: total }).map((_, i) => (
-          <span
-            key={i}
-            className={`h-1 flex-1 rounded-full transition-all duration-300 ${
-              i === index && active
-                ? "bg-accent"
-                : i === index
-                  ? "bg-accent/40"
-                  : "bg-zinc-200"
-            }`}
-          />
-        ))}
       </div>
     </motion.div>
   );

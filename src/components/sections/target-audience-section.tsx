@@ -108,7 +108,7 @@ export function TargetAudienceSection() {
                     lead={item.lead}
                     payoff={item.payoff}
                     icon={item.icon}
-                    active={i === activeIndex}
+                    active={true}
                   />
                 ))}
               </div>
