@@ -45,7 +45,7 @@ export function FAQItem({
           <div className="flex-1">
             <h3
               className={`text-base font-semibold leading-snug transition-colors md:text-lg ${
-                isOpen ? "text-white" : "text-zinc-200 group-hover:text-white"
+                isOpen ? "text-zinc-900" : "text-zinc-700 group-hover:text-zinc-900"
               }`}
             >
               {faq.q}
@@ -66,7 +66,7 @@ export function FAQItem({
           className={`grid h-9 w-9 shrink-0 place-items-center rounded-full border transition-all ${
             isOpen
               ? "rotate-45 border-accent/40 bg-accent/15 text-accent"
-              : "border-white/10 bg-white/[0.03] text-zinc-400 group-hover:border-white/30 group-hover:text-white"
+              : "border-zinc-200/70 bg-white/70 text-zinc-500 group-hover:border-zinc-300 group-hover:text-zinc-700"
           }`}
         >
           <svg viewBox="0 0 16 16" className="h-3.5 w-3.5" fill="none" stroke="currentColor" strokeWidth={2.2}>
@@ -86,7 +86,7 @@ export function FAQItem({
         <div ref={contentRef}>
           <div className="border-t border-white/5 px-6 pb-6 pt-4 md:px-7">
             <p
-              className="ml-9 max-w-3xl text-sm leading-relaxed text-zinc-400 md:text-base"
+              className="ml-9 max-w-3xl text-sm leading-relaxed text-zinc-600 md:text-base"
               style={{
                 transform: isOpen ? "translateY(0)" : "translateY(-8px)",
                 opacity: isOpen ? 1 : 0,

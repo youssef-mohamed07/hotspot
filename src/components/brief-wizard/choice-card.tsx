@@ -18,7 +18,7 @@ export function ChoiceCard({
     >
       {/* Reserve right padding so the check badge never overlaps the title */}
       <div className="pr-8">
-        <p className="text-sm font-semibold text-white">{label}</p>
+        <p className="text-sm font-semibold text-zinc-900">{label}</p>
         {description && <p className="mt-1 text-xs leading-relaxed text-zinc-500">{description}</p>}
       </div>
 

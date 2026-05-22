@@ -5,7 +5,7 @@ import { StepHeader } from "./step-header";
 import { BriefSummary } from "./brief-summary";
 
 export function Step5Contact({ data, update }: { data: BriefData; update: <K extends keyof BriefData>(k: K, v: BriefData[K]) => void }) {
-  const inputCls = "w-full rounded-xl border border-white/10 bg-white/5 px-4 py-3 text-sm text-white placeholder:text-zinc-600 transition focus:border-accent focus:bg-white/[0.07] focus:outline-none";
+  const inputCls = "w-full rounded-xl border border-zinc-200 bg-white px-4 py-3 text-sm text-zinc-900 placeholder:text-zinc-500 transition focus:border-accent focus:bg-white focus:outline-none";
   const labelCls = "mb-2 block text-[10px] uppercase tracking-[0.25em] text-zinc-400";
   return (
     <div className="grid gap-8 lg:grid-cols-[1.3fr_1fr]">

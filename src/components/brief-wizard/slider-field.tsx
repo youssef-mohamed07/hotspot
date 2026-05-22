@@ -11,7 +11,7 @@ export function SliderField({
     <div>
       <div className="mb-2 flex items-center justify-between">
         <span className="text-[10px] uppercase tracking-[0.25em] text-zinc-400">{label}</span>
-        <span className="text-sm font-semibold text-white">{display}</span>
+        <span className="text-sm font-semibold text-zinc-900">{display}</span>
       </div>
       <div className="relative">
         <div className="h-1 overflow-hidden rounded-full bg-white/10">

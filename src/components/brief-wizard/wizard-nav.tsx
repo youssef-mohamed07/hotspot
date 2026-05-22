@@ -15,7 +15,7 @@ export function WizardNav({
         type="button"
         onClick={onPrev}
         disabled={step === 0}
-        className="rounded-full px-5 py-2.5 text-xs uppercase tracking-[0.2em] text-zinc-400 transition hover:bg-white/5 hover:text-white disabled:cursor-not-allowed disabled:opacity-30 disabled:hover:bg-transparent disabled:hover:text-zinc-400"
+        className="rounded-full px-5 py-2.5 text-xs uppercase tracking-[0.2em] text-zinc-600 transition hover:bg-white/5 hover:text-zinc-900 disabled:cursor-not-allowed disabled:opacity-30 disabled:hover:bg-transparent disabled:hover:text-zinc-600"
       >
         ← Back
       </button>

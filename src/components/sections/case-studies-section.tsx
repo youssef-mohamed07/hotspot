@@ -11,7 +11,7 @@ export function CaseStudiesSection() {
       <div className="mx-auto max-w-7xl px-6">
         <Reveal className="mb-16">
           <p className="text-xs uppercase tracking-[0.3em] text-accent">Case studies</p>
-          <h2 className="display-headline mt-4 text-4xl text-white sm:text-5xl md:text-6xl">
+          <h2 className="display-headline mt-4 text-4xl text-zinc-900 sm:text-5xl md:text-6xl">
             Activations that<br />
             <span className="text-gradient-accent">moved markets.</span>
           </h2>

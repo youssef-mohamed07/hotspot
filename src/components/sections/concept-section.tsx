@@ -25,11 +25,11 @@ export function ConceptSection() {
             <span className="h-px w-12 bg-accent" />
             <p className="text-xs uppercase tracking-[0.3em] text-accent">The concept</p>
           </div>
-          <h2 className="display-headline mt-6 text-4xl text-white sm:text-5xl md:text-6xl lg:text-7xl">
+          <h2 className="display-headline mt-6 text-4xl text-zinc-900 sm:text-5xl md:text-6xl lg:text-7xl">
             This Cybertruck is<br />
             <span className="text-gradient-accent">made for you.</span>
           </h2>
-          <p className="mt-6 text-lg text-zinc-400">
+          <p className="mt-6 text-lg text-zinc-600">
             Two principles drive every activation — where we put it, and how it&apos;s dressed for your brand.
           </p>
         </Reveal>

@@ -11,20 +11,20 @@ export function BriefSuccess({ data }: { data: BriefData }) {
           <path d="M5 12.5l4.5 4.5L19 7" strokeLinecap="round" strokeLinejoin="round" />
         </svg>
       </div>
-      <h3 className="display-headline text-3xl text-white sm:text-4xl">
+      <h3 className="display-headline text-3xl text-zinc-900 sm:text-4xl">
         Brief received.
       </h3>
-      <p className="max-w-md text-sm text-zinc-400">
+      <p className="max-w-md text-sm text-zinc-600">
         Thanks{data.name ? `, ${data.name.split(" ")[0]}` : ""}. Our team will reach out within 24 hours with a tailored proposal for your{" "}
-        <span className="text-white">{data.campaignType ?? "activation"}</span>{" "}
-        in <span className="text-white">{data.city}</span>.
+        <span className="text-zinc-900">{data.campaignType ?? "activation"}</span>{" "}
+        in <span className="text-zinc-900">{data.city}</span>.
       </p>
       <div className="mt-4 flex flex-wrap items-center justify-center gap-3">
         <a href="https://wa.me/966543938548" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 rounded-full bg-accent-gradient px-6 py-3 text-xs font-semibold uppercase tracking-[0.2em] text-white transition hover:opacity-90">
           <IconWhatsApp className="h-4 w-4" />
           Chat now
         </a>
-        <a href="mailto:inquiry@hotsspots.com" className="glass inline-flex items-center gap-2 rounded-full px-6 py-3 text-xs font-medium uppercase tracking-[0.2em] text-white transition hover:bg-white/10">
+        <a href="mailto:inquiry@hotsspots.com" className="glass inline-flex items-center gap-2 rounded-full px-6 py-3 text-xs font-medium uppercase tracking-[0.2em] text-zinc-900 transition hover:bg-white/10">
           <IconMail className="h-4 w-4" />
           Email us
         </a>

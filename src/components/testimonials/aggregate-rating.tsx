@@ -17,7 +17,7 @@ export function AggregateRating() {
       </div>
       <div className="h-10 w-px bg-white/10" />
       <div>
-        <p className="text-2xl font-semibold tracking-tight text-white">98%</p>
+        <p className="text-2xl font-semibold tracking-tight text-zinc-900">98%</p>
         <p className="text-[10px] uppercase tracking-widest text-zinc-500">
           Repeat clients
         </p>

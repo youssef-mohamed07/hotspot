@@ -12,11 +12,11 @@ export function ServingCitiesSection() {
       <div className="relative mx-auto max-w-7xl px-6">
         <Reveal className="mb-16 max-w-3xl">
           <p className="text-xs uppercase tracking-[0.3em] text-accent">Serving cities</p>
-          <h2 className="display-headline mt-4 text-4xl text-white sm:text-5xl md:text-6xl">
+          <h2 className="display-headline mt-4 text-4xl text-zinc-900 sm:text-5xl md:text-6xl">
             Operating across<br />
             <span className="text-gradient-accent">the Kingdom.</span>
           </h2>
-          <p className="mt-6 text-lg text-zinc-400">
+          <p className="mt-6 text-lg text-zinc-600">
             From Riyadh to NEOM, we move the truck wherever your audience lives. Eight active hubs and counting.
           </p>
         </Reveal>

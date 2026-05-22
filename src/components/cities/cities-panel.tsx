@@ -14,7 +14,7 @@ export function CitiesPanel() {
           >
             <div className="flex items-start justify-between">
               <div>
-                <p className="text-sm font-semibold text-white">{city.name}</p>
+                <p className="text-sm font-semibold text-zinc-900">{city.name}</p>
                 <p className="mt-0.5 text-[10px] uppercase tracking-widest text-zinc-500">{city.region}</p>
               </div>
               {city.hub && (
@@ -31,11 +31,11 @@ export function CitiesPanel() {
         ))}
       </div>
       <div className="mt-2 rounded-2xl border border-dashed border-white/10 bg-white/[0.02] p-5 text-center">
-        <p className="text-sm text-zinc-300">
-          <span className="font-semibold text-white">Need another city?</span>{" "}
+        <p className="text-sm text-zinc-600">
+          <span className="font-semibold text-zinc-900">Need another city?</span>{" "}
           We deploy nationwide on request.
         </p>
-        <a href="#contact" className="mt-3 inline-flex items-center gap-1.5 text-xs font-semibold uppercase tracking-[0.2em] text-accent transition hover:text-white">
+        <a href="#contact" className="mt-3 inline-flex items-center gap-1.5 text-xs font-semibold uppercase tracking-[0.2em] text-accent transition hover:text-zinc-900">
           Request location
           <IconArrowRight className="h-3 w-3" />
         </a>

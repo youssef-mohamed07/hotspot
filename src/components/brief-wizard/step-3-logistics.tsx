@@ -5,7 +5,7 @@ import { StepHeader } from "./step-header";
 import { SliderField } from "./slider-field";
 
 export function Step3Logistics({ data, update }: { data: BriefData; update: <K extends keyof BriefData>(k: K, v: BriefData[K]) => void }) {
-  const inputCls = "w-full rounded-xl border border-white/10 bg-white/5 px-4 py-3 text-sm text-white placeholder:text-zinc-600 transition focus:border-accent focus:bg-white/[0.07] focus:outline-none";
+  const inputCls = "w-full rounded-xl border border-zinc-200 bg-white px-4 py-3 text-sm text-zinc-900 placeholder:text-zinc-500 transition focus:border-accent focus:bg-white focus:outline-none";
   const labelCls = "mb-2 block text-[10px] uppercase tracking-[0.25em] text-zinc-400";
   const cityOptions = ["Riyadh", "Jeddah", "Dammam", "Khobar", "Mecca", "Medina", "AlUla", "NEOM", "Multi-city"];
   return (
@@ -23,7 +23,7 @@ export function Step3Logistics({ data, update }: { data: BriefData; update: <K e
                 className={`rounded-full border px-4 py-2 text-xs transition ${
                   data.city === c
                     ? "border-accent bg-accent/15 text-white"
-                    : "border-white/10 bg-white/[0.03] text-zinc-400 hover:border-white/30 hover:text-white"
+                    : "border-zinc-200 bg-white/[0.06] text-zinc-600 hover:border-zinc-300 hover:text-zinc-900"
                 }`}
               >
                 {c}

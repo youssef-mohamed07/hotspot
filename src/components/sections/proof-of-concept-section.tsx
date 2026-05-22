@@ -22,7 +22,7 @@ export function ProofOfConceptSection() {
       {/* Big background watermark "TRUSTED" */}
       <div
         aria-hidden
-        className="display-headline pointer-events-none absolute inset-x-0 top-1/2 -translate-y-1/2 select-none whitespace-nowrap text-center text-[20rem] leading-none text-white/[0.02] sm:text-[28rem]"
+        className="display-headline pointer-events-none absolute inset-x-0 top-1/2 -translate-y-1/2 select-none whitespace-nowrap text-center text-[20rem] leading-none text-zinc-900/[0.04] sm:text-[28rem]"
       >
         TRUSTED
       </div>
@@ -35,7 +35,7 @@ export function ProofOfConceptSection() {
               <span className="h-px w-12 bg-accent" />
               <p className="text-xs uppercase tracking-[0.3em] text-accent">Proof of concept</p>
             </div>
-            <h2 className="display-headline mt-5 text-3xl text-white sm:text-4xl md:text-5xl">
+            <h2 className="display-headline mt-5 text-3xl text-zinc-900 sm:text-4xl md:text-5xl">
               Our solutions <span className="text-gradient-accent">trusted by</span>
             </h2>
           </Reveal>
@@ -43,11 +43,11 @@ export function ProofOfConceptSection() {
             <div className="flex flex-wrap items-center justify-end gap-3 text-sm text-zinc-400">
               <span className="flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.03] px-4 py-1.5">
                 <span className="h-1.5 w-1.5 rounded-full bg-accent shadow-[0_0_6px_rgba(42,118,166,0.9)]" />
-                <span className="text-zinc-200">{trustedClients.length}+</span>
+                <span className="text-zinc-700">{trustedClients.length}+</span>
                 <span className="text-[10px] uppercase tracking-widest text-zinc-500">brands</span>
               </span>
               <span className="flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.03] px-4 py-1.5">
-                <span className="text-zinc-200">10</span>
+                <span className="text-zinc-700">10</span>
                 <span className="text-[10px] uppercase tracking-widest text-zinc-500">sectors</span>
               </span>
             </div>

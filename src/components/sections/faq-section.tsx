@@ -31,7 +31,7 @@ export function FAQSection() {
       {/* Massive transparent ? glyph */}
       <div
         aria-hidden
-        className="display-headline pointer-events-none absolute right-[-8rem] top-1/2 -translate-y-1/2 select-none text-[40rem] leading-none text-white/[0.025] sm:right-[-4rem]"
+        className="display-headline pointer-events-none absolute right-[-8rem] top-1/2 -translate-y-1/2 select-none text-[40rem] leading-none text-zinc-900/[0.04] sm:right-[-4rem]"
       >
         ?
       </div>
@@ -43,11 +43,11 @@ export function FAQSection() {
             <span className="h-px w-12 bg-accent" />
             <p className="text-xs uppercase tracking-[0.3em] text-accent">FAQ</p>
           </div>
-          <h2 className="display-headline mt-6 text-4xl text-white sm:text-5xl md:text-6xl lg:text-7xl">
+          <h2 className="display-headline mt-6 text-4xl text-zinc-900 sm:text-5xl md:text-6xl lg:text-7xl">
             Everything you<br />
             need to <span className="text-gradient-accent">know.</span>
           </h2>
-          <p className="mt-6 text-lg text-zinc-400">
+          <p className="mt-6 text-lg text-zinc-600">
             Quick answers about customization, logistics, and how the activation actually runs.
           </p>
         </Reveal>
@@ -95,8 +95,8 @@ export function FAQSection() {
 
               {/* Helpful contact card */}
               <div className="mt-8 hidden rounded-2xl border border-dashed border-white/10 bg-white/[0.02] p-5 lg:block">
-                <p className="text-sm font-semibold text-white">Still curious?</p>
-                <p className="mt-2 text-xs leading-relaxed text-zinc-400">
+                <p className="text-sm font-semibold text-zinc-900">Still curious?</p>
+                <p className="mt-2 text-xs leading-relaxed text-zinc-600">
                   Skip the forms. Reach our team directly.
                 </p>
                 <div className="mt-4 flex flex-col gap-2">
@@ -111,7 +111,7 @@ export function FAQSection() {
                   </a>
                   <a
                     href="mailto:inquiry@hotsspots.com"
-                    className="inline-flex items-center gap-2 rounded-full border border-white/10 px-4 py-2 text-[10px] font-medium uppercase tracking-[0.2em] text-zinc-300 transition hover:bg-white/[0.04] hover:text-white"
+                    className="inline-flex items-center gap-2 rounded-full border border-zinc-200 px-4 py-2 text-[10px] font-medium uppercase tracking-[0.2em] text-zinc-600 transition hover:bg-white/[0.04] hover:text-zinc-900"
                   >
                     <IconMail className="h-3.5 w-3.5" />
                     Email
@@ -146,8 +146,8 @@ export function FAQSection() {
         <Reveal delay={0.15}>
           <div className="mt-20 flex flex-col items-center gap-4 rounded-3xl border border-white/10 bg-white/[0.03] p-10 text-center md:flex-row md:justify-between md:text-left">
             <div>
-              <p className="text-lg font-semibold text-white">Didn&apos;t find what you needed?</p>
-              <p className="mt-1 text-sm text-zinc-400">
+              <p className="text-lg font-semibold text-zinc-900">Didn&apos;t find what you needed?</p>
+              <p className="mt-1 text-sm text-zinc-600">
                 Our team responds within 24 hours with a tailored answer.
               </p>
             </div>

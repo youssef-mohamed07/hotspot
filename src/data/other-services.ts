@@ -1,28 +1,29 @@
-import { IconBolt, IconScreen, IconSpotlight, IconStar } from "@/components/icons";
+import { IconScreen, IconTruss, IconWave, IconSpotlight, IconUsers } from "@/components/icons";
 
 export const otherServices = [
   {
-    title: "LED Screens & Walls",
-    description:
-      "Modular LED panels for any size or shape — pair with the truck for full-coverage activations.",
+    title: "LED Screens & Displays",
+    description: "Indoor & Outdoor · Any Scale",
     Icon: IconScreen,
   },
   {
-    title: "Stage Production",
-    description:
-      "Full event staging, lighting, sound and AV crews to extend the activation into a complete production.",
+    title: "Stage & Truss Systems",
+    description: "Corporate Events · Concerts · Launches",
+    Icon: IconTruss,
+  },
+  {
+    title: "Professional Sound System",
+    description: "Line Array · Immersive Audio",
+    Icon: IconWave,
+  },
+  {
+    title: "Lighting Design",
+    description: "Architectural · Stage · Outdoor",
     Icon: IconSpotlight,
   },
   {
-    title: "Interactive Tech",
-    description:
-      "Custom apps, AI photo booths, social walls and live audience engagement layers.",
-    Icon: IconBolt,
-  },
-  {
-    title: "Brand Activations",
-    description:
-      "End-to-end campaign design, content production and on-site execution across the Kingdom.",
-    Icon: IconStar,
+    title: "Full Event Production",
+    description: "End-to-End · Single Point of Contact",
+    Icon: IconUsers,
   },
 ] as const;

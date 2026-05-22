@@ -20,17 +20,17 @@ export function ServiceAddonCard({ index, title, description, Icon }: ServiceAdd
       />
       <div className="relative flex flex-1 flex-col">
         <div className="flex items-start justify-between">
-          <span className="grid h-11 w-11 place-items-center rounded-xl border border-white/10 bg-white/[0.04] text-zinc-400 transition group-hover:border-white/20 group-hover:text-zinc-200">
+          <span className="grid h-11 w-11 place-items-center rounded-xl border border-zinc-200/70 bg-white/80 text-zinc-500 transition group-hover:border-zinc-300 group-hover:text-zinc-700">
             <Icon className="h-4 w-4" />
           </span>
           <span className="font-mono text-[10px] tracking-widest text-zinc-700">
             /{String(index).padStart(2, "0")}
           </span>
         </div>
-        <h3 className="mt-5 text-base font-semibold tracking-tight text-zinc-200 transition group-hover:text-white">
+        <h3 className="mt-5 text-base font-semibold tracking-tight text-zinc-900 transition group-hover:text-zinc-900">
           {title}
         </h3>
-        <p className="mt-3 flex-1 text-xs leading-relaxed text-zinc-500 transition group-hover:text-zinc-400">
+        <p className="mt-3 flex-1 text-xs leading-relaxed text-zinc-600 transition group-hover:text-zinc-700">
           {description}
         </p>
       </div>

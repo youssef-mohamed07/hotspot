@@ -42,7 +42,7 @@ export function BriefSummary({ data }: { data: BriefData }) {
         {rows.map((r) => (
           <div key={r.label} className="flex items-center justify-between border-b border-white/5 pb-3 text-sm last:border-0">
             <span className="text-zinc-500">{r.label}</span>
-            <span className="font-medium text-white">{r.value}</span>
+            <span className="font-medium text-zinc-900">{r.value}</span>
           </div>
         ))}
       </div>

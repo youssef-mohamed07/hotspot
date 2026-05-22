@@ -44,7 +44,7 @@ export function FeaturedTestimonial({
             </span>
           </div>
 
-          <p className="text-pretty text-2xl font-medium leading-tight text-white sm:text-3xl md:text-4xl lg:leading-[1.15]">
+          <p className="text-pretty text-2xl font-medium leading-tight text-zinc-900 sm:text-3xl md:text-4xl lg:leading-[1.15]">
             <span className="text-accent">&ldquo;</span>
             {testimonial.quote}
             <span className="text-accent">&rdquo;</span>
@@ -57,9 +57,9 @@ export function FeaturedTestimonial({
               {testimonial.initials}
             </div>
             <div>
-              <p className="text-base font-semibold text-white">{testimonial.author}</p>
-              <p className="text-sm text-zinc-400">
-                {testimonial.role} · <span className="text-zinc-300">{testimonial.company}</span>
+              <p className="text-base font-semibold text-zinc-900">{testimonial.author}</p>
+              <p className="text-sm text-zinc-600">
+                {testimonial.role} · <span className="text-zinc-700">{testimonial.company}</span>
               </p>
             </div>
           </div>
@@ -67,10 +67,10 @@ export function FeaturedTestimonial({
 
         <div className="flex flex-col gap-3 lg:items-end lg:text-right">
           <p className="text-[10px] uppercase tracking-[0.3em] text-accent">Outcome</p>
-          <p className="display-headline text-7xl text-white sm:text-8xl">
+          <p className="display-headline text-7xl text-zinc-900 sm:text-8xl">
             {testimonial.metric.value}
           </p>
-          <p className="max-w-[12rem] text-sm text-zinc-300 lg:ml-auto">
+          <p className="max-w-[12rem] text-sm text-zinc-600 lg:ml-auto">
             {testimonial.metric.label}
           </p>
           <div className="mt-6 flex items-center gap-2 lg:justify-end" role="tablist" aria-label="Testimonials">

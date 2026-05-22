@@ -2,43 +2,43 @@ import type { FaqItem } from "@/types/faq";
 
 export const faqs: FaqItem[] = [
   {
-    q: "Can the Cybertruck be customized?",
-    a: "Yes — full vehicle wraps, rooftop decorations, LED cube screens, flowers, balloons, and modular setups. Every activation is designed around your brand identity, with creative direction signed off before production.",
+    q: "What exactly is Cyber Stage?",
+    a: "Cyber Stage is a fully branded, AV-equipped Tesla Cybertruck that deploys at your event, venue, or location as a mobile brand activation unit. Full vehicle wrap in your identity, LED screens running your content, spatial audio — positioned exactly where your audience is. It's not a truck with a logo on it. It's a moving brand experience.",
     category: "Customization",
   },
   {
-    q: "Is it suitable for indoor events?",
-    a: "Absolutely. The Cybertruck fits through standard loading docks (height 1.91m, width 2.20m) and is engineered for both indoor malls and outdoor festivals. We coordinate venue clearances ahead of time.",
+    q: "How fast can you deploy after we confirm?",
+    a: "Standard is 48–72 hours from brief approval to street. We've done 36 hours for urgent campaigns. The earlier you brief us, the better — but we're built to move fast.",
+    category: "Operations",
+  },
+  {
+    q: "Can we use it at our event venue specifically?",
+    a: "Yes — and that's actually one of the highest-impact uses. Positioning Cyber Stage at your venue entrance creates an immediate first impression before guests walk through the door. Kora Break and Tawineya both did exactly this. It sets the tone for everything that follows.",
     category: "Logistics",
   },
   {
-    q: "Do you provide operators & setup?",
-    a: "Every activation includes a full technical crew — from delivery, setup, and rehearsal through live operation and strike. You don't need to coordinate with multiple vendors.",
-    category: "Operations",
+    q: "Do you handle the wrap design or do we bring our own?",
+    a: "Both options work. Our in-house design team can translate your brand guidelines into a full wrap concept — or we work directly with your creative agency. You approve every detail before anything goes to production.",
+    category: "Customization",
   },
   {
-    q: "Can we integrate our campaign digitally?",
-    a: "Yes. We support live social media feeds, custom mobile apps, QR activations, AI photo booths, real-time audience engagement tools, and CRM integrations for lead capture.",
-    category: "Technology",
-  },
-  {
-    q: "Is it available across Saudi Arabia?",
-    a: "We operate nationwide — Riyadh, Jeddah, Dammam, AlUla, NEOM, and everywhere in between. Multi-city tours are common; we route the truck and crew between activations.",
+    q: "What cities do you cover?",
+    a: "Currently active in Riyadh, Jeddah, Khobar, Mecca, and Medina. Dubai and Cairo available for multi-market packages. We handle all permits and logistics — you just send the brief.",
     category: "Logistics",
   },
   {
-    q: "How far in advance should we book?",
-    a: "For full-scale activations: 3–4 weeks ideal, 1 week minimum. We've delivered emergency campaigns in 72 hours when timelines allowed. The earlier we get involved, the more we can design for your brand.",
+    q: "What's the minimum booking?",
+    a: "One day. Most activations run 2–5 days for real impact. Multi-city campaigns run 5–14 days. We'll recommend the right duration based on your goals and budget — no upselling for the sake of it.",
     category: "Operations",
   },
   {
-    q: "What's included in the activation cost?",
-    a: "Vehicle rental, custom branding production, on-board hardware, full technical crew, content production, and a wrap report with footage and KPIs. Permits and venue fees are quoted separately based on the location.",
-    category: "Operations",
-  },
-  {
-    q: "Can the LED screens display live content?",
-    a: "Yes. Our screens accept live HDMI/SDI feeds, CMS-controlled playlists, social media walls, and remote live updates. Content can be swapped on-the-fly during the activation.",
+    q: "Is content capture included?",
+    a: "Every deployment includes an on-ground content crew. Reels, photos, behind-the-scenes — delivered to your team within 24 hours. You walk away with a full content library, not just the activation.",
     category: "Technology",
+  },
+  {
+    q: "Do we get a report after the campaign?",
+    a: "Always. Footfall data, reach estimates, content performance, full photography, and a strategic debrief — packaged into a single report you can present to your CMO. Every number justified, every outcome documented.",
+    category: "Operations",
   },
 ];

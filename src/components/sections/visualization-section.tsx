@@ -9,10 +9,10 @@ export function VisualizationSection() {
       <div className="mx-auto max-w-7xl px-6">
         <Reveal className="mb-12 text-center">
           <p className="text-xs uppercase tracking-[0.3em] text-accent">Visualization</p>
-          <h2 className="display-headline mt-4 text-4xl text-white sm:text-5xl md:text-6xl">
+          <h2 className="display-headline mt-4 text-4xl text-zinc-900 sm:text-5xl md:text-6xl">
             Meet your <span className="text-gradient-accent">activation truck.</span>
           </h2>
-          <p className="mx-auto mt-6 max-w-xl text-lg text-zinc-400">
+          <p className="mx-auto mt-6 max-w-xl text-lg text-zinc-600">
             Drag to rotate. Scroll to zoom. Explore every angle of the platform that will carry your brand.
           </p>
         </Reveal>
@@ -24,7 +24,7 @@ export function VisualizationSection() {
               <CybertruckSceneDynamic initialView="explore" />
             </div>
             <div className="pointer-events-none absolute left-6 top-6">
-              <div className="glass inline-flex items-center gap-2 rounded-full px-4 py-2 text-[10px] uppercase tracking-[0.25em] text-zinc-300">
+              <div className="glass inline-flex items-center gap-2 rounded-full px-4 py-2 text-[10px] uppercase tracking-[0.25em] text-zinc-600">
                 <span className="pulse-dot" />
                 Drag · Zoom · Explore
               </div>

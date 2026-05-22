@@ -27,7 +27,7 @@ export function TestimonialCard({ testimonial, selected = false, onSelect }: Tes
             {testimonial.initials}
           </div>
           <div>
-            <p className="text-sm font-semibold text-white">{testimonial.author}</p>
+            <p className="text-sm font-semibold text-zinc-900">{testimonial.author}</p>
             <p className="text-[11px] text-zinc-500">{testimonial.company}</p>
           </div>
         </div>
@@ -37,7 +37,7 @@ export function TestimonialCard({ testimonial, selected = false, onSelect }: Tes
           ))}
         </div>
       </div>
-      <p className="mt-5 line-clamp-3 text-xs leading-relaxed text-zinc-400 transition group-hover:text-zinc-300">
+      <p className="mt-5 line-clamp-3 text-xs leading-relaxed text-zinc-600 transition group-hover:text-zinc-700">
         &ldquo;{testimonial.quote}&rdquo;
       </p>
       <div className="mt-5 flex items-center justify-between border-t border-white/5 pt-4">

@@ -51,12 +51,12 @@ export function ProcessSection() {
             <span className="h-px w-12 bg-accent" />
             <p className="text-xs uppercase tracking-[0.3em] text-accent">Our process</p>
           </div>
-          <h2 className="display-headline mt-6 text-4xl text-white sm:text-5xl md:text-6xl lg:text-7xl">
+          <h2 className="display-headline mt-6 text-4xl text-zinc-900 sm:text-5xl md:text-6xl lg:text-7xl">
             From brief to<br />
             <span className="text-gradient-accent">activation day.</span>
           </h2>
-          <p className="mt-6 text-lg text-zinc-400">
-            Six stages, one team, no hand-offs. Every step is signed off before the next begins.
+          <p className="mt-6 text-lg text-zinc-600">
+            Five stages, one team, no hand-offs. Every step is signed off before the next begins.
           </p>
         </Reveal>
 
@@ -89,7 +89,7 @@ export function ProcessSection() {
         {/* Footer CTA */}
         <Reveal delay={0.1}>
           <div className="mt-24 flex flex-col items-center gap-4 text-center">
-            <p className="text-sm text-zinc-400">Ready to start your timeline?</p>
+            <p className="text-sm text-zinc-600">Ready to start your timeline?</p>
             <a
               href="#contact"
               className="inline-flex items-center gap-2 rounded-full bg-accent-gradient px-7 py-3.5 text-sm font-semibold text-white transition hover:opacity-90 hover:shadow-lg hover:shadow-accent/20"

@@ -61,7 +61,7 @@ export function ConceptPillar({
         <div className="relative">
           {/* Huge background numeral */}
           <span
-            className="display-headline pointer-events-none absolute -left-2 -top-10 select-none text-[10rem] leading-none text-white/[0.04] sm:text-[14rem]"
+            className="display-headline pointer-events-none absolute -left-2 -top-10 select-none text-[10rem] leading-none text-zinc-900/[0.04] sm:text-[14rem]"
             aria-hidden
           >
             {String(index + 1).padStart(2, "0")}
@@ -75,18 +75,18 @@ export function ConceptPillar({
               <p className="text-[10px] uppercase tracking-[0.3em] text-accent">{pillar.subtitle}</p>
             </div>
 
-            <h3 className="display-headline mt-6 text-3xl text-white sm:text-4xl md:text-5xl">
+            <h3 className="display-headline mt-6 text-3xl text-zinc-900 sm:text-4xl md:text-5xl">
               {pillar.title}
             </h3>
 
-            <p className="mt-5 max-w-md text-base leading-relaxed text-zinc-400 md:text-lg">
+            <p className="mt-5 max-w-md text-base leading-relaxed text-zinc-600 md:text-lg">
               {pillar.description}
             </p>
 
             {/* Bullets */}
             <ul className="mt-8 space-y-3">
               {pillar.bullets.map((b) => (
-                <li key={b} className="flex items-start gap-3 text-sm text-zinc-300">
+                <li key={b} className="flex items-start gap-3 text-sm text-zinc-600">
                   <span className="mt-1.5 grid h-4 w-4 shrink-0 place-items-center rounded-full border border-accent/40 bg-accent/10">
                     <span className="h-1 w-1 rounded-full bg-accent" />
                   </span>

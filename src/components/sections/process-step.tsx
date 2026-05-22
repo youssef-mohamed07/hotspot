@@ -78,26 +78,30 @@ export function ProcessStep({
               <span className="font-mono text-[10px] uppercase tracking-[0.3em] text-zinc-500">
                 /Step {step.n}
               </span>
-              <span className="rounded-full border border-accent/30 bg-accent/10 px-3 py-0.5 text-[10px] uppercase tracking-widest text-accent">
-                {step.duration}
-              </span>
+              {"duration" in step && (
+                <span className="rounded-full border border-accent/30 bg-accent/10 px-3 py-0.5 text-[10px] uppercase tracking-widest text-accent">
+                  {(step as any).duration}
+                </span>
+              )}
             </div>
-            <h3 className="mt-4 text-2xl font-semibold tracking-tight text-white md:text-3xl">
+            <h3 className="mt-4 text-2xl font-semibold tracking-tight text-zinc-900 md:text-3xl">
               {step.title}
             </h3>
-            <p className="mt-3 text-sm leading-relaxed text-zinc-400 md:text-base">
+            <p className="mt-3 text-sm leading-relaxed text-zinc-600 md:text-base">
               {step.blurb}
             </p>
-            <ul className="mt-5 space-y-2">
-              {step.bullets.map((b) => (
-                <li key={b} className="flex items-start gap-2 text-xs text-zinc-300 md:text-sm">
-                  <span className="mt-1.5 grid h-3 w-3 shrink-0 place-items-center rounded-full border border-accent/40 bg-accent/10">
-                    <span className="h-1 w-1 rounded-full bg-accent" />
-                  </span>
-                  {b}
-                </li>
-              ))}
-            </ul>
+            {"bullets" in step && (
+              <ul className="mt-5 space-y-2">
+                {(step as any).bullets.map((b: string) => (
+                  <li key={b} className="flex items-start gap-2 text-xs text-zinc-600 md:text-sm">
+                    <span className="mt-1.5 grid h-3 w-3 shrink-0 place-items-center rounded-full border border-accent/40 bg-accent/10">
+                      <span className="h-1 w-1 rounded-full bg-accent" />
+                    </span>
+                    {b}
+                  </li>
+                ))}
+              </ul>
+            )}
           </div>
         </div>
 
@@ -113,7 +117,7 @@ export function ProcessStep({
             opacity: visible ? 1 : 0,
           }}
         >
-          <span className="display-headline select-none text-[8rem] leading-none text-white/[0.06] lg:text-[11rem]">
+          <span className="display-headline select-none text-[8rem] leading-none text-zinc-900/[0.06] lg:text-[11rem]">
             {step.n}
           </span>
         </div>
