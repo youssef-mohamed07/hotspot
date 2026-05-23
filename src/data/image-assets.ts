@@ -94,18 +94,18 @@ export const imageAssets = {
     ),
   },
   clientLogos: {
-    mobily: asset("/placeholders/client-logo-mobily-280x96.png", 280, 96, "Client logo — Mobily"),
-    stc: asset("/placeholders/client-logo-stc-280x96.png", 280, 96, "Client logo — STC"),
-    neom: asset("/placeholders/client-logo-neom-280x96.png", 280, 96, "Client logo — NEOM"),
+    mobily: asset("/logos/mobily.svg", 280, 96, "Client logo — Mobily"),
+    stc: asset("/logos/stc.svg", 280, 96, "Client logo — STC"),
+    neom: asset("/logos/neom.svg", 280, 96, "Client logo — NEOM"),
     aramco: asset("/placeholders/client-logo-aramco-280x96.png", 280, 96, "Client logo — Aramco"),
-    sabic: asset("/placeholders/client-logo-sabic-280x96.png", 280, 96, "Client logo — SABIC"),
+    sabic: asset("/logos/sabic.svg", 280, 96, "Client logo — SABIC"),
     "riyadh-season": asset(
-      "/placeholders/client-logo-riyadh-season-280x96.png",
+      "/logos/riyadh-season.svg",
       280,
       96,
       "Client logo — Riyadh Season",
     ),
-    hikma: asset("/placeholders/client-logo-hikma-280x96.png", 280, 96, "Client logo — Hikma"),
+    hikma: asset("/logos/hikma.svg", 280, 96, "Client logo — Hikma"),
   },
 } as const;
 
