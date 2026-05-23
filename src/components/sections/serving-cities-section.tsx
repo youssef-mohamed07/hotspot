@@ -10,24 +10,15 @@ export function ServingCitiesSection() {
   const isRtl = useIsRtl();
   const audience = useAudience();
 
-  const b2bList = [
-    "Malls & Retail Centers",
-    "Conferences & Exhibitions",
-    "Entertainment Festivals",
-    "Corporate Campuses",
-    "Major Sporting Events",
-    "Real Estate Launches",
-  ];
-
   const SidePanel = () => {
     if (audience === "b2b") {
       return (
         <div className="flex h-full flex-col justify-center gap-4 text-start lg:pl-10">
           <p className="text-sm font-semibold uppercase tracking-widest text-zinc-500 mb-2">
-            Prime Activation Zones
+            {dict.cities.zonesTitle}
           </p>
           <ul className="space-y-4">
-            {b2bList.map((item, index) => (
+            {dict.cities.zones.map((item, index) => (
               <li key={index} className="flex items-center gap-3">
                 <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-accent/10 text-accent font-mono text-xs">
                   {String(index + 1).padStart(2, "0")}
@@ -79,11 +70,11 @@ export function ServingCitiesSection() {
             {isRtl ? (
               <>
                 <SidePanel />
-                <KingdomMap />
+                <KingdomMap showPins={audience !== "b2b"} showLegend={audience !== "b2b"} />
               </>
             ) : (
               <>
-                <KingdomMap />
+                <KingdomMap showPins={audience !== "b2b"} showLegend={audience !== "b2b"} />
                 <SidePanel />
               </>
             )}

@@ -154,7 +154,7 @@
         "metric": { "value": "98%", "label": "On-target placement" }
       },
       {
-        "title": "Branding Bta3ak",
+        "title": "Built for Your Brand",
         "subtitle": "Designed around your brand",
         "description": "Full vehicle wraps, custom LED content, interactive overlays, and modular accessories. The truck becomes a 100% extension of your brand identity.",
         "bullets": [
@@ -291,10 +291,19 @@
     ]
   },
   "cities": {
-    "eyebrow": "Serving cities",
-    "headline1": "Operating across",
-    "headlineAccent": "the Kingdom.",
-    "subtitle": "Riyadh, Jeddah, Khobar, Mecca, and Medina — five active hubs across the Kingdom.",
+    "eyebrow": "Activation locations",
+    "headline1": "Built for",
+    "headlineAccent": "high-footfall zones.",
+    "subtitle": "Premium public and commercial environments where brands need to be seen, filmed, and remembered.",
+    "zonesTitle": "Prime Activation Zones",
+    "zones": [
+      "Malls & Retail Centers",
+      "Conferences & Exhibitions",
+      "Entertainment Festivals",
+      "Corporate Campuses",
+      "Major Sporting Events",
+      "Real Estate Launches"
+    ],
     "hubBadge": "Hub",
     "active": "Active",
     "mapActiveHub": "Active hub",

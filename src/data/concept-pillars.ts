@@ -17,7 +17,7 @@ export const conceptPillars: ConceptPillarData[] = [
     metric: { value: "98%", label: "On-target placement" },
   },
   {
-    title: "Branding Bta3ak",
+    title: "Built for Your Brand",
     subtitle: "Designed around your brand",
     description:
       "Full vehicle wraps, custom LED content, interactive overlays, and modular accessories. The truck becomes a 100% extension of your brand identity.",

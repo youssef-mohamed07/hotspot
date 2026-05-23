@@ -5,7 +5,7 @@ import { useDictionary } from "@/i18n/locale-provider";
 import { getLocalizedCities } from "@/lib/cities-i18n";
 import { CityPinSvg } from "./city-pin-svg";
 
-export function KingdomMap() {
+export function KingdomMap({ showPins = true, showLegend = true }: { showPins?: boolean; showLegend?: boolean }) {
   const dict = useDictionary();
   const cities = getLocalizedCities(dict);
   const c = dict.cities;
@@ -51,18 +51,18 @@ export function KingdomMap() {
           ))}
         </g>
 
-        {cities.map((city) => (
-          <CityPinSvg key={city.name} city={city} />
-        ))}
+        {showPins && cities.map((city) => <CityPinSvg key={city.name} city={city} />)}
       </svg>
 
-      <div className="pointer-events-none absolute bottom-5 start-5 end-5 flex items-center justify-between gap-4 text-[10px] uppercase tracking-[0.25em] text-zinc-500">
-        <span className="flex items-center gap-2">
-          <span className="h-1.5 w-1.5 rounded-full bg-accent shadow-[0_0_8px_rgba(42,118,166,0.9)]" />
-          {c.mapActiveHub}
-        </span>
-        <span>{c.mapCountry}</span>
-      </div>
+      {showLegend && (
+        <div className="pointer-events-none absolute bottom-5 start-5 end-5 flex items-center justify-between gap-4 text-[10px] uppercase tracking-[0.25em] text-zinc-500">
+          <span className="flex items-center gap-2">
+            <span className="h-1.5 w-1.5 rounded-full bg-accent shadow-[0_0_8px_rgba(42,118,166,0.9)]" />
+            {c.mapActiveHub}
+          </span>
+          <span>{c.mapCountry}</span>
+        </div>
+      )}
     </div>
   );
 }
