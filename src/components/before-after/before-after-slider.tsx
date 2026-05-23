@@ -1,19 +1,15 @@
 "use client";
 
-import Image from "next/image";
 import { useCallback, useRef, useState } from "react";
+import { CybertruckSceneDynamic } from "@/components/scene/cybertruck-scene-dynamic";
 import { useDictionary } from "@/i18n/locale-provider";
 
 type BeforeAfterSliderProps = {
-  beforeSrc: string;
-  afterSrc: string;
   beforeAlt: string;
   afterAlt: string;
 };
 
 export function BeforeAfterSlider({
-  beforeSrc,
-  afterSrc,
   beforeAlt,
   afterAlt,
 }: BeforeAfterSliderProps) {
@@ -61,13 +57,12 @@ export function BeforeAfterSlider({
       aria-valuenow={Math.round(position)}
     >
       <div className="absolute inset-0 bg-gradient-to-br from-accent/[0.06] via-white to-accent-deep/[0.04]">
-        <Image
-          src={afterSrc}
-          alt={afterAlt}
-          fill
-          className="object-contain object-center p-5 saturate-[1.15] contrast-[1.05] drop-shadow-[0_28px_56px_rgba(42,118,166,0.45)] sm:p-8"
-          sizes="(max-width: 1024px) 100vw, 1200px"
-          priority
+        <span className="sr-only">{afterAlt}</span>
+        <CybertruckSceneDynamic
+          initialView="hero"
+          className="rounded-none"
+          modelClassName="pointer-events-none saturate-[1.15] contrast-[1.05] drop-shadow-[0_28px_56px_rgba(42,118,166,0.45)]"
+          showLogo={false}
         />
         <div
           className="pointer-events-none absolute inset-0"
@@ -83,13 +78,12 @@ export function BeforeAfterSlider({
         className="absolute inset-0 overflow-hidden"
         style={{ clipPath: `inset(0 ${100 - position}% 0 0)` }}
       >
-        <Image
-          src={beforeSrc}
-          alt={beforeAlt}
-          fill
-          className="object-contain object-center p-6 grayscale contrast-[0.85] brightness-[0.88] sm:p-10"
-          sizes="(max-width: 1024px) 100vw, 1200px"
-          priority
+        <span className="sr-only">{beforeAlt}</span>
+        <CybertruckSceneDynamic
+          initialView="hero"
+          className="rounded-none"
+          modelClassName="pointer-events-none grayscale contrast-[0.85] brightness-[0.88]"
+          showLogo={false}
         />
         <div className="pointer-events-none absolute inset-0 bg-zinc-400/25" aria-hidden />
       </div>

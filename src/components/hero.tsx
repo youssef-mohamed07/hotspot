@@ -3,11 +3,8 @@
 import type { CSSProperties } from "react";
 import { TrackedCta } from "@/components/marketing/tracked-cta";
 import { DirectionalArrow } from "@/components/icons/directional-arrow";
-import { SiteImage } from "@/components/ui/site-image";
-import { imageAssets } from "@/data/image-assets";
+import { CybertruckSceneDynamic } from "@/components/scene/cybertruck-scene-dynamic";
 import { useDictionary, useLocale } from "@/i18n/locale-provider";
-
-const heroImage = imageAssets.heroCar;
 
 const d = (seconds: number): CSSProperties =>
   ({ "--enter-delay": `${seconds}s` }) as CSSProperties;
@@ -107,19 +104,28 @@ export function Hero() {
           <div className="relative">
             <div className="vehicle-edge-glow" aria-hidden />
 
-            <SiteImage
-              asset={heroImage}
-              className="relative z-10 w-[92%] max-w-130 object-contain drop-shadow-[0_30px_40px_rgba(0,0,0,0.55)] sm:w-auto sm:max-h-[38vh] sm:max-w-none md:max-h-[36vh] lg:max-h-[38vh] xl:max-h-[40vh]"
-              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 75vw, 1400px"
-              priority
-            />
+            <div className="relative z-10 h-[220px] w-[82vw] max-w-3xl drop-shadow-[0_28px_44px_rgba(0,0,0,0.5)] sm:h-[280px] md:h-[32vh] lg:h-[36vh]">
+              <CybertruckSceneDynamic
+                initialView="hero"
+                className="rounded-none"
+                modelClassName="pointer-events-none scale-95"
+                showLogo={false}
+                tone="gray"
+              />
+            </div>
 
-            <SiteImage
-              asset={heroImage}
+            <div
               aria-hidden
-              className="vehicle-reflection pointer-events-none absolute start-0 end-0 top-[calc(100%-12px)] z-5 mx-auto w-[92%] max-w-130 object-contain sm:w-auto sm:max-h-[38vh] sm:max-w-none md:max-h-[36vh] lg:max-h-[38vh] xl:max-h-[40vh]"
-              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 75vw, 1400px"
-            />
+              className="vehicle-reflection pointer-events-none absolute start-0 end-0 top-[calc(100%-18px)] z-5 mx-auto h-[220px] w-[82vw] max-w-3xl scale-y-[-1] opacity-16 blur-[1px] [mask-image:linear-gradient(to_bottom,rgba(0,0,0,0.45),transparent_55%)] sm:h-[280px] md:h-[32vh] lg:h-[36vh]"
+            >
+              <CybertruckSceneDynamic
+                initialView="hero"
+                className="rounded-none"
+                modelClassName="pointer-events-none scale-95"
+                showLogo={false}
+                tone="gray"
+              />
+            </div>
 
             <div
               className="pointer-events-none absolute start-1/2 top-[calc(100%-22px)] h-16 w-[110%] -translate-x-1/2 rounded-[50%] bg-black/55 blur-3xl"

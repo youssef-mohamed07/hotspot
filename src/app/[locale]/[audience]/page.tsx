@@ -58,12 +58,12 @@ export default async function HomePage({ params }: PageProps) {
         <TransitionStatsSection />
         <ProcessSection />
         <ConceptSection />
-        {/* <VisualizationSection /> */}
         <CaseStudiesSection />
         <OtherServicesSection />
         <TestimonialsSection />
         <ServingCitiesSection />
         <FormSection />
+        <VisualizationSection />
         <FAQSection />
       </main>
       <Footer />
