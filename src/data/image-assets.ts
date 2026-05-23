@@ -24,30 +24,30 @@ export const imageAssets = {
   ogShare: asset("/placeholders/og-share-1200x630.png", 1200, 630, "Open Graph / social share"),
   beforeAfter: {
     before: asset(
-      "/placeholders/before-after-before-1600x1000.png",
+      "/1600.png",
       1600,
       1000,
-      "Before/After slider — Before (stock / unbranded)",
+      "Before/After slider — Before",
     ),
     after: asset(
-      "/placeholders/before-after-after-1600x1000.png",
+      "/1600%20%202.png",
       1600,
       1000,
-      "Before/After slider — After (branded activation)",
+      "Before/After slider — After",
     ),
   },
   caseStudies: [
     asset(
-      "/placeholders/case-study-01-kora-break-1200x960.png",
-      1200,
-      960,
+      "/1600%20%202.png",
+      1600,
+      1000,
       "Case study — Kora Break",
     ),
     asset(
-      "/placeholders/case-study-02-tawineya-1200x960.png",
-      1200,
-      960,
-      "Case study — Tawineya",
+      "/1400.png",
+      1400,
+      700,
+      "Case study — Tawuniya (التعاونية)",
     ),
   ],
   conceptPillars: [

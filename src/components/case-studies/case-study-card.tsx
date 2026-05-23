@@ -19,14 +19,14 @@ export function CaseStudyCard({
     <article className="overflow-hidden rounded-3xl border border-zinc-200/90 bg-white shadow-xl shadow-accent/[0.06] ring-1 ring-accent/10">
       <div className="grid lg:grid-cols-2">
         <div
-          className={`relative min-h-[280px] sm:min-h-[320px] lg:min-h-[480px] ${
+          className={`relative min-h-[280px] bg-white sm:min-h-[320px] lg:min-h-[480px] ${
             flipped ? "lg:order-2" : ""
           }`}
         >
           <SiteImage
             asset={image}
             fill
-            className="object-cover"
+            className="object-cover object-center"
             sizes="(max-width: 1024px) 100vw, 600px"
           />
         </div>
