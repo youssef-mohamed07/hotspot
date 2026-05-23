@@ -12,12 +12,13 @@ interface CybertruckSceneProps {
   className?: string;
   modelClassName?: string;
   showLogo?: boolean;
-  tone?: "blue" | "gray";
+  tone?: "blue" | "gray" | "white";
 }
 
 const MODEL_SRC = "/Cybertruck%203D/Cybertruck%203D.glb";
 const BRAND_BLUE = [0.16, 0.46, 0.65, 1] as const;
 const HERO_GRAY = [0.42, 0.45, 0.48, 1] as const;
+const SECTION_WHITE = [0.94, 0.93, 0.9, 1] as const;
 
 type ModelViewerElement = HTMLElement & {
   model?: {
@@ -54,12 +55,17 @@ export function CybertruckScene({
     if (!model) return;
 
     const applyBrandMaterial = () => {
-      const baseColor = tone === "gray" ? HERO_GRAY : BRAND_BLUE;
+      const baseColor =
+        tone === "white" ? SECTION_WHITE : tone === "gray" ? HERO_GRAY : BRAND_BLUE;
 
       model.model?.materials?.forEach((material) => {
         material.pbrMetallicRoughness?.setBaseColorFactor?.(baseColor);
-        material.pbrMetallicRoughness?.setMetallicFactor?.(tone === "gray" ? 0.65 : 0.85);
-        material.pbrMetallicRoughness?.setRoughnessFactor?.(tone === "gray" ? 0.36 : 0.28);
+        material.pbrMetallicRoughness?.setMetallicFactor?.(
+          tone === "white" ? 0.45 : tone === "gray" ? 0.65 : 0.85,
+        );
+        material.pbrMetallicRoughness?.setRoughnessFactor?.(
+          tone === "white" ? 0.42 : tone === "gray" ? 0.36 : 0.28,
+        );
       });
     };
 
@@ -88,7 +94,7 @@ export function CybertruckScene({
     "disable-pan": false,
     "disable-tap": false,
     "environment-image": "neutral",
-    exposure: tone === "gray" ? "0.9" : "1.05",
+    exposure: tone === "white" ? "1.15" : tone === "gray" ? "0.9" : "1.05",
     "field-of-view": "24deg",
     "interaction-prompt": isHero ? "none" : "auto",
     "interaction-prompt-style": "wiggle",

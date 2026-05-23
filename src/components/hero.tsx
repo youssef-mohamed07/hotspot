@@ -1,9 +1,9 @@
 "use client";
 
 import type { CSSProperties } from "react";
-import Image from "next/image";
 import { TrackedCta } from "@/components/marketing/tracked-cta";
 import { DirectionalArrow } from "@/components/icons/directional-arrow";
+import { CybertruckSceneDynamic } from "@/components/scene/cybertruck-scene-dynamic";
 import { useDictionary, useLocale } from "@/i18n/locale-provider";
 
 const d = (seconds: number): CSSProperties =>
@@ -105,13 +105,12 @@ export function Hero() {
             <div className="vehicle-edge-glow" aria-hidden />
 
             <div className="relative z-10 h-[220px] w-[82vw] max-w-3xl drop-shadow-[0_28px_44px_rgba(0,0,0,0.5)] sm:h-[280px] md:h-[32vh] lg:h-[36vh]">
-              <Image
-                src="/hero/tawuniya-hero-transparent.png"
-                alt="HotSpot branded Cybertruck"
-                fill
-                className="object-contain object-center"
-                sizes="(max-width: 768px) 82vw, 768px"
-                priority
+              <CybertruckSceneDynamic
+                initialView="hero"
+                className="rounded-none"
+                modelClassName="pointer-events-none scale-95"
+                showLogo={false}
+                tone="white"
               />
             </div>
 
@@ -119,12 +118,12 @@ export function Hero() {
               aria-hidden
               className="vehicle-reflection pointer-events-none absolute start-0 end-0 top-[calc(100%-18px)] z-5 mx-auto h-[220px] w-[82vw] max-w-3xl scale-y-[-1] opacity-16 blur-[1px] [mask-image:linear-gradient(to_bottom,rgba(0,0,0,0.45),transparent_55%)] sm:h-[280px] md:h-[32vh] lg:h-[36vh]"
             >
-              <Image
-                src="/hero/tawuniya-hero-transparent.png"
-                alt=""
-                fill
-                className="object-contain object-center"
-                sizes="(max-width: 768px) 82vw, 768px"
+              <CybertruckSceneDynamic
+                initialView="hero"
+                className="rounded-none"
+                modelClassName="pointer-events-none scale-95"
+                showLogo={false}
+                tone="white"
               />
             </div>
 
