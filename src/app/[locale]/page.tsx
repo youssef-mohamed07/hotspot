@@ -60,7 +60,7 @@ export default function LocaleSelectorPage({ params }: { params: Promise<{ local
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.5, duration: 0.5 }}
             onClick={switchLanguage}
-            className="absolute top-6 right-6 z-30 rounded-full border border-white/10 bg-black/20 px-4 py-2 text-xs font-medium text-white backdrop-blur-md transition hover:bg-black/40 md:top-8 md:right-8 shadow-lg mix-blend-difference"
+            className="absolute top-6 end-6 z-30 rounded-full border border-zinc-900/10 bg-white/95 px-4 py-2 text-xs font-medium text-zinc-900 shadow-lg backdrop-blur-md transition hover:bg-white hover:shadow-xl md:top-8"
           >
             {t.langToggle}
           </motion.button>
