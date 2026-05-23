@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import { useCallback, useRef, useState } from "react";
+import { useDictionary } from "@/i18n/locale-provider";
 
 type BeforeAfterSliderProps = {
   beforeSrc: string;
@@ -16,6 +17,7 @@ export function BeforeAfterSlider({
   beforeAlt,
   afterAlt,
 }: BeforeAfterSliderProps) {
+  const dict = useDictionary();
   const trackRef = useRef<HTMLDivElement>(null);
   const [position, setPosition] = useState(50);
   const dragging = useRef(false);
@@ -58,7 +60,6 @@ export function BeforeAfterSlider({
       aria-valuemax={100}
       aria-valuenow={Math.round(position)}
     >
-      {/* After — full (branded, dominant) */}
       <div className="absolute inset-0 bg-gradient-to-br from-accent/[0.06] via-white to-accent-deep/[0.04]">
         <Image
           src={afterSrc}
@@ -78,7 +79,6 @@ export function BeforeAfterSlider({
         />
       </div>
 
-      {/* Before — clipped left (stock, muted) */}
       <div
         className="absolute inset-0 overflow-hidden"
         style={{ clipPath: `inset(0 ${100 - position}% 0 0)` }}
@@ -94,7 +94,6 @@ export function BeforeAfterSlider({
         <div className="pointer-events-none absolute inset-0 bg-zinc-400/25" aria-hidden />
       </div>
 
-      {/* Divider */}
       <div
         className="absolute inset-y-0 z-20 w-0.5 bg-zinc-900 shadow-[0_0_12px_rgba(0,0,0,0.4)]"
         style={{ left: `${position}%`, transform: "translateX(-50%)" }}
@@ -106,12 +105,11 @@ export function BeforeAfterSlider({
         </div>
       </div>
 
-      {/* Labels */}
       <span className="pointer-events-none absolute left-5 top-5 z-10 rounded-full border border-zinc-200/80 bg-white/80 px-3 py-1.5 text-[10px] font-bold uppercase tracking-[0.25em] text-zinc-500 shadow-sm backdrop-blur-sm">
-        Before
+        {dict.beforeAfter.beforeLabel}
       </span>
       <span className="pointer-events-none absolute right-5 top-5 z-10 rounded-full bg-accent-gradient px-4 py-2 text-[11px] font-bold uppercase tracking-[0.25em] text-white shadow-lg shadow-accent/35 ring-2 ring-white/50">
-        After
+        {dict.beforeAfter.afterLabel}
       </span>
     </div>
   );

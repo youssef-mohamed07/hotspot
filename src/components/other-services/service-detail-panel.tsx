@@ -4,8 +4,10 @@ import Image from "next/image";
 import Link from "next/link";
 import { IconArrowRight } from "@/components/icons";
 import type { ServiceItem } from "@/data/other-services";
+import { useDictionary } from "@/i18n/locale-provider";
 
 export function ServiceDetailPanel({ service }: { service: ServiceItem }) {
+  const dict = useDictionary();
   const Icon = service.Icon;
 
   return (
@@ -86,7 +88,7 @@ export function ServiceDetailPanel({ service }: { service: ServiceItem }) {
                 href="#visualization"
                 className="inline-flex items-center gap-2 rounded-full bg-accent-gradient px-7 py-3.5 text-xs font-semibold uppercase tracking-[0.2em] text-white transition hover:opacity-90 hover:shadow-lg hover:shadow-accent/25"
               >
-                Explore Cyber Stage
+                {dict.services.exploreCta}
                 <IconArrowRight className="h-3.5 w-3.5" />
               </Link>
             )}
@@ -94,7 +96,7 @@ export function ServiceDetailPanel({ service }: { service: ServiceItem }) {
               href="#contact"
               className="inline-flex items-center gap-2 rounded-full border border-zinc-300 bg-white px-7 py-3.5 text-xs font-semibold uppercase tracking-[0.2em] text-zinc-800 transition hover:border-accent hover:text-accent"
             >
-              Request this layer
+              {dict.services.requestCta}
               <IconArrowRight className="h-3.5 w-3.5" />
             </Link>
           </div>

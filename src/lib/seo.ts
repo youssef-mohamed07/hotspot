@@ -5,6 +5,7 @@ import { getDictionary } from "@/i18n/get-dictionary";
 import type { Locale } from "@/i18n/config";
 import { localizedPath } from "@/i18n/config";
 import { seoKeywords } from "@/data/seo-keywords";
+import { imageAssets } from "@/data/image-assets";
 import { siteConfig } from "@/lib/site";
 
 const defaultTitle =
@@ -36,7 +37,7 @@ export function buildMetadata({
   noIndex?: boolean;
 } = {}): Metadata {
   const canonical = getSiteUrl(path);
-  const ogImage = getSiteUrl("/hero/car-hero.png");
+  const ogImage = getSiteUrl(imageAssets.ogShare.path);
   const ogLocale = locale === "ar" ? "ar_SA" : "en_SA";
   const alternateLocale = locale === "ar" ? "en_SA" : "ar_SA";
 
@@ -97,9 +98,9 @@ export function buildMetadata({
       images: [
         {
           url: ogImage,
-          width: 1400,
-          height: 700,
-          alt: "HotSpot Cybertruck mobile brand activation in Saudi Arabia",
+          width: imageAssets.ogShare.width,
+          height: imageAssets.ogShare.height,
+          alt: imageAssets.ogShare.label,
         },
       ],
     },
@@ -161,7 +162,7 @@ export function localBusinessJsonLd() {
     "@context": "https://schema.org",
     "@type": "LocalBusiness",
     name: siteConfig.name,
-    image: getSiteUrl("/hero/car-hero.png"),
+    image: getSiteUrl(imageAssets.heroCar.path),
     url: siteConfig.url,
     telephone: siteConfig.phone,
     email: siteConfig.email,

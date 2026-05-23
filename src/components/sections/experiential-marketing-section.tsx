@@ -1,7 +1,8 @@
 "use client";
 
-import { ImagePlaceholder } from "@/components/ui/image-placeholder";
 import { Reveal } from "@/components/reveal";
+import { SiteImage } from "@/components/ui/site-image";
+import { imageAssets } from "@/data/image-assets";
 import { SectionHeader } from "@/components/section-header";
 import { IconIntegration, IconVenue, IconSparkle } from "@/components/icons";
 import { useDictionary } from "@/i18n/locale-provider";
@@ -69,12 +70,11 @@ export function ExperientialMarketingSection() {
 
           <Reveal delay={0.3} className="relative hidden lg:block h-full min-h-[600px]">
             <div className="absolute inset-0 overflow-hidden rounded-[48px] border border-zinc-200/50 shadow-[0_32px_80px_rgba(0,0,0,0.08)]">
-              <ImagePlaceholder
+              <SiteImage
+                asset={imageAssets.experiential}
                 fill
-                width={800}
-                height={1000}
-                label="Cinematic Activation Visual"
-                className="rounded-[48px]"
+                className="object-cover"
+                sizes="(max-width: 1280px) 50vw, 400px"
               />
             </div>
           </Reveal>

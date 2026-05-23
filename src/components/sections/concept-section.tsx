@@ -3,6 +3,7 @@
 import { Reveal } from "@/components/reveal";
 import { ConceptPillar } from "@/components/concept/concept-pillar";
 import { IconCube, IconMapPin } from "@/components/icons";
+import { imageAssets } from "@/data/image-assets";
 import { useDictionary } from "@/i18n/locale-provider";
 import type { ConceptPillarData } from "@/types/concept-pillar";
 
@@ -47,7 +48,13 @@ export function ConceptSection() {
 
         <div className="space-y-24 lg:space-y-28">
           {conceptPillars.map((pillar, i) => (
-            <ConceptPillar key={pillar.title} pillar={pillar} index={i} flipped={i % 2 === 1} />
+            <ConceptPillar
+              key={pillar.title}
+              pillar={pillar}
+              index={i}
+              flipped={i % 2 === 1}
+              image={imageAssets.conceptPillars[i] ?? imageAssets.conceptPillars[0]}
+            />
           ))}
         </div>
       </div>

@@ -65,6 +65,8 @@
     "eyebrow": "Transformation",
     "title": "Before vs after",
     "subtitle": "See the exact transformation — from stock Cybertruck to your brand moving through Saudi streets.",
+    "beforeLabel": "Before",
+    "afterLabel": "After",
     "beforeAlt": "Stock Cybertruck before branding",
     "afterAlt": "Cybertruck after full brand wrap",
     "hint": "Drag the handle to compare · Same angle · Transparent assets with shadow"
@@ -205,6 +207,9 @@
     "headline1": "Years of 360° solutions.",
     "headlineAccent": "and still innovating.",
     "subtitle": "Cyber Stage is the newest chapter of a decade-long commitment to making Saudi events unforgettable.",
+    "swipe": "Swipe",
+    "exploreCta": "Explore Cyber Stage",
+    "requestCta": "Request this layer",
     "flagship": {
       "id": "cybertruck",
       "title": "Cybertruck",
@@ -313,6 +318,10 @@
     "successTitle": "Brief Received!",
     "successBody": "Thanks{name}. We are reviewing your specs and will be in touch within 24 hours.",
     "steps": ["Contact", "Brand", "Campaign", "Details"],
+    "progressLabel": "Step {current} of {total}",
+    "back": "Back",
+    "continue": "Continue",
+    "sending": "Sending…",
     "step0": {
       "title": "Let's connect.",
       "hint": "Tell us who you are and how to reach you.",

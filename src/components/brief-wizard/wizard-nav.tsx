@@ -1,6 +1,7 @@
 "use client";
 
 import { IconArrowRight } from "@/components/icons";
+import { useDictionary, useIsRtl } from "@/i18n/locale-provider";
 
 export function WizardNav({
   step,
@@ -21,6 +22,8 @@ export function WizardNav({
   onSubmit: () => void;
   submitLabel?: string;
 }) {
+  const dict = useDictionary();
+  const isRtl = useIsRtl();
   const isLast = step === totalSteps - 1;
   const disabled = !canAdvance || isSubmitting;
   return (
@@ -31,7 +34,7 @@ export function WizardNav({
         disabled={step === 0 || isSubmitting}
         className="rounded-full px-5 py-2.5 text-xs uppercase tracking-[0.2em] text-zinc-600 transition hover:bg-white/5 hover:text-zinc-900 disabled:cursor-not-allowed disabled:opacity-30 disabled:hover:bg-transparent disabled:hover:text-zinc-600"
       >
-        ← Back
+        {isRtl ? `${dict.contact.back} →` : `← ${dict.contact.back}`}
       </button>
       <button
         type="button"
@@ -39,8 +42,8 @@ export function WizardNav({
         disabled={disabled}
         className="inline-flex items-center gap-2 rounded-full bg-accent-gradient px-7 py-3 text-xs font-semibold uppercase tracking-[0.2em] text-white transition hover:opacity-90 hover:shadow-lg hover:shadow-accent/20 disabled:cursor-not-allowed disabled:opacity-30 disabled:hover:shadow-none"
       >
-        {isLast ? (isSubmitting ? "Sending…" : submitLabel) : "Continue"}
-        <IconArrowRight className="h-3.5 w-3.5" />
+        {isLast ? (isSubmitting ? dict.contact.sending : submitLabel) : dict.contact.continue}
+        <IconArrowRight className="rtl-flip h-3.5 w-3.5" />
       </button>
     </div>
   );

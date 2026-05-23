@@ -36,7 +36,7 @@ export function OtherServicesSection() {
           {/* Mobile Swipe Hint */}
           <div className="mt-8 flex items-center gap-2 text-xs font-medium uppercase tracking-widest text-zinc-400 xl:hidden">
             <IconChevronLeft className="h-4 w-4 animate-pulse" />
-            <span>Swipe</span>
+            <span>{dict.services.swipe}</span>
             <IconChevronRight className="h-4 w-4 animate-pulse" />
           </div>
         </Reveal>

@@ -1,18 +1,21 @@
 "use client";
 
 import { Reveal } from "@/components/reveal";
-import { ImagePlaceholder } from "@/components/ui/image-placeholder";
+import { SiteImage } from "@/components/ui/site-image";
 import { useIsRtl } from "@/i18n/locale-provider";
 import type { ConceptPillarData } from "@/types/concept-pillar";
+import type { ImageAsset } from "@/data/image-assets";
 
 export function ConceptPillar({
   pillar,
   index,
   flipped,
+  image,
 }: {
   pillar: ConceptPillarData;
   index: number;
   flipped: boolean;
+  image: ImageAsset;
 }) {
   const isRtl = useIsRtl();
   const swapColumns = isRtl ? !flipped : flipped;
@@ -26,13 +29,7 @@ export function ConceptPillar({
       >
         <div className="relative">
           <div className="relative aspect-[4/5] w-full overflow-hidden rounded-[36px]">
-            <ImagePlaceholder
-              fill
-              width={800}
-              height={1000}
-              label={`${pillar.title} Visual`}
-              className="rounded-[36px]"
-            />
+            <SiteImage asset={image} fill className="object-cover" sizes="(max-width: 1024px) 100vw, 400px" />
 
             <div className="absolute start-6 top-6 inline-flex items-center gap-2 rounded-full border border-zinc-200/90 bg-white/95 px-3 py-1.5 text-[10px] uppercase tracking-[0.25em] text-zinc-600 shadow-sm backdrop-blur-sm">
               <span className="pulse-dot" />

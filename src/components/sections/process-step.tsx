@@ -24,9 +24,9 @@ export function ProcessStep({
 
   const isEven = index % 2 === 0;
   /** Grid columns follow inline-start/end — mirrors automatically in RTL */
-  const cardCol = isEven ? "md:col-start-1" : "md:col-start-2";
+  const cardCol = isRtl ? "" : isEven ? "md:col-start-1" : "md:col-start-2";
   const numeralCol = isEven ? "md:col-start-2" : "md:col-start-1";
-  const cardPad = isEven ? "md:pe-12" : "md:ps-12";
+  const cardPad = isRtl ? "md:ps-14 md:pe-0" : isEven ? "md:pe-12" : "md:ps-12";
   const numeralAlign = isEven
     ? "md:justify-end md:pe-12"
     : "md:justify-start md:ps-12";
@@ -50,24 +50,28 @@ export function ProcessStep({
     return () => obs.disconnect();
   }, []);
 
-  const cardEnterX = isEven ? (isRtl ? 48 : -48) : isRtl ? -48 : 48;
+  const cardEnterX = isRtl ? 32 : isEven ? -48 : 48;
   const numeralEnterX = isEven ? (isRtl ? -36 : 36) : isRtl ? 36 : -36;
 
   return (
     <li ref={ref} className="relative min-h-[5rem] md:min-h-0">
       <span
-        className={`absolute start-[1.125rem] top-8 z-10 -translate-x-1/2 md:start-1/2 md:top-6 ${
+        className={`absolute start-[1.125rem] top-8 z-10 md:top-6 ${
+          isRtl ? "translate-x-1/2" : "-translate-x-1/2"
+        } ${
+          isRtl ? "md:start-[1.5rem]" : "md:start-1/2"
+        } ${
           visible ? "scale-100 opacity-100" : "scale-50 opacity-0"
         } transition-all duration-500`}
         aria-hidden
       >
         <span className="block h-3 w-3 rounded-full bg-accent shadow-[0_0_12px_rgba(42,118,166,0.9)] md:h-4 md:w-4" />
-        <span className="absolute start-1/2 top-1/2 h-6 w-6 -translate-x-1/2 -translate-y-1/2 rounded-full border border-accent/50 animate-ping md:h-8 md:w-8" />
+        <span className="absolute left-1/2 top-1/2 h-6 w-6 -translate-x-1/2 -translate-y-1/2 rounded-full border border-accent/50 animate-ping md:h-8 md:w-8" />
       </span>
 
-      <div className="grid items-start gap-6 md:grid-cols-2">
+      <div className={`grid items-start gap-6 ${isRtl ? "" : "md:grid-cols-2"}`}>
         <div
-          className={`pt-1 ps-10 sm:ps-12 md:ps-0 ${cardCol} ${cardPad} pe-2 sm:pe-4 md:px-0`}
+          className={`pt-1 ps-10 sm:ps-12 ${cardCol} ${cardPad} pe-2 sm:pe-4 ${isRtl ? "" : "md:ps-0 md:px-0"}`}
           style={{
             transition: "all 800ms cubic-bezier(0.22, 1, 0.36, 1)",
             transitionDelay: "100ms",
@@ -87,7 +91,7 @@ export function ProcessStep({
         </div>
 
         <div
-          className={`hidden md:flex md:items-start ${numeralCol} ${numeralAlign}`}
+          className={`${isRtl ? "hidden" : "hidden md:flex"} md:items-start ${numeralCol} ${numeralAlign}`}
           style={{
             transition: "all 900ms cubic-bezier(0.22, 1, 0.36, 1)",
             transitionDelay: "200ms",

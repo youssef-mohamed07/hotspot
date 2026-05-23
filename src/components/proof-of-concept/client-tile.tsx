@@ -32,7 +32,6 @@ export function ClientTile({
             width={140}
             height={48}
             className="h-9 w-auto max-w-[70%] object-contain opacity-60 grayscale transition duration-300 group-hover:opacity-100 group-hover:grayscale-0 sm:h-10"
-            unoptimized={client.logo.endsWith(".svg")}
             style={{ filter: "brightness(0) invert(0.78)" }}
           />
         ) : (

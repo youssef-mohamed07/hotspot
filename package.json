@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "placeholders": "python3 scripts/generate-placeholders.py"
   },
   "dependencies": {
     "@sendgrid/mail": "^8.1.6",

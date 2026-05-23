@@ -4,6 +4,7 @@ import { Reveal } from "@/components/reveal";
 import { CaseStudyCard } from "@/components/case-studies/case-study-card";
 import { useDictionary } from "@/i18n/locale-provider";
 import type { CaseStudy } from "@/data/case-studies";
+import { imageAssets } from "@/data/image-assets";
 
 export function CaseStudiesSection() {
   const dict = useDictionary();
@@ -34,7 +35,11 @@ export function CaseStudiesSection() {
         <div className="flex flex-col gap-10 lg:gap-14">
           {caseStudies.map((cs, i) => (
             <Reveal key={cs.title} delay={i * 0.08}>
-              <CaseStudyCard study={cs} index={i} />
+              <CaseStudyCard
+                study={cs}
+                index={i}
+                image={imageAssets.caseStudies[i] ?? imageAssets.caseStudies[0]}
+              />
             </Reveal>
           ))}
         </div>

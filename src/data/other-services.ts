@@ -1,4 +1,5 @@
 import { IconScreen, IconTruss, IconWave, IconSpotlight, IconUsers, IconTruck } from "@/components/icons";
+import { getServiceImage } from "@/data/image-assets";
 import type { ComponentType, SVGProps } from "react";
 
 export type ServiceItem = {
@@ -22,7 +23,7 @@ export const flagshipService: ServiceItem = {
     "A fully branded, AV-equipped mobile rig that deploys at your venue — custom wrap, on-board LED, spatial audio, and a crew that runs every on-ground moment.",
   highlights: ["Custom brand wrap", "On-board LED screens", "Road-ready crew", "KSA-wide deployment"],
   tag: "Flagship",
-  image: "/hero/car-hero.png",
+  image: getServiceImage("cybertruck").path,
   badge: "New",
   featured: true,
   Icon: IconTruck,
@@ -37,7 +38,7 @@ export const otherServices: ServiceItem[] = [
       "From intimate retail walls to stadium-scale outdoor walls — calibrated, content-ready, and operated by our AV team on activation day.",
     highlights: ["Indoor & outdoor rigs", "Any aspect ratio", "Content playback", "On-site tech crew"],
     tag: "Visual",
-    image: "https://images.unsplash.com/photo-1492684223066-81342ee5ff30?w=1200&q=80",
+    image: getServiceImage("led").path,
     Icon: IconScreen,
   },
   {
@@ -48,7 +49,7 @@ export const otherServices: ServiceItem[] = [
       "Engineered stage platforms and truss for corporate keynotes, concert builds, and product launches — safe, fast to deploy, and brand-ready.",
     highlights: ["Corporate & concert builds", "Certified rigging", "Custom sizing", "Launch-ready staging"],
     tag: "Structure",
-    image: "https://images.unsplash.com/photo-1501281668745-f7f57925c3b4?w=1200&q=80",
+    image: getServiceImage("stage").path,
     Icon: IconTruss,
   },
   {
@@ -59,7 +60,7 @@ export const otherServices: ServiceItem[] = [
       "Line-array systems tuned for clarity at scale — from VIP lounges to open-air activations with full spatial coverage.",
     highlights: ["Line array systems", "Zone mixing", "Live & playback", "Outdoor-rated"],
     tag: "Audio",
-    image: "https://images.unsplash.com/photo-1470229722913-7c0e2dbbafd3?w=1200&q=80",
+    image: getServiceImage("sound").path,
     Icon: IconWave,
   },
   {
@@ -70,7 +71,7 @@ export const otherServices: ServiceItem[] = [
       "Architectural washes, stage looks, and outdoor scenes — designed to match your brand palette and photographed beautifully.",
     highlights: ["Architectural washes", "Stage looks", "Outdoor scenes", "DMX programming"],
     tag: "Lighting",
-    image: "https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=1200&q=80",
+    image: getServiceImage("lighting").path,
     Icon: IconSpotlight,
   },
   {
@@ -81,7 +82,7 @@ export const otherServices: ServiceItem[] = [
       "One team owns the full stack — scope, vendors, permits, build, show-call, and strike. You get a single point of contact, zero hand-offs.",
     highlights: ["Single point of contact", "Permits & logistics", "Vendor management", "Show-day operations"],
     tag: "Production",
-    image: "https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=1200&q=80",
+    image: getServiceImage("production").path,
     Icon: IconUsers,
   },
 ];

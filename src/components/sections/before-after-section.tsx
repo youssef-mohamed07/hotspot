@@ -2,10 +2,8 @@
 
 import { Reveal } from "@/components/reveal";
 import { BeforeAfterSlider } from "@/components/before-after/before-after-slider";
+import { imageAssets } from "@/data/image-assets";
 import { useDictionary } from "@/i18n/locale-provider";
-
-const BEFORE_IMAGE = "/hero/car-hero.png";
-const AFTER_IMAGE = "/hero/car-hero.png";
 
 export function BeforeAfterSection() {
   const dict = useDictionary();
@@ -39,8 +37,8 @@ export function BeforeAfterSection() {
 
         <Reveal delay={0.1}>
           <BeforeAfterSlider
-            beforeSrc={BEFORE_IMAGE}
-            afterSrc={AFTER_IMAGE}
+            beforeSrc={imageAssets.beforeAfter.before.path}
+            afterSrc={imageAssets.beforeAfter.after.path}
             beforeAlt={dict.beforeAfter.beforeAlt}
             afterAlt={dict.beforeAfter.afterAlt}
           />

@@ -65,6 +65,8 @@
     "eyebrow": "قبل وبعد",
     "title": "التحول الحقيقي",
     "subtitle": "شاهد الفرق — من Cybertruck خام إلى علامتك تتحرك في شوارع السعودية.",
+    "beforeLabel": "قبل",
+    "afterLabel": "بعد",
     "beforeAlt": "Cybertruck قبل التغليف",
     "afterAlt": "Cybertruck بعد تغليف العلامة",
     "hint": "اسحب المقبض للمقارنة · نفس الزاوية · أصول شفافة مع ظل"
@@ -205,6 +207,9 @@
     "headline1": "سنوات من حلول 360°.",
     "headlineAccent": "ومازلنا نبتكر.",
     "subtitle": "سايبر ستيج أحدث فصل في التزامنا بجعل فعاليات السعودية لا تُنسى.",
+    "swipe": "اسحب",
+    "exploreCta": "استكشف سايبر ستيج",
+    "requestCta": "اطلب هذه الخدمة",
     "flagship": {
       "id": "cybertruck",
       "title": "Cybertruck",
@@ -313,6 +318,10 @@
     "successTitle": "استلمنا البريف!",
     "successBody": "شكراً{name}. نراجع التفاصيل ونتواصل خلال 24 ساعة.",
     "steps": ["التواصل", "العلامة", "الحملة", "التفاصيل"],
+    "progressLabel": "الخطوة {current} من {total}",
+    "back": "رجوع",
+    "continue": "متابعة",
+    "sending": "جاري الإرسال…",
     "step0": {
       "title": "خلنا نتعارف.",
       "hint": "من أنت وكيف نوصل لك.",

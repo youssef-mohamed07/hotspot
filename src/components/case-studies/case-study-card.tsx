@@ -1,9 +1,18 @@
 "use client";
 
-import { ImagePlaceholder } from "@/components/ui/image-placeholder";
+import { SiteImage } from "@/components/ui/site-image";
 import type { CaseStudy } from "@/data/case-studies";
+import type { ImageAsset } from "@/data/image-assets";
 
-export function CaseStudyCard({ study, index }: { study: CaseStudy; index: number }) {
+export function CaseStudyCard({
+  study,
+  index,
+  image,
+}: {
+  study: CaseStudy;
+  index: number;
+  image: ImageAsset;
+}) {
   const flipped = index % 2 === 1;
 
   return (
@@ -14,12 +23,11 @@ export function CaseStudyCard({ study, index }: { study: CaseStudy; index: numbe
             flipped ? "lg:order-2" : ""
           }`}
         >
-          <ImagePlaceholder
+          <SiteImage
+            asset={image}
             fill
-            width={1200}
-            height={960}
-            label={`${study.title} Case Study`}
-            className="rounded-none border-0 shadow-none"
+            className="object-cover"
+            sizes="(max-width: 1024px) 100vw, 600px"
           />
         </div>
 
