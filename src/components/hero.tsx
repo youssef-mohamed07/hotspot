@@ -110,7 +110,7 @@ export function Hero() {
                 className="rounded-none"
                 modelClassName="pointer-events-none scale-95"
                 showLogo={false}
-                tone="white"
+                tone="blue"
               />
             </div>
 
@@ -123,7 +123,7 @@ export function Hero() {
                 className="rounded-none"
                 modelClassName="pointer-events-none scale-95"
                 showLogo={false}
-                tone="white"
+                tone="blue"
               />
             </div>
 
