@@ -9,6 +9,8 @@ import { useDictionary, useLocale } from "@/i18n/locale-provider";
 const d = (seconds: number): CSSProperties =>
   ({ "--enter-delay": `${seconds}s` }) as CSSProperties;
 
+const KORA_BREAK_MODEL_SRC = "/Cyber%20Truck%20Koora%20Break.glb";
+
 export function Hero() {
   const dict = useDictionary();
   const locale = useLocale();
@@ -107,10 +109,12 @@ export function Hero() {
             <div className="relative z-10 h-[220px] w-[82vw] max-w-3xl drop-shadow-[0_28px_44px_rgba(0,0,0,0.5)] sm:h-[280px] md:h-[32vh] lg:h-[36vh]">
               <CybertruckSceneDynamic
                 initialView="hero"
+                src={KORA_BREAK_MODEL_SRC}
+                alt="Kora Break Cybertruck 3D activation model"
                 className="rounded-none"
                 modelClassName="pointer-events-none scale-95"
                 showLogo={false}
-                tone="blue"
+                tone="original"
               />
             </div>
 
@@ -120,10 +124,12 @@ export function Hero() {
             >
               <CybertruckSceneDynamic
                 initialView="hero"
+                src={KORA_BREAK_MODEL_SRC}
+                alt="Kora Break Cybertruck 3D activation model reflection"
                 className="rounded-none"
                 modelClassName="pointer-events-none scale-95"
                 showLogo={false}
-                tone="blue"
+                tone="original"
               />
             </div>
 

@@ -177,6 +177,18 @@
     "eyebrow": "أعمالنا",
     "headline1": "حملات",
     "headlineAccent": "حركت السوق.",
+    "modelControls": {
+      "instruction": "اسحب، قرّب، حرّك، أو استخدم الأزرار",
+      "autoRotateOn": "إيقاف الدوران",
+      "autoRotateOff": "تشغيل الدوران",
+      "front": "الأمام",
+      "side": "الجانب",
+      "rear": "الخلف",
+      "top": "الأعلى",
+      "zoomIn": "تقريب",
+      "zoomOut": "إبعاد",
+      "reset": "إعادة"
+    },
     "items": [
       {
         "title": "كورة بريك",

@@ -177,6 +177,18 @@
     "eyebrow": "Case studies",
     "headline1": "Campaigns that",
     "headlineAccent": "moved markets.",
+    "modelControls": {
+      "instruction": "Drag, zoom, pan, or use the controls",
+      "autoRotateOn": "Pause spin",
+      "autoRotateOff": "Auto spin",
+      "front": "Front",
+      "side": "Side",
+      "rear": "Rear",
+      "top": "Top",
+      "zoomIn": "Zoom in",
+      "zoomOut": "Zoom out",
+      "reset": "Reset"
+    },
     "items": [
       {
         "title": "Kora Break",

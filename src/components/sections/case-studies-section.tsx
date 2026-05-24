@@ -6,6 +6,8 @@ import { useDictionary } from "@/i18n/locale-provider";
 import type { CaseStudy } from "@/data/case-studies";
 import { imageAssets } from "@/data/image-assets";
 
+const KORA_BREAK_MODEL_SRC = "/Cyber%20Truck%20Koora%20Break.glb";
+
 export function CaseStudiesSection() {
   const dict = useDictionary();
   const caseStudies: CaseStudy[] = dict.caseStudies.items.map((item) => ({
@@ -39,6 +41,9 @@ export function CaseStudiesSection() {
                 study={cs}
                 index={i}
                 image={imageAssets.caseStudies[i] ?? imageAssets.caseStudies[0]}
+                modelSrc={i === 0 ? KORA_BREAK_MODEL_SRC : undefined}
+                modelAlt={i === 0 ? "Kora Break Cybertruck 3D activation model" : undefined}
+                modelControlsLabels={i === 0 ? dict.caseStudies.modelControls : undefined}
               />
             </Reveal>
           ))}

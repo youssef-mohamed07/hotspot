@@ -1,6 +1,7 @@
 "use client";
 
 import { SiteImage } from "@/components/ui/site-image";
+import { CybertruckSceneDynamic } from "@/components/scene/cybertruck-scene-dynamic";
 import type { CaseStudy } from "@/data/case-studies";
 import type { ImageAsset } from "@/data/image-assets";
 
@@ -8,10 +9,27 @@ export function CaseStudyCard({
   study,
   index,
   image,
+  modelSrc,
+  modelAlt,
+  modelControlsLabels,
 }: {
   study: CaseStudy;
   index: number;
   image: ImageAsset;
+  modelSrc?: string;
+  modelAlt?: string;
+  modelControlsLabels?: {
+    instruction: string;
+    autoRotateOn: string;
+    autoRotateOff: string;
+    front: string;
+    side: string;
+    rear: string;
+    top: string;
+    zoomIn: string;
+    zoomOut: string;
+    reset: string;
+  };
 }) {
   const flipped = index % 2 === 1;
 
@@ -23,12 +41,28 @@ export function CaseStudyCard({
             flipped ? "lg:order-2" : ""
           }`}
         >
-          <SiteImage
-            asset={image}
-            fill
-            className="object-cover object-center"
-            sizes="(max-width: 1024px) 100vw, 600px"
-          />
+          {modelSrc ? (
+            <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_34%,rgba(255,255,255,0.95),rgba(232,239,242,0.58)_42%,rgba(12,19,24,0.08)_100%)]">
+              <CybertruckSceneDynamic
+                initialView="explore"
+                src={modelSrc}
+                alt={modelAlt}
+                className="rounded-none"
+                modelClassName="pb-28 sm:pb-24"
+                showLogo={false}
+                showControls
+                controlsLabels={modelControlsLabels}
+                tone="original"
+              />
+            </div>
+          ) : (
+            <SiteImage
+              asset={image}
+              fill
+              className="object-cover object-center"
+              sizes="(max-width: 1024px) 100vw, 600px"
+            />
+          )}
         </div>
 
         <div
