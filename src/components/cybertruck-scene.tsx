@@ -85,7 +85,7 @@ export function CybertruckScene({
   const [loaded, setLoaded] = useState(false);
   const [autoRotate, setAutoRotate] = useState(true);
   const [cameraOrbit, setCameraOrbit] = useState(
-    isHero ? "35deg 72deg 96%" : "35deg 68deg 78%",
+    isHero ? "35deg 70deg 74%" : "35deg 68deg 78%",
   );
   const [fieldOfView, setFieldOfView] = useState(DEFAULT_FIELD_OF_VIEW);
   const modelRef = useRef<ModelViewerElement | null>(null);
@@ -206,7 +206,7 @@ export function CybertruckScene({
             <button
               type="button"
               onClick={() => {
-                setCameraOrbit(isHero ? "35deg 72deg 96%" : "35deg 68deg 78%");
+                setCameraOrbit(isHero ? "35deg 70deg 74%" : "35deg 68deg 78%");
                 setFieldOfView(DEFAULT_FIELD_OF_VIEW);
                 setAutoRotate(true);
               }}

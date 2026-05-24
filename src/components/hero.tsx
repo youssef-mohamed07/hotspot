@@ -96,23 +96,23 @@ export function Hero() {
         </div>
       </div>
 
-      <div className="relative z-0 mt-8 flex w-full max-w-2xl items-end justify-center pb-2 sm:mt-10 sm:max-w-3xl sm:pb-4 md:mt-10 md:max-w-5xl md:flex-1 md:pb-6">
+      <div className="relative z-0 mt-4 flex w-full max-w-3xl items-center justify-center pb-0 sm:mt-6 sm:max-w-4xl md:mt-0 md:max-w-6xl md:flex-1">
         <div className="hero-spotlight" aria-hidden />
 
         <div
-          className="enter-item enter-item-vehicle relative z-10 flex w-full items-end justify-center"
+          className="enter-item enter-item-vehicle relative z-10 flex w-full -translate-y-4 items-center justify-center sm:-translate-y-6 md:-translate-y-8"
           style={d(0.54)}
         >
           <div className="relative">
             <div className="vehicle-edge-glow" aria-hidden />
 
-            <div className="relative z-10 h-[220px] w-[82vw] max-w-3xl drop-shadow-[0_28px_44px_rgba(0,0,0,0.5)] sm:h-[280px] md:h-[32vh] lg:h-[36vh]">
+            <div className="relative z-10 h-[300px] w-[96vw] max-w-5xl drop-shadow-[0_34px_54px_rgba(0,0,0,0.5)] sm:h-[360px] md:h-[44vh] lg:h-[48vh]">
               <CybertruckSceneDynamic
                 initialView="hero"
                 src={KORA_BREAK_MODEL_SRC}
                 alt="Kora Break Cybertruck 3D activation model"
                 className="rounded-none"
-                modelClassName="pointer-events-none scale-95"
+                modelClassName="pointer-events-none scale-105"
                 showLogo={false}
                 tone="original"
               />
@@ -120,14 +120,14 @@ export function Hero() {
 
             <div
               aria-hidden
-              className="vehicle-reflection pointer-events-none absolute start-0 end-0 top-[calc(100%-18px)] z-5 mx-auto h-[220px] w-[82vw] max-w-3xl scale-y-[-1] opacity-16 blur-[1px] [mask-image:linear-gradient(to_bottom,rgba(0,0,0,0.45),transparent_55%)] sm:h-[280px] md:h-[32vh] lg:h-[36vh]"
+              className="vehicle-reflection pointer-events-none absolute start-0 end-0 top-[calc(100%-18px)] z-5 mx-auto h-[300px] w-[96vw] max-w-5xl scale-y-[-1] opacity-14 blur-[1px] [mask-image:linear-gradient(to_bottom,rgba(0,0,0,0.42),transparent_52%)] sm:h-[360px] md:h-[44vh] lg:h-[48vh]"
             >
               <CybertruckSceneDynamic
                 initialView="hero"
                 src={KORA_BREAK_MODEL_SRC}
                 alt="Kora Break Cybertruck 3D activation model reflection"
                 className="rounded-none"
-                modelClassName="pointer-events-none scale-95"
+                modelClassName="pointer-events-none scale-105"
                 showLogo={false}
                 tone="original"
               />
@@ -153,7 +153,7 @@ export function Hero() {
         </div>
       </div>
 
-      <div className="hero-bottom-transition z-20" aria-hidden />
+      <div className="hero-bottom-transition z-5" aria-hidden />
     </section>
   );
 }
