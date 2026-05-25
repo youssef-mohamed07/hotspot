@@ -166,11 +166,28 @@
     ]
   },
   "visualization": {
-    "eyebrow": "Visualization",
-    "headline1": "Meet your",
-    "headlineAccent": "activation truck.",
-    "subtitle": "Drag to rotate. Scroll to zoom. Explore every angle of the platform that will carry your brand.",
-    "badge": "Drag · Zoom · Explore"
+    "eyebrow": "Customize",
+    "headline1": "Design your",
+    "headlineAccent": "Cybertruck.",
+    "subtitle": "Pick a body color, upload your logo, and preview your activation in real time.",
+    "badge": "Live preview",
+    "customizer": {
+      "partsTitle": "Pick a part",
+      "loading": "Loading parts…",
+      "finishTitle": "Finish",
+      "finishMatte": "Matte",
+      "finishSatin": "Satin",
+      "finishGloss": "Gloss",
+      "finishChrome": "Chrome",
+      "customColor": "Custom hex",
+      "logoTitle": "Your logo",
+      "logoUpload": "Upload logo",
+      "logoReplace": "Replace logo",
+      "logoRemove": "Remove",
+      "logoSize": "Logo size",
+      "logoHint": "Drag the logo to position it anywhere on the truck.",
+      "reset": "Reset to default"
+    }
   },
   "caseStudies": {
     "eyebrow": "Case studies",

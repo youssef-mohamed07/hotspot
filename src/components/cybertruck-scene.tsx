@@ -5,6 +5,7 @@ import "@google/model-viewer";
 import Image from "next/image";
 import {
   createElement,
+  useCallback,
   useEffect,
   useLayoutEffect,
   useMemo,
@@ -14,9 +15,15 @@ import {
 } from "react";
 import { SceneLoader } from "@/components/scene/scene-loader";
 
+export type SceneFinish = "matte" | "satin" | "gloss" | "chrome";
+
+export interface SceneMaterial {
+  index: number;
+  name: string;
+}
+
 interface CybertruckSceneProps {
-  /** "hero" hides UI overlays and uses an autostart shot; "explore" enables full controls */
-  initialView?: "hero" | "explore";
+  initialView?: "hero" | "explore" | "showroom";
   src?: string;
   alt?: string;
   className?: string;
@@ -25,6 +32,13 @@ interface CybertruckSceneProps {
   showControls?: boolean;
   controlsLabels?: Partial<CybertruckControlsLabels>;
   tone?: "blue" | "gray" | "white" | "original";
+  /** Map of material index -> hex color. */
+  materialColors?: Record<number, string>;
+  finish?: SceneFinish;
+  logoSrc?: string | null;
+  autoRotate?: boolean;
+  cameraOrbit?: string;
+  onMaterialsReady?: (materials: SceneMaterial[]) => void;
 }
 
 const MODEL_SRC = "/Cybertruck%203D/Cybertruck%203D.glb";
@@ -59,15 +73,18 @@ const defaultControlsLabels: CybertruckControlsLabels = {
   reset: "Reset",
 };
 
+type ModelMaterial = {
+  name?: string;
+  pbrMetallicRoughness?: {
+    setBaseColorFactor?: (color: readonly [number, number, number, number]) => void;
+    setMetallicFactor?: (value: number) => void;
+    setRoughnessFactor?: (value: number) => void;
+  };
+};
+
 type ModelViewerElement = HTMLElement & {
   model?: {
-    materials?: Array<{
-      pbrMetallicRoughness?: {
-        setBaseColorFactor?: (color: readonly [number, number, number, number]) => void;
-        setMetallicFactor?: (value: number) => void;
-        setRoughnessFactor?: (value: number) => void;
-      };
-    }>;
+    materials?: ModelMaterial[];
   };
 };
 
@@ -77,6 +94,37 @@ const modelViewerStyle = {
   background: "transparent",
   "--poster-color": "transparent",
 } as CSSProperties;
+
+const FINISH_PARAMS: Record<SceneFinish, { metallic: number; roughness: number }> = {
+  matte: { metallic: 0.25, roughness: 0.7 },
+  satin: { metallic: 0.5, roughness: 0.45 },
+  gloss: { metallic: 0.75, roughness: 0.25 },
+  chrome: { metallic: 1, roughness: 0.08 },
+};
+
+function hexToColorFactor(
+  hex: string,
+): readonly [number, number, number, number] | null {
+  const match = /^#?([0-9a-f]{6})$/i.exec(hex.trim());
+  if (!match) return null;
+  const value = match[1];
+  const r = parseInt(value.slice(0, 2), 16) / 255;
+  const g = parseInt(value.slice(2, 4), 16) / 255;
+  const b = parseInt(value.slice(4, 6), 16) / 255;
+  return [r, g, b, 1];
+}
+
+export function classifyMaterial(
+  name: string,
+): "skip" | "body" | "accent" | "ball" {
+  const n = (name ?? "").toLowerCase();
+  if (/(tire|tyre|wheel|rubber|rim|brake|disc)/.test(n)) return "skip";
+  if (/(glass|window|mirror|light|lamp|head|tail|signal)/.test(n)) return "skip";
+  if (/(ball|sphere|orb|globe|moon|planet)/.test(n)) return "ball";
+  if (/(box|cargo|bed|container|panel|stripe|band|trim|accent)/.test(n))
+    return "accent";
+  return "body";
+}
 
 export function CybertruckScene({
   initialView = "explore",
@@ -88,40 +136,86 @@ export function CybertruckScene({
   showControls = false,
   controlsLabels,
   tone = "blue",
+  materialColors,
+  finish,
+  logoSrc,
+  autoRotate: autoRotateProp,
+  cameraOrbit: cameraOrbitProp,
+  onMaterialsReady,
 }: CybertruckSceneProps) {
   const isHero = initialView === "hero";
+  const isShowroom = initialView === "showroom";
   const [loaded, setLoaded] = useState(false);
-  const [autoRotate, setAutoRotate] = useState(true);
-  const [cameraOrbit, setCameraOrbit] = useState(
-    isHero ? "35deg 70deg 74%" : "35deg 68deg 78%",
-  );
+  const [autoRotate, setAutoRotate] = useState(autoRotateProp ?? true);
+  const defaultOrbit = isShowroom
+    ? "30deg 75deg 78%"
+    : isHero
+      ? "35deg 70deg 74%"
+      : "35deg 68deg 78%";
+  const [cameraOrbit, setCameraOrbit] = useState(cameraOrbitProp ?? defaultOrbit);
   const [fieldOfView, setFieldOfView] = useState(DEFAULT_FIELD_OF_VIEW);
   const modelRef = useRef<ModelViewerElement | null>(null);
+  const materialsRef = useRef<ModelMaterial[]>([]);
   const labels = { ...defaultControlsLabels, ...controlsLabels };
 
+  // Sync external controlled props.
+  useEffect(() => {
+    if (autoRotateProp !== undefined) setAutoRotate(autoRotateProp);
+  }, [autoRotateProp]);
+
+  useEffect(() => {
+    if (cameraOrbitProp !== undefined) setCameraOrbit(cameraOrbitProp);
+  }, [cameraOrbitProp]);
+
+  const applyMaterials = useCallback(() => {
+    const materials = materialsRef.current;
+    if (!materials.length) return;
+
+    const finishParams = finish ? FINISH_PARAMS[finish] : null;
+
+    const fallback =
+      tone === "original"
+        ? null
+        : tone === "white"
+          ? SECTION_WHITE
+          : tone === "gray"
+            ? HERO_GRAY
+            : BRAND_BLUE;
+
+    materials.forEach((material, index) => {
+      const override = materialColors?.[index];
+      const factor = override ? hexToColorFactor(override) : fallback;
+
+      if (factor) {
+        material.pbrMetallicRoughness?.setBaseColorFactor?.(factor);
+      }
+
+      if (finishParams) {
+        material.pbrMetallicRoughness?.setMetallicFactor?.(finishParams.metallic);
+        material.pbrMetallicRoughness?.setRoughnessFactor?.(finishParams.roughness);
+      }
+    });
+  }, [materialColors, finish, tone]);
+
+  // Initial load: introspect materials once.
   useEffect(() => {
     const model = modelRef.current;
     if (!model) return;
 
-    const applyBrandMaterial = () => {
-      if (tone === "original") return;
-
-      const baseColor =
-        tone === "white" ? SECTION_WHITE : tone === "gray" ? HERO_GRAY : BRAND_BLUE;
-
-      model.model?.materials?.forEach((material) => {
-        material.pbrMetallicRoughness?.setBaseColorFactor?.(baseColor);
-        material.pbrMetallicRoughness?.setMetallicFactor?.(
-          tone === "white" ? 0.45 : tone === "gray" ? 0.65 : 0.85,
-        );
-        material.pbrMetallicRoughness?.setRoughnessFactor?.(
-          tone === "white" ? 0.42 : tone === "gray" ? 0.36 : 0.28,
-        );
-      });
-    };
-
     const handleLoad = () => {
-      applyBrandMaterial();
+      const materials = model.model?.materials ?? [];
+      materialsRef.current = materials;
+
+      onMaterialsReady?.(
+        materials.map((material, index) => ({
+          index,
+          name: material.name && material.name.trim()
+            ? material.name
+            : `Material ${index + 1}`,
+        })),
+      );
+
+      applyMaterials();
       requestAnimationFrame(() => setLoaded(true));
     };
 
@@ -134,7 +228,12 @@ export function CybertruckScene({
       model.removeEventListener("load", handleLoad);
       model.removeEventListener("error", handleError);
     };
-  }, [tone]);
+  }, [src, applyMaterials, onMaterialsReady]);
+
+  // Re-apply whenever colors / finish change.
+  useEffect(() => {
+    applyMaterials();
+  }, [applyMaterials]);
 
   useLayoutEffect(() => {
     const model = modelRef.current;
@@ -155,22 +254,23 @@ export function CybertruckScene({
       ref: modelRef,
       src,
       alt,
-      "disable-pan": false,
-      "disable-tap": false,
+      "disable-pan": isShowroom ? true : false,
+      "disable-tap": isShowroom ? true : false,
       "environment-image": "neutral",
-      exposure: tone === "white" ? "1.15" : tone === "gray" ? "0.9" : "1.05",
-      "interaction-prompt": isHero ? "none" : "auto",
+      exposure:
+        tone === "white" ? "1.15" : tone === "gray" ? "0.9" : isShowroom ? "1.1" : "1.05",
+      "interaction-prompt": isShowroom || isHero ? "none" : "auto",
       "interaction-prompt-style": "wiggle",
       "max-camera-orbit": "auto auto 130%",
       "min-camera-orbit": "auto auto 35%",
-      "rotation-per-second": isHero ? "12deg" : "18deg",
-      "shadow-intensity": "0.9",
-      "touch-action": isHero ? "none" : "pan-y",
+      "rotation-per-second": isShowroom ? "10deg" : isHero ? "12deg" : "18deg",
+      "shadow-intensity": isShowroom ? "1.1" : "0.9",
+      "touch-action": isShowroom || isHero ? "none" : "pan-y",
       className: `h-full w-full ${modelClassName}`,
       style: modelViewerStyle,
-      ...(!isHero ? { "camera-controls": true } : {}),
+      ...(!isHero && !isShowroom ? { "camera-controls": true } : {}),
     }),
-    [src, alt, isHero, tone, modelClassName],
+    [src, alt, isHero, isShowroom, tone, modelClassName],
   );
 
   return (
@@ -228,7 +328,7 @@ export function CybertruckScene({
             <button
               type="button"
               onClick={() => {
-                setCameraOrbit(isHero ? "35deg 70deg 74%" : "35deg 68deg 78%");
+                setCameraOrbit(defaultOrbit);
                 setFieldOfView(DEFAULT_FIELD_OF_VIEW);
                 setAutoRotate(true);
               }}
@@ -240,7 +340,7 @@ export function CybertruckScene({
         </div>
       )}
 
-      {showLogo && (
+      {showLogo && !logoSrc && (
         <div className="pointer-events-none absolute left-1/2 top-[57%] z-20 w-[18%] min-w-20 max-w-40 -translate-x-1/2 -translate-y-1/2 -rotate-6 opacity-90 mix-blend-screen drop-shadow-[0_0_18px_rgba(255,255,255,0.55)]">
           <Image
             src="/logo.png"

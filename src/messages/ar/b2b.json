@@ -166,11 +166,28 @@
     ]
   },
   "visualization": {
-    "eyebrow": "تخيّل التفعيل",
-    "headline1": "تعرّف على",
-    "headlineAccent": "شاحنة التفعيل.",
-    "subtitle": "اسحب للدوران. مرّر للتكبير. استكشف كل زاوية من المنصة اللي تحمل علامتك.",
-    "badge": "اسحب · كبّر · استكشف"
+    "eyebrow": "خصّص",
+    "headline1": "صمّم سايبرتراك",
+    "headlineAccent": "علامتك.",
+    "subtitle": "اختر لون البودي، ارفع لوجو علامتك، وشوف التفعيل في الوقت الفعلي.",
+    "badge": "معاينة مباشرة",
+    "customizer": {
+      "partsTitle": "اختر جزء",
+      "loading": "جاري تحميل الأجزاء…",
+      "finishTitle": "اللمسة",
+      "finishMatte": "مطفي",
+      "finishSatin": "ساتان",
+      "finishGloss": "لامع",
+      "finishChrome": "كروم",
+      "customColor": "لون مخصص",
+      "logoTitle": "لوجو علامتك",
+      "logoUpload": "رفع اللوجو",
+      "logoReplace": "استبدال اللوجو",
+      "logoRemove": "إزالة",
+      "logoSize": "حجم اللوجو",
+      "logoHint": "اسحب اللوجو لتحريكه على أي مكان من العربية.",
+      "reset": "إعادة للوضع الافتراضي"
+    }
   },
   "caseStudies": {
     "eyebrow": "أعمالنا",
