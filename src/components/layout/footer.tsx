@@ -34,6 +34,7 @@ export function Footer() {
                 width={140}
                 height={42}
                 className="h-10 w-auto brightness-0 invert"
+                style={{ width: "auto", height: "auto" }}
               />
             </Link>
             <p className="mt-6 text-sm leading-relaxed text-zinc-400">{dict.footer.tagline}</p>

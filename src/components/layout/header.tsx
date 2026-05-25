@@ -44,9 +44,11 @@ export function Header() {
             width={120}
             height={36}
             priority
+            loading="eager"
             fetchPriority="high"
-            className="h-7 md:h-8"
-            style={{ width: "auto" }}
+            sizes="120px"
+            className="h-7 w-auto md:h-8"
+            style={{ width: "auto", height: "auto" }}
           />
         </Link>
         <nav className="hidden items-center gap-1 md:flex">

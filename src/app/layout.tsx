@@ -51,7 +51,7 @@ export default async function RootLayout({
   const fontClass = `${geistSans.variable} ${geistMono.variable} ${bebasNeue.variable} ${cairo.variable} h-full antialiased${locale === "ar" ? " lang-ar" : ""}`;
 
   return (
-    <html lang={locale} dir={dir} className={fontClass}>
+    <html lang={locale} dir={dir} className={fontClass} data-scroll-behavior="smooth">
       <body className="min-h-full flex flex-col bg-[#08090c] text-zinc-100">
         <MarketingScripts />
         <JsonLd data={homePageJsonLd(locale, audience)} />

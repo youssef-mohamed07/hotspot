@@ -74,14 +74,17 @@ export default function LocaleSelectorPage({ params }: { params: Promise<{ local
               className="rounded-full bg-white/10 p-4 backdrop-blur-xl shadow-[0_0_50px_rgba(0,0,0,0.3)] ring-1 ring-white/20"
               dir="ltr"
             >
-              <Image 
-                src="/logo.png" 
-                alt="HotSpot" 
-                width={140} 
-                height={40} 
-                className="h-8 w-auto md:h-10" 
-                style={{ width: "auto" }}
+              <Image
+                src="/logo.png"
+                alt="HotSpot"
+                width={140}
+                height={40}
                 priority
+                loading="eager"
+                fetchPriority="high"
+                sizes="140px"
+                className="h-8 w-auto md:h-10"
+                style={{ width: "auto", height: "auto" }}
               />
             </motion.div>
           </div>

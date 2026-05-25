@@ -3,7 +3,15 @@
 import "@google/model-viewer";
 
 import Image from "next/image";
-import { createElement, useEffect, useRef, useState, type CSSProperties } from "react";
+import {
+  createElement,
+  useEffect,
+  useLayoutEffect,
+  useMemo,
+  useRef,
+  useState,
+  type CSSProperties,
+} from "react";
 import { SceneLoader } from "@/components/scene/scene-loader";
 
 interface CybertruckSceneProps {
@@ -114,7 +122,7 @@ export function CybertruckScene({
 
     const handleLoad = () => {
       applyBrandMaterial();
-      setLoaded(true);
+      requestAnimationFrame(() => setLoaded(true));
     };
 
     const handleError = () => setLoaded(true);
@@ -128,28 +136,42 @@ export function CybertruckScene({
     };
   }, [tone]);
 
-  const viewerProps: Record<string, unknown> = {
-    ref: modelRef,
-    src,
-    alt,
-    "camera-orbit": cameraOrbit,
-    "disable-pan": false,
-    "disable-tap": false,
-    "environment-image": "neutral",
-    exposure: tone === "white" ? "1.15" : tone === "gray" ? "0.9" : "1.05",
-    "field-of-view": fieldOfView,
-    "interaction-prompt": isHero ? "none" : "auto",
-    "interaction-prompt-style": "wiggle",
-    "max-camera-orbit": "auto auto 130%",
-    "min-camera-orbit": "auto auto 35%",
-    "rotation-per-second": isHero ? "12deg" : "18deg",
-    "shadow-intensity": "0.9",
-    "touch-action": isHero ? "none" : "pan-y",
-    className: `h-full w-full ${modelClassName}`,
-    style: modelViewerStyle,
-    ...(!isHero ? { "camera-controls": true } : {}),
-    ...(autoRotate ? { "auto-rotate": true } : {}),
-  };
+  useLayoutEffect(() => {
+    const model = modelRef.current;
+    if (!model) return;
+
+    model.setAttribute("camera-orbit", cameraOrbit);
+    model.setAttribute("field-of-view", fieldOfView);
+
+    if (autoRotate) {
+      model.setAttribute("auto-rotate", "");
+    } else {
+      model.removeAttribute("auto-rotate");
+    }
+  }, [cameraOrbit, fieldOfView, autoRotate]);
+
+  const viewerProps = useMemo(
+    () => ({
+      ref: modelRef,
+      src,
+      alt,
+      "disable-pan": false,
+      "disable-tap": false,
+      "environment-image": "neutral",
+      exposure: tone === "white" ? "1.15" : tone === "gray" ? "0.9" : "1.05",
+      "interaction-prompt": isHero ? "none" : "auto",
+      "interaction-prompt-style": "wiggle",
+      "max-camera-orbit": "auto auto 130%",
+      "min-camera-orbit": "auto auto 35%",
+      "rotation-per-second": isHero ? "12deg" : "18deg",
+      "shadow-intensity": "0.9",
+      "touch-action": isHero ? "none" : "pan-y",
+      className: `h-full w-full ${modelClassName}`,
+      style: modelViewerStyle,
+      ...(!isHero ? { "camera-controls": true } : {}),
+    }),
+    [src, alt, isHero, tone, modelClassName],
+  );
 
   return (
     <div className={`relative h-full w-full overflow-hidden rounded-[36px] ${className}`}>
@@ -225,7 +247,8 @@ export function CybertruckScene({
             alt=""
             width={220}
             height={64}
-            className="h-auto w-full"
+            className="h-auto w-full max-w-full"
+            style={{ width: "auto", height: "auto" }}
             aria-hidden
           />
         </div>

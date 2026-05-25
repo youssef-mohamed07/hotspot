@@ -60,7 +60,11 @@ export function SplashScreen() {
           width={200}
           height={60}
           priority
+          loading="eager"
+          fetchPriority="high"
+          sizes="200px"
           className="splash-screen__logo"
+          style={{ width: "auto", height: "auto" }}
         />
         <p
           className="splash-screen__tagline"

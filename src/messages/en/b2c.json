@@ -69,7 +69,7 @@
     "afterLabel": "After",
     "beforeAlt": "Stock Cybertruck before branding",
     "afterAlt": "Cybertruck after full brand wrap",
-    "hint": "Drag the handle to compare · Same angle · Transparent assets with shadow"
+    "hint": "Drag the slider to compare · Same shot, same angle · Photoreal wrap preview"
   },
   "experiential": {
     "title": "EXPERIENTIAL MARKETING",
@@ -278,6 +278,9 @@
     "eyebrow": "Client voices",
     "headline1": "Trusted by the",
     "headlineAccent": "biggest stages.",
+    "subtitle": "Real outcomes from brands activating with Hotspot across Saudi Arabia.",
+    "metricLabel": "Outcome",
+    "ratingLabel": "5 out of 5",
     "items": [
       {
         "quote": "We needed to be in Riyadh and Jeddah in the same week. Hotspot made it happen — fully branded, on time, with a report in our inbox before we even debriefed internally. That's the level of execution we needed.",
