@@ -4,6 +4,8 @@ import { Reveal } from "@/components/reveal";
 import { CybertruckSceneDynamic } from "@/components/scene/cybertruck-scene-dynamic";
 import { useDictionary } from "@/i18n/locale-provider";
 
+const KORA_BREAK_MODEL_SRC = "/Cyber%20Truck%20Koora%20Break.glb";
+
 export function VisualizationSection() {
   const dict = useDictionary();
 
@@ -29,7 +31,13 @@ export function VisualizationSection() {
             />
             <div className="grid-floor pointer-events-none absolute inset-0 opacity-40" aria-hidden />
             <div className="relative h-full w-full">
-              <CybertruckSceneDynamic initialView="explore" />
+              <CybertruckSceneDynamic
+                initialView="explore"
+                src={KORA_BREAK_MODEL_SRC}
+                alt="Kora Break Cybertruck 3D activation model"
+                showLogo={false}
+                tone="original"
+              />
             </div>
             <div className="pointer-events-none absolute start-6 top-6">
               <div className="glass inline-flex items-center gap-2 rounded-full px-4 py-2 text-[10px] uppercase tracking-[0.25em] text-zinc-600">
