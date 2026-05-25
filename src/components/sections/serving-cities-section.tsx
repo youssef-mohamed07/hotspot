@@ -3,37 +3,11 @@
 import { Reveal } from "@/components/reveal";
 import { KingdomMap } from "@/components/cities/kingdom-map";
 import { CitiesPanel } from "@/components/cities/cities-panel";
-import { useDictionary, useIsRtl, useAudience } from "@/i18n/locale-provider";
+import { useDictionary, useIsRtl } from "@/i18n/locale-provider";
 
 export function ServingCitiesSection() {
   const dict = useDictionary();
   const isRtl = useIsRtl();
-  const audience = useAudience();
-
-  const SidePanel = () => {
-    if (audience === "b2b") {
-      return (
-        <div className="flex h-full flex-col justify-center gap-4 text-start lg:pl-10">
-          <p className="text-sm font-semibold uppercase tracking-widest text-zinc-500 mb-2">
-            {dict.cities.zonesTitle}
-          </p>
-          <ul className="space-y-4">
-            {dict.cities.zones.map((item, index) => (
-              <li key={index} className="flex items-center gap-3">
-                <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-accent/10 text-accent font-mono text-xs">
-                  {String(index + 1).padStart(2, "0")}
-                </span>
-                <span className="text-lg font-medium text-zinc-800">
-                  {item}
-                </span>
-              </li>
-            ))}
-          </ul>
-        </div>
-      );
-    }
-    return <CitiesPanel />;
-  };
 
   return (
     <section className="relative flex min-h-[100dvh] flex-col items-center justify-center overflow-hidden py-24">
@@ -69,13 +43,13 @@ export function ServingCitiesSection() {
           >
             {isRtl ? (
               <>
-                <SidePanel />
-                <KingdomMap showPins={audience !== "b2b"} showLegend={audience !== "b2b"} />
+                <CitiesPanel />
+                <KingdomMap />
               </>
             ) : (
               <>
-                <KingdomMap showPins={audience !== "b2b"} showLegend={audience !== "b2b"} />
-                <SidePanel />
+                <KingdomMap />
+                <CitiesPanel />
               </>
             )}
           </div>

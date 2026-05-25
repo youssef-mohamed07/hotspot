@@ -1,15 +1,15 @@
 "use client";
 
 import type { CSSProperties } from "react";
+import Image from "next/image";
 import { TrackedCta } from "@/components/marketing/tracked-cta";
 import { DirectionalArrow } from "@/components/icons/directional-arrow";
-import { CybertruckSceneDynamic } from "@/components/scene/cybertruck-scene-dynamic";
 import { useDictionary, useLocale } from "@/i18n/locale-provider";
 
 const d = (seconds: number): CSSProperties =>
   ({ "--enter-delay": `${seconds}s` }) as CSSProperties;
 
-const KORA_BREAK_MODEL_SRC = "/Cyber%20Truck%20Koora%20Break.glb";
+const HERO_IMAGE_SRC = "/hero-bg.png";
 
 export function Hero() {
   const dict = useDictionary();
@@ -57,12 +57,12 @@ export function Hero() {
 
         <h1
           dir={locale === "ar" ? "rtl" : "ltr"}
-          className="display-headline text-[2.5rem] leading-[0.92] tracking-[-0.01em] text-white sm:text-5xl sm:leading-[0.9] md:text-6xl lg:text-[5.5rem] xl:text-[6.25rem]"
+          className="display-headline max-w-[min(100%,64rem)] text-[clamp(1.35rem,4.2vw,6.25rem)] leading-[0.92] tracking-[-0.01em] whitespace-nowrap text-white sm:leading-[0.9]"
         >
-          <span className="enter-item block" style={d(0.22)}>
-            {dict.hero.titleLine1}
+          <span className="enter-item inline" style={d(0.22)}>
+            {dict.hero.titleLine1}{" "}
           </span>
-          <span className="enter-item hero-accent-gradient mt-0 block" style={d(0.3)}>
+          <span className="enter-item hero-accent-gradient inline" style={d(0.3)}>
             <span className="text-gradient-accent">{dict.hero.titleLine2}</span>
           </span>
         </h1>
@@ -73,8 +73,6 @@ export function Hero() {
           style={d(0.38)}
         >
           {dict.hero.subtitle1}
-          <br className="hidden sm:block" />
-          {dict.hero.subtitle2}
         </p>
 
         <div
@@ -96,64 +94,55 @@ export function Hero() {
         </div>
       </div>
 
-      <div className="relative z-0 mt-4 flex w-full max-w-3xl items-center justify-center pb-0 sm:mt-6 sm:max-w-4xl md:mt-0 md:max-w-6xl md:flex-1">
+      <div className="relative z-10 mt-4 flex w-full max-w-3xl items-center justify-center pb-0 sm:mt-6 sm:max-w-4xl md:mt-0 md:max-w-6xl md:flex-1 lg:mt-2">
         <div className="hero-spotlight" aria-hidden />
 
         <div
-          className="enter-item enter-item-vehicle relative z-10 flex w-full -translate-y-4 items-center justify-center sm:-translate-y-6 md:-translate-y-8"
+          className="enter-item enter-item-vehicle relative z-10 flex w-full -translate-y-2 items-center justify-center sm:-translate-y-3 md:-translate-y-8 lg:-translate-y-10"
           style={d(0.54)}
         >
           <div className="relative">
             <div className="vehicle-edge-glow" aria-hidden />
 
             <div className="relative z-10 h-[300px] w-[96vw] max-w-5xl drop-shadow-[0_34px_54px_rgba(0,0,0,0.5)] sm:h-[360px] md:h-[44vh] lg:h-[48vh]">
-              <CybertruckSceneDynamic
-                initialView="hero"
-                src={KORA_BREAK_MODEL_SRC}
-                alt="Kora Break Cybertruck 3D activation model"
-                className="rounded-none"
-                modelClassName="pointer-events-none scale-105"
-                showLogo={false}
-                tone="original"
+              <Image
+                src={HERO_IMAGE_SRC}
+                alt="HotSpot Cybertruck brand activation"
+                width={1400}
+                height={700}
+                priority
+                loading="eager"
+                fetchPriority="high"
+                sizes="(max-width: 768px) 96vw, 1152px"
+                className="h-full w-full object-contain object-center"
               />
             </div>
 
             <div
-              aria-hidden
-              className="vehicle-reflection pointer-events-none absolute start-0 end-0 top-[calc(100%-18px)] z-5 mx-auto h-[300px] w-[96vw] max-w-5xl scale-y-[-1] opacity-14 blur-[1px] [mask-image:linear-gradient(to_bottom,rgba(0,0,0,0.42),transparent_52%)] sm:h-[360px] md:h-[44vh] lg:h-[48vh]"
-            >
-              <CybertruckSceneDynamic
-                initialView="hero"
-                src={KORA_BREAK_MODEL_SRC}
-                alt="Kora Break Cybertruck 3D activation model reflection"
-                className="rounded-none"
-                modelClassName="pointer-events-none scale-105"
-                showLogo={false}
-                tone="original"
-              />
-            </div>
-
-            <div
-              className="pointer-events-none absolute start-1/2 top-[calc(100%-22px)] h-16 w-[110%] -translate-x-1/2 rounded-[50%] bg-black/55 blur-3xl"
+              className="pointer-events-none absolute start-1/2 top-[calc(100%-28px)] h-28 w-[125%] -translate-x-1/2 rounded-[50%] bg-white/75 blur-3xl"
               aria-hidden
             />
             <div
-              className="pointer-events-none absolute start-1/2 top-[calc(100%-14px)] h-10 w-[90%] -translate-x-1/2 rounded-[50%] bg-black/75 blur-2xl"
+              className="pointer-events-none absolute start-1/2 top-[calc(100%-13px)] h-12 w-[82%] -translate-x-1/2 rounded-[50%] bg-slate-900/28 blur-2xl"
               aria-hidden
             />
             <div
-              className="pointer-events-none absolute start-1/2 top-[calc(100%-6px)] h-5 w-[65%] -translate-x-1/2 rounded-[50%] bg-black/90 blur-lg"
+              className="pointer-events-none absolute start-1/2 top-[calc(100%-20px)] h-20 w-[105%] -translate-x-1/2 rounded-[50%] bg-[#eef6ff]/80 blur-2xl"
               aria-hidden
             />
             <div
-              className="pointer-events-none absolute start-1/2 top-[calc(100%-2px)] h-2 w-[45%] -translate-x-1/2 rounded-[50%] bg-black blur-sm"
+              className="pointer-events-none absolute start-1/2 top-[calc(100%-10px)] h-10 w-[78%] -translate-x-1/2 rounded-[50%] bg-white/90 blur-xl"
+              aria-hidden
+            />
+            <div
+              className="pointer-events-none absolute start-1/2 top-[calc(100%-5px)] h-4 w-[56%] -translate-x-1/2 rounded-[50%] bg-slate-950/18 blur-md"
               aria-hidden
             />
           </div>
         </div>
       </div>
 
-      <div className="hero-bottom-transition z-5" aria-hidden />
+      <div className="hero-bottom-transition z-[1]" aria-hidden />
     </section>
   );
 }

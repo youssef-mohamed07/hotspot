@@ -18,10 +18,7 @@ export function ClientsMarqueeSection() {
   ];
 
   return (
-    <section className="relative overflow-hidden py-16 sm:py-24">
-      {/* Optional faint top border to give structure after the hero */}
-      <div className="absolute top-0 inset-x-0 h-px w-full bg-linear-to-r from-transparent via-zinc-200 to-transparent opacity-50" />
-
+    <section className="relative overflow-hidden bg-white py-16 sm:py-24">
       <SectionHeader
         variant="transition"
         title={dict.marquee.title}

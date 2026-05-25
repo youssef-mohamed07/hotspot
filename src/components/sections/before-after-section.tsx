@@ -42,9 +42,6 @@ export function BeforeAfterSection() {
             beforeAlt={dict.beforeAfter.beforeAlt}
             afterAlt={dict.beforeAfter.afterAlt}
           />
-          <p className="mt-6 text-center text-xs text-zinc-500">
-            {dict.beforeAfter.hint}
-          </p>
         </Reveal>
       </div>
     </section>
