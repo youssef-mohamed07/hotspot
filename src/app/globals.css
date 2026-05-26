@@ -134,24 +134,24 @@ html.lang-ar .hero-accent-gradient {
 .hero-spotlight {
   position: absolute;
   left: 50%;
-  bottom: 18%;
+  bottom: 10%;
   transform: translateX(-50%);
-  width: 90%;
-  max-width: 1200px;
-  height: 55%;
+  width: 100%;
+  max-width: 1400px;
+  height: 68%;
   pointer-events: none;
   background:
     radial-gradient(
-      50% 60% at 50% 60%,
-      rgba(60, 140, 210, 0.28),
-      transparent 70%
+      55% 65% at 50% 58%,
+      rgba(60, 140, 210, 0.38),
+      transparent 72%
     ),
     radial-gradient(
-      80% 50% at 50% 80%,
-      rgba(20, 60, 120, 0.35),
-      transparent 75%
+      85% 55% at 50% 82%,
+      rgba(20, 60, 120, 0.42),
+      transparent 78%
     );
-  filter: blur(20px);
+  filter: blur(18px);
 }
 
 /* Premium glass-pill (slightly upgraded glass) */
@@ -182,15 +182,15 @@ html.lang-ar .hero-accent-gradient {
 /* Vehicle ambient edge highlight (very subtle) */
 .vehicle-edge-glow {
   position: absolute;
-  inset: 0;
+  inset: -8%;
   pointer-events: none;
   background: radial-gradient(
-    60% 50% at 50% 50%,
-    rgba(80, 160, 230, 0.18),
-    transparent 70%
+    65% 55% at 50% 48%,
+    rgba(80, 160, 230, 0.28),
+    transparent 72%
   );
   mix-blend-mode: screen;
-  filter: blur(30px);
+  filter: blur(28px);
 }
 
 .hero-bottom-transition {

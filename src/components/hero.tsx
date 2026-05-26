@@ -4,16 +4,19 @@ import type { CSSProperties } from "react";
 import Image from "next/image";
 import { TrackedCta } from "@/components/marketing/tracked-cta";
 import { DirectionalArrow } from "@/components/icons/directional-arrow";
-import { useDictionary, useLocale } from "@/i18n/locale-provider";
+import { useAudience, useDictionary, useLocale } from "@/i18n/locale-provider";
 
 const d = (seconds: number): CSSProperties =>
   ({ "--enter-delay": `${seconds}s` }) as CSSProperties;
 
-const HERO_IMAGE_SRC = "/hero-bg.png";
+const HERO_IMAGE_B2B = "/hero-bg.png";
+const HERO_IMAGE_B2C = "/140000.png";
 
 export function Hero() {
   const dict = useDictionary();
   const locale = useLocale();
+  const audience = useAudience();
+  const heroImageSrc = audience === "b2c" ? HERO_IMAGE_B2C : HERO_IMAGE_B2B;
 
   return (
     <section className="dark-hero-bg relative flex w-full flex-col items-center overflow-hidden px-4 pb-24 pt-28 sm:px-6 sm:pb-28 md:h-dvh md:min-h-dvh md:pb-0 md:pt-24 lg:pt-28">
@@ -94,27 +97,27 @@ export function Hero() {
         </div>
       </div>
 
-      <div className="relative z-10 mt-4 flex w-full max-w-3xl items-center justify-center pb-0 sm:mt-6 sm:max-w-4xl md:mt-0 md:max-w-6xl md:flex-1 lg:mt-2">
+      <div className="relative z-10 mt-2 flex w-full max-w-5xl items-center justify-center pb-0 sm:mt-4 sm:max-w-6xl md:mt-0 md:max-w-7xl md:flex-1 lg:max-w-[88rem] lg:mt-0">
         <div className="hero-spotlight" aria-hidden />
 
         <div
-          className="enter-item enter-item-vehicle relative z-10 flex w-full -translate-y-2 items-center justify-center sm:-translate-y-3 md:-translate-y-8 lg:-translate-y-10"
+          className="enter-item enter-item-vehicle relative z-10 flex w-full translate-y-0 items-center justify-center sm:translate-y-1 md:-translate-y-2 lg:-translate-y-4"
           style={d(0.54)}
         >
-          <div className="relative">
+          <div className="relative w-full">
             <div className="vehicle-edge-glow" aria-hidden />
 
-            <div className="relative z-10 h-[300px] w-[96vw] max-w-5xl drop-shadow-[0_34px_54px_rgba(0,0,0,0.5)] sm:h-[360px] md:h-[44vh] lg:h-[48vh]">
+            <div className="relative z-10 mx-auto h-[min(52vh,380px)] w-full max-w-6xl drop-shadow-[0_40px_70px_rgba(0,0,0,0.55)] sm:h-[min(54vh,440px)] md:h-[min(58vh,520px)] lg:h-[min(62vh,600px)] lg:max-w-7xl">
               <Image
-                src={HERO_IMAGE_SRC}
-                alt="HotSpot Cybertruck brand activation"
-                width={1400}
-                height={700}
+                src={heroImageSrc}
+                alt={dict.hero.imageAlt}
+                width={1600}
+                height={800}
                 priority
                 loading="eager"
                 fetchPriority="high"
-                sizes="(max-width: 768px) 96vw, 1152px"
-                className="h-full w-full object-contain object-center"
+                sizes="(max-width: 768px) 100vw, (max-width: 1280px) 90vw, 1400px"
+                className="h-full w-full scale-[1.06] object-contain object-center brightness-[1.06] contrast-[1.04] sm:scale-[1.08] md:scale-[1.1]"
               />
             </div>
 
