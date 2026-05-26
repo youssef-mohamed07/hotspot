@@ -6,7 +6,7 @@ import {
   classifyMaterial,
   type SceneFinish,
   type SceneMaterial,
-} from "@/components/cybertruck-scene";
+} from "@/components/scene/material-utils";
 import { DraggableLogo } from "./draggable-logo";
 import type { TruckCustomizerLabels } from "@/types/customizer";
 

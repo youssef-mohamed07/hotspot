@@ -8,6 +8,11 @@ import { imageAssets } from "@/data/image-assets";
 
 const KORA_BREAK_MODEL_SRC = "/Cyber%20Truck%20Koora%20Break.glb";
 
+const CASE_STUDY_VIDEOS: (string | undefined)[] = [
+  "https://drive.google.com/file/d/1BkUiW_enA__FeYhxd3w5jTINy3NNZBMP/preview",
+  "https://drive.google.com/file/d/1P07_aAA1TGqje2jC3RQqS00AmiRVYO-D/preview",
+];
+
 export function CaseStudiesSection() {
   const dict = useDictionary();
   const caseStudies: CaseStudy[] = dict.caseStudies.items.map((item) => ({
@@ -41,6 +46,7 @@ export function CaseStudiesSection() {
                 study={cs}
                 index={i}
                 image={imageAssets.caseStudies[i] ?? imageAssets.caseStudies[0]}
+                videoEmbedUrl={CASE_STUDY_VIDEOS[i]}
                 modelSrc={i === 0 ? KORA_BREAK_MODEL_SRC : undefined}
                 modelAlt={i === 0 ? "Kora Break Cybertruck 3D activation model" : undefined}
                 modelControlsLabels={i === 0 ? dict.caseStudies.modelControls : undefined}

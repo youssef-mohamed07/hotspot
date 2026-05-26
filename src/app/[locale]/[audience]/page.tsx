@@ -46,6 +46,9 @@ export default async function HomePage({ params }: PageProps) {
   const { locale: localeParam, audience: audienceParam } = await params;
   if (!isLocale(localeParam) || !isAudience(audienceParam)) notFound();
 
+  const audience = audienceParam as Audience;
+  const isB2B = audience === "b2b";
+
   return (
     <>
       <Header />
@@ -59,7 +62,7 @@ export default async function HomePage({ params }: PageProps) {
         <TransitionStatsSection />
         <ProcessSection />
         <ConceptSection />
-        {/* <CaseStudiesSection /> */}
+        {isB2B && <CaseStudiesSection />}
         <OtherServicesSection />
         <TestimonialsSection />
         <FormSection />

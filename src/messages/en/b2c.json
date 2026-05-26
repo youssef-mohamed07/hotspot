@@ -16,7 +16,7 @@
     "process": "Process",
     "services": "Services",
     "contact": "Contact",
-    "cta": "Book Experience"
+    "cta": "Get in touch"
   },
   "hero": {
     "badgeRank": "#1",
@@ -24,8 +24,8 @@
     "titleLine1": "Cybertruck Is Now",
     "titleLine2": "Your Ad.",
     "subtitle1": "Command attention with the most futuristic mobile billboard on the road.",
-    "cta": "Book Your Experience",
-    "ctaAlt": "Start Your Activation",
+    "cta": "Get in touch",
+    "ctaAlt": "Get in touch",
     "imageAlt": "HotSpot Cybertruck mobile brand activation"
   },
   "marquee": {
@@ -500,7 +500,7 @@
   },
   "footer": {
     "tagline": "The strongest marketing tool in the Saudi market. Cybertruck activations, LED experiences, and full event production from concept to deployment.",
-    "cta": "Book your activation",
+    "cta": "Get in touch",
     "navigation": "Navigation",
     "contact": "Contact",
     "location": "Riyadh, Saudi Arabia",
@@ -511,6 +511,11 @@
   },
   "whatsapp": {
     "ariaLabel": "Chat with HotSpot on WhatsApp"
+  },
+  "contactCard": {
+    "label": "Contact Mohamed",
+    "role": "President & Co-founder @ HotSpot",
+    "ariaLabel": "Contact Mohamed, President & Co-founder of HotSpot"
   },
   "languageSwitcher": {
     "label": "Language"

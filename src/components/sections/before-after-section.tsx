@@ -3,10 +3,15 @@
 import { Reveal } from "@/components/reveal";
 import { BeforeAfterSlider } from "@/components/before-after/before-after-slider";
 import { imageAssets } from "@/data/image-assets";
-import { useDictionary } from "@/i18n/locale-provider";
+import { useAudience, useDictionary } from "@/i18n/locale-provider";
+
+const B2C_AFTER_SRC = "/16002.png";
 
 export function BeforeAfterSection() {
   const dict = useDictionary();
+  const audience = useAudience();
+  const afterSrc =
+    audience === "b2c" ? B2C_AFTER_SRC : imageAssets.beforeAfter.after.path;
 
   return (
     <section
@@ -38,7 +43,7 @@ export function BeforeAfterSection() {
         <Reveal delay={0.1}>
           <BeforeAfterSlider
             beforeSrc={imageAssets.beforeAfter.before.path}
-            afterSrc={imageAssets.beforeAfter.after.path}
+            afterSrc={afterSrc}
             beforeAlt={dict.beforeAfter.beforeAlt}
             afterAlt={dict.beforeAfter.afterAlt}
           />

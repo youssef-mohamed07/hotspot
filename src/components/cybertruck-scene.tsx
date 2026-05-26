@@ -1,7 +1,5 @@
 "use client";
 
-import "@google/model-viewer";
-
 import Image from "next/image";
 import {
   createElement,
@@ -14,13 +12,13 @@ import {
   type CSSProperties,
 } from "react";
 import { SceneLoader } from "@/components/scene/scene-loader";
+import {
+  classifyMaterial,
+  type SceneFinish,
+  type SceneMaterial,
+} from "@/components/scene/material-utils";
 
-export type SceneFinish = "matte" | "satin" | "gloss" | "chrome";
-
-export interface SceneMaterial {
-  index: number;
-  name: string;
-}
+export { classifyMaterial, type SceneFinish, type SceneMaterial };
 
 interface CybertruckSceneProps {
   initialView?: "hero" | "explore" | "showroom";
@@ -30,6 +28,7 @@ interface CybertruckSceneProps {
   modelClassName?: string;
   showLogo?: boolean;
   showControls?: boolean;
+  controlsPlacement?: "bottom" | "side";
   controlsLabels?: Partial<CybertruckControlsLabels>;
   tone?: "blue" | "gray" | "white" | "original";
   /** Map of material index -> hex color. */
@@ -38,6 +37,8 @@ interface CybertruckSceneProps {
   logoSrc?: string | null;
   autoRotate?: boolean;
   cameraOrbit?: string;
+  rotationPerSecond?: string;
+  disableZoom?: boolean;
   onMaterialsReady?: (materials: SceneMaterial[]) => void;
 }
 
@@ -114,18 +115,6 @@ function hexToColorFactor(
   return [r, g, b, 1];
 }
 
-export function classifyMaterial(
-  name: string,
-): "skip" | "body" | "accent" | "ball" {
-  const n = (name ?? "").toLowerCase();
-  if (/(tire|tyre|wheel|rubber|rim|brake|disc)/.test(n)) return "skip";
-  if (/(glass|window|mirror|light|lamp|head|tail|signal)/.test(n)) return "skip";
-  if (/(ball|sphere|orb|globe|moon|planet)/.test(n)) return "ball";
-  if (/(box|cargo|bed|container|panel|stripe|band|trim|accent)/.test(n))
-    return "accent";
-  return "body";
-}
-
 export function CybertruckScene({
   initialView = "explore",
   src = MODEL_SRC,
@@ -134,6 +123,7 @@ export function CybertruckScene({
   modelClassName = "",
   showLogo = true,
   showControls = false,
+  controlsPlacement = "bottom",
   controlsLabels,
   tone = "blue",
   materialColors,
@@ -141,6 +131,8 @@ export function CybertruckScene({
   logoSrc,
   autoRotate: autoRotateProp,
   cameraOrbit: cameraOrbitProp,
+  rotationPerSecond,
+  disableZoom = false,
   onMaterialsReady,
 }: CybertruckSceneProps) {
   const isHero = initialView === "hero";
@@ -157,6 +149,15 @@ export function CybertruckScene({
   const modelRef = useRef<ModelViewerElement | null>(null);
   const materialsRef = useRef<ModelMaterial[]>([]);
   const labels = { ...defaultControlsLabels, ...controlsLabels };
+  const controlsClassName =
+    controlsPlacement === "side"
+      ? "absolute right-0 inset-y-0 z-30 flex w-32 flex-col gap-2 overflow-y-auto rounded-l-2xl rounded-r-none border-s border-white/70 bg-white/90 p-3 text-zinc-900 shadow-2xl shadow-black/10 backdrop-blur-md sm:w-36"
+      : "absolute inset-x-4 bottom-4 z-30 rounded-2xl border border-white/70 bg-white/85 p-3 text-zinc-900 shadow-2xl shadow-black/10 backdrop-blur-md sm:inset-x-6 sm:bottom-6";
+
+  // Load model-viewer only in the browser runtime.
+  useEffect(() => {
+    void import("@google/model-viewer");
+  }, []);
 
   // Sync external controlled props.
   useEffect(() => {
@@ -263,14 +264,25 @@ export function CybertruckScene({
       "interaction-prompt-style": "wiggle",
       "max-camera-orbit": "auto auto 130%",
       "min-camera-orbit": "auto auto 35%",
-      "rotation-per-second": isShowroom ? "10deg" : isHero ? "12deg" : "18deg",
+      "rotation-per-second":
+        rotationPerSecond ?? (isShowroom ? "10deg" : isHero ? "12deg" : "18deg"),
       "shadow-intensity": isShowroom ? "1.1" : "0.9",
       "touch-action": isShowroom || isHero ? "none" : "pan-y",
       className: `h-full w-full ${modelClassName}`,
       style: modelViewerStyle,
+      "disable-zoom": disableZoom ? true : false,
       ...(!isHero && !isShowroom ? { "camera-controls": true } : {}),
     }),
-    [src, alt, isHero, isShowroom, tone, modelClassName],
+    [
+      src,
+      alt,
+      isHero,
+      isShowroom,
+      tone,
+      modelClassName,
+      disableZoom,
+      rotationPerSecond,
+    ],
   );
 
   return (
@@ -284,11 +296,11 @@ export function CybertruckScene({
       {createElement("model-viewer", viewerProps)}
 
       {showControls && (
-        <div className="absolute inset-x-4 bottom-4 z-30 rounded-2xl border border-white/70 bg-white/85 p-3 text-zinc-900 shadow-2xl shadow-black/10 backdrop-blur-md sm:inset-x-6 sm:bottom-6">
+        <div className={controlsClassName}>
           <p className="mb-2 text-[10px] font-bold uppercase tracking-[0.24em] text-zinc-500">
             {labels.instruction}
           </p>
-          <div className="flex flex-wrap gap-2">
+          <div className={controlsPlacement === "side" ? "flex flex-col gap-1.5" : "flex flex-wrap gap-2"}>
             <button
               type="button"
               onClick={() => setAutoRotate((value) => !value)}

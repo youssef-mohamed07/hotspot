@@ -12,6 +12,7 @@ export function CaseStudyCard({
   modelSrc,
   modelAlt,
   modelControlsLabels,
+  videoEmbedUrl,
 }: {
   study: CaseStudy;
   index: number;
@@ -30,6 +31,7 @@ export function CaseStudyCard({
     zoomOut: string;
     reset: string;
   };
+  videoEmbedUrl?: string;
 }) {
   const flipped = index % 2 === 1;
 
@@ -41,7 +43,18 @@ export function CaseStudyCard({
             flipped ? "lg:order-2" : ""
           }`}
         >
-          {modelSrc ? (
+          {videoEmbedUrl ? (
+            <div className="absolute inset-0 bg-black">
+              <iframe
+                src={videoEmbedUrl}
+                title={`${study.title} case study video`}
+                allow="autoplay; encrypted-media; picture-in-picture; fullscreen"
+                allowFullScreen
+                className="absolute inset-0 h-full w-full border-0"
+                loading="lazy"
+              />
+            </div>
+          ) : modelSrc ? (
             <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_34%,rgba(255,255,255,0.95),rgba(232,239,242,0.58)_42%,rgba(12,19,24,0.08)_100%)]">
               <CybertruckSceneDynamic
                 initialView="explore"
