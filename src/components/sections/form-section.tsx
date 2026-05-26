@@ -140,6 +140,211 @@ function CustomSelect({
   );
 }
 
+function DateRangePicker({
+  value,
+  onChange,
+  placeholder,
+}: {
+  value: string;
+  onChange: (val: string) => void;
+  placeholder: string;
+}) {
+  const [isOpen, setIsOpen] = useState(false);
+  const containerRef = useRef<HTMLDivElement>(null);
+  const [currentMonth, setCurrentMonth] = useState(new Date());
+
+  const [start, setStart] = useState<Date | null>(null);
+  const [end, setEnd] = useState<Date | null>(null);
+  const [hoveredDate, setHoveredDate] = useState<Date | null>(null);
+
+  useEffect(() => {
+    function handleClickOutside(event: MouseEvent) {
+      if (containerRef.current && !containerRef.current.contains(event.target as Node)) {
+        setIsOpen(false);
+      }
+    }
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
+
+  const daysInMonth = (date: Date) => new Date(date.getFullYear(), date.getMonth() + 1, 0).getDate();
+  const firstDayOfMonth = (date: Date) => new Date(date.getFullYear(), date.getMonth(), 1).getDay();
+
+  const handleDateClick = (day: number) => {
+    const selected = new Date(currentMonth.getFullYear(), currentMonth.getMonth(), day);
+    if (!start || (start && end)) {
+      setStart(selected);
+      setEnd(null);
+    } else if (selected < start) {
+      setStart(selected);
+      setEnd(null);
+    } else {
+      setEnd(selected);
+      const fmt = (d: Date) =>
+        d.toLocaleDateString("en-GB", { day: "numeric", month: "short", year: "numeric" });
+      onChange(`From ${fmt(start)} To ${fmt(selected)}`);
+      setIsOpen(false);
+    }
+  };
+
+  const isSelected = (day: number) => {
+    const d = new Date(currentMonth.getFullYear(), currentMonth.getMonth(), day);
+    if (start && d.getTime() === start.getTime()) return true;
+    if (end && d.getTime() === end.getTime()) return true;
+    return false;
+  };
+
+  const isInRange = (day: number) => {
+    const d = new Date(currentMonth.getFullYear(), currentMonth.getMonth(), day);
+    if (start && end) {
+      return d > start && d < end;
+    }
+    if (start && hoveredDate && !end) {
+      const s = start < hoveredDate ? start : hoveredDate;
+      const h = start < hoveredDate ? hoveredDate : start;
+      return d > s && d < h;
+    }
+    return false;
+  };
+
+  const isHovered = (day: number) => {
+    if (!start || end) return false;
+    const d = new Date(currentMonth.getFullYear(), currentMonth.getMonth(), day);
+    return hoveredDate && d.getTime() === hoveredDate.getTime();
+  };
+
+  const prevMonth = () =>
+    setCurrentMonth(new Date(currentMonth.getFullYear(), currentMonth.getMonth() - 1));
+  const nextMonth = () =>
+    setCurrentMonth(new Date(currentMonth.getFullYear(), currentMonth.getMonth() + 1));
+
+  return (
+    <div className="relative w-full" ref={containerRef}>
+      <button
+        type="button"
+        onClick={() => setIsOpen((prev) => !prev)}
+        className={`flex w-full items-center justify-between rounded-xl border px-4 py-3 text-sm outline-none transition-all ${
+          isOpen
+            ? "border-accent bg-white ring-1 ring-accent"
+            : "border-zinc-200 bg-zinc-50 hover:bg-zinc-100/80"
+        } ${value ? "text-zinc-900" : "text-zinc-500"}`}
+      >
+        <span className="truncate">{value || placeholder}</span>
+        <svg
+          className="h-4 w-4 text-zinc-400"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+        >
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth={2}
+            d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
+          />
+        </svg>
+      </button>
+
+      <AnimatePresence>
+        {isOpen && (
+          <motion.div
+            initial={{ opacity: 0, y: 10, scale: 0.98 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            exit={{ opacity: 0, y: 10, scale: 0.98 }}
+            className="absolute bottom-full left-0 right-0 z-50 mb-2 rounded-2xl border border-zinc-200 bg-white p-3 shadow-xl md:right-auto md:w-72"
+          >
+            <div className="mb-3 flex items-center justify-between px-1">
+              <button type="button" onClick={prevMonth} className="p-1 hover:text-accent">
+                <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M15 19l-7-7 7-7"
+                  />
+                </svg>
+              </button>
+              <h4 className="text-xs font-bold text-zinc-900">
+                {currentMonth.toLocaleDateString("default", { month: "long", year: "numeric" })}
+              </h4>
+              <button type="button" onClick={nextMonth} className="p-1 hover:text-accent">
+                <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M9 5l7 7-7 7"
+                  />
+                </svg>
+              </button>
+            </div>
+
+            <div className="grid grid-cols-7 text-center text-[9px] font-bold uppercase tracking-widest text-zinc-400">
+              {["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"].map((d) => (
+                <div key={d} className="py-1">
+                  {d}
+                </div>
+              ))}
+            </div>
+
+            <div className="grid grid-cols-7 gap-y-0.5">
+              {Array.from({ length: firstDayOfMonth(currentMonth) }).map((_, i) => (
+                <div key={`empty-${i}`} />
+              ))}
+              {Array.from({ length: daysInMonth(currentMonth) }).map((_, i) => {
+                const day = i + 1;
+                const selected = isSelected(day);
+                const ranged = isInRange(day);
+                const hovered = isHovered(day);
+                return (
+                  <button
+                    key={day}
+                    type="button"
+                    onMouseEnter={() =>
+                      setHoveredDate(
+                        new Date(currentMonth.getFullYear(), currentMonth.getMonth(), day)
+                      )
+                    }
+                    onMouseLeave={() => setHoveredDate(null)}
+                    onClick={() => handleDateClick(day)}
+                    className={`relative flex aspect-square items-center justify-center rounded-lg text-xs transition-colors ${
+                      selected
+                        ? "bg-accent text-white"
+                        : ranged
+                        ? "bg-accent/10 text-accent"
+                        : hovered
+                        ? "bg-zinc-100 text-accent ring-1 ring-accent/30"
+                        : "text-zinc-700 hover:bg-zinc-50"
+                    }`}
+                  >
+                    {day}
+                  </button>
+                );
+              })}
+            </div>
+            <div className="mt-3 flex items-center justify-between border-t border-zinc-100 pt-3 px-1 text-[9px] uppercase tracking-widest">
+              <span className="font-bold text-accent">
+                {!start ? "Pick Start" : !end ? "Pick End" : "Range Set"}
+              </span>
+              <button
+                type="button"
+                onClick={() => {
+                  setStart(null);
+                  setEnd(null);
+                  onChange("");
+                }}
+                className="text-zinc-400 hover:text-zinc-600"
+              >
+                Clear
+              </button>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </div>
+  );
+}
+
 export function FormSection() {
   const dict = useDictionary();
   const c = dict.contact;
@@ -315,12 +520,10 @@ export function FormSection() {
                           />
                         </Field>
                         <Field label={c.step2.date}>
-                          <input
-                            type="text"
-                            placeholder={c.step2.datePlaceholder}
+                          <DateRangePicker
                             value={data.campaignDate}
-                            onChange={(e) => update("campaignDate", e.target.value)}
-                            className={inputCls}
+                            onChange={(val) => update("campaignDate", val)}
+                            placeholder={c.step2.datePlaceholder}
                           />
                         </Field>
                         <Field label={c.step2.budget}>

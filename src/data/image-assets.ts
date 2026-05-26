@@ -58,54 +58,61 @@ export const imageAssets = {
       "Concept pillar 01 — Location",
     ),
     asset(
-      "/placeholders/concept-pillar-02-branding-800x1000.png",
+      "/assets/wrap.png",
       800,
       1000,
-      "Concept pillar 02 — Branding",
+      "Concept pillar 02 — Brand wrapping process",
     ),
   ],
   experiential: asset(
-    "/placeholders/experiential-cinematic-800x1000.png",
+    "/assets/event.png",
     800,
     1000,
-    "Experiential marketing — cinematic visual",
+    "Experiential marketing — Brand activation event",
   ),
   services: {
     cybertruck: asset(
-      "/placeholders/service-cybertruck-1200x880.png",
+      "/assets/services/cybertruck.png",
       1200,
       880,
       "Service — Cybertruck / Cyber Stage",
     ),
-    led: asset("/placeholders/service-led-1200x880.png", 1200, 880, "Service — LED screens"),
-    stage: asset("/placeholders/service-stage-1200x880.png", 1200, 880, "Service — Stage & truss"),
-    sound: asset("/placeholders/service-sound-1200x880.png", 1200, 880, "Service — Sound"),
+    led: asset("/assets/services/ledscreens.png", 1200, 880, "Service — LED screens"),
+    stage: asset("/assets/services/stqgeandtruss.png", 1200, 880, "Service — Stage & truss"),
+    sound: asset("/assets/services/sound.png", 1200, 880, "Service — Sound"),
     lighting: asset(
-      "/placeholders/service-lighting-1200x880.png",
+      "/assets/services/lighting.png",
       1200,
       880,
       "Service — Lighting",
     ),
     production: asset(
-      "/placeholders/service-production-1200x880.png",
+      "/assets/services/fulleventprod.png",
       1200,
       880,
       "Service — Full production",
     ),
   },
   clientLogos: {
-    mobily: asset("/logos/mobily.svg", 280, 96, "Client logo — Mobily"),
-    stc: asset("/logos/stc.svg", 280, 96, "Client logo — STC"),
+    mobily: asset("/logos/new/mobily.jpg", 280, 96, "Client logo — Mobily"),
+    stc: asset("/logos/new/stc.jpg", 280, 96, "Client logo — STC"),
     neom: asset("/logos/neom.svg", 280, 96, "Client logo — NEOM"),
     aramco: asset("/placeholders/client-logo-aramco-280x96.png", 280, 96, "Client logo — Aramco"),
     sabic: asset("/logos/sabic.svg", 280, 96, "Client logo — SABIC"),
     "riyadh-season": asset(
-      "/logos/riyadh-season.svg",
+      "/logos/new/riyadhseason.jpg",
       280,
       96,
       "Client logo — Riyadh Season",
     ),
-    hikma: asset("/logos/hikma.svg", 280, 96, "Client logo — Hikma"),
+    hikma: asset("/logos/new/hikma.jpg", 280, 96, "Client logo — Hikma"),
+    alhilal: asset("/logos/new/alhilal.jpg", 280, 96, "Client logo — Alhilal"),
+    altawnya: asset("/logos/new/altawnya.jpg", 280, 96, "Client logo — Altawnya"),
+    korabreak: asset("/logos/new/korabreak.jpg", 280, 96, "Client logo — Kora Break"),
+    riyadbank: asset("/logos/new/riyadbank.jpg", 280, 96, "Client logo — Riyadh Bank"),
+    sabinvest: asset("/logos/new/sabinvest.jpg", 280, 96, "Client logo — SAB Invest"),
+    sabk: asset("/logos/new/sabk.jpg", 280, 96, "Client logo — SAB"),
+    snb: asset("/logos/new/snb.jpg", 280, 96, "Client logo — SNB"),
   },
 } as const;
 
@@ -117,7 +124,7 @@ export function getServiceImage(id: string): ImageAsset {
 }
 
 export function getClientLogoImage(logoPath: string): ImageAsset | null {
-  const match = logoPath.match(/\/([^/]+)\.(svg|png)$/);
+  const match = logoPath.match(/\/([^/]+)\.(svg|png|jpg|jpeg)$/);
   if (!match) return null;
   const slug = match[1];
   const logos = imageAssets.clientLogos as Record<string, ImageAsset>;

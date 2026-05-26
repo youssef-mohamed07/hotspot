@@ -30,13 +30,13 @@ export function ClientsMarqueeSection() {
           {doubledLogos.map((client, idx) => (
             <div
               key={`${client.name}-${idx}`}
-              className="relative flex h-12 w-32 shrink-0 items-center justify-center grayscale transition-all duration-300 hover:grayscale-0 sm:h-14 sm:w-40"
+              className="relative flex h-12 w-32 shrink-0 items-center justify-center sm:h-14 sm:w-40"
             >
               <Image
                 src={client.logo!}
                 alt={`${client.name} logo`}
                 fill
-                className="object-contain opacity-50 transition-opacity hover:opacity-100"
+                className="object-contain"
               />
             </div>
           ))}

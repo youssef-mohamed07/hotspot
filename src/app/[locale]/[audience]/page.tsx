@@ -52,16 +52,16 @@ export default async function HomePage({ params }: PageProps) {
       <main id="main-content" className="flex-1 text-start">
         <Hero />
         <ClientsMarqueeSection />
+        <ExperientialMarketingSection />
         <TargetAudienceSection />
         <BeforeAfterSection />
-        <ExperientialMarketingSection />
+        <ServingCitiesSection />
         <TransitionStatsSection />
         <ProcessSection />
         <ConceptSection />
-        <CaseStudiesSection />
+        {/* <CaseStudiesSection /> */}
         <OtherServicesSection />
         <TestimonialsSection />
-        <ServingCitiesSection />
         <FormSection />
         <VisualizationSection />
         <FAQSection />

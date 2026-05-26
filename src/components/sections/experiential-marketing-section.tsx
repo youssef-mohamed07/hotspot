@@ -26,7 +26,10 @@ export function ExperientialMarketingSection() {
         }}
         aria-hidden
       />
-      <div className="grid-floor pointer-events-none absolute inset-0 opacity-15" aria-hidden />
+      <div
+        className="grid-floor pointer-events-none absolute inset-0 opacity-15"
+        aria-hidden
+      />
 
       <div className="relative mx-auto max-w-7xl px-6 w-full">
         <div className="grid lg:grid-cols-2 gap-16 lg:gap-24 items-center">
@@ -40,7 +43,9 @@ export function ExperientialMarketingSection() {
                   {dict.experiential.headline1}
                   <br />
                   {dict.experiential.headline2}{" "}
-                  <span className="text-gradient-accent">{dict.experiential.headlineAccent}</span>
+                  <span className="text-gradient-accent">
+                    {dict.experiential.headlineAccent}
+                  </span>
                 </>
               }
               subtitle={dict.experiential.subtitle}
@@ -56,7 +61,9 @@ export function ExperientialMarketingSection() {
                         <Icon className="h-6 w-6" />
                       </div>
                       <div>
-                        <h3 className="text-lg font-bold text-zinc-900">{card.title}</h3>
+                        <h3 className="text-lg font-bold text-zinc-900">
+                          {card.title}
+                        </h3>
                         <p className="mt-1.5 text-sm text-zinc-500 leading-relaxed">
                           {card.description}
                         </p>
@@ -68,7 +75,10 @@ export function ExperientialMarketingSection() {
             </div>
           </div>
 
-          <Reveal delay={0.3} className="relative hidden lg:block h-full min-h-[600px]">
+          <Reveal
+            delay={0.3}
+            className="relative hidden lg:block h-full min-h-[600px]"
+          >
             <div className="absolute inset-0 overflow-hidden rounded-[48px] border border-zinc-200/50 shadow-[0_32px_80px_rgba(0,0,0,0.08)]">
               <SiteImage
                 asset={imageAssets.experiential}

@@ -2,20 +2,22 @@
 
 import { Reveal } from "@/components/reveal";
 import { ConceptPillar } from "@/components/concept/concept-pillar";
-import { IconCube, IconMapPin } from "@/components/icons";
+import { IconCube } from "@/components/icons";
 import { imageAssets } from "@/data/image-assets";
 import { useDictionary } from "@/i18n/locale-provider";
 import type { ConceptPillarData } from "@/types/concept-pillar";
 
-const pillarIcons = [IconMapPin, IconCube];
-
 export function ConceptSection() {
   const dict = useDictionary();
-  const conceptPillars: ConceptPillarData[] = dict.concept.pillars.map((pillar, i) => ({
-    ...pillar,
-    Icon: pillarIcons[i] ?? IconMapPin,
+  const pillarData = dict.concept.pillars[1];
+
+  if (!pillarData) return null;
+
+  const pillar: ConceptPillarData = {
+    ...pillarData,
+    Icon: IconCube,
     image: "",
-  }));
+  };
 
   return (
     <section
@@ -47,15 +49,12 @@ export function ConceptSection() {
         </Reveal>
 
         <div className="space-y-24 lg:space-y-28">
-          {conceptPillars.map((pillar, i) => (
-            <ConceptPillar
-              key={pillar.title}
-              pillar={pillar}
-              index={i}
-              flipped={i % 2 === 1}
-              image={imageAssets.conceptPillars[i] ?? imageAssets.conceptPillars[0]}
-            />
-          ))}
+          <ConceptPillar
+            pillar={pillar}
+            index={0}
+            flipped={false}
+            image={imageAssets.conceptPillars[1] ?? imageAssets.conceptPillars[0]}
+          />
         </div>
       </div>
     </section>
