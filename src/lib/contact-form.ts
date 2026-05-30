@@ -59,6 +59,75 @@ export function parseContactForm(body: unknown): ContactFormData | null {
   return data;
 }
 
+export function buildUserConfirmationEmailHtml(data: ContactFormData) {
+  const firstName = data.name.split(" ")[0];
+
+  return `
+    <!DOCTYPE html>
+    <html>
+    <head>
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>Brief Received</title>
+    </head>
+    <body style="margin: 0; padding: 0; background-color: #f4f4f5; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;">
+      <div style="max-width: 600px; margin: 40px auto; background-color: #ffffff; border-radius: 16px; overflow: hidden; box-shadow: 0 4px 24px rgba(0, 0, 0, 0.04);">
+        <!-- Header -->
+        <div style="background: linear-gradient(135deg, #2a76a6 0%, #04285f 100%); padding: 40px 32px; text-align: center;">
+          <h1 style="color: #ffffff; margin: 0; font-size: 24px; font-weight: 600; letter-spacing: 0.02em;">Brief Received</h1>
+          <p style="color: rgba(255, 255, 255, 0.8); margin: 8px 0 0 0; font-size: 15px;">HotSpot Cyber Stage Activation</p>
+        </div>
+
+        <!-- Body -->
+        <div style="padding: 40px 32px;">
+          <p style="margin: 0 0 16px; color: #27272a; font-size: 16px; line-height: 1.6;">Hi ${escapeHtml(firstName)},</p>
+          <p style="margin: 0 0 24px; color: #52525b; font-size: 16px; line-height: 1.6;">
+            Thank you for reaching out. We have successfully received your activation brief for <strong>${escapeHtml(data.company)}</strong>.
+          </p>
+
+          <!-- Campaign Summary Box -->
+          <div style="background-color: #fafafa; border: 1px solid #e4e4e7; border-radius: 12px; padding: 24px; margin-bottom: 32px;">
+            <p style="margin: 0 0 12px; color: #a1a1aa; text-transform: uppercase; font-size: 12px; font-weight: 700; letter-spacing: 0.05em;">Campaign Overview</p>
+            
+            <div style="margin-bottom: 8px;">
+              <span style="color: #71717a; font-size: 14px; display: inline-block; width: 120px;">Type:</span>
+              <span style="color: #27272a; font-size: 14px; font-weight: 500;">${escapeHtml(data.campaignType)}</span>
+            </div>
+            
+            <div style="margin-bottom: 8px;">
+              <span style="color: #71717a; font-size: 14px; display: inline-block; width: 120px;">Locations:</span>
+              <span style="color: #27272a; font-size: 14px; font-weight: 500;">${escapeHtml(data.targetCities)}</span>
+            </div>
+
+            ${data.campaignDate ? `
+            <div>
+              <span style="color: #71717a; font-size: 14px; display: inline-block; width: 120px;">Date:</span>
+              <span style="color: #27272a; font-size: 14px; font-weight: 500;">${escapeHtml(data.campaignDate)}</span>
+            </div>
+            ` : ""}
+          </div>
+
+          <p style="margin: 0 0 16px; color: #52525b; font-size: 16px; line-height: 1.6;">
+            Our team is currently reviewing your requirements. We will be in touch within the next <strong>24 hours</strong> to discuss the scope, timeline, and next steps.
+          </p>
+          <p style="margin: 0; color: #52525b; font-size: 16px; line-height: 1.6;">
+            Speak soon,<br>
+            <span style="font-weight: 600; color: #27272a;">The HotSpot Team</span>
+          </p>
+        </div>
+
+        <!-- Footer -->
+        <div style="background-color: #fafafa; border-top: 1px solid #e4e4e7; padding: 24px 32px; text-align: center;">
+          <p style="margin: 0; color: #a1a1aa; font-size: 13px;">
+            This is an automated confirmation email. You can reply directly to this email if you need to add any additional information to your brief.
+          </p>
+        </div>
+      </div>
+    </body>
+    </html>
+  `;
+}
+
 export function buildContactEmailHtml(data: ContactFormData) {
   const row = (label: string, value: string) =>
     value

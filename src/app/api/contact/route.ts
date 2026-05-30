@@ -1,22 +1,31 @@
 import { NextResponse } from "next/server";
 import { parseContactForm } from "@/lib/contact-form";
-import { sendContactBriefEmail } from "@/lib/resend";
+import { sendContactBriefEmail, sendUserConfirmationEmail } from "@/lib/resend";
 
 export async function POST(request: Request) {
   let body: unknown;
   try {
     body = await request.json();
-  } catch {
-    return NextResponse.json({ error: "Invalid request body." }, { status: 400 });
+  } catch (err) {
+    return NextResponse.json({ error: "Invalid JSON body" }, { status: 400 });
   }
 
   const data = parseContactForm(body);
   if (!data) {
-    return NextResponse.json({ error: "Please fill in all required fields." }, { status: 400 });
+    return NextResponse.json({ error: "Invalid or missing form fields" }, { status: 400 });
   }
 
   try {
+    // Send email to admin
     await sendContactBriefEmail(data);
+
+    // Attempt to send confirmation to user (do not fail the request if it errors)
+    try {
+      await sendUserConfirmationEmail(data);
+    } catch (userEmailErr) {
+      console.error("[contact] Failed to send user confirmation email:", userEmailErr);
+    }
+
     return NextResponse.json({ ok: true });
   } catch (err) {
     console.error("[contact]", err);

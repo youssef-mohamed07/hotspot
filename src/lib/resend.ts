@@ -2,6 +2,7 @@ import { Resend } from "resend";
 import {
   buildContactEmailHtml,
   buildContactEmailText,
+  buildUserConfirmationEmailHtml,
   type ContactFormData,
 } from "@/lib/contact-form";
 
@@ -37,6 +38,28 @@ export async function sendContactBriefEmail(data: ContactFormData) {
 
   if (error) {
     throw new Error(`Resend Error: ${error.message}`);
+  }
+
+  return result;
+}
+
+export async function sendUserConfirmationEmail(data: ContactFormData) {
+  const config = getResendConfig();
+  if (!config) {
+    throw new Error("Email service is not configured.");
+  }
+
+  const resend = new Resend(config.apiKey);
+
+  const { data: result, error } = await resend.emails.send({
+    to: data.email,
+    from: `HotSpot Team <${config.fromAddress}>`,
+    subject: `We received your brief for ${data.company}`,
+    html: buildUserConfirmationEmailHtml(data),
+  });
+
+  if (error) {
+    throw new Error(`Resend User Confirmation Error: ${error.message}`);
   }
 
   return result;
