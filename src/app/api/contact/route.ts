@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import { parseContactForm } from "@/lib/contact-form";
-import { sendContactBriefEmail } from "@/lib/sendgrid";
+import { sendContactBriefEmail } from "@/lib/resend";
 
 export async function POST(request: Request) {
   let body: unknown;

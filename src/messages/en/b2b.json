@@ -405,7 +405,7 @@
     "subtitle": "Tell us about your campaign. We come back within 24 hours with scope, timeline and a tailored proposal.",
     "successTitle": "Brief Received!",
     "successBody": "Thanks{name}. We are reviewing your specs and will be in touch within 24 hours.",
-    "steps": ["Contact", "Brand", "Campaign", "Details"],
+    "steps": ["Contact", "Brand", "Campaign", "Details", "Method"],
     "progressLabel": "Step {current} of {total}",
     "back": "Back",
     "continue": "Continue",

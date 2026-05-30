@@ -11,6 +11,8 @@ export type ContactFormData = {
   campaignDate: string;
   budget: string;
   notes: string;
+  contactMethod: string;
+  meetingDate: string;
   attribution?: AttributionData;
 };
 
@@ -37,6 +39,8 @@ export function parseContactForm(body: unknown): ContactFormData | null {
     campaignDate: str("campaignDate"),
     budget: str("budget"),
     notes: str("notes"),
+    contactMethod: str("contactMethod"),
+    meetingDate: str("meetingDate"),
     attribution,
   };
 
@@ -61,9 +65,12 @@ export function buildContactEmailHtml(data: ContactFormData) {
       ? `<tr><td style="padding:8px 12px;font-weight:600;color:#52525b;vertical-align:top;width:160px">${label}</td><td style="padding:8px 12px;color:#18181b">${escapeHtml(value)}</td></tr>`
       : "";
 
+  const timestamp = new Date().toLocaleString("en-US", { timeZone: "UTC", timeZoneName: "short" });
+
   return `
     <div style="font-family:system-ui,sans-serif;max-width:560px">
-      <h2 style="color:#18181b;margin:0 0 16px">New activation brief</h2>
+      <h2 style="color:#18181b;margin:0 0 4px">New activation brief</h2>
+      <p style="color:#52525b;font-size:13px;margin:0 0 16px">Submitted on: ${timestamp}</p>
       <table style="width:100%;border-collapse:collapse;background:#fafafa;border-radius:12px">
         ${row("Name", data.name)}
         ${row("Company", data.company)}
@@ -74,6 +81,8 @@ export function buildContactEmailHtml(data: ContactFormData) {
         ${row("Target cities", data.targetCities)}
         ${row("Campaign date", data.campaignDate)}
         ${row("Budget", data.budget)}
+        ${row("Contact Method", data.contactMethod || "-")}
+        ${row("Meeting Date", data.meetingDate || "-")}
         ${row("Notes", data.notes.replace(/\n/g, "<br>"))}
       </table>
       ${attributionBlockHtml(data.attribution)}
@@ -110,6 +119,8 @@ function attributionBlockHtml(attribution?: AttributionData) {
 }
 
 export function buildContactEmailText(data: ContactFormData) {
+  const timestamp = new Date().toLocaleString("en-US", { timeZone: "UTC", timeZoneName: "short" });
+
   const lines = [
     ["Name", data.name],
     ["Company", data.company],
@@ -120,10 +131,12 @@ export function buildContactEmailText(data: ContactFormData) {
     ["Target cities", data.targetCities],
     ["Campaign date", data.campaignDate],
     ["Budget", data.budget],
+    ["Contact method", data.contactMethod],
+    ["Meeting date", data.meetingDate],
     ["Notes", data.notes],
   ].filter(([, v]) => v);
 
-  let text = `New activation brief\n\n${lines.map(([k, v]) => `${k}: ${v}`).join("\n")}`;
+  let text = `New activation brief\nSubmitted on: ${timestamp}\n\n${lines.map(([k, v]) => `${k}: ${v}`).join("\n")}`;
 
   if (data.attribution) {
     const attrLines = Object.entries(data.attribution).filter(([, v]) => v);

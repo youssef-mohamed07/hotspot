@@ -21,7 +21,7 @@ export function WizardProgress({
     <div className="flex flex-col gap-3">
       <div className="flex items-center justify-between text-[10px] uppercase tracking-[0.3em] text-zinc-500">
         <span className="text-accent">{stepText}</span>
-        <span>{progressLabels[current]}</span>
+        <span>{progressLabels[current] || ""}</span>
       </div>
       <div className="h-1 overflow-hidden rounded-full bg-zinc-100">
         <div

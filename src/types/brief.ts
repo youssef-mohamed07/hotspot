@@ -1,8 +1,21 @@
 export type CampaignType = "mall" | "event" | "national" | "vip" | "other";
-export type Goal = "awareness" | "launch" | "footfall" | "sales" | "vip" | "social";
-export type Service = "led" | "stage" | "sound" | "interactive" | "photo" | "wraps";
+export type Goal =
+  | "awareness"
+  | "launch"
+  | "footfall"
+  | "sales"
+  | "vip"
+  | "social";
+export type Service =
+  | "led"
+  | "stage"
+  | "sound"
+  | "interactive"
+  | "photo"
+  | "wraps";
 export type Timeline = "asap" | "1month" | "3months" | "exploring";
 export type Budget = "under50" | "50to150" | "150to500" | "500plus" | "tbd";
+export type ContactMethod = "email" | "phone" | "meet";
 
 export interface BriefData {
   campaignType: CampaignType | null;
@@ -18,6 +31,8 @@ export interface BriefData {
   email: string;
   phone: string;
   notes: string;
+  contactMethod: ContactMethod | null;
+  meetingDate: Date | null;
 }
 
 export const initialBrief: BriefData = {
@@ -34,4 +49,6 @@ export const initialBrief: BriefData = {
   email: "",
   phone: "",
   notes: "",
+  contactMethod: null,
+  meetingDate: null,
 };
