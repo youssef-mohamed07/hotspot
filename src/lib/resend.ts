@@ -29,7 +29,7 @@ export async function sendContactBriefEmail(data: ContactFormData) {
   const { data: result, error } = await resend.emails.send({
     to: config.to,
     from: `${config.fromName} <${config.fromAddress}>`,
-    reply_to: data.email,
+    replyTo: data.email,
     subject: `New brief: ${data.company} — ${data.name}`,
     text: buildContactEmailText(data),
     html: buildContactEmailHtml(data),
