@@ -68,7 +68,7 @@ export function FeaturedCybertruckCard() {
 
           <div className="mt-2 flex flex-wrap items-center gap-3">
             <span className="inline-flex items-center gap-2 rounded-full bg-white px-6 py-3 text-sm font-semibold text-[#04285f] transition group-hover:translate-x-1">
-              Explore the truck
+              Explore Cyber Stage
               <IconArrowRight className="rtl-flip h-4 w-4" />
             </span>
             <span className="inline-flex items-center gap-2 text-xs uppercase tracking-[0.25em] text-white/70">

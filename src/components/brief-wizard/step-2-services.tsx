@@ -47,7 +47,7 @@ export function Step2Services({
     <div>
       <StepHeader
         title="Which add-ons do you need?"
-        hint="Combine the truck with extra production capabilities."
+        hint="Combine Cyber Stage with extra production capabilities."
       />
       <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
         {services.map((s) => (

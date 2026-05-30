@@ -46,7 +46,7 @@ export const caseStudies: CaseStudy[] = [
       },
       {
         title: "Built-In Photo Moment",
-        description: "Every guest left with a picture next to the truck",
+        description: "Every guest left with a picture next to Cyber Stage",
       },
       {
         title: "Set The Energy",

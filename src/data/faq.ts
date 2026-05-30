@@ -3,7 +3,7 @@ import type { FaqItem } from "@/types/faq";
 export const faqs: FaqItem[] = [
   {
     q: "What exactly is Cyber Stage?",
-    a: "Cyber Stage is a fully branded, AV-equipped Tesla Cyber Stage that deploys at your event, venue, or location as a mobile brand activation unit. Full vehicle wrap in your identity, LED screens running your content, spatial audio — positioned exactly where your audience is. It's not a truck with a logo on it. It's a moving brand experience.",
+    a: "Cyber Stage is a fully branded, AV-equipped mobile activation unit that deploys at your event, venue, or location. Full vehicle wrap in your identity, LED screens running your content, spatial audio — positioned exactly where your audience is. It's not just a logo slapped on a vehicle. It's a moving brand experience.",
     category: "Customization",
   },
   {

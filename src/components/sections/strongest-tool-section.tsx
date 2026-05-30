@@ -124,7 +124,7 @@ export function StrongestToolSection() {
               <EngagementGauge value={94} />
               <div className="mt-2 flex items-center justify-between text-[10px] uppercase tracking-widest text-zinc-500">
                 <span>Banner ad</span>
-                <span>HotSpot truck</span>
+                <span>HotSpot Cyber Stage</span>
               </div>
             </div>
           </Reveal>

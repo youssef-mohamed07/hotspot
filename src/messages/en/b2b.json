@@ -1,7 +1,7 @@
 {
   "meta": {
     "title": "HotSpot | Cyber Stage Brand Activations & Event Production — Saudi Arabia",
-    "description": "Cyber Stage: branded Tesla Cyber Stage activations for product launches, venues & festivals. LED, sound, lighting & full event production in Riyadh, Jeddah, Khobar, Mecca & Medina. Book in 48–72h."
+    "description": "Cyber Stage: branded mobile activations for product launches, venues & festivals. LED, sound, lighting & full event production in Riyadh, Jeddah, Khobar, Mecca & Medina. Book in 48–72h."
   },
   "site": {
     "whatsappMessage": "Hi HotSpot! I'd like to learn more about Cyber Stage and book an activation."
@@ -11,7 +11,7 @@
   },
   "nav": {
     "concept": "Concept",
-    "truck": "The Truck",
+    "truck": "Cyber Stage",
     "cases": "Case Studies",
     "process": "Process",
     "services": "Services",
@@ -56,7 +56,7 @@
       {
         "id": "street",
         "lead": "You're ready to own the street...",
-        "payoff": "One truck. Every city. Unlimited presence."
+        "payoff": "One Cyber Stage. Every city. Unlimited presence."
       }
     ]
   },
@@ -121,7 +121,7 @@
       {
         "n": "03",
         "title": "Production & Wrap",
-        "blurb": "The truck is wrapped, the AV systems are configured, and content is loaded. Production takes 48–72 hours from final approval."
+        "blurb": "Cyber Stage is wrapped, the AV systems are configured, and content is loaded. Production takes 48–72 hours from final approval."
       },
       {
         "n": "04",
@@ -155,7 +155,7 @@
       {
         "title": "Built for Your Brand",
         "subtitle": "Designed around your brand",
-        "description": "Full vehicle wraps, custom LED content, interactive overlays, and modular accessories. The truck becomes a 100% extension of your brand identity.",
+        "description": "Full vehicle wraps, custom LED content, interactive overlays, and modular accessories. Cyber Stage becomes a 100% extension of your brand identity.",
         "bullets": [
           "Full-body custom vehicle wrap",
           "Branded LED content & motion graphics",
@@ -186,7 +186,7 @@
       "logoReplace": "Replace logo",
       "logoRemove": "Remove",
       "logoSize": "Logo size",
-      "logoHint": "Drag the logo to position it anywhere on the truck.",
+      "logoHint": "Drag the logo to position it anywhere on Cyber Stage.",
       "reset": "Reset to default"
     }
   },
@@ -211,7 +211,7 @@
         "title": "Koora Break",
         "category": "Sports Media",
         "location": "Riyadh",
-        "intro": "Sports media brand. Riyadh. The truck was the entrance.",
+        "intro": "Sports media brand. Riyadh. Cyber Stage was the entrance.",
         "highlights": [
           {
             "title": "Instant Crowd",
@@ -239,7 +239,7 @@
           },
           {
             "title": "Built-In Photo Moment",
-            "description": "Every guest left with a picture next to the truck"
+            "description": "Every guest left with a picture next to Cyber Stage"
           },
           {
             "title": "Set The Energy",
@@ -250,7 +250,7 @@
     ]
   },
   "services": {
-    "eyebrow": "Beyond The Truck",
+    "eyebrow": "Beyond Cyber Stage",
     "headline1": "Years of 360° solutions.",
     "headlineAccent": "and still innovating.",
     "subtitle": "Cyber Stage is the newest chapter of a decade-long commitment to making Saudi events unforgettable.",
@@ -507,7 +507,7 @@
     "items": [
       {
         "q": "What exactly is Cyber Stage?",
-        "a": "Cyber Stage is a fully branded, AV-equipped Tesla Cyber Stage that deploys at your event, venue, or location as a mobile brand activation unit. Full vehicle wrap in your identity, LED screens running your content, spatial audio — positioned exactly where your audience is. It's not a truck with a logo on it. It's a moving brand experience.",
+        "a": "Cyber Stage is a fully branded, AV-equipped mobile activation unit that deploys at your event, venue, or location. Full vehicle wrap in your identity, LED screens running your content, spatial audio — positioned exactly where your audience is. It's not just a logo slapped on a vehicle. It's a moving brand experience.",
         "category": "Customization"
       },
       {

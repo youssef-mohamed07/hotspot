@@ -52,7 +52,7 @@ export function ImpressionsTicker() {
         {formatted}
         <span className="text-gradient-accent">+</span>
       </p>
-      <p className="mt-2 text-xs text-zinc-500">eyes per truck per day</p>
+      <p className="mt-2 text-xs text-zinc-500">eyes per Cyber Stage per day</p>
     </div>
   );
 }

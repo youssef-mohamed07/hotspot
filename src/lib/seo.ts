@@ -11,7 +11,7 @@ import { siteConfig } from "@/lib/site";
 const defaultTitle =
   "HotSpot | Cyber Stage Activations, LED & Event Production in Saudi Arabia";
 const defaultDescription =
-  "Book Cyber Stage — a branded Tesla Cyber Stage mobile activation for launches, venues, and festivals. LED screens, sound, lighting, and end-to-end event production across Riyadh, Jeddah, Khobar, Mecca & Medina.";
+  "Book Cyber Stage — a branded mobile activation for launches, venues, and festivals. LED screens, sound, lighting, and end-to-end event production across Riyadh, Jeddah, Khobar, Mecca & Medina.";
 
 const keywords = [...seoKeywords];
 
@@ -214,7 +214,7 @@ export function serviceJsonLd() {
     },
     areaServed: siteConfig.address.countryName,
     description:
-      "Fully branded Tesla Cyber Stage deployment with on-board LED, spatial audio, crew, and content — for launches, venues, and festivals.",
+      "Fully branded Cyber Stage deployment with on-board LED, spatial audio, crew, and content — for launches, venues, and festivals.",
     serviceType: "Experiential marketing and event production",
   };
 }

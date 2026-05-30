@@ -17,8 +17,8 @@ export const seoKeywords = [
   // Cyber Stage / mobile activation
   "Cyber Stage activation",
   "Cyber Stage activation Saudi Arabia",
-  "Tesla Cyber Stage marketing",
-  "Tesla Cyber Stage advertising KSA",
+  "Cyber Stage marketing",
+  "Cyber Stage advertising KSA",
   "Cyber Stage brand activation",
   "Cyber Stage event Saudi Arabia",
   "Cyber Stage wrap branding",
