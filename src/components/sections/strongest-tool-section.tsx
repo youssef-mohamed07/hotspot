@@ -8,7 +8,7 @@ import { SectionHeader } from "@/components/section-header";
 
 export function StrongestToolSection() {
   return (
-    <section className="relative flex min-h-[100dvh] flex-col items-center justify-center overflow-hidden py-24">
+    <section className="relative flex min-h-[100dvh] flex-col items-center justify-center overflow-hidden bg-white py-24">
       {/* Light atmospheric backdrop */}
       <div
         className="absolute inset-0 opacity-20"
@@ -82,7 +82,7 @@ export function StrongestToolSection() {
               />
               <div className="relative">
                 <p className="text-[10px] uppercase tracking-[0.3em] text-accent">
-                  HotSpot Cybertruck
+                  HotSpot Cyber Stage
                 </p>
                 <p className="mt-4 display-headline text-5xl text-gradient-accent sm:text-6xl">
                   REMEMBERED

@@ -52,7 +52,7 @@ export default async function HomePage({ params }: PageProps) {
   return (
     <>
       <Header />
-      <main id="main-content" className="flex-1 text-start">
+      <main id="main-content" className="flex-1 bg-white text-start">
         <Hero />
         <ClientsMarqueeSection />
         <ExperientialMarketingSection />

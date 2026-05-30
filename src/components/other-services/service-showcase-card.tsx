@@ -24,6 +24,7 @@ export function ServiceShowcaseCard({
 }) {
   const detailLines = getDetailLines(service);
   const featured = service.featured;
+  const badgeOnly = featured && service.badge;
 
   return (
     <button
@@ -65,21 +66,25 @@ export function ServiceShowcaseCard({
           </span>
         )}
 
-        <div className="mb-4 text-white">
-          <service.Icon className="h-6 w-6" />
-        </div>
+        {!badgeOnly && (
+          <>
+            <div className="mb-4 text-white">
+              <service.Icon className="h-6 w-6" />
+            </div>
 
-        <h3 className="max-w-[220px] text-xl font-bold leading-tight text-white transition duration-300 xl:text-2xl">
-          {service.title}
-        </h3>
+            <h3 className="max-w-[220px] text-xl font-bold leading-tight text-white transition duration-300 xl:text-2xl">
+              {service.title}
+            </h3>
 
-        <div className="mt-3 max-w-[200px] space-y-1">
-          {detailLines.map((line) => (
-            <p key={line} className="text-xs leading-snug text-white/85">
-              {line}
-            </p>
-          ))}
-        </div>
+            <div className="mt-3 max-w-[200px] space-y-1">
+              {detailLines.map((line) => (
+                <p key={line} className="text-xs leading-snug text-white/85">
+                  {line}
+                </p>
+              ))}
+            </div>
+          </>
+        )}
       </div>
     </button>
   );

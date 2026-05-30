@@ -35,11 +35,10 @@ export const caseStudies: CaseStudy[] = [
     image: "",
   },
   {
-    title: "Tawineya",
-    category: "Community Brand",
+    title: "Tawuniya",
+    category: "Brand",
     location: "Saudi Arabia",
-    intro:
-      "Saudi community brand. The venue didn't need decoration — it needed a statement.",
+    intro: "The venue didn't need decoration — it needed a statement.",
     highlights: [
       {
         title: "Venue Takeover",

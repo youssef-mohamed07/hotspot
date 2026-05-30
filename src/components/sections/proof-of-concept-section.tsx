@@ -6,7 +6,7 @@ import { ClientTile } from "@/components/proof-of-concept/client-tile";
 
 export function ProofOfConceptSection() {
   return (
-    <section className="relative flex min-h-[100dvh] flex-col items-center justify-center overflow-hidden py-24">
+    <section className="relative flex min-h-[100dvh] flex-col items-center justify-center overflow-hidden bg-white py-24">
       {/* Top + bottom hairlines */}
       <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-accent-soft/40 to-transparent" aria-hidden />
       <div className="absolute inset-x-0 bottom-0 h-px bg-gradient-to-r from-transparent via-accent-soft/40 to-transparent" aria-hidden />

@@ -16,7 +16,7 @@ export function BeforeAfterSection() {
   return (
     <section
       id="before-after"
-      className="relative overflow-hidden bg-[#fafafa] py-24 md:py-32"
+      className="relative overflow-hidden bg-white py-24 md:py-32"
     >
       <div
         className="grid-floor pointer-events-none absolute inset-0 opacity-25 mix-blend-multiply"

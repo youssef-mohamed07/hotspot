@@ -77,7 +77,9 @@ const defaultControlsLabels: CybertruckControlsLabels = {
 type ModelMaterial = {
   name?: string;
   pbrMetallicRoughness?: {
-    setBaseColorFactor?: (color: readonly [number, number, number, number]) => void;
+    setBaseColorFactor?: (
+      color: readonly [number, number, number, number],
+    ) => void;
     setMetallicFactor?: (value: number) => void;
     setRoughnessFactor?: (value: number) => void;
   };
@@ -96,7 +98,10 @@ const modelViewerStyle = {
   "--poster-color": "transparent",
 } as CSSProperties;
 
-const FINISH_PARAMS: Record<SceneFinish, { metallic: number; roughness: number }> = {
+const FINISH_PARAMS: Record<
+  SceneFinish,
+  { metallic: number; roughness: number }
+> = {
   matte: { metallic: 0.25, roughness: 0.7 },
   satin: { metallic: 0.5, roughness: 0.45 },
   gloss: { metallic: 0.75, roughness: 0.25 },
@@ -118,7 +123,7 @@ function hexToColorFactor(
 export function CybertruckScene({
   initialView = "explore",
   src = MODEL_SRC,
-  alt = "3D Cybertruck activation model",
+  alt = "3D Cyber Stage activation model",
   className = "",
   modelClassName = "",
   showLogo = true,
@@ -144,7 +149,9 @@ export function CybertruckScene({
     : isHero
       ? "35deg 70deg 74%"
       : "35deg 68deg 78%";
-  const [cameraOrbit, setCameraOrbit] = useState(cameraOrbitProp ?? defaultOrbit);
+  const [cameraOrbit, setCameraOrbit] = useState(
+    cameraOrbitProp ?? defaultOrbit,
+  );
   const [fieldOfView, setFieldOfView] = useState(DEFAULT_FIELD_OF_VIEW);
   const modelRef = useRef<ModelViewerElement | null>(null);
   const materialsRef = useRef<ModelMaterial[]>([]);
@@ -192,8 +199,12 @@ export function CybertruckScene({
       }
 
       if (finishParams) {
-        material.pbrMetallicRoughness?.setMetallicFactor?.(finishParams.metallic);
-        material.pbrMetallicRoughness?.setRoughnessFactor?.(finishParams.roughness);
+        material.pbrMetallicRoughness?.setMetallicFactor?.(
+          finishParams.metallic,
+        );
+        material.pbrMetallicRoughness?.setRoughnessFactor?.(
+          finishParams.roughness,
+        );
       }
     });
   }, [materialColors, finish, tone]);
@@ -210,9 +221,10 @@ export function CybertruckScene({
       onMaterialsReady?.(
         materials.map((material, index) => ({
           index,
-          name: material.name && material.name.trim()
-            ? material.name
-            : `Material ${index + 1}`,
+          name:
+            material.name && material.name.trim()
+              ? material.name
+              : `Material ${index + 1}`,
         })),
       );
 
@@ -259,13 +271,20 @@ export function CybertruckScene({
       "disable-tap": isShowroom ? true : false,
       "environment-image": "neutral",
       exposure:
-        tone === "white" ? "1.15" : tone === "gray" ? "0.9" : isShowroom ? "1.1" : "1.05",
+        tone === "white"
+          ? "1.15"
+          : tone === "gray"
+            ? "0.9"
+            : isShowroom
+              ? "1.1"
+              : "1.05",
       "interaction-prompt": isShowroom || isHero ? "none" : "auto",
       "interaction-prompt-style": "wiggle",
       "max-camera-orbit": "auto auto 130%",
       "min-camera-orbit": "auto auto 35%",
       "rotation-per-second":
-        rotationPerSecond ?? (isShowroom ? "10deg" : isHero ? "12deg" : "18deg"),
+        rotationPerSecond ??
+        (isShowroom ? "10deg" : isHero ? "12deg" : "18deg"),
       "shadow-intensity": isShowroom ? "1.1" : "0.9",
       "touch-action": isShowroom || isHero ? "none" : "pan-y",
       className: `h-full w-full ${modelClassName}`,
@@ -286,7 +305,9 @@ export function CybertruckScene({
   );
 
   return (
-    <div className={`relative h-full w-full overflow-hidden rounded-[36px] ${className}`}>
+    <div
+      className={`relative h-full w-full overflow-hidden rounded-[36px] ${className}`}
+    >
       {!loaded && (
         <div className="absolute inset-0 z-10 grid place-items-center bg-[#05060a]/30">
           <SceneLoader />
@@ -300,7 +321,13 @@ export function CybertruckScene({
           <p className="mb-2 text-[10px] font-bold uppercase tracking-[0.24em] text-zinc-500">
             {labels.instruction}
           </p>
-          <div className={controlsPlacement === "side" ? "flex flex-col gap-1.5" : "flex flex-wrap gap-2"}>
+          <div
+            className={
+              controlsPlacement === "side"
+                ? "flex flex-col gap-1.5"
+                : "flex flex-wrap gap-2"
+            }
+          >
             <button
               type="button"
               onClick={() => setAutoRotate((value) => !value)}

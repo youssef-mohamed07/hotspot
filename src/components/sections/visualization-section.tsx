@@ -11,7 +11,7 @@ export function VisualizationSection() {
   return (
     <section
       id="visualization"
-      className="relative flex min-h-[56dvh] flex-col items-center justify-center overflow-hidden py-12"
+      className="relative flex min-h-[56dvh] flex-col items-center justify-center overflow-hidden bg-white py-12"
     >
       <div className="mx-auto w-full max-w-7xl px-6">
         <Reveal className="mb-8 text-center">

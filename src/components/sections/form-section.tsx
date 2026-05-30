@@ -407,7 +407,7 @@ export function FormSection() {
   return (
     <section
       id="contact"
-      className="relative flex min-h-[100dvh] flex-col items-center justify-center overflow-hidden bg-[#fafafa] py-24 md:py-32"
+      className="relative flex min-h-[100dvh] flex-col items-center justify-center overflow-hidden bg-white py-24 md:py-32"
     >
       <div className="grid-floor pointer-events-none absolute inset-0 opacity-40 mix-blend-multiply" aria-hidden />
 

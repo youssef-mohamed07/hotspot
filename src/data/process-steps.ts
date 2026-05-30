@@ -19,8 +19,9 @@ export const processSteps = [
   },
   {
     n: "04",
-    title: "Street Deployment",
-    blurb: "The Cyber Stage hits the road. Our crew manages every on-ground moment — positioning, content capture, audience engagement.",
+    title: "Activation Day",
+    blurb:
+      "The Cyber Stage hits the road. Our crew manages every on-ground moment — positioning, content capture, audience engagement.",
   },
   {
     n: "05",

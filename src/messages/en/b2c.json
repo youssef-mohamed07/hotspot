@@ -1,7 +1,7 @@
 {
   "meta": {
-    "title": "HotSpot | Cybertruck Brand Activations & Event Production — Saudi Arabia",
-    "description": "Cyber Stage: branded Tesla Cybertruck activations for product launches, venues & festivals. LED, sound, lighting & full event production in Riyadh, Jeddah, Khobar, Mecca & Medina. Book in 48–72h."
+    "title": "HotSpot | Cyber Stage Brand Activations & Event Production — Saudi Arabia",
+    "description": "Cyber Stage: branded Tesla Cyber Stage activations for product launches, venues & festivals. LED, sound, lighting & full event production in Riyadh, Jeddah, Khobar, Mecca & Medina. Book in 48–72h."
   },
   "site": {
     "whatsappMessage": "Hi HotSpot! I'd like to learn more about Cyber Stage and book an activation."
@@ -21,41 +21,41 @@
   "hero": {
     "badgeRank": "#1",
     "badgeLabel": "For the first time in Saudi Arabia",
-    "titleLine1": "Cybertruck Is Now",
+    "titleLine1": "Cyber Stage Is Now",
     "titleLine2": "Your moment.",
     "subtitle1": "Make your celebration impossible to forget",
     "cta": "Get in touch",
     "ctaAlt": "Get in touch",
-    "imageAlt": "HotSpot Cybertruck mobile brand activation"
+    "imageAlt": "HotSpot Cyber Stage mobile brand activation"
   },
   "marquee": {
     "title": "Celebrated at the most memorable occasions across the Kingdom."
   },
   "targetAudience": {
     "title": "Is this for you?",
-    "headline1": "This Cybertruck is",
+    "headline1": "This Cyber Stage is",
     "headline2": "made for you",
     "headlineAccent": "if...",
     "subtitle": "It's not just a digital billboard. It's a statement piece designed strictly for brands that refuse to blend in.",
     "items": [
       {
         "id": "launch",
-        "lead": "If you're launching something big...",
+        "lead": "You're launching something big...",
         "payoff": "You need an entrance, not just an announcement."
       },
       {
         "id": "event",
-        "lead": "If you have an event ahead...",
+        "lead": "You have an event ahead...",
         "payoff": "The first impression starts outside the door."
       },
       {
         "id": "buzz",
-        "lead": "If you want people talking before it starts...",
+        "lead": "You want people talking before it starts...",
         "payoff": "Cyber Stage is already filming before guests arrive."
       },
       {
         "id": "street",
-        "lead": "If you're ready to own the street...",
+        "lead": "You're ready to own the street...",
         "payoff": "One truck. Every city. Unlimited presence."
       }
     ]
@@ -63,11 +63,11 @@
   "beforeAfter": {
     "eyebrow": "Transformation",
     "title": "Before vs after",
-    "subtitle": "See the exact transformation — from stock Cybertruck to your brand moving through Saudi streets.",
+    "subtitle": "See the exact transformation — from stock Cyber Stage to your brand moving through Saudi streets.",
     "beforeLabel": "Before",
     "afterLabel": "After",
-    "beforeAlt": "Stock Cybertruck before branding",
-    "afterAlt": "Cybertruck after full brand wrap",
+    "beforeAlt": "Stock Cyber Stage before branding",
+    "afterAlt": "Cyber Stage after full brand wrap",
     "hint": "Drag the slider to compare · Same shot, same angle · Photoreal wrap preview"
   },
   "experiential": {
@@ -125,7 +125,7 @@
       },
       {
         "n": "04",
-        "title": "Street Deployment",
+        "title": "Activation Day",
         "blurb": "The Cyber Stage hits the road. Our crew manages every on-ground moment — positioning, content capture, audience engagement."
       },
       {
@@ -137,14 +137,14 @@
   },
   "concept": {
     "eyebrow": "The concept",
-    "headline1": "This Cybertruck is",
+    "headline1": "This Cyber Stage is",
     "headlineAccent": "made for you.",
     "subtitle": "Two principles drive every activation — where we put it, and how it's dressed for your brand.",
     "pillars": [
       {
         "title": "Location-Based",
         "subtitle": "Built around your audience",
-        "description": "We position the Cybertruck where your audience already lives — malls, events, neighborhoods, business districts. The location is part of the message.",
+        "description": "We position the Cyber Stage where your audience already lives — malls, events, neighborhoods, business districts. The location is part of the message.",
         "bullets": [
           "Foot-traffic mapping in advance",
           "Permits, parking & power handled",
@@ -168,7 +168,7 @@
   "visualization": {
     "eyebrow": "Customize",
     "headline1": "Design your",
-    "headlineAccent": "Cybertruck.",
+    "headlineAccent": "Cyber Stage.",
     "subtitle": "Pick a body color, upload your logo, and preview your activation in real time.",
     "badge": "Live preview",
     "customizer": {
@@ -212,20 +212,38 @@
         "location": "Riyadh",
         "intro": "Sports media brand. Riyadh. The truck was the entrance.",
         "highlights": [
-          { "title": "Instant Crowd", "description": "Lines formed before doors opened" },
-          { "title": "Organic Content", "description": "Guests filmed it before the event started" },
-          { "title": "Zero Paid Reach", "description": "The activation marketed itself" }
+          {
+            "title": "Instant Crowd",
+            "description": "Lines formed before doors opened"
+          },
+          {
+            "title": "Organic Content",
+            "description": "Guests filmed it before the event started"
+          },
+          {
+            "title": "Zero Paid Reach",
+            "description": "The activation marketed itself"
+          }
         ]
       },
       {
-        "title": "Tawineya",
+        "title": "Tawuniya",
         "category": "Community Brand",
         "location": "Saudi Arabia",
-        "intro": "Saudi community brand. The venue didn't need decoration — it needed a statement.",
+        "intro": "The venue didn't need decoration — it needed a statement.",
         "highlights": [
-          { "title": "Venue Takeover", "description": "Entrance became the first brand moment" },
-          { "title": "Built-In Photo Moment", "description": "Every guest left with a picture next to the truck" },
-          { "title": "Set The Energy", "description": "Crowd was hyped before stepping inside" }
+          {
+            "title": "Venue Takeover",
+            "description": "Entrance became the first brand moment"
+          },
+          {
+            "title": "Built-In Photo Moment",
+            "description": "Every guest left with a picture next to the truck"
+          },
+          {
+            "title": "Set The Energy",
+            "description": "Crowd was hyped before stepping inside"
+          }
         ]
       }
     ]
@@ -239,11 +257,16 @@
     "exploreCta": "Explore Cyber Stage",
     "requestCta": "Request this layer",
     "flagship": {
-      "id": "cybertruck",
-      "title": "Cybertruck",
+      "id": "Cyber Stage",
+      "title": "Cyber Stage",
       "description": "Immersive Mobile Stage",
       "summary": "A fully branded, AV-equipped mobile rig that deploys at your venue — custom wrap, on-board LED, spatial audio, and a crew that runs every on-ground moment.",
-      "highlights": ["Custom brand wrap", "On-board LED screens", "Road-ready crew", "KSA-wide deployment"],
+      "highlights": [
+        "Custom brand wrap",
+        "On-board LED screens",
+        "Road-ready crew",
+        "KSA-wide deployment"
+      ],
       "tag": "Flagship",
       "badge": "New"
     },
@@ -253,7 +276,12 @@
         "title": "LED Screens & Displays",
         "description": "Indoor & Outdoor · Any Scale",
         "summary": "From intimate retail walls to stadium-scale outdoor walls — calibrated, content-ready, and operated by our AV team on activation day.",
-        "highlights": ["Indoor & outdoor rigs", "Any aspect ratio", "Content playback", "On-site tech crew"],
+        "highlights": [
+          "Indoor & outdoor rigs",
+          "Any aspect ratio",
+          "Content playback",
+          "On-site tech crew"
+        ],
         "tag": "Visual"
       },
       {
@@ -261,7 +289,12 @@
         "title": "Stage & Truss Systems",
         "description": "Corporate Events · Concerts · Launches",
         "summary": "Engineered stage platforms and truss for corporate keynotes, concert builds, and product launches — safe, fast to deploy, and brand-ready.",
-        "highlights": ["Corporate & concert builds", "Certified rigging", "Custom sizing", "Launch-ready staging"],
+        "highlights": [
+          "Corporate & concert builds",
+          "Certified rigging",
+          "Custom sizing",
+          "Launch-ready staging"
+        ],
         "tag": "Structure"
       },
       {
@@ -269,7 +302,12 @@
         "title": "Professional Sound System",
         "description": "Line Array · Immersive Audio",
         "summary": "Line-array systems tuned for clarity at scale — from VIP lounges to open-air activations with full spatial coverage.",
-        "highlights": ["Line array systems", "Zone mixing", "Live & playback", "Outdoor-rated"],
+        "highlights": [
+          "Line array systems",
+          "Zone mixing",
+          "Live & playback",
+          "Outdoor-rated"
+        ],
         "tag": "Audio"
       },
       {
@@ -277,7 +315,12 @@
         "title": "Lighting Design",
         "description": "Architectural · Stage · Outdoor",
         "summary": "Architectural washes, stage looks, and outdoor scenes — designed to match your brand palette and photographed beautifully.",
-        "highlights": ["Architectural washes", "Stage looks", "Outdoor scenes", "DMX programming"],
+        "highlights": [
+          "Architectural washes",
+          "Stage looks",
+          "Outdoor scenes",
+          "DMX programming"
+        ],
         "tag": "Lighting"
       },
       {
@@ -285,7 +328,12 @@
         "title": "Full Event Production",
         "description": "End-to-End · Single Point of Contact",
         "summary": "One team owns the full stack — scope, vendors, permits, build, show-call, and strike. You get a single point of contact, zero hand-offs.",
-        "highlights": ["Single point of contact", "Permits & logistics", "Vendor management", "Show-day operations"],
+        "highlights": [
+          "Single point of contact",
+          "Permits & logistics",
+          "Vendor management",
+          "Show-day operations"
+        ],
         "tag": "Production"
       }
     ]
@@ -313,7 +361,7 @@
         "metric": { "value": "10x", "label": "Organic engagement" }
       },
       {
-        "quote": "The Cybertruck activation generated more social impressions in one weekend than our entire Q3 digital campaign. Outstanding tech and execution.",
+        "quote": "The Cyber Stage activation generated more social impressions in one weekend than our entire Q3 digital campaign. Outstanding tech and execution.",
         "author": "Khalid R.",
         "role": "VP Marketing",
         "company": "Tech Company",
@@ -458,7 +506,7 @@
     "items": [
       {
         "q": "What exactly is Cyber Stage?",
-        "a": "Cyber Stage is a fully branded, AV-equipped Tesla Cybertruck that deploys at your event, venue, or location as a mobile brand activation unit. Full vehicle wrap in your identity, LED screens running your content, spatial audio — positioned exactly where your audience is. It's not a truck with a logo on it. It's a moving brand experience.",
+        "a": "Cyber Stage is a fully branded, AV-equipped Tesla Cyber Stage that deploys at your event, venue, or location as a mobile brand activation unit. Full vehicle wrap in your identity, LED screens running your content, spatial audio — positioned exactly where your audience is. It's not a truck with a logo on it. It's a moving brand experience.",
         "category": "Customization"
       },
       {
@@ -468,7 +516,7 @@
       },
       {
         "q": "Can we use it at our event venue specifically?",
-        "a": "Yes — and that's actually one of the highest-impact uses. Positioning Cyber Stage at your venue entrance creates an immediate first impression before guests walk through the door. Kora Break and Tawineya both did exactly this. It sets the tone for everything that follows.",
+        "a": "Yes — and that's actually one of the highest-impact uses. Positioning Cyber Stage at your venue entrance creates an immediate first impression before guests walk through the door. Kora Break and Tawuniya both did exactly this. It sets the tone for everything that follows.",
         "category": "Logistics"
       },
       {
@@ -499,7 +547,7 @@
     ]
   },
   "footer": {
-    "tagline": "The strongest marketing tool in the Saudi market. Cybertruck activations, LED experiences, and full event production from concept to deployment.",
+    "tagline": "The strongest marketing tool in the Saudi market. Cyber Stage activations, LED experiences, and full event production from concept to deployment.",
     "cta": "Get in touch",
     "navigation": "Navigation",
     "contact": "Contact",

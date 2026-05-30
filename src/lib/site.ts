@@ -1,7 +1,7 @@
 export const siteConfig = {
   name: "HotSpot",
   legalName: "HotSpot Event Technology",
-  tagline: "Cybertruck activations & 360° event production in Saudi Arabia",
+  tagline: "Cyber Stage activations & 360° event production in Saudi Arabia",
   url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://hotsspots.com",
   locale: "en_SA",
   email: "inquiry@hotsspots.com",

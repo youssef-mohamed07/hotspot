@@ -9,9 +9,9 @@ import { imageAssets } from "@/data/image-assets";
 import { siteConfig } from "@/lib/site";
 
 const defaultTitle =
-  "HotSpot | Cybertruck Activations, LED & Event Production in Saudi Arabia";
+  "HotSpot | Cyber Stage Activations, LED & Event Production in Saudi Arabia";
 const defaultDescription =
-  "Book Cyber Stage — a branded Tesla Cybertruck mobile activation for launches, venues, and festivals. LED screens, sound, lighting, and end-to-end event production across Riyadh, Jeddah, Khobar, Mecca & Medina.";
+  "Book Cyber Stage — a branded Tesla Cyber Stage mobile activation for launches, venues, and festivals. LED screens, sound, lighting, and end-to-end event production across Riyadh, Jeddah, Khobar, Mecca & Medina.";
 
 const keywords = [...seoKeywords];
 
@@ -133,7 +133,11 @@ export function organizationJsonLd() {
       addressLocality: siteConfig.address.city,
       addressCountry: siteConfig.address.country,
     },
-    sameAs: [siteConfig.social.instagram, siteConfig.social.linkedin, siteConfig.social.x],
+    sameAs: [
+      siteConfig.social.instagram,
+      siteConfig.social.linkedin,
+      siteConfig.social.x,
+    ],
     areaServed: {
       "@type": "Country",
       name: siteConfig.address.countryName,
@@ -141,7 +145,10 @@ export function organizationJsonLd() {
   };
 }
 
-export function webSiteJsonLd(locale: Locale = "en", audience: Audience = defaultAudience) {
+export function webSiteJsonLd(
+  locale: Locale = "en",
+  audience: Audience = defaultAudience,
+) {
   const dict = getDictionary(locale, audience);
   return {
     "@context": "https://schema.org",
@@ -172,10 +179,17 @@ export function localBusinessJsonLd() {
       addressCountry: siteConfig.address.country,
     },
     priceRange: "$$$",
-    areaServed: ["Riyadh", "Jeddah", "Khobar", "Mecca", "Medina", "Saudi Arabia"],
+    areaServed: [
+      "Riyadh",
+      "Jeddah",
+      "Khobar",
+      "Mecca",
+      "Medina",
+      "Saudi Arabia",
+    ],
     description: defaultDescription,
     knowsAbout: [
-      "Cybertruck brand activations",
+      "Cyber Stage brand activations",
       "Cyber Stage mobile activations",
       "LED screen rental and displays",
       "Professional sound systems for events",
@@ -200,12 +214,15 @@ export function serviceJsonLd() {
     },
     areaServed: siteConfig.address.countryName,
     description:
-      "Fully branded Tesla Cybertruck deployment with on-board LED, spatial audio, crew, and content — for launches, venues, and festivals.",
+      "Fully branded Tesla Cyber Stage deployment with on-board LED, spatial audio, crew, and content — for launches, venues, and festivals.",
     serviceType: "Experiential marketing and event production",
   };
 }
 
-export function faqPageJsonLd(locale: Locale = "en", audience: Audience = defaultAudience) {
+export function faqPageJsonLd(
+  locale: Locale = "en",
+  audience: Audience = defaultAudience,
+) {
   const faqs = getDictionary(locale, audience).faq.items;
   return {
     "@context": "https://schema.org",
@@ -221,7 +238,10 @@ export function faqPageJsonLd(locale: Locale = "en", audience: Audience = defaul
   };
 }
 
-export function homePageJsonLd(locale: Locale = "en", audience: Audience = defaultAudience) {
+export function homePageJsonLd(
+  locale: Locale = "en",
+  audience: Audience = defaultAudience,
+) {
   return [
     organizationJsonLd(),
     webSiteJsonLd(locale, audience),

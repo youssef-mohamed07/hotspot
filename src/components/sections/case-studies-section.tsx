@@ -21,8 +21,14 @@ export function CaseStudiesSection() {
   }));
 
   return (
-    <section id="cases" className="relative overflow-hidden bg-[#fafafa] py-24 md:py-32">
-      <div className="grid-floor pointer-events-none absolute inset-0 opacity-30 mix-blend-multiply" aria-hidden />
+    <section
+      id="cases"
+      className="relative overflow-hidden bg-white py-24 md:py-32"
+    >
+      <div
+        className="grid-floor pointer-events-none absolute inset-0 opacity-30 mix-blend-multiply"
+        aria-hidden
+      />
 
       <div className="relative mx-auto w-full max-w-[100rem] px-6">
         <Reveal className="mb-14 max-w-3xl text-start">
@@ -35,7 +41,9 @@ export function CaseStudiesSection() {
           <h2 className="display-headline mt-6 text-4xl text-zinc-900 sm:text-5xl md:text-6xl lg:text-7xl">
             {dict.caseStudies.headline1}
             <br />
-            <span className="text-gradient-accent">{dict.caseStudies.headlineAccent}</span>
+            <span className="text-gradient-accent">
+              {dict.caseStudies.headlineAccent}
+            </span>
           </h2>
         </Reveal>
 
@@ -48,8 +56,14 @@ export function CaseStudiesSection() {
                 image={imageAssets.caseStudies[i] ?? imageAssets.caseStudies[0]}
                 videoEmbedUrl={CASE_STUDY_VIDEOS[i]}
                 modelSrc={i === 0 ? KORA_BREAK_MODEL_SRC : undefined}
-                modelAlt={i === 0 ? "Kora Break Cybertruck 3D activation model" : undefined}
-                modelControlsLabels={i === 0 ? dict.caseStudies.modelControls : undefined}
+                modelAlt={
+                  i === 0
+                    ? "Kora Break Cyber Stage 3D activation model"
+                    : undefined
+                }
+                modelControlsLabels={
+                  i === 0 ? dict.caseStudies.modelControls : undefined
+                }
               />
             </Reveal>
           ))}

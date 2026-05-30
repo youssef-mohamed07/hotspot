@@ -1,4 +1,11 @@
-import { IconScreen, IconTruss, IconWave, IconSpotlight, IconUsers, IconTruck } from "@/components/icons";
+import {
+  IconScreen,
+  IconTruss,
+  IconWave,
+  IconSpotlight,
+  IconUsers,
+  IconTruck,
+} from "@/components/icons";
 import { getServiceImage } from "@/data/image-assets";
 import type { ComponentType, SVGProps } from "react";
 
@@ -17,11 +24,16 @@ export type ServiceItem = {
 
 export const flagshipService: ServiceItem = {
   id: "cybertruck",
-  title: "Cybertruck",
+  title: "Cyber Stage",
   description: "Immersive Mobile Stage",
   summary:
     "A fully branded, AV-equipped mobile rig that deploys at your venue — custom wrap, on-board LED, spatial audio, and a crew that runs every on-ground moment.",
-  highlights: ["Custom brand wrap", "On-board LED screens", "Road-ready crew", "KSA-wide deployment"],
+  highlights: [
+    "Custom brand wrap",
+    "On-board LED screens",
+    "Road-ready crew",
+    "KSA-wide deployment",
+  ],
   tag: "Flagship",
   image: getServiceImage("cybertruck").path,
   badge: "New",
@@ -36,7 +48,12 @@ export const otherServices: ServiceItem[] = [
     description: "Indoor & Outdoor · Any Scale",
     summary:
       "From intimate retail walls to stadium-scale outdoor walls — calibrated, content-ready, and operated by our AV team on activation day.",
-    highlights: ["Indoor & outdoor rigs", "Any aspect ratio", "Content playback", "On-site tech crew"],
+    highlights: [
+      "Indoor & outdoor rigs",
+      "Any aspect ratio",
+      "Content playback",
+      "On-site tech crew",
+    ],
     tag: "Visual",
     image: getServiceImage("led").path,
     Icon: IconScreen,
@@ -47,7 +64,12 @@ export const otherServices: ServiceItem[] = [
     description: "Corporate Events · Concerts · Launches",
     summary:
       "Engineered stage platforms and truss for corporate keynotes, concert builds, and product launches — safe, fast to deploy, and brand-ready.",
-    highlights: ["Corporate & concert builds", "Certified rigging", "Custom sizing", "Launch-ready staging"],
+    highlights: [
+      "Corporate & concert builds",
+      "Certified rigging",
+      "Custom sizing",
+      "Launch-ready staging",
+    ],
     tag: "Structure",
     image: getServiceImage("stage").path,
     Icon: IconTruss,
@@ -58,7 +80,12 @@ export const otherServices: ServiceItem[] = [
     description: "Line Array · Immersive Audio",
     summary:
       "Line-array systems tuned for clarity at scale — from VIP lounges to open-air activations with full spatial coverage.",
-    highlights: ["Line array systems", "Zone mixing", "Live & playback", "Outdoor-rated"],
+    highlights: [
+      "Line array systems",
+      "Zone mixing",
+      "Live & playback",
+      "Outdoor-rated",
+    ],
     tag: "Audio",
     image: getServiceImage("sound").path,
     Icon: IconWave,
@@ -69,7 +96,12 @@ export const otherServices: ServiceItem[] = [
     description: "Architectural · Stage · Outdoor",
     summary:
       "Architectural washes, stage looks, and outdoor scenes — designed to match your brand palette and photographed beautifully.",
-    highlights: ["Architectural washes", "Stage looks", "Outdoor scenes", "DMX programming"],
+    highlights: [
+      "Architectural washes",
+      "Stage looks",
+      "Outdoor scenes",
+      "DMX programming",
+    ],
     tag: "Lighting",
     image: getServiceImage("lighting").path,
     Icon: IconSpotlight,
@@ -80,7 +112,12 @@ export const otherServices: ServiceItem[] = [
     description: "End-to-End · Single Point of Contact",
     summary:
       "One team owns the full stack — scope, vendors, permits, build, show-call, and strike. You get a single point of contact, zero hand-offs.",
-    highlights: ["Single point of contact", "Permits & logistics", "Vendor management", "Show-day operations"],
+    highlights: [
+      "Single point of contact",
+      "Permits & logistics",
+      "Vendor management",
+      "Show-day operations",
+    ],
     tag: "Production",
     image: getServiceImage("production").path,
     Icon: IconUsers,

@@ -36,7 +36,7 @@ export function ProcessSection() {
   return (
     <section
       id="process"
-      className="relative flex min-h-[100dvh] scroll-mt-28 flex-col items-center justify-center overflow-hidden py-24 pt-32 md:scroll-mt-24 md:pt-24"
+      className="relative flex min-h-[100dvh] scroll-mt-28 flex-col items-center justify-center overflow-hidden bg-white py-24 pt-32 md:scroll-mt-24 md:pt-24"
     >
       <div
         className="absolute inset-0 opacity-40"

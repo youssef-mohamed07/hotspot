@@ -18,7 +18,7 @@ export function ClientsMarqueeSection() {
   ];
 
   return (
-    <section className="relative overflow-hidden bg-white py-16 sm:py-24">
+    <section className="relative -mt-1 overflow-hidden bg-white py-16 sm:py-24">
       <SectionHeader
         variant="transition"
         title={dict.marquee.title}

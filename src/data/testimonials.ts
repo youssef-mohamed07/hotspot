@@ -25,7 +25,7 @@ export const testimonials: Testimonial[] = [
   },
   {
     quote:
-      "The Cybertruck activation generated more social impressions in one weekend than our entire Q3 digital campaign. Outstanding tech and execution.",
+      "The Cyber Stage activation generated more social impressions in one weekend than our entire Q3 digital campaign. Outstanding tech and execution.",
     author: "Khalid R.",
     role: "VP Marketing",
     company: "Tech Company",

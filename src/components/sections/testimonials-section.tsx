@@ -8,7 +8,7 @@ export function TestimonialsSection() {
   const dict = useDictionary();
 
   return (
-    <section className="relative flex min-h-[100dvh] flex-col items-center justify-center overflow-hidden bg-[#fafafa] py-24 md:py-32">
+    <section className="relative flex min-h-[100dvh] flex-col items-center justify-center overflow-hidden bg-white py-24 md:py-32">
       <div className="grid-floor pointer-events-none absolute inset-0 opacity-40 mix-blend-multiply" aria-hidden />
 
       <div className="relative z-10 mx-auto w-full max-w-7xl px-6">

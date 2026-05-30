@@ -6,7 +6,7 @@ export const conceptPillars: ConceptPillarData[] = [
     title: "Location-Based",
     subtitle: "Built around your audience",
     description:
-      "We position the Cybertruck where your audience already lives — malls, events, neighborhoods, business districts. The location is part of the message.",
+      "We position the Cyber Stage where your audience already lives — malls, events, neighborhoods, business districts. The location is part of the message.",
     Icon: IconMapPin,
     image: "",
     bullets: [

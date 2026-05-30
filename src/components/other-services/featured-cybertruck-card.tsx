@@ -1,6 +1,11 @@
 import { IconArrowRight, IconTruck } from "@/components/icons";
 
-const featureTags = ["Mobile reach", "Custom wrap", "On-board LED", "Crew + content"] as const;
+const featureTags = [
+  "Mobile reach",
+  "Custom wrap",
+  "On-board LED",
+  "Crew + content",
+] as const;
 
 export function FeaturedCybertruckCard() {
   return (
@@ -20,12 +25,18 @@ export function FeaturedCybertruckCard() {
         }}
         aria-hidden
       />
-      <div className="grid-floor pointer-events-none absolute inset-0 opacity-30" aria-hidden />
+      <div
+        className="grid-floor pointer-events-none absolute inset-0 opacity-30"
+        aria-hidden
+      />
       <div
         aria-hidden
         className="pointer-events-none absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/10 to-transparent transition-transform duration-1000 ease-out group-hover:translate-x-full"
       />
-      <div aria-hidden className="led-panel pointer-events-none absolute inset-0 opacity-25" />
+      <div
+        aria-hidden
+        className="led-panel pointer-events-none absolute inset-0 opacity-25"
+      />
 
       <div className="relative grid gap-10 p-8 md:p-14 lg:grid-cols-[1.15fr_1fr] lg:items-center">
         <div className="flex flex-col gap-6">
@@ -34,13 +45,14 @@ export function FeaturedCybertruckCard() {
             Core product · /01
           </div>
           <h3 className="display-headline text-4xl text-white sm:text-5xl md:text-6xl lg:text-7xl">
-            Cybertruck
+            Cyber Stage
             <br />
             <span className="text-gradient-accent">Activation.</span>
           </h3>
           <p className="max-w-lg text-base text-zinc-200 md:text-lg">
-            The mobile, customizable, attention-stealing platform that anchors every campaign —
-            fully wrapped in your brand, fitted with on-board LED, and operated by our crew.
+            The mobile, customizable, attention-stealing platform that anchors
+            every campaign — fully wrapped in your brand, fitted with on-board
+            LED, and operated by our crew.
           </p>
 
           <div className="flex flex-wrap gap-2">
@@ -75,9 +87,15 @@ export function FeaturedCybertruckCard() {
             <IconTruck className="h-20 w-20 text-white md:h-28 md:w-28" />
           </div>
           <div className="absolute bottom-0 right-0 w-44 rounded-2xl border border-white/15 bg-black/40 p-4 backdrop-blur sm:bottom-2 sm:right-2">
-            <p className="text-[10px] uppercase tracking-[0.25em] text-white/60">Mobile rig</p>
-            <p className="mt-1 text-sm font-semibold text-white">Cybertruck · LED skin</p>
-            <p className="mt-2 text-[10px] text-white/50">Plug-and-play · road-ready</p>
+            <p className="text-[10px] uppercase tracking-[0.25em] text-white/60">
+              Mobile rig
+            </p>
+            <p className="mt-1 text-sm font-semibold text-white">
+              Cyber Stage · LED skin
+            </p>
+            <p className="mt-2 text-[10px] text-white/50">
+              Plug-and-play · road-ready
+            </p>
           </div>
         </div>
       </div>

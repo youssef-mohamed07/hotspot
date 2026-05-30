@@ -14,15 +14,15 @@ export const seoKeywords = [
   "هوت سبوت",
   "هوتسبوت",
 
-  // Cybertruck / mobile activation
-  "Cybertruck activation",
-  "Cybertruck activation Saudi Arabia",
-  "Tesla Cybertruck marketing",
-  "Tesla Cybertruck advertising KSA",
-  "Cybertruck brand activation",
-  "Cybertruck event Saudi Arabia",
-  "Cybertruck wrap branding",
-  "Cybertruck mobile billboard",
+  // Cyber Stage / mobile activation
+  "Cyber Stage activation",
+  "Cyber Stage activation Saudi Arabia",
+  "Tesla Cyber Stage marketing",
+  "Tesla Cyber Stage advertising KSA",
+  "Cyber Stage brand activation",
+  "Cyber Stage event Saudi Arabia",
+  "Cyber Stage wrap branding",
+  "Cyber Stage mobile billboard",
   "mobile brand activation",
   "mobile brand activation Saudi Arabia",
   "mobile brand activation Riyadh",
@@ -236,7 +236,7 @@ export const seoKeywords = [
   "أفضل إنتاج فعاليات الرياض",
 
   // Long-tail booking
-  "book Cybertruck activation Saudi",
+  "book Cyber Stage activation Saudi",
   "rent mobile activation stage KSA",
   "hire event production team Riyadh",
   "Cyber Stage booking",

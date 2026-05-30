@@ -9,7 +9,7 @@ export function TransitionStatsSection() {
   const isRtl = useIsRtl();
 
   return (
-    <section className="relative overflow-hidden py-20 sm:py-28 bg-background">
+    <section className="relative overflow-hidden bg-white py-20 sm:py-28">
       <div
         className="absolute inset-0 opacity-10"
         style={{

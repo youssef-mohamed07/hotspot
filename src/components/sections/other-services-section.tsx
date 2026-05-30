@@ -13,7 +13,7 @@ export function OtherServicesSection() {
   const [activeId, setActiveId] = useState(allServices[0].id);
 
   return (
-    <section id="services" className="relative overflow-hidden bg-[#fafafa] py-24 md:py-32">
+    <section id="services" className="relative overflow-hidden bg-white py-24 md:py-32">
       <div className="grid-floor pointer-events-none absolute inset-0 opacity-20 mix-blend-multiply" aria-hidden />
 
       <div className="relative z-10 mx-auto w-full max-w-[100rem] px-6">

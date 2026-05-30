@@ -15,7 +15,7 @@ export function FAQSection() {
   const [openIndex, setOpenIndex] = useState<number | null>(0);
 
   return (
-    <section className="relative flex min-h-[100dvh] flex-col items-center justify-center overflow-hidden bg-[#fafafa] py-24">
+    <section className="relative flex min-h-[100dvh] flex-col items-center justify-center overflow-hidden bg-white py-24">
       <div
         className="absolute inset-0 opacity-40"
         style={{

@@ -3,7 +3,7 @@ import type { FaqItem } from "@/types/faq";
 export const faqs: FaqItem[] = [
   {
     q: "What exactly is Cyber Stage?",
-    a: "Cyber Stage is a fully branded, AV-equipped Tesla Cybertruck that deploys at your event, venue, or location as a mobile brand activation unit. Full vehicle wrap in your identity, LED screens running your content, spatial audio — positioned exactly where your audience is. It's not a truck with a logo on it. It's a moving brand experience.",
+    a: "Cyber Stage is a fully branded, AV-equipped Tesla Cyber Stage that deploys at your event, venue, or location as a mobile brand activation unit. Full vehicle wrap in your identity, LED screens running your content, spatial audio — positioned exactly where your audience is. It's not a truck with a logo on it. It's a moving brand experience.",
     category: "Customization",
   },
   {
@@ -13,7 +13,7 @@ export const faqs: FaqItem[] = [
   },
   {
     q: "Can we use it at our event venue specifically?",
-    a: "Yes — and that's actually one of the highest-impact uses. Positioning Cyber Stage at your venue entrance creates an immediate first impression before guests walk through the door. Kora Break and Tawineya both did exactly this. It sets the tone for everything that follows.",
+    a: "Yes — and that's actually one of the highest-impact uses. Positioning Cyber Stage at your venue entrance creates an immediate first impression before guests walk through the door. Kora Break and Tawuniya both did exactly this. It sets the tone for everything that follows.",
     category: "Logistics",
   },
   {

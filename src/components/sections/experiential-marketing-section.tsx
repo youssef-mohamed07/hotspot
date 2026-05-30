@@ -17,7 +17,7 @@ export function ExperientialMarketingSection() {
   }));
 
   return (
-    <section className="relative flex min-h-[100dvh] flex-col items-center justify-center overflow-hidden py-24 bg-background">
+    <section className="relative flex min-h-[100dvh] flex-col items-center justify-center overflow-hidden bg-white py-24">
       <div
         className="absolute inset-0 opacity-40"
         style={{

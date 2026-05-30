@@ -22,7 +22,7 @@ export function ConceptSection() {
   return (
     <section
       id="concept"
-      className="relative flex min-h-[100dvh] flex-col items-center justify-center overflow-hidden py-24"
+      className="relative flex min-h-[100dvh] flex-col items-center justify-center overflow-hidden bg-white py-24"
     >
       <div
         className="absolute inset-0 opacity-40"

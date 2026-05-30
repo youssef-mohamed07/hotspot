@@ -4,22 +4,11 @@ import { useRef, useState } from "react";
 import { motion, useScroll, useMotionValueEvent } from "framer-motion";
 import { SectionHeader } from "@/components/section-header";
 import { AudienceCard } from "@/components/target-audience/audience-card";
-import { IconSparkle, IconVenue, IconCamera, IconWave } from "@/components/icons";
 import { useDictionary } from "@/i18n/locale-provider";
-
-const audienceIcons = {
-  launch: IconSparkle,
-  event: IconVenue,
-  buzz: IconCamera,
-  street: IconWave,
-} as const;
 
 export function TargetAudienceSection() {
   const dict = useDictionary();
-  const audienceList = dict.targetAudience.items.map((item) => ({
-    ...item,
-    icon: audienceIcons[item.id as keyof typeof audienceIcons],
-  }));
+  const audienceList = dict.targetAudience.items;
 
   const sectionRef = useRef<HTMLDivElement>(null);
   const [activeIndex, setActiveIndex] = useState(0);
@@ -38,7 +27,7 @@ export function TargetAudienceSection() {
   return (
     <section
       ref={sectionRef}
-      className="relative h-auto bg-[#fafafa] py-16 md:h-[300vh] md:py-0"
+      className="relative h-auto bg-white py-16 md:h-[300vh] md:py-0"
     >
       <div className="grid-floor pointer-events-none absolute inset-0 opacity-25 mix-blend-multiply" aria-hidden />
 
@@ -58,7 +47,6 @@ export function TargetAudienceSection() {
                     <span className="text-accent italic">{dict.targetAudience.headlineAccent}</span>
                   </>
                 }
-                subtitle={dict.targetAudience.subtitle}
               />
 
               <div className="mt-10 hidden gap-2 md:flex">
@@ -92,7 +80,6 @@ export function TargetAudienceSection() {
                       total={audienceList.length}
                       lead={item.lead}
                       payoff={item.payoff}
-                      icon={item.icon}
                       active={i === activeIndex}
                     />
                   </div>
@@ -107,7 +94,6 @@ export function TargetAudienceSection() {
                     total={audienceList.length}
                     lead={item.lead}
                     payoff={item.payoff}
-                    icon={item.icon}
                     active={true}
                   />
                 ))}
