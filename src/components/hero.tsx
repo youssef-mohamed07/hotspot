@@ -19,7 +19,7 @@ export function Hero() {
   const heroImageSrc = audience === "b2c" ? HERO_IMAGE_B2C : HERO_IMAGE_B2B;
 
   return (
-    <section className="dark-hero-bg relative flex w-full flex-col items-center overflow-hidden px-4 pb-24 pt-28 sm:px-6 sm:pb-28 md:h-dvh md:min-h-dvh md:pb-0 md:pt-24 lg:pt-28">
+    <section className="dark-hero-bg relative flex w-full flex-col items-center overflow-hidden px-4 pb-12 pt-28 sm:px-6 sm:pb-20 md:h-dvh md:min-h-dvh md:pb-0 md:pt-24 lg:pt-28">
       <div className="aurora" aria-hidden />
       <div className="cinematic-guides" aria-hidden />
 
@@ -145,7 +145,7 @@ export function Hero() {
         </div>
       </div>
 
-      <div className="hero-bottom-transition z-[1]" aria-hidden />
+      <div className="hero-bottom-transition z-20" aria-hidden />
     </section>
   );
 }

@@ -60,13 +60,13 @@ export default async function HomePage({ params }: PageProps) {
         <BeforeAfterSection />
         <ServingCitiesSection />
         <TransitionStatsSection />
+        <VisualizationSection />
         <ProcessSection />
         <ConceptSection />
         {isB2B && <CaseStudiesSection />}
         <OtherServicesSection />
         <TestimonialsSection />
         <FormSection />
-        <VisualizationSection />
         <FAQSection />
       </main>
       <Footer />

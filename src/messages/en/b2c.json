@@ -167,9 +167,10 @@
   },
   "visualization": {
     "eyebrow": "Customize",
-    "headline1": "Design your",
-    "headlineAccent": "Cyber Stage.",
-    "subtitle": "Pick a body color, upload your logo, and preview your activation in real time.",
+    "headline1": "See the",
+    "headlineAccent": "Cyber Stage",
+    "headline2": "From Every Angle",
+    "subtitle": "Rotate, navigate, and discover the digital venue through a fully interactive 3D experience.",
     "badge": "Live preview",
     "customizer": {
       "partsTitle": "Pick a part",

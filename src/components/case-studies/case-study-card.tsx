@@ -12,7 +12,7 @@ export function CaseStudyCard({
   modelSrc,
   modelAlt,
   modelControlsLabels,
-  videoEmbedUrl,
+  videoSrc,
 }: {
   study: CaseStudy;
   index: number;
@@ -31,7 +31,7 @@ export function CaseStudyCard({
     zoomOut: string;
     reset: string;
   };
-  videoEmbedUrl?: string;
+  videoSrc?: string;
 }) {
   const flipped = index % 2 === 1;
 
@@ -43,15 +43,15 @@ export function CaseStudyCard({
             flipped ? "lg:order-2" : ""
           }`}
         >
-          {videoEmbedUrl ? (
+          {videoSrc ? (
             <div className="absolute inset-0 bg-black">
-              <iframe
-                src={videoEmbedUrl}
-                title={`${study.title} case study video`}
-                allow="autoplay; encrypted-media; picture-in-picture; fullscreen"
-                allowFullScreen
-                className="absolute inset-0 h-full w-full border-0"
-                loading="lazy"
+              <video
+                src={videoSrc}
+                autoPlay
+                muted
+                loop
+                playsInline
+                className="absolute inset-0 h-full w-full object-cover"
               />
             </div>
           ) : modelSrc ? (

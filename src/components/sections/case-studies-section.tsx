@@ -6,11 +6,11 @@ import { useDictionary } from "@/i18n/locale-provider";
 import type { CaseStudy } from "@/data/case-studies";
 import { imageAssets } from "@/data/image-assets";
 
-const KORA_BREAK_MODEL_SRC = "/Cyber%20Truck%20Koora%20Break.glb";
+const KORA_BREAK_MODEL_SRC = "/Cybertruck%203D/Cyber%20Truck%20Koora%20Break.glb";
 
 const CASE_STUDY_VIDEOS: (string | undefined)[] = [
-  "https://drive.google.com/file/d/1BkUiW_enA__FeYhxd3w5jTINy3NNZBMP/preview",
-  "https://drive.google.com/file/d/1P07_aAA1TGqje2jC3RQqS00AmiRVYO-D/preview",
+  "https://res.cloudinary.com/dulknudzk/video/upload/v1780151184/kora-break_tta4ob.mp4",
+  "https://res.cloudinary.com/dulknudzk/video/upload/v1780151345/Taw_cykrjr.mp4",
 ];
 
 export function CaseStudiesSection() {
@@ -54,7 +54,7 @@ export function CaseStudiesSection() {
                 study={cs}
                 index={i}
                 image={imageAssets.caseStudies[i] ?? imageAssets.caseStudies[0]}
-                videoEmbedUrl={CASE_STUDY_VIDEOS[i]}
+                videoSrc={CASE_STUDY_VIDEOS[i]}
                 modelSrc={i === 0 ? KORA_BREAK_MODEL_SRC : undefined}
                 modelAlt={
                   i === 0

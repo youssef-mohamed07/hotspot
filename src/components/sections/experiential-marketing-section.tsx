@@ -4,16 +4,16 @@ import { Reveal } from "@/components/reveal";
 import { SiteImage } from "@/components/ui/site-image";
 import { imageAssets } from "@/data/image-assets";
 import { SectionHeader } from "@/components/section-header";
-import { IconIntegration, IconVenue, IconSparkle } from "@/components/icons";
+import { IconIntegration, IconSpotlight, IconUsers } from "@/components/icons";
 import { useDictionary } from "@/i18n/locale-provider";
 
-const cardIcons = [IconIntegration, IconVenue, IconSparkle];
+const cardIcons = [IconIntegration, IconSpotlight, IconUsers];
 
 export function ExperientialMarketingSection() {
   const dict = useDictionary();
   const cards = dict.experiential.cards.map((card, i) => ({
     ...card,
-    icon: cardIcons[i] ?? IconSparkle,
+    icon: cardIcons[i] ?? IconSpotlight,
   }));
 
   return (
