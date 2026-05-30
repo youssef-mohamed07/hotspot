@@ -14,7 +14,7 @@ export type CaseStudy = {
 
 export const caseStudies: CaseStudy[] = [
   {
-    title: "Kora Break",
+    title: "Koora Break",
     category: "Sports Media",
     location: "Riyadh",
     intro: "Sports media brand. Riyadh. The truck was the entrance.",
@@ -36,7 +36,7 @@ export const caseStudies: CaseStudy[] = [
   },
   {
     title: "Tawuniya",
-    category: "Brand",
+    category: "Insurance",
     location: "Saudi Arabia",
     intro: "The venue didn't need decoration — it needed a statement.",
     highlights: [

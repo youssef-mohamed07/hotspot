@@ -3,7 +3,7 @@ import type { Testimonial } from "@/types/testimonial";
 export const testimonials: Testimonial[] = [
   {
     quote:
-      "We needed to be in Riyadh and Jeddah in the same week. Hotspot made it happen — fully branded, on time, with a report in our inbox before we even debriefed internally. That's the level of execution we needed.",
+      "We needed to be in Riyadh and Jeddah in the same week. HotSpot made it happen — fully branded, on time, with a report in our inbox before we even debriefed internally. That's the level of execution we needed.",
     author: "Ahmed K.",
     role: "Head of Marketing",
     company: "FMCG Brand",

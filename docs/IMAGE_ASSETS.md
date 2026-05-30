@@ -27,7 +27,7 @@ Source of truth in code: `src/data/image-assets.ts`.
 | `before-after-before-1600x1000.png` | **1600×1000** | Before/After slider — left (before) |
 | `before-after-after-1600x1000.png` | **1600×1000** | Before/After slider — right (after) |
 | `case-study-01-kora-break-1200x960.png` | **1200×960** | Case study card 1 |
-| `case-study-02-tawineya-1200x960.png` | **1200×960** | Case study card 2 |
+| `case-study-02-tawuniya-1200x960.png` | **1200×960** | Case study card 2 |
 | `concept-pillar-01-location-800x1000.png` | **800×1000** | Concept section — pillar 1 (4:5) |
 | `concept-pillar-02-branding-800x1000.png` | **800×1000** | Concept section — pillar 2 (4:5) |
 | `experiential-cinematic-800x1000.png` | **800×1000** | Experiential marketing — desktop visual |

@@ -13,13 +13,13 @@ export const trustedClients: TrustedClient[] = [
   { name: "Hikma", sector: "Healthcare", since: "2024", logo: imageAssets.clientLogos.hikma.path },
   { name: "Al Hilal", sector: "Sports", since: "2024", logo: imageAssets.clientLogos.alhilal.path },
   {
-    name: "Altawniya",
+    name: "Tawuniya",
     sector: "Insurance",
     since: "2023",
-    logo: imageAssets.clientLogos.altawnya.path,
+    logo: imageAssets.clientLogos.tawuniya.path,
   },
   {
-    name: "Kora Break",
+    name: "Koora Break",
     sector: "Entertainment",
     since: "2024",
     logo: imageAssets.clientLogos.korabreak.path,

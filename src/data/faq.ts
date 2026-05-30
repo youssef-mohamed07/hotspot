@@ -13,7 +13,7 @@ export const faqs: FaqItem[] = [
   },
   {
     q: "Can we use it at our event venue specifically?",
-    a: "Yes — and that's actually one of the highest-impact uses. Positioning Cyber Stage at your venue entrance creates an immediate first impression before guests walk through the door. Kora Break and Tawuniya both did exactly this. It sets the tone for everything that follows.",
+    a: "Yes — and that's actually one of the highest-impact uses. Positioning Cyber Stage at your venue entrance creates an immediate first impression before guests walk through the door. Koora Break and Tawuniya both did exactly this. It sets the tone for everything that follows.",
     category: "Logistics",
   },
   {

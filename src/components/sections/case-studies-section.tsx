@@ -58,7 +58,7 @@ export function CaseStudiesSection() {
                 modelSrc={i === 0 ? KORA_BREAK_MODEL_SRC : undefined}
                 modelAlt={
                   i === 0
-                    ? "Kora Break Cyber Stage 3D activation model"
+                    ? "Koora Break Cyber Stage 3D activation model"
                     : undefined
                 }
                 modelControlsLabels={

@@ -37,7 +37,7 @@ export const imageAssets = {
     after: asset("/1600%20%202.png", 1600, 1000, "Before/After slider — After"),
   },
   caseStudies: [
-    asset("/1600%20%202.png", 1600, 1000, "Case study — Kora Break"),
+    asset("/1600%20%202.png", 1600, 1000, "Case study — Koora Break"),
     asset("/1400.png", 1400, 700, "Case study — Tawuniya (التعاونية)"),
   ],
   conceptPillars: [
@@ -112,17 +112,17 @@ export const imageAssets = {
     ),
     hikma: asset("/logos/new/hikma.jpg", 280, 96, "Client logo — Hikma"),
     alhilal: asset("/logos/new/alhilal.jpg", 280, 96, "Client logo — Alhilal"),
-    altawnya: asset(
+    tawuniya: asset(
       "/logos/new/altawnya.jpg",
       280,
       96,
-      "Client logo — Altawnya",
+      "Client logo — Tawuniya (التعاونية)",
     ),
     korabreak: asset(
       "/logos/new/korabreak.jpg",
       280,
       96,
-      "Client logo — Kora Break",
+      "Client logo — Koora Break",
     ),
     riyadbank: asset(
       "/logos/new/riyadbank.jpg",

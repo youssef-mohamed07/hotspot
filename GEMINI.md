@@ -1,6 +1,6 @@
 # Project Overview: Hotspot
 
-Hotspot is a modern web application built with **Next.js 16 (App Router)**, **React 19**, **TypeScript**, and **Tailwind CSS 4**. It serves as a high-impact marketing landing page, likely for a creative or logistics agency focusing on the Saudi Arabian (KSA) market, featuring interactive elements like a "Cybertruck scene" and a multi-step client brief wizard.
+HotSpot is a modern web application built with **Next.js 16 (App Router)**, **React 19**, **TypeScript**, and **Tailwind CSS 4**. It serves as a high-impact marketing landing page, likely for a creative or logistics agency focusing on the Saudi Arabian (KSA) market, featuring interactive elements like a "Cybertruck scene" and a multi-step client brief wizard.
 
 ## Tech Stack
 - **Framework:** [Next.js 16](https://nextjs.org/) (App Router)
