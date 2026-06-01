@@ -33,8 +33,8 @@ export const imageAssets = {
     "Open Graph / social share",
   ),
   beforeAfter: {
-    before: asset("/1600.png", 1600, 1000, "Before/After slider — Before"),
-    after: asset("/1600%20%202.png", 1600, 1000, "Before/After slider — After"),
+    before: asset("/before.png", 1600, 1000, "Before/After slider — Before"),
+    after: asset("/after.png", 1600, 1000, "Before/After slider — After"),
   },
   caseStudies: [
     asset("/1600%20%202.png", 1600, 1000, "Case study — Koora Break"),
@@ -62,32 +62,27 @@ export const imageAssets = {
   ),
   services: {
     cybertruck: asset(
-      "/assets/services/cybertruck.png",
+      "/assets/services/cyber.png",
       1200,
       880,
       "Service — Cyber Stage / Cyber Stage",
     ),
-    led: asset(
-      "/assets/services/ledscreens.png",
-      1200,
-      880,
-      "Service — LED screens",
-    ),
-    stage: asset(
-      "/assets/services/stqgeandtruss.png",
-      1200,
-      880,
-      "Service — Stage & truss",
-    ),
-    sound: asset("/assets/services/sound.png", 1200, 880, "Service — Sound"),
+    led: asset("/assets/services/led.png", 1200, 880, "Service — LED screens"),
+    sound: asset("/assets/services/soundsys.png", 1200, 880, "Service — Sound"),
     lighting: asset(
-      "/assets/services/lighting.png",
+      "/assets/services/lightingg.png",
       1200,
       880,
       "Service — Lighting",
     ),
+    stage: asset(
+      "/assets/services/stageqgeandtruss.png",
+      1200,
+      880,
+      "Service — Stage & truss",
+    ),
     production: asset(
-      "/assets/services/fulleventprod.png",
+      "/assets/services/fulleventproduction.png",
       1200,
       880,
       "Service — Full production",

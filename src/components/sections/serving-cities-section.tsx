@@ -35,7 +35,7 @@ export function ServingCitiesSection() {
               {dict.cities.headlineAccent}
             </span>
           </h2>
-          <p className="mt-6 text-lg text-zinc-600">{dict.cities.subtitle}</p>
+          <p className="mt-6 whitespace-pre-line text-lg text-zinc-600">{dict.cities.subtitle}</p>
         </Reveal>
         <Reveal delay={0.1}>
           <div

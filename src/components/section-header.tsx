@@ -20,6 +20,7 @@ export interface SectionHeaderProps {
   subtitle?: ReactNode;
   align?: "start" | "center";
   theme?: "light" | "dark"; // "dark" = dark background (white text), "light" = light background (dark text)
+  className?: string;
 }
 
 export function SectionHeader({
@@ -29,6 +30,7 @@ export function SectionHeader({
   subtitle,
   align = "start",
   theme = "dark",
+  className,
 }: SectionHeaderProps) {
   // -------------------------
   // TRANSITION SECTION HEADER
@@ -86,16 +88,18 @@ export function SectionHeader({
 
   return (
     <Reveal
-      className={`mb-16 max-w-4xl text-start ${isCenter ? "mx-auto text-center" : ""}`}
+      className={
+        className ??
+        `mb-16 max-w-4xl text-start ${isCenter ? "mx-auto text-center" : ""}`
+      }
     >
       <div
         className={`flex items-center gap-3 ${isCenter ? "justify-center" : ""}`}
       >
-        {!isCenter && <span className="h-px w-12 bg-accent" />}
+        <span className="h-px w-12 bg-accent" />
         <p className="text-xs uppercase tracking-[0.3em] text-accent">
           {title}
         </p>
-        {isCenter && <span className="h-px w-12 bg-accent hidden md:block" />}
       </div>
 
       {headline && (

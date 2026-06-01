@@ -59,22 +59,6 @@ export const otherServices: ServiceItem[] = [
     Icon: IconScreen,
   },
   {
-    id: "stage",
-    title: "Stage & Truss Systems",
-    description: "Corporate Events · Concerts · Launches",
-    summary:
-      "Engineered stage platforms and truss for corporate keynotes, concert builds, and product launches — safe, fast to deploy, and brand-ready.",
-    highlights: [
-      "Corporate & concert builds",
-      "Certified rigging",
-      "Custom sizing",
-      "Launch-ready staging",
-    ],
-    tag: "Structure",
-    image: getServiceImage("stage").path,
-    Icon: IconTruss,
-  },
-  {
     id: "sound",
     title: "Professional Sound System",
     description: "Line Array · Immersive Audio",
@@ -105,6 +89,22 @@ export const otherServices: ServiceItem[] = [
     tag: "Lighting",
     image: getServiceImage("lighting").path,
     Icon: IconSpotlight,
+  },
+  {
+    id: "stage",
+    title: "Stage & Truss Systems",
+    description: "Corporate Events · Concerts · Launches",
+    summary:
+      "Engineered stage platforms and truss for corporate keynotes, concert builds, and product launches — safe, fast to deploy, and brand-ready.",
+    highlights: [
+      "Corporate & concert builds",
+      "Certified rigging",
+      "Custom sizing",
+      "Launch-ready staging",
+    ],
+    tag: "Structure",
+    image: getServiceImage("stage").path,
+    Icon: IconTruss,
   },
   {
     id: "production",
