@@ -1,11 +1,14 @@
 /** Standard + custom event names used across pixels and dataLayer. */
 
 export const MarketingEvents = {
-  pageView: "page_view",
-  lead: "generate_lead",
-  contact: "contact",
-  ctaClick: "cta_click",
-  formStart: "form_start",
+  pageView: "Page_Viewed",
+  lead: "Lead_Generated",
+  contact: "Contact_Initiated",
+  ctaClick: "CTA_Clicked",
+  formStart: "Brief_Started",
+  formStep: "Brief_Step_Completed",
+  formSubmitAttempt: "Brief_Submit_Attempted",
+  formSubmitError: "Brief_Submit_Failed",
 } as const;
 
 export type MarketingEventName = (typeof MarketingEvents)[keyof typeof MarketingEvents];

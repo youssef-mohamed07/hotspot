@@ -2,23 +2,41 @@
 
 import type { Audience } from "@/i18n/audience";
 import type { Locale } from "@/i18n/config";
-import type { MarketingEventName } from "@/lib/marketing/events";
+import { MarketingEvents, type MarketingEventName } from "@/lib/marketing/events";
 import type { AttributionData } from "@/lib/marketing/attribution";
 import { getAttributionForLead } from "@/lib/marketing/attribution";
 
 export type TrackPayload = Record<string, string | number | boolean | undefined>;
 
+const standardEvents = [
+  "Lead",
+  "Contact",
+  "ViewContent",
+  "PageView",
+  "InitiateCheckout",
+  "Schedule",
+  "CompleteRegistration",
+];
+
+function cleanPayload(payload?: TrackPayload): TrackPayload | undefined {
+  if (!payload) return undefined;
+  const data = Object.fromEntries(
+    Object.entries(payload).filter(([, value]) => value !== undefined && value !== ""),
+  ) as TrackPayload;
+  return Object.keys(data).length > 0 ? data : undefined;
+}
+
 function withAttribution(payload?: TrackPayload): TrackPayload | undefined {
   const attribution = getAttributionForLead();
-  if (!attribution || Object.keys(attribution).length === 0) return payload;
-  return { ...payload, ...attribution };
+  const data = cleanPayload(payload);
+  if (!attribution || Object.keys(attribution).length === 0) return data;
+  return cleanPayload({ ...data, ...attribution });
 }
 
 function metaEvent(name: string, params?: TrackPayload) {
   if (typeof window.fbq !== "function") return;
-  const standard = ["Lead", "Contact", "ViewContent", "PageView", "InitiateCheckout"];
   const data = withAttribution(params);
-  if (standard.includes(name)) {
+  if (standardEvents.includes(name)) {
     window.fbq("track", name, data);
   } else {
     window.fbq("trackCustom", name, data);
@@ -28,17 +46,26 @@ function metaEvent(name: string, params?: TrackPayload) {
 /** Meta Pixel events only. */
 export function trackEvent(event: MarketingEventName | string, payload?: TrackPayload) {
   switch (event) {
-    case "generate_lead":
-      metaEvent("Lead", { currency: "SAR", ...payload });
+    case MarketingEvents.lead:
+      metaEvent(MarketingEvents.lead, { currency: "SAR", ...payload });
       break;
-    case "contact":
-      metaEvent("Contact", payload);
+    case MarketingEvents.contact:
+      metaEvent(MarketingEvents.contact, payload);
       break;
-    case "cta_click":
-      metaEvent("InitiateCheckout", payload);
+    case MarketingEvents.ctaClick:
+      metaEvent(MarketingEvents.ctaClick, {
+        content_name: "contact_brief",
+        content_category: "lead_funnel",
+        currency: "SAR",
+        ...payload,
+      });
       break;
-    case "form_start":
-      metaEvent("ViewContent", { content_name: "contact_form", ...payload });
+    case MarketingEvents.formStart:
+      metaEvent(MarketingEvents.formStart, {
+        content_name: "contact_form",
+        content_category: "lead_funnel",
+        ...payload,
+      });
       break;
     default:
       metaEvent(event, payload);
@@ -55,19 +82,61 @@ export function trackPageView(path: string, context?: { locale?: Locale; audienc
 }
 
 export function trackLead(payload?: TrackPayload) {
-  trackEvent("generate_lead", payload);
+  trackEvent(MarketingEvents.lead, payload);
 }
 
 export function trackContact(payload?: TrackPayload) {
-  trackEvent("contact", payload);
+  trackEvent(MarketingEvents.contact, payload);
 }
 
 export function trackCtaClick(location: string, label?: string) {
-  trackEvent("cta_click", { cta_location: location, cta_label: label });
+  trackEvent(MarketingEvents.ctaClick, {
+    cta_location: location,
+    cta_label: label,
+    funnel_stage: "cta_to_contact",
+  });
 }
 
-export function trackFormStart() {
-  trackEvent("form_start");
+export function trackFormStart(payload?: TrackPayload) {
+  trackEvent(MarketingEvents.formStart, {
+    form_name: "contact_brief",
+    funnel_stage: "form_start",
+    ...payload,
+  });
+}
+
+export function trackFormStep(step: number, totalSteps: number, stepName?: string) {
+  trackEvent(MarketingEvents.formStep, {
+    form_name: "contact_brief",
+    form_step: step,
+    form_total_steps: totalSteps,
+    form_step_name: stepName,
+    funnel_stage: "form_progress",
+  });
+}
+
+export function trackFormSubmitAttempt(payload?: TrackPayload) {
+  trackEvent(MarketingEvents.formSubmitAttempt, {
+    form_name: "contact_brief",
+    funnel_stage: "submit_attempt",
+    ...payload,
+  });
+}
+
+export function trackFormSubmitError(message?: string) {
+  trackEvent(MarketingEvents.formSubmitError, {
+    form_name: "contact_brief",
+    funnel_stage: "submit_error",
+    error_message: message,
+  });
+}
+
+export function trackSchedule(payload?: TrackPayload) {
+  metaEvent("Schedule", {
+    content_name: "contact_meeting",
+    content_category: "lead_funnel",
+    ...payload,
+  });
 }
 
 export function attributionPayload(): AttributionData | undefined {

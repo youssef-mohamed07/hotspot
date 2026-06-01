@@ -1,6 +1,7 @@
 "use client";
 
 import { DirectionalArrow } from "@/components/icons/directional-arrow";
+import { TrackedCta } from "@/components/marketing/tracked-cta";
 import { useDictionary } from "@/i18n/locale-provider";
 import { getLocalizedCities } from "@/lib/cities-i18n";
 
@@ -41,13 +42,14 @@ export function CitiesPanel() {
         <p className="text-sm text-zinc-600">
           <span className="font-semibold text-zinc-900">{c.ctaBold}</span> {c.ctaRest}
         </p>
-        <a
+        <TrackedCta
           href="#contact"
+          ctaLocation="cities"
           className="mt-3 inline-flex items-center gap-1.5 text-xs font-semibold uppercase tracking-[0.2em] text-accent transition hover:text-zinc-900"
         >
           {c.requestCta}
           <DirectionalArrow className="h-3 w-3" />
-        </a>
+        </TrackedCta>
       </div>
     </div>
   );

@@ -3,6 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { IconArrowRight } from "@/components/icons";
+import { TrackedCta } from "@/components/marketing/tracked-cta";
 import type { ServiceItem } from "@/data/other-services";
 import { useDictionary } from "@/i18n/locale-provider";
 
@@ -92,13 +93,14 @@ export function ServiceDetailPanel({ service }: { service: ServiceItem }) {
                 <IconArrowRight className="h-3.5 w-3.5" />
               </Link>
             )}
-            <Link
+            <TrackedCta
               href="#contact"
+              ctaLocation="services"
               className="inline-flex items-center gap-2 rounded-full border border-zinc-300 bg-white px-7 py-3.5 text-xs font-semibold uppercase tracking-[0.2em] text-zinc-800 transition hover:border-accent hover:text-accent"
             >
               {dict.services.requestCta}
               <IconArrowRight className="h-3.5 w-3.5" />
-            </Link>
+            </TrackedCta>
           </div>
         </div>
       </div>

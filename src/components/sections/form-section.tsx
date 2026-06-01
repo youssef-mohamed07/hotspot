@@ -12,7 +12,11 @@ import { useDictionary } from "@/i18n/locale-provider";
 import {
   attributionPayload,
   trackFormStart,
+  trackFormStep,
+  trackFormSubmitAttempt,
+  trackFormSubmitError,
   trackLead,
+  trackSchedule,
 } from "@/lib/marketing/track";
 
 const initialForm: ContactFormData = {
@@ -455,7 +459,7 @@ function PhoneIcon(props: React.SVGProps<SVGSVGElement>) {
 
 function getUpcomingWorkdays(count: number) {
   const days: Date[] = [];
-  let d = new Date();
+  const d = new Date();
   while (days.length < count) {
     d.setDate(d.getDate() + 1);
     const w = d.getDay();
@@ -694,6 +698,8 @@ export function FormSection() {
   const [submitError, setSubmitError] = useState<string | null>(null);
   const [step, setStep] = useState(0);
   const [data, setData] = useState<ContactFormData>(initialForm);
+  const formStartedRef = useRef(false);
+  const trackedStepsRef = useRef<Set<number>>(new Set([0]));
 
   const [selectedDay, setSelectedDay] = useState<Date | null>(null);
   const [timeHour, setTimeHour] = useState(9); // 9 to 17
@@ -723,7 +729,6 @@ export function FormSection() {
       // eslint-disable-next-line react-hooks/set-state-in-effect
       update("meetingDate", `${dStr} at ${hStr}:${mStr} ${period}`);
     } else {
-      // eslint-disable-next-line react-hooks/set-state-in-effect
       update("meetingDate", "");
     }
   }, [selectedDay, timeHour, timeMinute]);
@@ -749,6 +754,11 @@ export function FormSection() {
 
     setSubmitError(null);
     setIsSubmitting(true);
+    trackFormSubmitAttempt({
+      campaign_type: data.campaignType,
+      contact_method: data.contactMethod,
+      budget: data.budget,
+    });
     try {
       const payload: ContactFormData = {
         ...data,
@@ -764,13 +774,25 @@ export function FormSection() {
         throw new Error(body.error ?? c.error);
       }
       trackLead({
+        content_name: "contact_brief",
+        content_category: "lead_funnel",
         campaign_type: data.campaignType,
         industry: data.industry,
-        budget: data.budget || undefined,
+        target_cities: data.targetCities,
+        budget: data.budget,
+        contact_method: data.contactMethod,
       });
+      if (data.contactMethod === "meet") {
+        trackSchedule({
+          campaign_type: data.campaignType,
+          meeting_date: data.meetingDate,
+        });
+      }
       setSubmitted(true);
     } catch (err) {
-      setSubmitError(err instanceof Error ? err.message : c.error);
+      const message = err instanceof Error ? err.message : c.error;
+      trackFormSubmitError(message);
+      setSubmitError(message);
     } finally {
       setIsSubmitting(false);
     }
@@ -1264,8 +1286,20 @@ export function FormSection() {
                   isSubmitting={isSubmitting}
                   onPrev={() => setStep((s) => Math.max(0, s - 1))}
                   onNext={() => {
-                    if (step === 0) trackFormStart();
-                    setStep((s) => Math.min(TOTAL_STEPS - 1, s + 1));
+                    if (!formStartedRef.current) {
+                      formStartedRef.current = true;
+                      trackFormStart({
+                        form_step: 1,
+                        form_total_steps: TOTAL_STEPS,
+                        form_step_name: c.steps[0],
+                      });
+                    }
+                    const nextStep = Math.min(TOTAL_STEPS - 1, step + 1);
+                    if (!trackedStepsRef.current.has(nextStep)) {
+                      trackedStepsRef.current.add(nextStep);
+                      trackFormStep(nextStep + 1, TOTAL_STEPS, c.steps[nextStep]);
+                    }
+                    setStep(nextStep);
                   }}
                   onSubmit={handleSubmit}
                   submitLabel={c.submit}

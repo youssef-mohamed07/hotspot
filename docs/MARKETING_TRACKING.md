@@ -31,7 +31,11 @@ UTM + `fbclid` are stored in cookie `hs_attribution` for **30 days** and sent wi
 | Page / route change | `PageView` |
 | CTA → `#contact` | `InitiateCheckout` |
 | WhatsApp button | `Contact` |
-| Contact form step 2 | `ViewContent` |
+| Contact form started | `ViewContent` |
+| Contact form step reached | `FormStep` |
+| Contact form submit clicked | `FormSubmitAttempt` |
+| Contact form submit failed | `FormSubmitError` |
+| Meeting date submitted | `Schedule` |
 | Form submitted | `Lead` |
 
 In Ads Manager, optimize campaigns for **Lead** or **Contact** as your conversion goal.
