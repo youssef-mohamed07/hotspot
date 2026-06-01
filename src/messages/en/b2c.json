@@ -41,27 +41,27 @@
     "title": "Is this for you?",
     "headline1": "This Cyber Stage is",
     "headline2": "made for you",
-    "headlineAccent": "if...",
+    "headlineAccent": "if you...",
     "subtitle": "It's not just a digital billboard. It's a statement piece designed strictly for brands that refuse to blend in.",
     "items": [
       {
         "id": "launch",
-        "lead": "You're launching something big...",
+        "lead": "Want to launch something big...",
         "payoff": "You need an entrance, not just an announcement."
       },
       {
         "id": "event",
-        "lead": "You have an event ahead...",
+        "lead": "have an event ahead...",
         "payoff": "The first impression starts outside the door."
       },
       {
         "id": "buzz",
-        "lead": "You want people talking before it starts...",
+        "lead": "want people talking before it starts...",
         "payoff": "Cyber Stage is already filming before guests arrive."
       },
       {
         "id": "street",
-        "lead": "You're ready to own the street...",
+        "lead": "want to own the street...",
         "payoff": "One Cyber Stage. Every city. Unlimited presence."
       }
     ]
@@ -152,32 +152,22 @@
     ]
   },
   "concept": {
-    "eyebrow": "The concept",
-    "headline1": "This Cyber Stage is",
-    "headlineAccent": "made for you.",
-    "subtitle": "Two principles drive every activation — where we put it, and how it's dressed for your brand.",
+    "eyebrow": "The Concept",
+    "headline1": "Designed for",
+    "headlineAccent": "Your Celebration.",
+    "subtitle": "A premium, mobile stage designed to bring your vision to life, perfectly positioned and styled for your special day.",
     "pillars": [
       {
-        "title": "Location-Based",
-        "subtitle": "Built around your audience",
-        "description": "We position the Cyber Stage where your audience already lives — malls, events, neighborhoods, business districts. The location is part of the message.",
+        "title": "Styled for You, Placed for Impact",
+        "subtitle": "Your Vision + The Perfect Spot",
+        "description": "We bring your celebration to the spotlight with custom vehicle wraps and LED content that reflects your personal style. Whether at a luxury hotel, private villa, or open festival, we handle every detail so you can focus on the moment.",
         "bullets": [
-          "Foot-traffic mapping in advance",
-          "Permits, parking & power handled",
-          "Indoor mall + open street ready"
+          "Personalized vehicle wrap and custom LED motion",
+          "Premium sound, lighting, and modular accessories",
+          "On-site coordination and logistical management",
+          "Perfect for weddings, graduations, and private events"
         ],
-        "metric": { "value": "98%", "label": "On-target placement" }
-      },
-      {
-        "title": "Built for Your Brand",
-        "subtitle": "Designed around your brand",
-        "description": "Full vehicle wraps, custom LED content, interactive overlays, and modular accessories. Cyber Stage becomes a 100% extension of your brand identity.",
-        "bullets": [
-          "Full-body custom vehicle wrap",
-          "Branded LED content & motion graphics",
-          "Modular props, lighting & accessories"
-        ],
-        "metric": { "value": "100%", "label": "Brand control" }
+        "metric": { "value": "100%", "label": "Moments Captured" }
       }
     ]
   },

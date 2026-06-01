@@ -31,11 +31,6 @@ export function ConceptPillar({
           <div className="relative aspect-[4/5] w-full overflow-hidden rounded-[36px]">
             <SiteImage asset={image} fill className="object-cover" sizes="(max-width: 1024px) 100vw, 400px" />
 
-            <div className="absolute start-6 top-6 inline-flex items-center gap-2 rounded-full border border-zinc-200/90 bg-white/95 px-3 py-1.5 text-[10px] uppercase tracking-[0.25em] text-zinc-600 shadow-sm backdrop-blur-sm">
-              <span className="pulse-dot" />
-              Pillar /{String(index + 1).padStart(2, "0")}
-            </div>
-
             <div className="absolute bottom-6 end-6 rounded-2xl border border-zinc-200/90 bg-white/95 px-5 py-3 shadow-sm backdrop-blur-sm">
               <p className="text-2xl font-semibold tracking-tight text-zinc-900">
                 {pillar.metric.value}
@@ -55,13 +50,6 @@ export function ConceptPillar({
         </div>
 
         <div className="relative">
-          <span
-            className="display-headline pointer-events-none absolute -start-2 -top-10 select-none text-[10rem] leading-none text-zinc-900/[0.04] sm:text-[14rem]"
-            aria-hidden
-          >
-            {String(index + 1).padStart(2, "0")}
-          </span>
-
           <div className="relative">
             <div className="flex items-center gap-3">
               <span className="grid h-12 w-12 place-items-center rounded-2xl border border-white/10 bg-gradient-to-br from-white/10 to-white/0 text-accent">

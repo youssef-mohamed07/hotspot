@@ -9,7 +9,7 @@ import type { ConceptPillarData } from "@/types/concept-pillar";
 
 export function ConceptSection() {
   const dict = useDictionary();
-  const pillarData = dict.concept.pillars[1];
+  const pillarData = dict.concept.pillars[0];
 
   if (!pillarData) return null;
 

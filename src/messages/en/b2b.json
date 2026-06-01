@@ -41,27 +41,27 @@
     "title": "Is this for you?",
     "headline1": "This Cyber Stage is",
     "headline2": "made for you",
-    "headlineAccent": "if...",
+    "headlineAccent": "if you...",
     "subtitle": "It's not just a digital billboard. It's a statement piece designed strictly for brands that refuse to blend in.",
     "items": [
       {
         "id": "launch",
-        "lead": "You're launching something big...",
+        "lead": "Want to launch something big...",
         "payoff": "You need an entrance, not just an announcement."
       },
       {
         "id": "event",
-        "lead": "You have an event ahead...",
+        "lead": "have an event ahead...",
         "payoff": "The first impression starts outside the door."
       },
       {
         "id": "buzz",
-        "lead": "You want people talking before it starts...",
+        "lead": "want people talking before it starts...",
         "payoff": "Cyber Stage is already filming before guests arrive."
       },
       {
         "id": "street",
-        "lead": "You're ready to own the street...",
+        "lead": "Want to own the street...",
         "payoff": "One Cyber Stage. Every city. Unlimited presence."
       }
     ]
@@ -152,32 +152,22 @@
     ]
   },
   "concept": {
-    "eyebrow": "The concept",
-    "headline1": "This Cyber Stage is",
-    "headlineAccent": "made for you.",
-    "subtitle": "Two principles drive every activation — where we put it, and how it's dressed for your brand.",
+    "eyebrow": "The Concept",
+    "headline1": "Strategy Meets",
+    "headlineAccent": "Creative Impact.",
+    "subtitle": "A fully immersive brand experience that moves with your audience and reflects your identity in every detail.",
     "pillars": [
       {
-        "title": "Location-Based",
-        "subtitle": "Built around your audience",
-        "description": "We position the Cyber Stage where your audience already lives — malls, events, neighborhoods, business districts. The location is part of the message.",
+        "title": "Location Driven, Brand Focused",
+        "subtitle": "Audience + Identity",
+        "description": "We position the Cyber Stage where your audience lives — malls, events, and neighborhoods — while wrapping it in your brand's unique colors and motion graphics. It's a 100% extension of your brand identity, deployed where it matters most.",
         "bullets": [
-          "Foot-traffic mapping in advance",
-          "Permits, parking & power handled",
-          "Indoor mall + open street ready"
+          "Strategic location placement based on traffic mapping",
+          "Full vehicle wraps and custom branded LED content",
+          "Seamless logistics, permits, and power management",
+          "Indoor mall, festivals, and open street ready"
         ],
-        "metric": { "value": "98%", "label": "On-target placement" }
-      },
-      {
-        "title": "Built for Your Brand",
-        "subtitle": "Designed around your brand",
-        "description": "Full vehicle wraps, custom LED content, interactive overlays, and modular accessories. Cyber Stage becomes a 100% extension of your brand identity.",
-        "bullets": [
-          "Full-body custom vehicle wrap",
-          "Branded LED content & motion graphics",
-          "Modular props, lighting & accessories"
-        ],
-        "metric": { "value": "100%", "label": "Brand control" }
+        "metric": { "value": "100%", "label": "Impact Focused" }
       }
     ]
   },
@@ -505,8 +495,6 @@
         "Jeddah only",
         "Khobar / Eastern Province only",
         "Multiple KSA cities",
-        "KSA + Dubai",
-        "KSA + Cairo",
         "Full multi-market — let's discuss"
       ],
       "budgetOptions": [
@@ -582,7 +570,7 @@
       },
       {
         "q": "What cities do you cover?",
-        "a": "Currently active in Riyadh, Jeddah, Khobar, Mecca, and Medina. Dubai and Cairo available for multi-market packages. We handle all permits and logistics — you just send the brief.",
+        "a": "Currently active in Riyadh, Jeddah, Khobar, Mecca, and Medina with support for other cities depending on your request. available for multi-market packages. We handle all permits and logistics — you just send the brief.",
         "category": "Logistics"
       },
       {
