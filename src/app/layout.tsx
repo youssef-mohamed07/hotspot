@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { headers } from "next/headers";
 import { Geist, Geist_Mono, Bebas_Neue, Cairo } from "next/font/google";
+import { Analytics } from "@vercel/analytics/next";
 import { MarketingScripts } from "@/components/marketing/marketing-scripts";
 import { JsonLd } from "@/components/seo/json-ld";
 import { homePageJsonLd, rootMetadata } from "@/lib/seo";
@@ -56,6 +57,7 @@ export default async function RootLayout({
         <MarketingScripts />
         <JsonLd data={homePageJsonLd(locale, audience)} />
         {children}
+        <Analytics />
       </body>
     </html>
   );
