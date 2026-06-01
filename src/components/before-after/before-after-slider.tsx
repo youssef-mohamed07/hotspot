@@ -60,7 +60,7 @@ export function BeforeAfterSlider({
       aria-valuemax={100}
       aria-valuenow={Math.round(position)}
     >
-      <div className="absolute inset-0 bg-gradient-to-br from-accent/[0.06] via-white to-accent-deep/[0.04]">
+      <div className="absolute inset-0">
         <Image
           src={afterSrc}
           alt={afterAlt}
@@ -68,14 +68,6 @@ export function BeforeAfterSlider({
           className="object-cover object-center saturate-[1.05] contrast-[1.02]"
           sizes="(max-width: 1024px) 100vw, 1200px"
           priority
-        />
-        <div
-          className="pointer-events-none absolute inset-0"
-          style={{
-            background:
-              "radial-gradient(55% 45% at 72% 48%, rgba(42,118,166,0.22), transparent 65%), radial-gradient(40% 35% at 50% 100%, rgba(4,40,95,0.08), transparent 70%)",
-          }}
-          aria-hidden
         />
       </div>
 
