@@ -49,6 +49,7 @@ export function OtherServicesSection() {
                 service={service}
                 active={activeId === service.id}
                 onSelect={() => setActiveId(service.id)}
+                imageAlt={dict.services.serviceImageAlt.replace("{title}", service.title)}
               />
             ))}
           </div>

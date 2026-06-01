@@ -56,11 +56,7 @@ export function CaseStudiesSection() {
                 image={imageAssets.caseStudies[i] ?? imageAssets.caseStudies[0]}
                 videoSrc={CASE_STUDY_VIDEOS[i]}
                 modelSrc={i === 0 ? KORA_BREAK_MODEL_SRC : undefined}
-                modelAlt={
-                  i === 0
-                    ? "Koora Break Cyber Stage 3D activation model"
-                    : undefined
-                }
+                modelAlt={i === 0 ? dict.caseStudies.kooraModelAlt : undefined}
                 modelControlsLabels={
                   i === 0 ? dict.caseStudies.modelControls : undefined
                 }

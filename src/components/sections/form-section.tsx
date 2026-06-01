@@ -953,8 +953,8 @@ export function FormSection() {
                   {step === 4 && (
                     <div>
                       <StepHeader
-                        title="How should we reach out?"
-                        hint="We mostly prefer calls & meets, but email is fine too."
+                        title={c.step4.title}
+                        hint={c.step4.hint}
                       />
                       <div className="mt-6 grid gap-3 sm:grid-cols-3">
                         {/* Email */}
@@ -978,7 +978,7 @@ export function FormSection() {
                             />
                           </div>
                           <span className="text-xs font-semibold text-zinc-900">
-                            Email
+                            {c.step4.methodEmail}
                           </span>
                         </button>
 
@@ -1003,7 +1003,7 @@ export function FormSection() {
                             />
                           </div>
                           <span className="text-xs font-semibold text-zinc-900">
-                            Phone/WhatsApp
+                            {c.step4.methodPhone}
                           </span>
                         </button>
 
@@ -1039,7 +1039,7 @@ export function FormSection() {
                             </svg>
                           </div>
                           <span className="text-xs font-semibold text-zinc-900">
-                            Google Meet
+                            {c.step4.methodMeet}
                           </span>
                         </button>
                       </div>
@@ -1048,7 +1048,7 @@ export function FormSection() {
                         <div className="mt-6 rounded-3xl border border-zinc-200 bg-zinc-50/50 p-4 sm:p-6 shadow-sm">
                           <div className="mb-4 flex items-center justify-between">
                             <p className="text-sm font-semibold text-zinc-900">
-                              Pick Date & Time
+                              {c.step4.pickDateTime}
                             </p>
                           </div>
 
@@ -1068,12 +1068,12 @@ export function FormSection() {
                                     d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
                                   />
                                 </svg>
-                                Date
+                                {c.step4.dateLabel}
                               </label>
                               <SingleDatePicker
                                 value={selectedDay}
                                 onChange={setSelectedDay}
-                                placeholder="Select a date"
+                                placeholder={c.step4.datePlaceholder}
                               />
                             </div>
 
@@ -1094,7 +1094,7 @@ export function FormSection() {
                                         d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
                                       />
                                     </svg>
-                                    Hour
+                                    {c.step4.hourLabel}
                                   </label>
                                   <div className="flex items-center justify-between rounded-xl border border-zinc-200 bg-white px-2 py-2 sm:px-3 shadow-sm">
                                     <button
@@ -1178,7 +1178,7 @@ export function FormSection() {
                                         d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
                                       />
                                     </svg>
-                                    Minute
+                                    {c.step4.minuteLabel}
                                   </label>
                                   <div className="flex items-center justify-between rounded-xl border border-zinc-200 bg-white px-2 py-2 sm:px-3 shadow-sm">
                                     <button
