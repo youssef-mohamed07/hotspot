@@ -606,9 +606,9 @@
     "ariaLabel": "Chat with HotSpot on WhatsApp"
   },
   "contactCard": {
-    "label": "Contact Mohamed",
+    "label": "How can I help you?",
     "role": "President & Co-founder @ HotSpot",
-    "ariaLabel": "Contact Mohamed, President & Co-founder of HotSpot"
+    "ariaLabel": "Chat with HotSpot support on WhatsApp"
   },
   "languageSwitcher": {
     "label": "Language"

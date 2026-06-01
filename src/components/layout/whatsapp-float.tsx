@@ -1,6 +1,7 @@
 "use client";
 
 import type { CSSProperties } from "react";
+import Image from "next/image";
 import { useDictionary } from "@/i18n/locale-provider";
 import { TrackedCta } from "@/components/marketing/tracked-cta";
 import { getWhatsAppUrl } from "@/lib/site";
@@ -36,28 +37,20 @@ export function WhatsAppFloat() {
           className="pointer-events-none absolute inset-x-3 top-px h-px bg-gradient-to-r from-transparent via-white/40 to-transparent"
         />
 
-        <span className="relative grid h-11 w-11 shrink-0 place-items-center overflow-hidden rounded-xl bg-accent-gradient text-white ring-1 ring-white/20 shadow-[0_8px_20px_-8px_rgba(42,118,166,0.7)]">
-          <svg
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth={1.8}
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            className="h-5 w-5"
-            aria-hidden
-          >
-            <path d="M20 21a8 8 0 1 0-16 0" />
-            <circle cx="12" cy="7" r="4" />
-          </svg>
+        <span className="relative h-12 w-12 shrink-0 overflow-hidden rounded-xl bg-zinc-900 ring-1 ring-white/20 shadow-[0_8px_20px_-8px_rgba(42,118,166,0.7)]">
+          <Image
+            src="/assets/contact.jpeg"
+            alt=""
+            width={1600}
+            height={1280}
+            className="h-full w-full object-cover"
+            sizes="48px"
+          />
         </span>
 
         <span className="relative flex min-w-0 flex-col leading-tight">
-          <span className="truncate text-sm font-semibold tracking-tight text-white">
+          <span className="truncate text-sm font-semibold tracking-tight text-white sm:text-base">
             {card.label}
-          </span>
-          <span className="truncate text-[11px] font-medium text-white/65">
-            {card.role}
           </span>
         </span>
       </TrackedCta>
