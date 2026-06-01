@@ -17,9 +17,21 @@ export type ServiceItem = {
   highlights: readonly string[];
   tag: string;
   image: string;
+  href: string;
   badge?: string;
   featured?: boolean;
   Icon: ComponentType<SVGProps<SVGSVGElement>>;
+};
+
+export const serviceLinks: Record<string, string> = {
+  cybertruck: "https://hotsspots.com/cyber-truck/corporate",
+  "cyber-stage": "https://hotsspots.com/cyber-truck/corporate",
+  "Cyber Stage": "https://hotsspots.com/cyber-truck/corporate",
+  led: "https://hotsspots.com/experience/led-screens",
+  sound: "https://hotsspots.com/experience/sound-systems",
+  lighting: "https://hotsspots.com/experience/lighting",
+  production: "https://hotsspots.com/experience/control-systems",
+  stage: "https://hotsspots.com/experience/stage-trusses",
 };
 
 export const flagshipService: ServiceItem = {
@@ -36,6 +48,7 @@ export const flagshipService: ServiceItem = {
   ],
   tag: "Flagship",
   image: getServiceImage("cybertruck").path,
+  href: serviceLinks.cybertruck,
   badge: "New",
   featured: true,
   Icon: IconTruck,
@@ -56,6 +69,7 @@ export const otherServices: ServiceItem[] = [
     ],
     tag: "Visual",
     image: getServiceImage("led").path,
+    href: serviceLinks.led,
     Icon: IconScreen,
   },
   {
@@ -72,6 +86,7 @@ export const otherServices: ServiceItem[] = [
     ],
     tag: "Audio",
     image: getServiceImage("sound").path,
+    href: serviceLinks.sound,
     Icon: IconWave,
   },
   {
@@ -88,6 +103,7 @@ export const otherServices: ServiceItem[] = [
     ],
     tag: "Lighting",
     image: getServiceImage("lighting").path,
+    href: serviceLinks.lighting,
     Icon: IconSpotlight,
   },
   {
@@ -104,6 +120,7 @@ export const otherServices: ServiceItem[] = [
     ],
     tag: "Structure",
     image: getServiceImage("stage").path,
+    href: serviceLinks.stage,
     Icon: IconTruss,
   },
   {
@@ -120,6 +137,7 @@ export const otherServices: ServiceItem[] = [
     ],
     tag: "Production",
     image: getServiceImage("production").path,
+    href: serviceLinks.production,
     Icon: IconUsers,
   },
 ];

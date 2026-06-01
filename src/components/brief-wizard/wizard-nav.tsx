@@ -12,6 +12,7 @@ export function WizardNav({
   onNext,
   onSubmit,
   submitLabel = "Submit Brief",
+  nextLabel,
 }: {
   step: number;
   totalSteps: number;
@@ -21,6 +22,7 @@ export function WizardNav({
   onNext: () => void;
   onSubmit: () => void;
   submitLabel?: string;
+  nextLabel?: string;
 }) {
   const dict = useDictionary();
   const isRtl = useIsRtl();
@@ -42,7 +44,11 @@ export function WizardNav({
         disabled={disabled}
         className="inline-flex items-center gap-2 rounded-full bg-accent-gradient px-7 py-3 text-xs font-semibold uppercase tracking-[0.2em] text-white transition hover:opacity-90 hover:shadow-lg hover:shadow-accent/20 disabled:cursor-not-allowed disabled:opacity-30 disabled:hover:shadow-none"
       >
-        {isLast ? (isSubmitting ? dict.contact.sending : submitLabel) : dict.contact.continue}
+        {isLast
+          ? isSubmitting
+            ? dict.contact.sending
+            : submitLabel
+          : nextLabel ?? dict.contact.continue}
         <IconArrowRight className="rtl-flip h-3.5 w-3.5" />
       </button>
     </div>

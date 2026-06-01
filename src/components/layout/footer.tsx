@@ -90,7 +90,11 @@ export function Footer() {
                   </a>
                 </li>
                 <li>
-                  <a href={`tel:${siteConfig.phone}`} className="transition-colors hover:text-white">
+                  <a
+                    href={`tel:${siteConfig.phone}`}
+                    dir="ltr"
+                    className="inline-block transition-colors hover:text-white"
+                  >
                     {siteConfig.phoneDisplay}
                   </a>
                 </li>

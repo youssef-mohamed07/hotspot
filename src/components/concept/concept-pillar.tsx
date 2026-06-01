@@ -23,7 +23,7 @@ export function ConceptPillar({
   return (
     <Reveal delay={index * 0.1}>
       <div
-        className={`grid items-center gap-10 text-start lg:grid-cols-2 lg:gap-16 ${
+        className={`grid items-start gap-10 text-start lg:grid-cols-2 lg:gap-16 ${
           swapColumns ? "lg:[&>div:first-child]:order-2" : ""
         }`}
       >

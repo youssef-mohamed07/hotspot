@@ -7,7 +7,7 @@ import {
   IconWave,
 } from "@/components/icons";
 import type { Dictionary } from "@/i18n/get-dictionary";
-import type { ServiceItem } from "@/data/other-services";
+import { serviceLinks, type ServiceItem } from "@/data/other-services";
 import { getServiceImage } from "@/data/image-assets";
 
 const serviceIcons = {
@@ -30,6 +30,7 @@ export function getLocalizedServices(dict: Dictionary): ServiceItem[] {
     highlights: flagship.highlights,
     tag: flagship.tag,
     image: getServiceImage("cybertruck").path,
+    href: serviceLinks[flagship.id] ?? serviceLinks.cybertruck,
     badge: flagship.badge,
     featured: true,
     Icon: serviceIcons.cybertruck,
@@ -45,6 +46,7 @@ export function getLocalizedServices(dict: Dictionary): ServiceItem[] {
       highlights: item.highlights,
       tag: item.tag,
       image: getServiceImage(item.id).path,
+      href: serviceLinks[item.id] ?? serviceLinks.production,
       Icon: serviceIcons[item.id as keyof typeof serviceIcons] ?? IconUsers,
     })),
   ];

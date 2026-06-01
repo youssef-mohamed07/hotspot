@@ -728,19 +728,25 @@ export function FormSection() {
     }
   }, [selectedDay, timeHour, timeMinute]);
 
-  const canAdvance = [
+  const firstStepComplete =
     data.name.trim().length > 0 &&
-      data.company.trim().length > 0 &&
-      /\S+@\S+\.\S+/.test(data.email) &&
-      data.whatsapp.trim().length > 0,
-    data.industry.length > 0,
-    data.campaignType.length > 0 && data.targetCities.length > 0,
-    true,
+    data.company.trim().length > 0 &&
+    /\S+@\S+\.\S+/.test(data.email) &&
+    data.whatsapp.trim().length > 0;
+  const lastStepComplete =
     data.contactMethod.length > 0 &&
-      (data.contactMethod !== "meet" || data.meetingDate!.length > 0),
-  ][step];
+    (data.contactMethod !== "meet" || data.meetingDate!.length > 0);
+  const canAdvance =
+    step === 0
+      ? firstStepComplete
+      : step === TOTAL_STEPS - 1
+        ? lastStepComplete
+        : true;
+  const isOptionalStep = step > 0 && step < TOTAL_STEPS - 1;
 
   const handleSubmit = async () => {
+    if (!lastStepComplete) return;
+
     setSubmitError(null);
     setIsSubmitting(true);
     try {
@@ -1263,6 +1269,7 @@ export function FormSection() {
                   }}
                   onSubmit={handleSubmit}
                   submitLabel={c.submit}
+                  nextLabel={isOptionalStep ? c.skip : c.continue}
                 />
               </div>
             )}

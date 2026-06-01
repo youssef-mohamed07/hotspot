@@ -32,10 +32,12 @@ export function ServiceShowcaseCard({
   const badgeOnly = featured && service.badge;
 
   return (
-    <button
-      type="button"
+    <a
+      href={service.href}
+      target="_blank"
+      rel="noopener noreferrer"
       onClick={onSelect}
-      aria-pressed={active}
+      aria-current={active ? "true" : undefined}
       className={`group relative flex h-[320px] w-[82vw] min-w-[280px] shrink-0 snap-center flex-col overflow-hidden rounded-2xl text-start transition-all duration-500 sm:h-[380px] sm:w-[320px] xl:h-[440px] xl:w-auto xl:min-w-0 ${
         featured
           ? active
@@ -89,6 +91,6 @@ export function ServiceShowcaseCard({
           </>
         )}
       </div>
-    </button>
+    </a>
   );
 }

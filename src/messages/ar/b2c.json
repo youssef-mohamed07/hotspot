@@ -460,6 +460,7 @@
     "progressLabel": "الخطوة {current} من {total}",
     "back": "رجوع",
     "continue": "متابعة",
+    "skip": "تخطي",
     "sending": "جاري الإرسال…",
     "step0": {
       "title": "لنتعرف عليكم.",

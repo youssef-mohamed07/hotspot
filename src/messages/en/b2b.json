@@ -443,6 +443,7 @@
     "progressLabel": "Step {current} of {total}",
     "back": "Back",
     "continue": "Continue",
+    "skip": "Skip",
     "sending": "Sending…",
     "step0": {
       "title": "Let's connect.",
