@@ -9,7 +9,7 @@ import { useAudience, useDictionary, useLocale } from "@/i18n/locale-provider";
 const d = (seconds: number): CSSProperties =>
   ({ "--enter-delay": `${seconds}s` }) as CSSProperties;
 
-const HERO_IMAGE_B2B = "/hero-bg.png";
+const HERO_IMAGE_B2B = "/hero-bg2.png";
 const HERO_IMAGE_B2C = "/140000.png";
 
 export function Hero() {
@@ -65,7 +65,10 @@ export function Hero() {
           <span className="enter-item inline" style={d(0.22)}>
             {dict.hero.titleLine1}{" "}
           </span>
-          <span className="enter-item hero-accent-gradient inline" style={d(0.3)}>
+          <span
+            className="enter-item hero-accent-gradient inline"
+            style={d(0.3)}
+          >
             <span className="text-gradient-accent">{dict.hero.titleLine2}</span>
           </span>
         </h1>

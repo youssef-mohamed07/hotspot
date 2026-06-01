@@ -15,6 +15,7 @@ import { TestimonialsSection } from "@/components/sections/testimonials-section"
 import { TransitionStatsSection } from "@/components/sections/transition-stats-section";
 import { VisualizationSection } from "@/components/sections/visualization-section";
 import { ExperientialMarketingSection } from "@/components/sections/experiential-marketing-section";
+import { AddonsSection } from "@/components/sections/addons-section";
 import { isAudience, type Audience } from "@/i18n/audience";
 import { getDictionary } from "@/i18n/get-dictionary";
 import { isLocale, localizedPath, type Locale } from "@/i18n/config";
@@ -64,6 +65,7 @@ export default async function HomePage({ params }: PageProps) {
         <ProcessSection />
         <ConceptSection />
         {isB2B && <CaseStudiesSection />}
+        <AddonsSection />
         <OtherServicesSection />
         <TestimonialsSection />
         <FormSection />

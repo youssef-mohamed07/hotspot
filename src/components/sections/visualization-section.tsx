@@ -29,30 +29,28 @@ export function VisualizationSection() {
 
       <div className="relative mx-auto w-full max-w-7xl px-6">
         <div className="flex flex-col items-center mb-10 max-w-3xl mx-auto text-center">
-            <SectionHeader
-              variant="normal"
-              align="center"
-              title={c.eyebrow}
-              theme="light"
-              headline={
-                <>
-                  {c.headline1}{" "}
-                  <span className="text-gradient-accent">
-                    {c.headlineAccent}
-                  </span>
-                  {"headline2" in c && c.headline2 ? ` ${c.headline2}` : ""}
-                </>
-              }
-              subtitle={c.subtitle}
-            />
+          <SectionHeader
+            variant="normal"
+            align="center"
+            title={c.eyebrow}
+            theme="light"
+            headline={
+              <>
+                {c.headline1}{" "}
+                <span className="text-gradient-accent">{c.headlineAccent}</span>
+                {"headline2" in c && c.headline2 ? ` ${c.headline2}` : ""}
+              </>
+            }
+            subtitle={c.subtitle}
+          />
         </div>
 
         <Reveal delay={0.08}>
           <div className="mx-auto aspect-[16/10] w-full max-w-3xl overflow-hidden rounded-[48px] border border-zinc-200/50 shadow-[0_32px_80px_rgba(0,0,0,0.08)] bg-zinc-50/30">
             <CybertruckSceneDynamic
               initialView="explore"
-              src="/Cybertruck%203D/Cyber%20Truck%20HotSpot.glb"
-              alt={c.modelAlt}
+              src="/Cybertruck%203D/ct1.glb"
+              alt="HotSpot Cyber Stage 3D model"
               className="h-full w-full"
               modelClassName="h-full w-full"
               showLogo={false}

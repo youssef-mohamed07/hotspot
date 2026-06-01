@@ -5,7 +5,10 @@ import type { ServiceItem } from "@/data/other-services";
 
 function getDetailLines(service: ServiceItem): string[] {
   if (service.description.includes("·")) {
-    return service.description.split("·").map((line) => line.trim()).filter(Boolean);
+    return service.description
+      .split("·")
+      .map((line) => line.trim())
+      .filter(Boolean);
   }
   if (service.highlights.length >= 2) {
     return [...service.highlights].slice(0, 2);
@@ -48,16 +51,14 @@ export function ServiceShowcaseCard({
           src={service.image}
           alt={imageAlt}
           fill
-          className={`object-cover transition duration-500 ${
-            active ? "grayscale-0" : "grayscale-[25%] group-hover:grayscale-0"
-          }`}
+          className={`object-cover transition duration-500`}
           sizes="(max-width: 768px) 75vw, 320px"
           priority={featured}
         />
       </div>
 
       <div
-        className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/20 to-black/70 pointer-events-none"
+        className="pointer-events-none absolute inset-0 bg-gradient-to-b from-black/70 via-black/20 to-black/70"
         aria-hidden
       />
 

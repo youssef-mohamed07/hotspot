@@ -1,8 +1,10 @@
 "use client";
 
+import { useState, useRef } from "react";
 import type { CSSProperties } from "react";
 import Link from "next/link";
 import Image from "next/image";
+import { motion, useScroll, useMotionValueEvent } from "framer-motion";
 import { DirectionalArrow } from "@/components/icons/directional-arrow";
 import { TrackedCta } from "@/components/marketing/tracked-cta";
 import { LanguageSwitcher } from "@/components/layout/language-switcher";
@@ -15,6 +17,20 @@ export function Header() {
   const audience = useAudience();
   const home = localizedPath(locale, audience);
 
+  const [hidden, setHidden] = useState(false);
+  const { scrollY } = useScroll();
+  const lastScrollY = useRef(0);
+
+  useMotionValueEvent(scrollY, "change", (latest) => {
+    const previous = lastScrollY.current;
+    if (latest > previous && latest > 150) {
+      setHidden(true);
+    } else if (latest < previous) {
+      setHidden(false);
+    }
+    lastScrollY.current = latest;
+  });
+
   const links = [
     { href: "#concept", label: dict.nav.concept },
     { href: "#visualization", label: dict.nav.truck },
@@ -25,9 +41,14 @@ export function Header() {
   ];
 
   return (
-    <header
-      className="enter-item enter-item-from-top fixed inset-x-0 top-6 z-50 px-4 md:px-8"
-      style={{ "--enter-delay": "0.1s" } as CSSProperties}
+    <motion.header
+      initial={{ y: -20, opacity: 0 }}
+      animate={hidden ? { y: -150, opacity: 0 } : { y: 0, opacity: 1 }}
+      transition={{ 
+        y: { duration: 0.35, ease: "easeInOut" },
+        opacity: { duration: 0.4, ease: "easeOut", delay: 0.1 }
+      }}
+      className="fixed inset-x-0 top-6 z-50 px-4 md:px-8"
     >
       <div className="mx-auto flex max-w-5xl items-center justify-between gap-2 rounded-full border border-white/15 px-4 py-2.5 shadow-[0_8px_32px_rgba(0,0,0,0.25),0_0_40px_-20px_rgba(80,160,230,0.4)] ring-1 ring-black/5 transition-all"
         style={{
@@ -74,6 +95,6 @@ export function Header() {
           </TrackedCta>
         </div>
       </div>
-    </header>
+    </motion.header>
   );
 }

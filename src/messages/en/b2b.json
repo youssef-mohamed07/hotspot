@@ -110,7 +110,7 @@
     "eyebrow": "Our process",
     "headline1": "From brief to",
     "headlineAccent": "activation day.",
-    "subtitle": "Five stages, one team, no hand-offs. Every step is signed off before the next begins.",
+    "subtitle": "Seven stages, one team, no hand-offs. Every step is signed off before the next begins.",
     "ctaPrompt": "Ready to start your timeline?",
     "cta": "Build my brief",
     "steps": [
@@ -121,21 +121,31 @@
       },
       {
         "n": "02",
+        "title": "Audience & Location Analysis",
+        "blurb": "Map your target audience against footfall data, event calendars, and high-traffic zones. We identify where your people are, then we plan to be exactly there."
+      },
+      {
+        "n": "03",
+        "title": "Traffic & Logistics Planning",
+        "blurb": "Route mapping, permits, city clearances, and deployment logistics: fully managed by our team. You approve the plan, we handle everything from road access to on-ground coordination."
+      },
+      {
+        "n": "04",
         "title": "Creative & Wrap Design",
         "blurb": "Our design team translates your brand into a full-vehicle wrap concept. You approve every detail before anything goes to print."
       },
       {
-        "n": "03",
+        "n": "05",
         "title": "Production & Wrap",
         "blurb": "Cyber Stage is wrapped, the AV systems are configured, and content is loaded. Production takes 48–72 hours from final approval."
       },
       {
-        "n": "04",
+        "n": "06",
         "title": "Activation Day",
         "blurb": "The Cyber Stage hits the road. Our crew manages every on-ground moment — positioning, content capture, audience engagement."
       },
       {
-        "n": "05",
+        "n": "07",
         "title": "Report & Debrief",
         "blurb": "Full campaign report delivered within 48 hours: reach, footfall, content assets, social performance, and recommendations for the next phase."
       }
@@ -295,19 +305,6 @@
         "tag": "Visual"
       },
       {
-        "id": "stage",
-        "title": "Stage & Truss Systems",
-        "description": "Corporate Events · Concerts · Launches",
-        "summary": "Engineered stage platforms and truss for corporate keynotes, concert builds, and product launches — safe, fast to deploy, and brand-ready.",
-        "highlights": [
-          "Corporate & concert builds",
-          "Certified rigging",
-          "Custom sizing",
-          "Launch-ready staging"
-        ],
-        "tag": "Structure"
-      },
-      {
         "id": "sound",
         "title": "Professional Sound System",
         "description": "Line Array · Immersive Audio",
@@ -334,6 +331,19 @@
         "tag": "Lighting"
       },
       {
+        "id": "stage",
+        "title": "Stage & Truss Systems",
+        "description": "Corporate Events · Concerts · Launches",
+        "summary": "Engineered stage platforms and truss for corporate keynotes, concert builds, and product launches — safe, fast to deploy, and brand-ready.",
+        "highlights": [
+          "Corporate & concert builds",
+          "Certified rigging",
+          "Custom sizing",
+          "Launch-ready staging"
+        ],
+        "tag": "Structure"
+      },
+      {
         "id": "production",
         "title": "Full Event Production",
         "description": "End-to-End · Single Point of Contact",
@@ -347,6 +357,30 @@
         "tag": "Production"
       }
     ]
+  },
+  "addons": {
+    "eyebrow": "On-ground solutions",
+    "title": "Create a full experience",
+    "subtitle": "Depending on your goals, we add on-ground solutions to deepen the experience and multiply your brand's footprint.",
+    "counter": {
+      "number": "+10 other",
+      "label": "on-ground solutions"
+    },
+    "imageAlt": "Mockup of a brand activation setup with add-on stations",
+    "items": {
+      "photobooth": {
+        "title": "Photo Booth",
+        "description": "Branded capture moments guests share instantly."
+      },
+      "giveaways": {
+        "title": "Giveaways",
+        "description": "Useful branded items handed out on site."
+      },
+      "ledBackpack": {
+        "title": "LED Backpack",
+        "description": "Mobile visibility carried through the crowd."
+      }
+    }
   },
   "testimonials": {
     "eyebrow": "Client voices",
@@ -381,9 +415,9 @@
   },
   "cities": {
     "eyebrow": "Activation locations",
-    "headline1": "Built for",
-    "headlineAccent": "high-footfall zones.",
-    "subtitle": "Premium public and commercial environments where brands need to be seen, filmed, and remembered.",
+    "headline1": "Where the city moves,",
+    "headlineAccent": "we move.",
+    "subtitle": "We identify the highest-traffic zones: malls, festivals, stadiums, streets, and more.\nWe manage all permits and logistics, and deploy your brand exactly where your audience shows up.",
     "zonesTitle": "Prime Activation Zones",
     "zones": [
       "Malls & Retail Centers",
