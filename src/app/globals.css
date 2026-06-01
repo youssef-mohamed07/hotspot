@@ -20,12 +20,14 @@ html,
 body {
   background: var(--color-background);
   color: var(--color-foreground);
-  font-family: var(--font-sans), var(--font-arabic), Arial, Helvetica, sans-serif;
+  font-family:
+    var(--font-sans), var(--font-arabic), Arial, Helvetica, sans-serif;
   overflow-x: clip;
 }
 
 html.lang-ar body {
-  font-family: var(--font-arabic), var(--font-sans), Arial, Helvetica, sans-serif;
+  font-family:
+    var(--font-arabic), var(--font-sans), Arial, Helvetica, sans-serif;
 }
 
 /* Marketing chrome (hero/header) stays LTR layout — matches English composition */
@@ -40,6 +42,11 @@ html[dir="rtl"] .rtl-flip {
 /* ---------- RTL layout & typography ---------- */
 html[dir="rtl"] {
   direction: rtl;
+}
+
+/* Fix iOS detached letter rendering: disable letter-spacing for Arabic text */
+html[dir="rtl"] [class*="tracking-"] {
+  letter-spacing: normal !important;
 }
 
 html[dir="rtl"] main {
@@ -241,7 +248,8 @@ section[id] {
 
 /* ---------- Typography helpers ---------- */
 .display-headline {
-  font-family: var(--font-display), var(--font-sans), var(--font-arabic), Arial, sans-serif;
+  font-family:
+    var(--font-display), var(--font-sans), var(--font-arabic), Arial, sans-serif;
   font-weight: 400;
   letter-spacing: 0.02em;
   line-height: 0.95;
@@ -267,7 +275,12 @@ html.lang-ar .bg-accent-gradient {
 /* Static gradient text — fixed angle so AR/EN match (not mirrored by dir) */
 .text-gradient-accent {
   display: inline;
-  background-image: linear-gradient(135deg, #2a76a6 0%, #5ba3d4 50%, #2a76a6 100%);
+  background-image: linear-gradient(
+    135deg,
+    #2a76a6 0%,
+    #5ba3d4 50%,
+    #2a76a6 100%
+  );
   background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
