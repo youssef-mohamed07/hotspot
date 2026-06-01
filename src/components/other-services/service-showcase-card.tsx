@@ -17,10 +17,12 @@ export function ServiceShowcaseCard({
   service,
   active,
   onSelect,
+  imageAlt,
 }: {
   service: ServiceItem;
   active: boolean;
   onSelect: () => void;
+  imageAlt: string;
 }) {
   const detailLines = getDetailLines(service);
   const featured = service.featured;
@@ -44,7 +46,7 @@ export function ServiceShowcaseCard({
       <div className="absolute inset-0 bg-zinc-900">
         <Image
           src={service.image}
-          alt={`${service.title} — HotSpot event service Saudi Arabia`}
+          alt={imageAlt}
           fill
           className={`object-cover transition duration-500 ${
             active ? "grayscale-0" : "grayscale-[25%] group-hover:grayscale-0"

@@ -6,6 +6,12 @@
   "site": {
     "whatsappMessage": "Hi HotSpot! I'd like to learn more about Cyber Stage and book an activation."
   },
+  "localeGate": {
+    "b2bTitle": "Corporates",
+    "b2bDesc": "Brand activations, launch campaigns, and enterprise-scale event production.",
+    "b2cTitle": "Individuals",
+    "b2cDesc": "Private celebrations, weddings, graduations, and unforgettable moments with Cyber Stage."
+  },
   "splash": {
     "tagline": "Own the street. Own the moment."
   },
@@ -171,6 +177,7 @@
     "headlineAccent": "Cyber Stage",
     "headline2": "From Every Angle",
     "subtitle": "Rotate, navigate, and discover the digital venue through a fully interactive 3D experience.",
+    "modelAlt": "HotSpot Cyber Stage 3D model",
     "badge": "Live preview",
     "customizer": {
       "partsTitle": "Pick a part",
@@ -194,6 +201,7 @@
     "eyebrow": "Case studies",
     "headline1": "Campaigns that",
     "headlineAccent": "moved markets.",
+    "kooraModelAlt": "Koora Break Cyber Stage 3D activation model",
     "modelControls": {
       "instruction": "Drag, zoom, pan, or use the controls",
       "autoRotateOn": "Pause spin",
@@ -254,6 +262,7 @@
     "headline1": "Years of 360° solutions.",
     "headlineAccent": "and still innovating.",
     "subtitle": "Cyber Stage is the newest chapter of a decade-long commitment to making Saudi events unforgettable.",
+    "serviceImageAlt": "{title} — HotSpot event service, Saudi Arabia",
     "swipe": "Swipe",
     "exploreCta": "Explore Cyber Stage",
     "requestCta": "Request this layer",
@@ -479,6 +488,18 @@
       "hint": "Share extra details, links, or requirements before you send.",
       "notes": "Tell Us About Your Campaign",
       "notesPlaceholder": "Any extra details, links, or requirements..."
+    },
+    "step4": {
+      "title": "How should we reach out?",
+      "hint": "We prefer calls and video meetings; email works too.",
+      "methodEmail": "Email",
+      "methodPhone": "Phone / WhatsApp",
+      "methodMeet": "Google Meet",
+      "pickDateTime": "Pick date & time",
+      "dateLabel": "Date",
+      "datePlaceholder": "Select a date",
+      "hourLabel": "Hour",
+      "minuteLabel": "Minute"
     },
     "submit": "Send My Brief — Let's Deploy",
     "error": "Something went wrong. Please try again."

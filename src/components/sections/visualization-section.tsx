@@ -52,7 +52,7 @@ export function VisualizationSection() {
             <CybertruckSceneDynamic
               initialView="explore"
               src="/Cybertruck%203D/Cyber%20Truck%20HotSpot.glb"
-              alt="HotSpot Cyber Stage 3D model"
+              alt={c.modelAlt}
               className="h-full w-full"
               modelClassName="h-full w-full"
               showLogo={false}
