@@ -22,7 +22,6 @@ function getResendConfig() {
 
 export async function sendContactBriefEmail(data: ContactFormData) {
   const config = getResendConfig();
-  console.log(config);
   if (!config) {
     throw new Error("[sendContactBriefEmail] Email service is not configured.");
   }
