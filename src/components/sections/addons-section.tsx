@@ -2,7 +2,7 @@
 
 import { Reveal } from "@/components/reveal";
 import { SectionHeader } from "@/components/section-header";
-import { IconCamera, IconScreen, IconSparkle } from "@/components/icons";
+import { IconCamera, IconScreen, IconSparkle, IconSpotlight } from "@/components/icons";
 import { useDictionary } from "@/i18n/locale-provider";
 
 const addonHotspots = [
@@ -23,6 +23,18 @@ const addonHotspots = [
     x: "7.4%",
     y: "55%",
     Icon: IconScreen,
+  },
+  {
+    id: "topSphere",
+    x: "49.5%",
+    y: "34%",
+    Icon: IconSpotlight,
+  },
+  {
+    id: "frontBranding",
+    x: "48.5%",
+    y: "59%",
+    Icon: IconSparkle,
   },
 ] as const;
 

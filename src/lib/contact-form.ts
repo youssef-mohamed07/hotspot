@@ -48,10 +48,7 @@ export function parseContactForm(body: unknown): ContactFormData | null {
     !data.name ||
     !data.company ||
     !/\S+@\S+\.\S+/.test(data.email) ||
-    !data.whatsapp ||
-    !data.industry ||
-    !data.campaignType ||
-    !data.targetCities
+    !data.whatsapp
   ) {
     return null;
   }
@@ -91,12 +88,12 @@ export function buildUserConfirmationEmailHtml(data: ContactFormData) {
             
             <div style="margin-bottom: 8px;">
               <span style="color: #71717a; font-size: 14px; display: inline-block; width: 120px;">Type:</span>
-              <span style="color: #27272a; font-size: 14px; font-weight: 500;">${escapeHtml(data.campaignType)}</span>
+              <span style="color: #27272a; font-size: 14px; font-weight: 500;">${escapeHtml(data.campaignType || "Not specified")}</span>
             </div>
             
             <div style="margin-bottom: 8px;">
               <span style="color: #71717a; font-size: 14px; display: inline-block; width: 120px;">Locations:</span>
-              <span style="color: #27272a; font-size: 14px; font-weight: 500;">${escapeHtml(data.targetCities)}</span>
+              <span style="color: #27272a; font-size: 14px; font-weight: 500;">${escapeHtml(data.targetCities || "Not specified")}</span>
             </div>
 
             ${data.campaignDate ? `

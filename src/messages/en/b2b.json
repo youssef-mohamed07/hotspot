@@ -369,6 +369,14 @@
       "ledBackpack": {
         "title": "LED Backpack",
         "description": "Mobile visibility carried through the crowd."
+      },
+      "topSphere": {
+        "title": "360° Brand Beacon",
+        "description": "An unmissable elevated presence that stands out in any crowd."
+      },
+      "frontBranding": {
+        "title": "Striking Front Display",
+        "description": "A sleek, integrated canvas to put your brand identity front and center."
       }
     }
   },
