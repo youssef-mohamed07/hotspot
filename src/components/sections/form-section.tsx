@@ -747,7 +747,16 @@ export function FormSection() {
       : step === TOTAL_STEPS - 1
         ? lastStepComplete
         : true;
+
+  const hasInputForCurrentStep = () => {
+    if (step === 1) return data.industry.trim().length > 0;
+    if (step === 2) return data.campaignType.trim().length > 0 || data.targetCities.trim().length > 0 || data.campaignDate.trim().length > 0 || data.budget.trim().length > 0;
+    if (step === 3) return data.notes.trim().length > 0;
+    return false;
+  };
+
   const isOptionalStep = step > 0 && step < TOTAL_STEPS - 1;
+  const showSkip = isOptionalStep && !hasInputForCurrentStep();
 
   const handleSubmit = async () => {
     if (!lastStepComplete) return;
@@ -1303,7 +1312,7 @@ export function FormSection() {
                   }}
                   onSubmit={handleSubmit}
                   submitLabel={c.submit}
-                  nextLabel={isOptionalStep ? c.skip : c.continue}
+                  nextLabel={showSkip ? c.skip : c.continue}
                 />
               </div>
             )}
