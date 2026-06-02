@@ -80,10 +80,14 @@ export function AddonsSection() {
               <div className="pointer-events-none absolute inset-0 bg-linear-to-b from-black/10 via-transparent to-black/25" />
 
               {addonHotspots.map((hotspot) => {
-                const addon = dict.addons.items[hotspot.id];
+                const addon =
+                  dict.addons.items?.[
+                    hotspot.id as keyof typeof dict.addons.items
+                  ];
                 const Icon = hotspot.Icon;
 
                 // Determine alignment based on horizontal position to prevent cutoff
+                if (!addon) return null;
                 const xVal = parseFloat(hotspot.x);
                 const alignClass =
                   xVal < 25
@@ -108,10 +112,10 @@ export function AddonsSection() {
                       </span>
                       <span className="min-w-0">
                         <span className="block text-[10px] font-bold leading-tight text-zinc-900 sm:text-xs">
-                          {addon.title}
+                          {addon?.title}
                         </span>
                         <span className="mt-1 block text-[9px] leading-snug text-zinc-600 sm:text-[11px]">
-                          {addon.description}
+                          {addon?.description}
                         </span>
                       </span>
                     </div>
