@@ -8,8 +8,9 @@ import {
 
 function getResendConfig() {
   const apiKey = process.env.RESEND_API_KEY;
-  const fromName = process.env.EMAIL_FROM_NAME || "Build8 Website";
-  const fromAddress = process.env.EMAIL_FROM_ADDRESS || "noreply@build8.dev";
+  const fromName = process.env.EMAIL_FROM_NAME || "Hotsspots";
+  const fromAddress =
+    process.env.EMAIL_FROM_ADDRESS || "noreply@cyberstage.hotsspots.com";
   const to = process.env.EMAIL_TO_ADDRESS;
 
   if (!apiKey || !fromAddress || !to) {
