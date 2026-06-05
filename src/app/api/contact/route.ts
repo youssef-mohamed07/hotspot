@@ -1,5 +1,7 @@
+import { track } from "@vercel/analytics/server";
 import { NextResponse } from "next/server";
 import { parseContactForm } from "@/lib/contact-form";
+import { MarketingEvents } from "@/lib/marketing/events";
 import { sendContactBriefEmail, sendUserConfirmationEmail } from "@/lib/resend";
 
 export async function POST(request: Request) {
@@ -25,6 +27,11 @@ export async function POST(request: Request) {
     } catch (userEmailErr) {
       console.error("[contact] Failed to send user confirmation email:", userEmailErr);
     }
+
+    await track(MarketingEvents.lead, {
+      utm_source: data.attribution?.utm_source ?? "direct",
+      utm_campaign: data.attribution?.utm_campaign ?? "none",
+    });
 
     return NextResponse.json({ ok: true });
   } catch (err) {

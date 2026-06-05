@@ -9,6 +9,7 @@ export const MarketingEvents = {
   formStep: "Brief_Step_Completed",
   formSubmitAttempt: "Brief_Submit_Attempted",
   formSubmitError: "Brief_Submit_Failed",
+  schedule: "Meeting_Scheduled",
 } as const;
 
 export type MarketingEventName = (typeof MarketingEvents)[keyof typeof MarketingEvents];

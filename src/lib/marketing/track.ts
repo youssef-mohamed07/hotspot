@@ -1,7 +1,9 @@
 "use client";
 
+import { track as vercelTrack } from "@vercel/analytics";
 import type { Audience } from "@/i18n/audience";
 import type { Locale } from "@/i18n/config";
+import { getMarketingContext } from "@/lib/marketing/context";
 import { MarketingEvents, type MarketingEventName } from "@/lib/marketing/events";
 import type { AttributionData } from "@/lib/marketing/attribution";
 import { getAttributionForLead } from "@/lib/marketing/attribution";
@@ -18,6 +20,20 @@ const standardEvents = [
   "CompleteRegistration",
 ];
 
+/** Pro plan allows 2 custom properties per event. */
+const VERCEL_DATA_PRIORITY = [
+  "cta_location",
+  "audience",
+  "locale",
+  "form_step",
+  "form_step_name",
+  "utm_source",
+  "utm_campaign",
+  "funnel_stage",
+  "form_name",
+  "error_message",
+] as const;
+
 function cleanPayload(payload?: TrackPayload): TrackPayload | undefined {
   if (!payload) return undefined;
   const data = Object.fromEntries(
@@ -26,11 +42,47 @@ function cleanPayload(payload?: TrackPayload): TrackPayload | undefined {
   return Object.keys(data).length > 0 ? data : undefined;
 }
 
+function withContext(payload?: TrackPayload): TrackPayload | undefined {
+  const { locale, audience } = getMarketingContext();
+  return cleanPayload({
+    locale,
+    audience,
+    ...payload,
+  });
+}
+
 function withAttribution(payload?: TrackPayload): TrackPayload | undefined {
   const attribution = getAttributionForLead();
-  const data = cleanPayload(payload);
+  const data = withContext(payload);
   if (!attribution || Object.keys(attribution).length === 0) return data;
   return cleanPayload({ ...data, ...attribution });
+}
+
+function toVercelData(payload?: TrackPayload): Record<string, string | number | boolean> | undefined {
+  const data = cleanPayload(payload);
+  if (!data) return undefined;
+
+  const picked: Record<string, string | number | boolean> = {};
+  for (const key of VERCEL_DATA_PRIORITY) {
+    const value = data[key];
+    if (value === undefined || value === "") continue;
+    if (typeof value === "string" || typeof value === "number" || typeof value === "boolean") {
+      picked[key] = key === "error_message" && typeof value === "string" ? value.slice(0, 255) : value;
+    }
+    if (Object.keys(picked).length >= 2) break;
+  }
+
+  return Object.keys(picked).length > 0 ? picked : undefined;
+}
+
+function vercelEvent(name: string, payload?: TrackPayload) {
+  try {
+    const data = toVercelData(withAttribution(payload));
+    if (data) vercelTrack(name, data);
+    else vercelTrack(name);
+  } catch {
+    // Analytics must never break UX.
+  }
 }
 
 function metaEvent(name: string, params?: TrackPayload) {
@@ -43,8 +95,10 @@ function metaEvent(name: string, params?: TrackPayload) {
   }
 }
 
-/** Meta Pixel events only. */
+/** Meta Pixel + Vercel Web Analytics custom events. */
 export function trackEvent(event: MarketingEventName | string, payload?: TrackPayload) {
+  vercelEvent(event, payload);
+
   switch (event) {
     case MarketingEvents.lead:
       metaEvent(MarketingEvents.lead, { currency: "SAR", ...payload });
@@ -73,6 +127,12 @@ export function trackEvent(event: MarketingEventName | string, payload?: TrackPa
 }
 
 export function trackPageView(path: string, context?: { locale?: Locale; audience?: Audience }) {
+  vercelEvent(MarketingEvents.pageView, {
+    page_path: path,
+    page_location: typeof window !== "undefined" ? window.location.href : path,
+    locale: context?.locale,
+    audience: context?.audience,
+  });
   metaEvent("PageView", {
     page_path: path,
     page_location: typeof window !== "undefined" ? window.location.href : path,
@@ -132,6 +192,11 @@ export function trackFormSubmitError(message?: string) {
 }
 
 export function trackSchedule(payload?: TrackPayload) {
+  vercelEvent(MarketingEvents.schedule, {
+    content_name: "contact_meeting",
+    content_category: "lead_funnel",
+    ...payload,
+  });
   metaEvent("Schedule", {
     content_name: "contact_meeting",
     content_category: "lead_funnel",

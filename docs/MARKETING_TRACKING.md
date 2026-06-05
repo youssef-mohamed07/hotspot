@@ -1,6 +1,6 @@
-# Meta Pixel — tracking & UTM
+# Marketing tracking — Meta Pixel & Vercel Analytics
 
-HotSpot uses **Meta Pixel only** (Facebook / Instagram ads). Enabled via `NEXT_PUBLIC_META_PIXEL_ID` in `.env` or Vercel.
+HotSpot sends the same funnel events to **Meta Pixel** (ads) and **Vercel Web Analytics** (Events tab). Meta is enabled via `NEXT_PUBLIC_META_PIXEL_ID` in `.env` or Vercel. Vercel custom events require Web Analytics enabled on the project (Pro plan).
 
 ## Setup
 
@@ -24,21 +24,21 @@ Use audience paths + UTM (and `fbclid` is captured automatically from Meta ads):
 
 UTM + `fbclid` are stored in cookie `hs_attribution` for **30 days** and sent with lead form emails.
 
-## Meta standard events
+## Events (Meta + Vercel)
 
-| User action | Meta event |
-|-------------|------------|
-| Page / route change | `PageView` |
-| CTA → `#contact` | `InitiateCheckout` |
-| WhatsApp button | `Contact` |
-| Contact form started | `ViewContent` |
-| Contact form step reached | `FormStep` |
-| Contact form submit clicked | `FormSubmitAttempt` |
-| Contact form submit failed | `FormSubmitError` |
-| Meeting date submitted | `Schedule` |
-| Form submitted | `Lead` |
+| User action | Vercel custom event | Meta event |
+|-------------|---------------------|------------|
+| Page / route change | `Page_Viewed` | `PageView` |
+| CTA → `#contact` | `CTA_Clicked` | `InitiateCheckout` (custom) |
+| WhatsApp button | `Contact_Initiated` | `Contact` (custom) |
+| Contact form started | `Brief_Started` | `ViewContent` (custom) |
+| Contact form step reached | `Brief_Step_Completed` | `FormStep` (custom) |
+| Contact form submit clicked | `Brief_Submit_Attempted` | custom |
+| Contact form submit failed | `Brief_Submit_Failed` | custom |
+| Meeting date submitted | `Meeting_Scheduled` | `Schedule` |
+| Form submitted (client + API) | `Lead_Generated` | `Lead` (custom) |
 
-In Ads Manager, optimize campaigns for **Lead** or **Contact** as your conversion goal.
+Vercel Pro stores up to **2 properties** per event (e.g. `audience`, `cta_location`, `utm_source`). In Ads Manager, optimize campaigns for **Lead** or **Contact** as your conversion goal.
 
 ## Local testing
 
