@@ -194,6 +194,22 @@ export function IconPlay(props: IconProps) {
   );
 }
 
+export function IconVolume(props: IconProps) {
+  return (
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.8} {...props}>
+      <path strokeLinecap="round" strokeLinejoin="round" d="M6.75 8.25H4.5A1.5 1.5 0 003 9.75v4.5a1.5 1.5 0 001.5 1.5h2.25L12 20.25V3.75L6.75 8.25zM16.5 8.25a6 6 0 010 7.5M19.5 5.25a10.5 10.5 0 010 13.5" />
+    </svg>
+  );
+}
+
+export function IconVolumeMuted(props: IconProps) {
+  return (
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.8} {...props}>
+      <path strokeLinecap="round" strokeLinejoin="round" d="M6.75 8.25H4.5A1.5 1.5 0 003 9.75v4.5a1.5 1.5 0 001.5 1.5h2.25L12 20.25V3.75L6.75 8.25zM16.5 9.75l4.5 4.5M21 9.75l-4.5 4.5" />
+    </svg>
+  );
+}
+
 export function IconMapPin(props: IconProps) {
   return (
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} {...props}>

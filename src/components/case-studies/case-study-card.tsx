@@ -1,5 +1,7 @@
 "use client";
 
+import { useState } from "react";
+import { IconVolume, IconVolumeMuted } from "@/components/icons";
 import { SiteImage } from "@/components/ui/site-image";
 import { CybertruckSceneDynamic } from "@/components/scene/cybertruck-scene-dynamic";
 import type { CaseStudy } from "@/data/case-studies";
@@ -13,6 +15,7 @@ export function CaseStudyCard({
   modelAlt,
   modelControlsLabels,
   videoSrc,
+  videoControlsLabels,
 }: {
   study: CaseStudy;
   index: number;
@@ -32,8 +35,16 @@ export function CaseStudyCard({
     reset: string;
   };
   videoSrc?: string;
+  videoControlsLabels?: {
+    mute: string;
+    unmute: string;
+  };
 }) {
   const flipped = index % 2 === 1;
+  const [isMuted, setIsMuted] = useState(true);
+  const videoControlLabel = isMuted
+    ? videoControlsLabels?.unmute ?? "Unmute"
+    : videoControlsLabels?.mute ?? "Mute";
 
   return (
     <article className="overflow-hidden rounded-3xl border border-zinc-200/90 bg-white shadow-xl shadow-accent/[0.06] ring-1 ring-accent/10">
@@ -48,11 +59,25 @@ export function CaseStudyCard({
               <video
                 src={videoSrc}
                 autoPlay
-                muted
+                muted={isMuted}
                 loop
                 playsInline
                 className="absolute inset-0 h-full w-full object-cover"
               />
+              <button
+                type="button"
+                className="absolute bottom-4 end-4 z-10 grid size-11 place-items-center rounded-full border border-white/25 bg-black/60 text-white shadow-lg backdrop-blur transition hover:bg-black/75 focus:outline-none focus:ring-2 focus:ring-white/80"
+                aria-label={videoControlLabel}
+                title={videoControlLabel}
+                aria-pressed={!isMuted}
+                onClick={() => setIsMuted((muted) => !muted)}
+              >
+                {isMuted ? (
+                  <IconVolumeMuted className="size-5" aria-hidden />
+                ) : (
+                  <IconVolume className="size-5" aria-hidden />
+                )}
+              </button>
             </div>
           ) : modelSrc ? (
             <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_34%,rgba(255,255,255,0.95),rgba(232,239,242,0.58)_42%,rgba(12,19,24,0.08)_100%)]">
