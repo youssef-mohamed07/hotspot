@@ -1,6 +1,5 @@
 "use client";
 
-import { useEffect } from "react";
 import { Reveal } from "@/components/reveal";
 import { CaseStudyCard } from "@/components/case-studies/case-study-card";
 import { useDictionary } from "@/i18n/locale-provider";
@@ -20,64 +19,12 @@ const VIDEO_CONTROL_LABELS = {
   unmute: "Unmute",
 };
 
-const CLOUDINARY_TRANSFORMATION_SEGMENT_PATTERN =
-  /^(?:w_|h_|c_|g_|q_|f_|e_|dpr_|t_)/;
-
-function getCloudinaryTransformationSegments(src: string) {
-  const uploadMarker = "/upload/";
-  const uploadIndex = src.indexOf(uploadMarker);
-
-  if (!src.startsWith("https://res.cloudinary.com/") || uploadIndex === -1) {
-    return [];
-  }
-
-  return src
-    .slice(uploadIndex + uploadMarker.length)
-    .split("/")
-    .filter((segment) =>
-      CLOUDINARY_TRANSFORMATION_SEGMENT_PATTERN.test(segment),
-    );
-}
-
 export function CaseStudiesSection() {
   const dict = useDictionary();
   const caseStudies: CaseStudy[] = dict.caseStudies.items.map((item) => ({
     ...item,
     image: "",
   }));
-
-  useEffect(() => {
-    if (process.env.NODE_ENV === "production") {
-      return;
-    }
-
-    CASE_STUDY_VIDEOS.forEach((src, index) => {
-      if (!src) {
-        return;
-      }
-
-      const transformationSegments = getCloudinaryTransformationSegments(src);
-      const details = {
-        index,
-        src,
-        transformationSegments,
-        isOriginalAssetUrl: transformationSegments.length === 0,
-      };
-
-      if (transformationSegments.length > 0) {
-        console.warn(
-          "[cloudinary-audit] Case study video uses Cloudinary transformations.",
-          details,
-        );
-        return;
-      }
-
-      console.info(
-        "[cloudinary-audit] Case study video uses original Cloudinary asset URL.",
-        details,
-      );
-    });
-  }, []);
 
   return (
     <section
