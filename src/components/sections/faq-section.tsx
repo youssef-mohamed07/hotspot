@@ -1,9 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { TrackedCta } from "@/components/marketing/tracked-cta";
 import { Reveal } from "@/components/reveal";
-import { DirectionalArrow } from "@/components/icons/directional-arrow";
 import { IconMail, IconWhatsApp } from "@/components/icons";
 import { FAQItem } from "@/components/faq/faq-item";
 import { useDictionary } from "@/i18n/locale-provider";
@@ -88,23 +86,6 @@ export function FAQSection() {
             </div>
           </Reveal>
         </div>
-
-        <Reveal delay={0.15}>
-          <div className="mt-20 flex flex-col items-center gap-4 rounded-3xl border border-zinc-200/60 bg-white/50 p-10 text-center shadow-sm backdrop-blur-sm md:flex-row md:justify-between md:text-start">
-            <div>
-              <p className="text-lg font-semibold text-zinc-900">{dict.faq.bottomTitle}</p>
-              <p className="mt-1 text-sm text-zinc-600">{dict.faq.bottomBody}</p>
-            </div>
-            <TrackedCta
-              href="#contact"
-              ctaLocation="faq"
-              className="inline-flex items-center gap-2 rounded-full bg-accent-gradient px-6 py-3 text-sm font-semibold text-white shadow-lg shadow-accent/20 transition hover:opacity-90"
-            >
-              {dict.faq.bottomCta}
-              <DirectionalArrow className="h-4 w-4" />
-            </TrackedCta>
-          </div>
-        </Reveal>
       </div>
     </section>
   );

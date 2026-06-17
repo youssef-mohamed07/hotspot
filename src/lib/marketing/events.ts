@@ -22,5 +22,12 @@ export type CtaLocation =
   | "faq"
   | "services"
   | "cities"
+  | "case_studies"
+  | "before_after"
+  | "testimonials"
+  | "addons"
+  | "target_audience"
+  | "experiential"
+  | "concept"
   | "whatsapp_float"
   | "other";

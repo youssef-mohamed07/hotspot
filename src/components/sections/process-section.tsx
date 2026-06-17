@@ -1,9 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { TrackedCta } from "@/components/marketing/tracked-cta";
 import { Reveal } from "@/components/reveal";
-import { DirectionalArrow } from "@/components/icons/directional-arrow";
 import { ProcessStep } from "@/components/sections/process-step";
 import { useDictionary, useIsRtl } from "@/i18n/locale-provider";
 
@@ -90,20 +88,6 @@ export function ProcessSection() {
             ))}
           </ol>
         </div>
-
-        <Reveal delay={0.1}>
-          <div className="mt-24 flex flex-col items-center gap-4 text-center">
-            <p className="text-sm text-zinc-600">{dict.process.ctaPrompt}</p>
-            <TrackedCta
-              href="#contact"
-              ctaLocation="process"
-              className="inline-flex items-center gap-2 rounded-full bg-accent-gradient px-7 py-3.5 text-sm font-semibold text-white transition hover:opacity-90 hover:shadow-lg hover:shadow-accent/20"
-            >
-              {dict.process.cta}
-              <DirectionalArrow className="h-4 w-4" />
-            </TrackedCta>
-          </div>
-        </Reveal>
       </div>
     </section>
   );

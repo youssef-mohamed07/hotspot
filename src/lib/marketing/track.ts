@@ -4,6 +4,7 @@ import { track as vercelTrack } from "@vercel/analytics";
 import type { Audience } from "@/i18n/audience";
 import type { Locale } from "@/i18n/config";
 import { getMarketingContext } from "@/lib/marketing/context";
+import { hasGtm } from "@/lib/marketing/config";
 import { MarketingEvents, type MarketingEventName } from "@/lib/marketing/events";
 import type { AttributionData } from "@/lib/marketing/attribution";
 import { getAttributionForLead } from "@/lib/marketing/attribution";
@@ -95,9 +96,19 @@ function metaEvent(name: string, params?: TrackPayload) {
   }
 }
 
-/** Meta Pixel + Vercel Web Analytics custom events. */
+function gtmEvent(event: string, payload?: TrackPayload) {
+  if (typeof window === "undefined" || !hasGtm()) return;
+  window.dataLayer = window.dataLayer ?? [];
+  window.dataLayer.push({
+    event,
+    ...withAttribution(payload),
+  });
+}
+
+/** Meta Pixel + GTM dataLayer + Vercel Web Analytics custom events. */
 export function trackEvent(event: MarketingEventName | string, payload?: TrackPayload) {
   vercelEvent(event, payload);
+  gtmEvent(event, payload);
 
   switch (event) {
     case MarketingEvents.lead:
@@ -127,18 +138,16 @@ export function trackEvent(event: MarketingEventName | string, payload?: TrackPa
 }
 
 export function trackPageView(path: string, context?: { locale?: Locale; audience?: Audience }) {
-  vercelEvent(MarketingEvents.pageView, {
+  const payload = {
     page_path: path,
     page_location: typeof window !== "undefined" ? window.location.href : path,
     locale: context?.locale,
     audience: context?.audience,
-  });
-  metaEvent("PageView", {
-    page_path: path,
-    page_location: typeof window !== "undefined" ? window.location.href : path,
-    locale: context?.locale,
-    audience: context?.audience,
-  });
+  };
+
+  vercelEvent(MarketingEvents.pageView, payload);
+  gtmEvent(MarketingEvents.pageView, payload);
+  metaEvent("PageView", payload);
 }
 
 export function trackLead(payload?: TrackPayload) {
@@ -193,6 +202,11 @@ export function trackFormSubmitError(message?: string) {
 
 export function trackSchedule(payload?: TrackPayload) {
   vercelEvent(MarketingEvents.schedule, {
+    content_name: "contact_meeting",
+    content_category: "lead_funnel",
+    ...payload,
+  });
+  gtmEvent(MarketingEvents.schedule, {
     content_name: "contact_meeting",
     content_category: "lead_funnel",
     ...payload,

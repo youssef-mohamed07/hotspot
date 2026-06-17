@@ -2,6 +2,10 @@ import type { Metadata, Viewport } from "next";
 import { headers } from "next/headers";
 import { Geist, Geist_Mono, Bebas_Neue, Cairo } from "next/font/google";
 import { Analytics } from "@vercel/analytics/next";
+import {
+  GoogleTagManagerBody,
+  GoogleTagManagerHead,
+} from "@/components/marketing/google-tag-manager";
 import { MarketingScripts } from "@/components/marketing/marketing-scripts";
 import { JsonLd } from "@/components/seo/json-ld";
 import { homePageJsonLd, rootMetadata } from "@/lib/seo";
@@ -53,7 +57,11 @@ export default async function RootLayout({
 
   return (
     <html lang={locale} dir={dir} className={fontClass} data-scroll-behavior="smooth">
+      <head>
+        <GoogleTagManagerHead />
+      </head>
       <body className="min-h-full flex flex-col bg-[#08090c] text-zinc-100">
+        <GoogleTagManagerBody />
         <MarketingScripts />
         <JsonLd data={homePageJsonLd(locale, audience)} />
         {children}

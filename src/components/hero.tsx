@@ -2,8 +2,6 @@
 
 import type { CSSProperties } from "react";
 import Image from "next/image";
-import { TrackedCta } from "@/components/marketing/tracked-cta";
-import { DirectionalArrow } from "@/components/icons/directional-arrow";
 import { useAudience, useDictionary, useLocale } from "@/i18n/locale-provider";
 
 const d = (seconds: number): CSSProperties =>
@@ -80,24 +78,6 @@ export function Hero() {
         >
           {dict.hero.subtitle1}
         </p>
-
-        <div
-          className="enter-item relative z-20 mt-5 flex flex-wrap items-center justify-center gap-2.5 sm:mt-6 sm:gap-3 md:mt-7"
-          style={d(0.46)}
-        >
-          <TrackedCta
-            href="#contact"
-            ctaLocation="hero"
-            className="group relative inline-flex items-center gap-2 overflow-hidden rounded-full bg-accent-gradient px-5 py-2.5 text-[13px] font-semibold tracking-wide text-white shadow-[0_0_50px_-12px_rgba(80,160,230,0.85)] ring-1 ring-white/10 transition-all duration-300 hover:shadow-[0_0_60px_-8px_rgba(80,160,230,1)] hover:ring-white/20 sm:px-6 sm:py-3 sm:text-sm"
-          >
-            <span
-              aria-hidden
-              className="pointer-events-none absolute inset-0 -translate-x-full bg-linear-to-r from-transparent via-white/25 to-transparent transition-transform duration-700 group-hover:translate-x-full"
-            />
-            <span className="relative">{dict.hero.cta}</span>
-            <DirectionalArrow className="relative h-3.5 w-3.5 transition-transform duration-300 group-hover:translate-x-0.5 sm:h-4 sm:w-4" />
-          </TrackedCta>
-        </div>
       </div>
 
       <div className="relative z-10 mt-2 flex w-full max-w-5xl items-center justify-center pb-0 sm:mt-4 sm:max-w-6xl md:mt-0 md:max-w-7xl md:flex-1 lg:max-w-[88rem] lg:mt-0">

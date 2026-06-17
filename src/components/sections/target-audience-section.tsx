@@ -4,6 +4,8 @@ import { useRef, useState } from "react";
 import { motion, useScroll, useMotionValueEvent } from "framer-motion";
 import { SectionHeader } from "@/components/section-header";
 import { AudienceCard } from "@/components/target-audience/audience-card";
+import { DirectionalArrow } from "@/components/icons/directional-arrow";
+import { TrackedCta } from "@/components/marketing/tracked-cta";
 import { useDictionary } from "@/i18n/locale-provider";
 
 export function TargetAudienceSection() {
@@ -65,6 +67,17 @@ export function TargetAudienceSection() {
                   </button>
                 ))}
               </div>
+
+              <div className="mt-10 hidden md:block">
+                <TrackedCta
+                  href="#contact"
+                  ctaLocation="target_audience"
+                  className="inline-flex items-center gap-2 rounded-full bg-accent-gradient px-7 py-3.5 text-sm font-semibold text-white shadow-lg shadow-accent/20 transition hover:opacity-90"
+                >
+                  {dict.hero.cta}
+                  <DirectionalArrow className="h-4 w-4" />
+                </TrackedCta>
+              </div>
             </div>
 
             <div className="relative w-full md:h-80 lg:h-[22rem] md:overflow-hidden">
@@ -97,6 +110,17 @@ export function TargetAudienceSection() {
                     active={true}
                   />
                 ))}
+              </div>
+
+              <div className="mt-8 flex justify-center md:hidden">
+                <TrackedCta
+                  href="#contact"
+                  ctaLocation="target_audience"
+                  className="inline-flex items-center gap-2 rounded-full bg-accent-gradient px-7 py-3.5 text-sm font-semibold text-white shadow-lg shadow-accent/20 transition hover:opacity-90"
+                >
+                  {dict.hero.cta}
+                  <DirectionalArrow className="h-4 w-4" />
+                </TrackedCta>
               </div>
             </div>
           </div>

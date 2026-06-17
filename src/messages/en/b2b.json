@@ -22,7 +22,7 @@
     "process": "Process",
     "services": "Services",
     "contact": "Contact",
-    "cta": "Get in touch"
+    "cta": "Book Cyber Stage"
   },
   "hero": {
     "badgeRank": "#1",
@@ -30,8 +30,8 @@
     "titleLine1": "Cyber Stage Is Now",
     "titleLine2": "Your Ad.",
     "subtitle1": "Be the first brand in your sector to own the street.",
-    "cta": "Get in touch",
-    "ctaAlt": "Get in touch",
+    "cta": "Book Cyber Stage",
+    "ctaAlt": "Book Cyber Stage",
     "imageAlt": "HotSpot Cyber Stage mobile brand activation"
   },
   "marquee": {
@@ -447,7 +447,7 @@
     "subtitle": "Tell us about your campaign. We come back within 24 hours with scope, timeline and a tailored proposal.",
     "successTitle": "Brief Received!",
     "successBody": "Thanks{name}. We are reviewing your specs and will be in touch within 24 hours.",
-    "steps": ["Contact", "Brand", "Campaign", "Details", "Method"],
+    "steps": ["Contact", "Campaign", "Follow-up"],
     "progressLabel": "Step {current} of {total}",
     "back": "Back",
     "continue": "Continue",
@@ -601,7 +601,7 @@
   },
   "footer": {
     "tagline": "The strongest marketing tool in the Saudi market. Cyber Stage activations, LED experiences, and full event production from concept to deployment.",
-    "cta": "Get in touch",
+    "cta": "Book Cyber Stage",
     "navigation": "Navigation",
     "contact": "Contact",
     "location": "Riyadh, Saudi Arabia",

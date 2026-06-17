@@ -2,7 +2,9 @@
 
 import { Reveal } from "@/components/reveal";
 import { SectionHeader } from "@/components/section-header";
+import { DirectionalArrow } from "@/components/icons/directional-arrow";
 import { IconCamera, IconScreen, IconSparkle, IconSpotlight } from "@/components/icons";
+import { TrackedCta } from "@/components/marketing/tracked-cta";
 import { useDictionary } from "@/i18n/locale-provider";
 
 const addonHotspots = [
@@ -143,6 +145,19 @@ export function AddonsSection() {
                 </div>
               </div>
             </div>
+          </div>
+        </Reveal>
+
+        <Reveal delay={0.14}>
+          <div className="mt-10 flex justify-center">
+            <TrackedCta
+              href="#contact"
+              ctaLocation="addons"
+              className="inline-flex items-center gap-2 rounded-full bg-accent-gradient px-7 py-3.5 text-sm font-semibold text-white shadow-lg shadow-accent/20 transition hover:opacity-90"
+            >
+              {dict.hero.cta}
+              <DirectionalArrow className="h-4 w-4" />
+            </TrackedCta>
           </div>
         </Reveal>
       </div>

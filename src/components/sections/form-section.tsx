@@ -35,8 +35,8 @@ const initialForm: ContactFormData = {
 };
 
 const inputCls =
-  "w-full rounded-xl border border-zinc-200 bg-zinc-50 px-4 py-3 text-sm text-zinc-900 outline-none transition focus:border-accent focus:bg-white focus:ring-1 focus:ring-accent";
-const labelCls = "text-sm font-semibold text-zinc-900";
+  "w-full rounded-xl border border-zinc-200 bg-zinc-50 px-3.5 py-2.5 text-sm text-zinc-900 outline-none transition focus:border-accent focus:bg-white focus:ring-1 focus:ring-accent";
+const labelCls = "text-xs font-semibold uppercase tracking-wide text-zinc-900";
 const hintCls = "text-xs text-zinc-500";
 
 function Field({
@@ -51,7 +51,7 @@ function Field({
   className?: string;
 }) {
   return (
-    <div className={`flex flex-col gap-2 ${className}`}>
+    <div className={`flex flex-col gap-1.5 ${className}`}>
       <label className={labelCls}>{label}</label>
       {hint && <span className={hintCls}>{hint}</span>}
       {children}
@@ -749,9 +749,16 @@ export function FormSection() {
         : true;
 
   const hasInputForCurrentStep = () => {
-    if (step === 1) return data.industry.trim().length > 0;
-    if (step === 2) return data.campaignType.trim().length > 0 || data.targetCities.trim().length > 0 || data.campaignDate.trim().length > 0 || data.budget.trim().length > 0;
-    if (step === 3) return data.notes.trim().length > 0;
+    if (step === 1) {
+      return (
+        data.industry.trim().length > 0 ||
+        data.campaignType.trim().length > 0 ||
+        data.targetCities.trim().length > 0 ||
+        data.campaignDate.trim().length > 0 ||
+        data.budget.trim().length > 0 ||
+        data.notes.trim().length > 0
+      );
+    }
     return false;
   };
 
@@ -815,15 +822,15 @@ export function FormSection() {
   return (
     <section
       id="contact"
-      className="relative flex min-h-[100dvh] flex-col items-center justify-center overflow-hidden bg-white py-24 md:py-32"
+      className="relative flex flex-col items-center justify-center overflow-hidden bg-white py-16 md:py-24"
     >
       <div
         className="grid-floor pointer-events-none absolute inset-0 opacity-40 mix-blend-multiply"
         aria-hidden
       />
 
-      <div className="relative z-10 mx-auto w-full max-w-4xl px-6">
-        <Reveal className="mb-16 flex flex-col items-center text-center">
+      <div className="relative z-10 mx-auto w-full max-w-3xl px-6">
+        <Reveal className="mb-10 flex flex-col items-center text-center">
           <div className="flex items-center justify-center gap-3">
             <span className="h-px w-12 bg-accent" />
             <p className="text-xs font-bold uppercase tracking-[0.3em] text-accent">
@@ -831,39 +838,39 @@ export function FormSection() {
             </p>
             <span className="h-px w-12 bg-accent" />
           </div>
-          <h2 className="display-headline mt-6 text-4xl text-zinc-900 sm:text-5xl md:text-6xl">
+          <h2 className="display-headline mt-5 text-4xl text-zinc-900 sm:text-5xl">
             {c.headline1}
             <br />
             <span className="text-accent">{c.headlineAccent}</span>
           </h2>
-          <p className="mt-6 max-w-xl text-lg text-zinc-600">{c.subtitle}</p>
+          <p className="mt-4 max-w-lg text-base leading-relaxed text-zinc-600">{c.subtitle}</p>
         </Reveal>
 
         <Reveal delay={0.1}>
-          <div className="relative rounded-[2rem] bg-white p-8 shadow-xl shadow-accent/5 ring-1 ring-accent/10 md:p-12">
+          <div className="relative rounded-[1.5rem] bg-white p-5 shadow-xl shadow-accent/5 ring-1 ring-accent/10 sm:p-6 md:p-8">
             {submitted ? (
-              <div className="flex flex-col items-center py-20 text-center">
-                <div className="mb-6 flex h-20 w-20 items-center justify-center rounded-full bg-accent/10 text-accent">
-                  <DirectionalArrow className="h-10 w-10 rotate-90" />
+              <div className="flex flex-col items-center py-14 text-center">
+                <div className="mb-5 flex h-16 w-16 items-center justify-center rounded-full bg-accent/10 text-accent">
+                  <DirectionalArrow className="h-8 w-8 rotate-90" />
                 </div>
-                <h3 className="text-3xl font-bold text-zinc-900">
+                <h3 className="text-2xl font-bold text-zinc-900">
                   {c.successTitle}
                 </h3>
                 <p className="mt-4 text-zinc-600">{successBody}</p>
               </div>
             ) : (
-              <div className="grid gap-8">
+              <div className="grid gap-5">
                 <WizardProgress
                   current={step}
                   total={TOTAL_STEPS}
                   labels={c.steps}
                 />
 
-                <div className="min-h-[280px]">
+                <div className="min-h-[220px]">
                   {step === 0 && (
                     <div>
                       <StepHeader title={c.step0.title} hint={c.step0.hint} />
-                      <div className="grid gap-6 md:grid-cols-2">
+                      <div className="grid gap-4 md:grid-cols-2">
                         <Field label={c.step0.name}>
                           <input
                             required
@@ -910,25 +917,20 @@ export function FormSection() {
 
                   {step === 1 && (
                     <div>
-                      <StepHeader title={c.step1.title} hint={c.step1.hint} />
-                      <Field
-                        label={c.step1.industry}
-                        hint={c.step1.industryHint}
-                      >
-                        <CustomSelect
-                          value={data.industry}
-                          onChange={(val) => update("industry", val)}
-                          options={c.step1.industries}
-                          placeholder={c.step1.choose}
-                        />
-                      </Field>
-                    </div>
-                  )}
-
-                  {step === 2 && (
-                    <div>
                       <StepHeader title={c.step2.title} hint={c.step2.hint} />
-                      <div className="grid gap-6 md:grid-cols-2">
+                      <div className="grid gap-4 md:grid-cols-2">
+                        <Field
+                          label={c.step1.industry}
+                          hint={c.step1.industryHint}
+                          className="md:col-span-2"
+                        >
+                          <CustomSelect
+                            value={data.industry}
+                            onChange={(val) => update("industry", val)}
+                            options={c.step1.industries}
+                            placeholder={c.step1.choose}
+                          />
+                        </Field>
                         <Field
                           label={c.step2.type}
                           hint={c.step2.typeHint}
@@ -968,32 +970,29 @@ export function FormSection() {
                             placeholder={c.step1.choose}
                           />
                         </Field>
+                        <Field
+                          label={c.step3.notes}
+                          className="md:col-span-2"
+                        >
+                          <textarea
+                            rows={3}
+                            value={data.notes}
+                            onChange={(e) => update("notes", e.target.value)}
+                            placeholder={c.step3.notesPlaceholder}
+                            className={inputCls}
+                          />
+                        </Field>
                       </div>
                     </div>
                   )}
 
-                  {step === 3 && (
-                    <div>
-                      <StepHeader title={c.step3.title} hint={c.step3.hint} />
-                      <Field label={c.step3.notes}>
-                        <textarea
-                          rows={5}
-                          value={data.notes}
-                          onChange={(e) => update("notes", e.target.value)}
-                          placeholder={c.step3.notesPlaceholder}
-                          className={inputCls}
-                        />
-                      </Field>
-                    </div>
-                  )}
-
-                  {step === 4 && (
+                  {step === 2 && (
                     <div>
                       <StepHeader
                         title={c.step4.title}
                         hint={c.step4.hint}
                       />
-                      <div className="mt-6 grid gap-3 sm:grid-cols-3">
+                      <div className="mt-5 grid gap-3 sm:grid-cols-3">
                         {/* Email */}
                         <button
                           type="button"

@@ -3,6 +3,8 @@
 import { Reveal } from "@/components/reveal";
 import { ConceptPillar } from "@/components/concept/concept-pillar";
 import { IconCube } from "@/components/icons";
+import { DirectionalArrow } from "@/components/icons/directional-arrow";
+import { TrackedCta } from "@/components/marketing/tracked-cta";
 import { imageAssets } from "@/data/image-assets";
 import { useDictionary } from "@/i18n/locale-provider";
 import type { ConceptPillarData } from "@/types/concept-pillar";
@@ -56,6 +58,19 @@ export function ConceptSection() {
             image={imageAssets.conceptPillars[1] ?? imageAssets.conceptPillars[0]}
           />
         </div>
+
+        <Reveal delay={0.12}>
+          <div className="mt-16 flex justify-center">
+            <TrackedCta
+              href="#contact"
+              ctaLocation="concept"
+              className="inline-flex items-center gap-2 rounded-full bg-accent-gradient px-7 py-3.5 text-sm font-semibold text-white shadow-lg shadow-accent/20 transition hover:opacity-90"
+            >
+              {dict.hero.cta}
+              <DirectionalArrow className="h-4 w-4" />
+            </TrackedCta>
+          </div>
+        </Reveal>
       </div>
     </section>
   );
