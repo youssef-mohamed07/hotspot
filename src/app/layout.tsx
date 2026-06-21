@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import { headers } from "next/headers";
 import { Geist, Geist_Mono, Bebas_Neue, Cairo } from "next/font/google";
 import { Analytics } from "@vercel/analytics/next";
+import { GoogleAdsTag } from "@/components/marketing/google-ads-tag";
 import {
   GoogleTagManagerBody,
   GoogleTagManagerHead,
@@ -59,6 +60,7 @@ export default async function RootLayout({
     <html lang={locale} dir={dir} className={fontClass} data-scroll-behavior="smooth">
       <head>
         <GoogleTagManagerHead />
+        <GoogleAdsTag />
       </head>
       <body className="min-h-full flex flex-col bg-[#08090c] text-zinc-100">
         <GoogleTagManagerBody />
