@@ -10,8 +10,8 @@ const KORA_BREAK_MODEL_SRC =
   "/Cybertruck%203D/Cyber%20Truck%20Koora%20Break.glb";
 
 const CASE_STUDY_VIDEOS: (string | undefined)[] = [
-  "https://res.cloudinary.com/deq01sbkp/video/upload/v1780659600/kora-break_tta4ob_urar5p.mp4",
-  "https://res.cloudinary.com/deq01sbkp/video/upload/v1780659611/Taw_cykrjr_pum9cf.mp4",
+  "https://res.cloudinary.com/erazc93v/video/upload/v1783626491/kora-break_vgtv0q.mp4",
+  "https://res.cloudinary.com/erazc93v/video/upload/v1783626481/tawounya_wvnbr7.mp4",
 ];
 
 const VIDEO_CONTROL_LABELS = {
