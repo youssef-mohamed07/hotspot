@@ -9,6 +9,7 @@ const nextConfig: NextConfig = {
     remotePatterns: [],
     // Bust CDN cache for updated public assets (after.png, messages).
     minimumCacheTTL: 60,
+    unoptimized: true,
   },
 };
 
